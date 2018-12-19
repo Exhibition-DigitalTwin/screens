@@ -8,11 +8,11 @@
 
 <body>
 
-  <video autoplay muted loop id="loop" style="display: block">
+  <video autoplay muted id="loop" style="display: block">
     <source src="videos/loop_right.mp4" type="video/mp4">
     Your browser does not support HTML5 video.
   </video>
-  <video autoplay muted loop id="transition" style="display: none">
+  <video autoplay muted id="transition" style="display: none">
     <source src="videos/transition.mp4" type="video/mp4">
     Your browser does not support HTML5 video.
   </video>
@@ -21,25 +21,7 @@
     <button id="myBtn" onclick="changeToSourceTwo()">transition</button>
   </div>
 
-  <script>
-    var video = document.getElementById("myVideo");
-    var btn = document.getElementById("myBtn");
-
-    function myFunction() {
-      if (video.paused) {
-        video.play();
-        btn.innerHTML = "Pause";
-      } else {
-        video.pause();
-        btn.innerHTML = "Play";
-      }
-    }
-
-    function changeToSourceTwo() {
-      document.getElementById("transition").style.display = "block";
-      document.getElementById("loop").style.display = "none";
-    }
-  </script>
+  <script src="js/main.js"></script>
 
 </body>
 
