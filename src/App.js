@@ -2,7 +2,7 @@ import React from 'react';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import './App.css';
 import 'typeface-roboto';
-import { Route, Switch } from "react-router-dom";
+import { BrowserRouter, Route, Switch } from "react-router-dom";
 import Grid from '@material-ui/core/Grid';
 import SideMenu from './SideMenu';
 
@@ -27,15 +27,15 @@ class App extends React.Component {
             spacing={16}
             className="App"
             direction="row"
-            justify="center"
+            justify="right"
             alignItems="flex-start">
             <Grid item xs={12}>
               <Grid key="switch" item>
-                {/* A JSX comment 
+              <BrowserRouter>
                 <Switch>
-                <Route path="/" component={Home} />
                   <Route exact path="/" component={Home} />
-                </Switch>*/}
+                </Switch>
+                </BrowserRouter>
                 <SideMenu></SideMenu>
               </Grid>
             </Grid>
