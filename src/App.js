@@ -5,11 +5,12 @@ import 'typeface-roboto';
 import { BrowserRouter, Route, Switch } from "react-router-dom";
 import Grid from '@material-ui/core/Grid';
 import SideMenu from './SideMenu';
+import logo from './logo.svg';
 
 const divStyle = {
-  width: '412px',
-  height: '740px',
-  backgroundColor: '#F2F2F2'
+  width: '70%',
+  height: '100%',
+  backgroundColor: '#1d1d1d'
 };
 
 class App extends React.Component {
@@ -49,7 +50,10 @@ class App extends React.Component {
 //Home component
 const Home = props => (
   <div className="home" style={divStyle} >
-    <SideMenu></SideMenu>
+     <img src={logo} className="App-logo" alt="logo" />
+          <p>
+            Hi, I'm test text.
+          </p>
   </div>
 );
 
