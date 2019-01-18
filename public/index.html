@@ -7,7 +7,7 @@
 </head>
 
 <body>
-    <button onclick="myFunction()">Click me</button>
+    <button onclick="rotate()">Click me</button>
 
     <script src="js/three.js"></script>
     <script src="js/OBJLoader.js"></script>
@@ -73,11 +73,22 @@
 
         });
 
+        var counterInit = 50;
+        var rotation = 50;
+        function rotate() {
+            counterInit = 0;
+        };
+
         var animate = function () {
             requestAnimationFrame(animate);
             var object = scene.getObjectByName("windrad");
-            if (object) {
+            //if (object) {
+            //    object.rotateOnAxis(axis, speed);
+            //}
+            if (counterInit < rotation) {
+                requestAnimationFrame(animate);
                 object.rotateOnAxis(axis, speed);
+                counterInit++;
             }
             controls.update();
             renderer.render(scene, camera);
