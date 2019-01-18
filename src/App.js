@@ -9,9 +9,11 @@ import SideMenu from './SideMenu';
 import logo from './logo.svg';
 import grey from '@material-ui/core/colors/grey';
 import deepOrange from '@material-ui/core/colors/deepOrange';
+import { dark } from '@material-ui/core/styles/createPalette';
 
 const theme = createMuiTheme({
   palette: {
+    type: 'dark',
     primary: { main: grey[900] }, // #212121
     secondary: { main: deepOrange.A700 }, // #dd2c00
   },

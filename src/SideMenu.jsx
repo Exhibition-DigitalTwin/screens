@@ -11,8 +11,9 @@ import Typography from '@material-ui/core/Typography';
 
 const styles = theme => ({
   root: {
-    width: '10%',
-    height: '100%',
+    width: '20%',
+    height: '80px',
+    minHeight: '1080px',
     position: 'absolute', 
     right: 0
   },
