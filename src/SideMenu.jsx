@@ -11,7 +11,10 @@ import Typography from '@material-ui/core/Typography';
 
 const styles = theme => ({
   root: {
-    width: '90%',
+    width: '10%',
+    height: '100%',
+    position: 'absolute', 
+    right: 0
   },
   button: {
     marginTop: theme.spacing.unit,
@@ -26,7 +29,7 @@ const styles = theme => ({
 });
 
 function getSteps() {
-  return ['Select campaign settings', 'Create an ad group', 'Create an ad'];
+  return ['Aufbau', 'Daten', 'Simulation', 'Anwendungsfelder'];
 }
 
 function getStepContent(step) {
@@ -82,7 +85,6 @@ class VerticalLinearStepper extends React.Component {
             <Step key={label}>
               <StepLabel>{label}</StepLabel>
               <StepContent>
-                <Typography>{getStepContent(index)}</Typography>
                 <div className={classes.actionsContainer}>
                   <div>
                     <Button
@@ -110,7 +112,7 @@ class VerticalLinearStepper extends React.Component {
           <Paper square elevation={0} className={classes.resetContainer}>
             <Typography>All steps completed - you&apos;re finished</Typography>
             <Button onClick={this.handleReset} className={classes.button}>
-              Reset
+              Restart
             </Button>
           </Paper>
         )}
