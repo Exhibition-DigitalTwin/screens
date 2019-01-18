@@ -18,8 +18,12 @@
     <script>
 
         function myFunction() {
-            document.getElementById("demo").innerHTML = "Hello World";
+
         }
+
+        var axis = new THREE.Vector3(4, 0, 7).normalize();
+        var speed = 0.01;
+
 
         var scene = new THREE.Scene();
 
@@ -63,6 +67,7 @@
 
                 scene.add(object);
                 object.position.y -= 40;
+                object.name = "windrad";
 
             });
 
@@ -70,6 +75,10 @@
 
         var animate = function () {
             requestAnimationFrame(animate);
+            var object = scene.getObjectByName("windrad");
+            if (object) {
+                object.rotateOnAxis(axis, speed);
+            }
             controls.update();
             renderer.render(scene, camera);
         };
