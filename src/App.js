@@ -1,25 +1,43 @@
 import React from 'react';
 import CssBaseline from '@material-ui/core/CssBaseline';
+import PropTypes from 'prop-types';
 import './App.css';
 import 'typeface-roboto';
 import { BrowserRouter, Route, Switch } from "react-router-dom";
-import Grid from '@material-ui/core/Grid';
-import Paper from '@material-ui/core/Paper';
+import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
 import SideMenu from './SideMenu';
 import logo from './logo.svg';
+import grey from '@material-ui/core/colors/grey';
+import deepOrange from '@material-ui/core/colors/deepOrange';
+
+const theme = createMuiTheme({
+  palette: {
+    primary: { main: grey[900] }, // #212121
+    secondary: { main: deepOrange.A700 }, // #dd2c00
+  },
+  typography: { useNextVariants: true },
+});
 
 const divStyle = {
   width: '70%',
   height: '100%',
-  backgroundColor: '#1d1d1d'
 };
 
 class App extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {height: props.height};
+  }
+
+  componentWillMount(){
+    this.setState({height: window.innerHeight + 'px'});
+  }
 
   render() {
     return (
       <div className="App">
         <React.Fragment>
+        <MuiThemeProvider theme={theme}>
           <CssBaseline />
           <meta
             name="viewport"
@@ -31,6 +49,7 @@ class App extends React.Component {
                   <Route exact path="/" component={Home} />
                 </Switch>
                 </BrowserRouter>
+                </MuiThemeProvider>
         </React.Fragment>
       </div>
     );
@@ -46,5 +65,9 @@ const Home = props => (
           </p>
   </div>
 );
+
+App.propTypes = {
+  classes: PropTypes.object.isRequired,
+};
 
 export default App;
