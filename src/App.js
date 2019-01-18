@@ -9,13 +9,24 @@ import SideMenu from './SideMenu';
 import logo from './logo.svg';
 import grey from '@material-ui/core/colors/grey';
 import deepOrange from '@material-ui/core/colors/deepOrange';
-import { dark } from '@material-ui/core/styles/createPalette';
+import Button from '@material-ui/core/Button';
 
 const theme = createMuiTheme({
   palette: {
     type: 'dark',
     primary: { main: grey[900] }, // #212121
     secondary: { main: deepOrange.A700 }, // #dd2c00
+  },
+  MuiButton: {
+    text: {
+      background: 'linear-gradient(45deg, #FE6B8B 30%, #FF8E53 90%)',
+      borderRadius: 3,
+      border: 0,
+      color: 'white',
+      height: 48,
+      padding: '0 30px',
+      boxShadow: '0 3px 5px 2px rgba(255, 105, 135, .3)',
+    },
   },
   typography: { useNextVariants: true },
 });
@@ -26,14 +37,6 @@ const divStyle = {
 };
 
 class App extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {height: props.height};
-  }
-
-  componentWillMount(){
-    this.setState({height: window.innerHeight + 'px'});
-  }
 
   render() {
     return (
@@ -46,6 +49,7 @@ class App extends React.Component {
             content="minimum-scale=1, initial-scale=1, width=device-width, shrink-to-fit=no"
           />
           <SideMenu></SideMenu>
+          <Button>Overrides CSS</Button>
               <BrowserRouter>
                 <Switch>
                   <Route exact path="/" component={Home} />
