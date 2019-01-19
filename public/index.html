@@ -36,7 +36,7 @@
         camera.position.z = 200;
         camera.rotation.y = 20;
 
-        var renderer = new THREE.WebGLRenderer();
+        renderer = new THREE.WebGLRenderer({ antialiasing: true });
         renderer.setSize(window.innerWidth, window.innerHeight);
         document.body.appendChild(renderer.domElement);
 
