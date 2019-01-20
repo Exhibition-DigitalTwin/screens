@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import * as THREE from 'three';
 import * as OBJLoader from 'three-obj-loader';
+import OBJ from './objects/Windrad_base_kopf.obj';
+import MAT from './objects/Windrad_base_kopf.mtl';
 OBJLoader(THREE);
 class ThreeScene extends Component {
     componentDidMount() {
@@ -27,17 +29,18 @@ class ThreeScene extends Component {
             0.1,
             1000
         )
-        this.camera.position.z = 200
+        this.camera.position.z = 400
+        this.camera.rotation.x = -0.05
         //ADD RENDERER
         this.renderer = new THREE.WebGLRenderer({ antialias: true })
         this.renderer.setSize(width, height)
         this.mount.appendChild(this.renderer.domElement)
 
         this.keyLight = new THREE.DirectionalLight(new THREE.Color('hsl(30, 100%, 75%)'), 1.0);
-        this.keyLight.position.set(-100, 0, 100);
+        this.keyLight.position.set(100, 0, 100);
 
         this.fillLight = new THREE.DirectionalLight(new THREE.Color('hsl(240, 100%, 75%)'), 0.75);
-        this.fillLight.position.set(100, 0, 100);
+        this.fillLight.position.set(-100, 0, 100);
 
         this.backLight = new THREE.DirectionalLight(0xffffff, 1.0);
         this.backLight.position.set(100, 0, -100).normalize();
@@ -46,18 +49,26 @@ class ThreeScene extends Component {
         this.scene.add(this.fillLight);
         this.scene.add(this.backLight);
 
-        this.material = new THREE.MeshBasicMaterial({ color: 0xff0000, transparent: false });
+        var MTLLoader = require('three-mtl-loader')
+        const mtlLoader = new MTLLoader();
+        mtlLoader.load(MAT, function (materials) {
+            materials.preload();
+            materials.name = "white";
+        });
 
         this.THREE = THREE;
+        var materials = this.scene.getObjectByName("white");
         const objLoader = new this.THREE.OBJLoader();
-        objLoader.setPath('C:/Users/magge/OneDrive/Semester_4/Sem4.Schwerpunkte_1/04_Code_Github/screens/src/');
-        objLoader.load('Windrad_base_kopf.obj', (object) => {
+        //objLoader.setMaterials(new THREE.MeshBasicMaterial({ color: 0xff0000, side: THREE.DoubleSide }));
+        objLoader.crossOrigin = '';
+        objLoader.load(OBJ, (object) => {
+            console.log("hi");
+            object.material = materials;
             this.scene.add(object);
-            this.object.position.y -= 40;
-            this.object.add(new THREE.AxesHelper(200));
-            this.object.name = "windrad";
-            if (object instanceof THREE.Mesh) object.material = this.material;
+            object.position.y -= 40;
+            object.add(new THREE.AxesHelper(2000));
         });
+
 
 
 
