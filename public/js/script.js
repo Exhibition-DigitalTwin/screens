@@ -3,8 +3,8 @@ var parentBladesTop
 
 var loaded = false;
 
-var speedRotationBlades = 0.01;
-var speedRotationHead = 0.01;
+var speedRotationBlades = -0.01;
+var speedRotationHead = 0;
 
 var initRotationLoop = 0;
 var stopRotationLoop = 0;
@@ -71,7 +71,7 @@ mtlLoader.load('windrad_flügel.mtl', function (materials) {
         parentBladesBottom.add(object);
         parentBladesBottom.position.y += 3;
         parentBladesBottom.rotateY(0.785);
-        parentBladesBottom.add(new THREE.AxesHelper(20));
+        //parentBladesBottom.add(new THREE.AxesHelper(20));
         parentBladesTop = new THREE.Object3D();
         parentBladesTop.add(parentBladesBottom);
         scene.add(parentBladesTop);
@@ -80,9 +80,13 @@ mtlLoader.load('windrad_flügel.mtl', function (materials) {
     });
 });
 
-function rotationLoop(init, stop) {
+function rotationLoop(init, stop, speed) {
+    speedRotationHead = speed;
     initRotationLoop = init;
-    stopRotationLoop = stop;
+    var rad = stop * Math.PI / 180;
+    var steps = rad / speed;
+    console.log("steps" + steps);
+    stopRotationLoop = steps;
 };
 
 var animate = function () {
