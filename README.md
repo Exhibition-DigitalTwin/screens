@@ -1,12 +1,12 @@
-# Three.js
-This is a simple three.js application
+# screens
+All files regarding the screen
 
+## installation
+Install all dependencies with 'npm install'.
 
-Install dependencies and start your engines! This ships with a simple express.js server so we can run three.js properly without cross-origin issues.
+## start
+Start the program with 'npm start'.
+We recommend the use of Google Chrome for preview.
 
-
-$ npm install
-$ npm run start
-
-
-Open http://localhost:8080 to view your project.
+## React information
+You can find the most recent version of react information [here](https://github.com/facebook/create-react-app/blob/master/packages/react-scripts/template/README.md).
