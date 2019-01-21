@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import * as THREE from 'three';
 import * as OBJLoader from 'three-obj-loader';
 import OBJ from './objects/Windrad_base_kopf.obj';
+import OBJ1 from './objects/Windrad_flügel.obj';
 import MAT from './objects/Windrad_base_kopf.mtl';
 OBJLoader(THREE);
 class ThreeScene extends Component {
@@ -9,16 +10,13 @@ class ThreeScene extends Component {
         const width = this.mount.clientWidth
         const height = this.mount.clientHeight
 
-        var parentBladesBottom
-        var parentBladesTop
+        this.loaded = false;
 
-        var loaded = false;
+        this.speedRotationBlades = -0.01
+        this.speedRotationHead = 0
 
-        var speedRotationBlades = -0.01
-        var speedRotationHead = 0
-
-        var initRotationLoop = 0
-        var stopRotationLoop = 0
+        this.initRotationLoop = 0
+        this.stopRotationLoop = 0
 
         //ADD SCENE
         this.scene = new THREE.Scene()
@@ -57,20 +55,34 @@ class ThreeScene extends Component {
         });
 
         this.THREE = THREE;
-        var materials = this.scene.getObjectByName("white");
         const objLoader = new this.THREE.OBJLoader();
-        //objLoader.setMaterials(new THREE.MeshBasicMaterial({ color: 0xff0000, side: THREE.DoubleSide }));
+        //objLoader.setMaterials(this.materials);
         objLoader.crossOrigin = '';
-        objLoader.load(OBJ, (object) => {
-            console.log("hi");
-            object.material = materials;
-            this.scene.add(object);
-            object.position.y -= 40;
-            object.add(new THREE.AxesHelper(2000));
-        });
+        objLoader.load(OBJ, (object0) => {
+            //object.material = materials;
+            this.scene.add(object0);
+            object0.position.y -= 40;
+            object0.add(new THREE.AxesHelper(2000));
+            object0.name = "windrad";
+        })
 
-
-
+        const objLoader1 = new this.THREE.OBJLoader();
+        //objLoader.setMaterials(this.materials);
+        objLoader1.crossOrigin = '';
+        objLoader1.load(OBJ1, (object) => {
+            this.parentBladesBottom = new THREE.Object3D();
+            object.position.y -= 43;
+            object.rotateY(-0.785);
+            this.parentBladesBottom.add(object);
+            this.parentBladesBottom.position.y += 3;
+            this.parentBladesBottom.rotateY(0.785);
+            //parentBladesBottom.add(new THREE.AxesHelper(20));
+            this.parentBladesTop = new THREE.Object3D();
+            this.parentBladesTop.add(this.parentBladesBottom);
+            this.scene.add(this.parentBladesTop);
+            this.loaded = true;
+            console.log("hi" + this.loaded);
+        })
 
         this.start()
     }
@@ -86,8 +98,27 @@ class ThreeScene extends Component {
     stop = () => {
         cancelAnimationFrame(this.frameId)
     }
+
+    handleClick(init, stop, speed) {
+        this.speedRotationHead = speed;
+        this.initRotationLoop = init;
+        var rad = stop * 3.14159 / 180;
+        var steps = rad / speed;
+        console.log("steps" + steps);
+        this.stopRotationLoop = steps;
+    };
+
     animate = () => {
 
+        if (this.loaded) {
+            this.parentBladesBottom.rotateZ(this.speedRotationBlades);
+        }
+        this.headBody = this.scene.getObjectByName("windrad");
+        if (this.initRotationLoop < this.stopRotationLoop) {
+            this.headBody.rotateY(this.speedRotationHead);
+            this.parentBladesTop.rotateY(this.speedRotationHead);
+            this.initRotationLoop++;
+        }
         this.renderScene()
         this.frameId = window.requestAnimationFrame(this.animate)
     }
@@ -96,10 +127,15 @@ class ThreeScene extends Component {
     }
     render() {
         return (
-            <div
-                style={{ width: '1920px', height: '1080px' }}
-                ref={(mount) => { this.mount = mount }}
-            />
+            <div>
+                <button onClick={() => this.handleClick(0, 90, 0.01)}>
+                    Click me
+            </button>
+                <div
+                    style={{ width: '1920px', height: '1080px' }}
+                    ref={(mount) => { this.mount = mount }}
+                />
+            </div>
         )
     }
 }
