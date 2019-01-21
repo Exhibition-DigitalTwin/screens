@@ -62,7 +62,7 @@ class ThreeScene extends Component {
             //object.material = materials;
             this.scene.add(object0);
             object0.position.y -= 40;
-            object0.add(new THREE.AxesHelper(2000));
+            //object0.add(new THREE.AxesHelper(2000));
             object0.name = "windrad";
         })
 
@@ -103,7 +103,7 @@ class ThreeScene extends Component {
         this.speedRotationHead = speed;
         this.initRotationLoop = init;
         var rad = stop * 3.14159 / 180;
-        var steps = rad / speed;
+        var steps = rad / Math.sqrt(speed * speed);
         console.log("steps" + steps);
         this.stopRotationLoop = steps;
     };
@@ -128,14 +128,31 @@ class ThreeScene extends Component {
     render() {
         return (
             <div>
-                <button onClick={() => this.handleClick(0, 90, 0.01)}>
-                    Click me
-            </button>
+                <div>
+                    <button id="ninetyDeg" onClick={() => this.handleClick(0, 90, 0.01)}>
+                        Turn 90°
+                    </button>
+                </div>
+                <div>
+                    <button id="onehundretEightyDeg" onClick={() => this.handleClick(0, 180, 0.01)}>
+                        Turn 180°
+                    </button>
+                </div>
+                <div>
+                    <button id="minusNinetyDeg" onClick={() => this.handleClick(0, 90, -0.01)}>
+                        Turn -90°
+                    </button>
+                </div>
+                <div>
+                    <button id="minusOnehundretEightyDeg" onClick={() => this.handleClick(0, 180, (-0.01))}>
+                        Turn -180°
+                    </button>
+                </div>
                 <div
                     style={{ width: '1920px', height: '1080px' }}
                     ref={(mount) => { this.mount = mount }}
                 />
-            </div>
+            </div >
         )
     }
 }
