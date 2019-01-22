@@ -3,6 +3,7 @@ import CssBaseline from '@material-ui/core/CssBaseline';
 import PropTypes from 'prop-types';
 import './App.css';
 import 'typeface-roboto';
+import Three from './Three';
 import { BrowserRouter, Route, Switch, Link } from "react-router-dom";
 import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
 import logo from './logo.svg';
@@ -38,6 +39,7 @@ class App extends React.Component {
               name="viewport"
               content="minimum-scale=1, initial-scale=1, width=device-width, shrink-to-fit=no"
             />
+            <Three />
             <Menu></Menu>
             <BrowserRouter>
               <Switch>
