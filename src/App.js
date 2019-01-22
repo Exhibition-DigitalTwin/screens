@@ -3,12 +3,12 @@ import CssBaseline from '@material-ui/core/CssBaseline';
 import PropTypes from 'prop-types';
 import './App.css';
 import 'typeface-roboto';
-import { BrowserRouter, Route, Switch } from "react-router-dom";
+import { BrowserRouter, Route, Switch, Link } from "react-router-dom";
 import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
-import SideMenu from './SideMenu';
 import logo from './logo.svg';
 import grey from '@material-ui/core/colors/grey';
 import deepOrange from '@material-ui/core/colors/deepOrange';
+import Button from '@material-ui/core/Button';
 
 const theme = createMuiTheme({
   palette: {
@@ -16,7 +16,9 @@ const theme = createMuiTheme({
     primary: { main: grey[900] }, // #212121
     secondary: { main: deepOrange.A700 }, // #dd2c00
   },
-  typography: { useNextVariants: true },
+  typography: {
+    useNextVariants: true,
+  },
 });
 
 const divStyle = {
@@ -30,23 +32,23 @@ class App extends React.Component {
     return (
       <div className="App">
         <React.Fragment>
-        <MuiThemeProvider theme={theme}>
-          <CssBaseline />
-          <meta
-            name="viewport"
-            content="minimum-scale=1, initial-scale=1, width=device-width, shrink-to-fit=no"
-          />
-          <SideMenu></SideMenu>
-              <BrowserRouter>
-                <Switch>
-                  <Route exact path="/" component={Home} />
-                  <Route exact path="/aufbau" component={Aufbau} />
-                  <Route exact path="/daten" component={Daten} />
-                  <Route exact path="/simulation" component={Simulation} />
-                  <Route exact path="/annwendungen" component={Anwendungen} />
-                </Switch>
-                </BrowserRouter>
-                </MuiThemeProvider>
+          <MuiThemeProvider theme={theme}>
+            <CssBaseline />
+            <meta
+              name="viewport"
+              content="minimum-scale=1, initial-scale=1, width=device-width, shrink-to-fit=no"
+            />
+            <Menu></Menu>
+            <BrowserRouter>
+              <Switch>
+                <Route exact path="/" component={Home} />
+                <Route path="/aufbau" component={Aufbau} />
+                <Route path="/daten" component={Daten} />
+                <Route path="/simulation" component={Simulation} />
+                <Route path="/anwendungsgebiete" component={Anwendungen} />
+              </Switch>
+            </BrowserRouter>
+          </MuiThemeProvider>
         </React.Fragment>
       </div>
     );
@@ -54,11 +56,34 @@ class App extends React.Component {
 }
 
 //Home component
+const Menu = props => (
+  <div className="buttonActive" style={divStyle} >
+    <BrowserRouter>
+      <Link to="/aufbau" style={{ textDecoration: 'none', color: 'white', position: 'absolute', right: 30, top: 30, }}>
+        <Button className='n1' style={{fontSize:'20px'}}>Aufbau</Button>
+      </Link>
+    </BrowserRouter><BrowserRouter>
+      <Link to="/daten" style={{ textDecoration: 'none', color: 'white', position: 'absolute', right: 30, top: 350, }}>
+        <Button className='n1' style={{fontSize:'20px'}}>Daten</Button>
+      </Link>
+    </BrowserRouter><BrowserRouter>
+      <Link to="/simulation" style={{ textDecoration: 'none', color: 'white', position: 'absolute', right: 30, top: 700, }}>
+        <Button className='n1' style={{fontSize:'20px'}}>Simulation</Button>
+      </Link>
+    </BrowserRouter><BrowserRouter>
+      <Link to="/anwendungsgebiete" style={{ textDecoration: 'none', color: 'white', position: 'absolute', right: 30, bottom: 30, }}>
+        <Button className='n1' style={{fontSize:'20px'}}>Anwendungsgebiete</Button>
+      </Link>
+    </BrowserRouter>
+  </div>
+);
+
+//Home component
 const Home = props => (
   <div className="home" style={divStyle} >
-     <img src={logo} className="App-logo" alt="logo" />
-          <p>
-            Hi, I'm a screensaver.
+    <img src={logo} className="App-logo" alt="logo" />
+    <p>
+      Hi, I'm a screensaver.
           </p>
   </div>
 );
@@ -66,9 +91,8 @@ const Home = props => (
 //Aufbau component
 const Aufbau = props => (
   <div className="home" style={divStyle} >
-     <img src={logo} className="App-logo" alt="logo" />
-          <p>
-            AUFBAU
+    <p>
+      AUFBAU
           </p>
   </div>
 );
@@ -76,9 +100,8 @@ const Aufbau = props => (
 //Aufbau component
 const Daten = props => (
   <div className="home" style={divStyle} >
-     <img src={logo} className="App-logo" alt="logo" />
-          <p>
-            DATEN
+    <p>
+      DATEN
           </p>
   </div>
 );
@@ -86,9 +109,8 @@ const Daten = props => (
 //Aufbau component
 const Simulation = props => (
   <div className="home" style={divStyle} >
-     <img src={logo} className="App-logo" alt="logo" />
-          <p>
-            SIMULATION
+    <p>
+      SIMULATION
           </p>
   </div>
 );
@@ -96,9 +118,8 @@ const Simulation = props => (
 //Aufbau component
 const Anwendungen = props => (
   <div className="home" style={divStyle} >
-     <img src={logo} className="App-logo" alt="logo" />
-          <p>
-            ANWENDUNGEN
+    <p>
+      ANWENDUNGEN
           </p>
   </div>
 );
