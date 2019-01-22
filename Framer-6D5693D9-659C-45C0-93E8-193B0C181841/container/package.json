@@ -13,5 +13,8 @@
 	"framer": {
 		"id": "bcd5b011-60dd-40fd-800a-6de57d8f2681"
 	},
-	"author": "Hi schmid"
+	"author": "Hi schmid",
+	"dependencies": {
+		"@framer/graz.radial-gradient": "^1.4.0"
+	}
 }

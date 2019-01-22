@@ -1,47 +1,7 @@
 {
-  "bookmarkData" : "Ym9vazwDAAAAAAQQMAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAIAIAAAQAAAADAwAAAAQAAAUAAAABAQAAVXNlcnMAAAAFAAAAAQEAAGFkbWluAAAABwAAAAEBAABEZXNrdG9wAAcAAAABAQAAc2NyZWVucwAUAAAAAQEAAGRpZ2l0YWwtdHdpbi5mcmFtZXJ4FAAAAAEGAAAQAAAAIAAAADAAAABAAAAAUAAAAAgAAAAEAwAAIZgCAAAAAAAIAAAABAMAAKfEBgAAAAAACAAAAAQDAAC4xAYAAAAAAAgAAAAEAwAAHjEwAAEAAAAIAAAABAMAAHYIMgABAAAAFAAAAAEGAACIAAAAmAAAAKgAAAC4AAAAyAAAAAgAAAAABAAAQcD6Y/usmXoYAAAAAQIAAAEAAAAAAAAAHwIAAAAAAAAfAgAAAAAAAAgAAAAEAwAAAwAAAAAAAAAEAAAAAwMAAPUBAAAIAAAAAQkAAGZpbGU6Ly8vCAAAAAEBAABJb1QtTWFjMwgAAAAEAwAAAGBGZDoAAAAIAAAAAAQAAEHAl3LGAAAAJAAAAAEBAAA3MEI4QkFFQy05QUIxLTM1RjQtODlGNi0xMkIyNzU3ODlGQ0UYAAAAAQIAAIEAAAABAAAA7xMAAAEAAADvEwAAAQAAAAEAAAABAQAALwAAAAAAAAABBQAANwAAAAECAABkbmliAAAAAAEAAAAAAAAAAAAAAAAAAAAAAAAABwAAAAAAAABmcmFtZXJ4Pz8/PwAAAAAAAAAAAOQAAAD+////AQAAAAAAAAASAAAABBAAAGwAAAAAAAAABRAAANgAAAAAAAAAEBAAAAQBAAAAAAAAQBAAAPQAAAAAAAAAAiAAAMwBAAAAAAAABSAAAEABAAAAAAAAECAAAFABAAAAAAAAESAAAIABAAAAAAAAEiAAAGABAAAAAAAAEyAAAHABAAAAAAAAICAAAKwBAAAAAAAAMCAAANgBAAAAAAAAAcAAACQBAAAAAAAAEcAAACAAAAAAAAAAEsAAADQBAAAAAAAAENAAAAQAAAAAAAAAF/AAAFAAAAAAAAAAIvAAAOABAAAAAAAA",
+  "bookmarkData" : "Ym9vazwDAAAAAAQQMAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAIAIAAAQAAAADAwAAAAQAAAUAAAABAQAAVXNlcnMAAAAFAAAAAQEAAGFkbWluAAAABwAAAAEBAABEZXNrdG9wAAcAAAABAQAAc2NyZWVucwAUAAAAAQEAAGRpZ2l0YWwtdHdpbi5mcmFtZXJ4FAAAAAEGAAAQAAAAIAAAADAAAABAAAAAUAAAAAgAAAAEAwAAIZgCAAAAAAAIAAAABAMAAKfEBgAAAAAACAAAAAQDAAC4xAYAAAAAAAgAAAAEAwAAHjEwAAEAAAAIAAAABAMAAIEKMwABAAAAFAAAAAEGAACIAAAAmAAAAKgAAAC4AAAAyAAAAAgAAAAABAAAQcD6Y/usmXoYAAAAAQIAAAEAAAAAAAAAHwIAAAAAAAAfAgAAAAAAAAgAAAAEAwAAAwAAAAAAAAAEAAAAAwMAAPUBAAAIAAAAAQkAAGZpbGU6Ly8vCAAAAAEBAABJb1QtTWFjMwgAAAAEAwAAAGBGZDoAAAAIAAAAAAQAAEHAl3LGAAAAJAAAAAEBAAA3MEI4QkFFQy05QUIxLTM1RjQtODlGNi0xMkIyNzU3ODlGQ0UYAAAAAQIAAIEAAAABAAAA7xMAAAEAAADvEwAAAQAAAAEAAAABAQAALwAAAAAAAAABBQAANwAAAAECAABkbmliAAAAAAEAAAAAAAAAAAAAAAAAAAAAAAAABwAAAAAAAABmcmFtZXJ4Pz8/PwAAAAAAAAAAAOQAAAD+////AQAAAAAAAAASAAAABBAAAGwAAAAAAAAABRAAANgAAAAAAAAAEBAAAAQBAAAAAAAAQBAAAPQAAAAAAAAAAiAAAMwBAAAAAAAABSAAAEABAAAAAAAAECAAAFABAAAAAAAAESAAAIABAAAAAAAAEiAAAGABAAAAAAAAEyAAAHABAAAAAAAAICAAAKwBAAAAAAAAMCAAANgBAAAAAAAAAcAAACQBAAAAAAAAEcAAACAAAAAAAAAAEsAAADQBAAAAAAAAENAAAAQAAAAAAAAAF/AAAFAAAAAAAAAAIvAAAOABAAAAAAAA",
   "manifest" : {
     "files" : {
-      ".backups/2019-01-20 13.27.42.zip" : {
-        "sha1" : "7BxOGe4+mxZXoQTMZXa5Pkig5sA=",
-        "size" : 156
-      },
-      ".backups/2019-01-20 13.38.02.zip" : {
-        "sha1" : "vt7y9klaF6IQU5sQYInthAyezKE=",
-        "size" : 553
-      },
-      ".backups/2019-01-20 13.39.03.zip" : {
-        "sha1" : "2yQ35/r4J4u5b2nmuteMneTPA8s=",
-        "size" : 1243
-      },
-      ".backups/2019-01-20 13.43.04.zip" : {
-        "sha1" : "mjOkRz2qDoQUT6Jjl0dfv3E/1wE=",
-        "size" : 1663
-      },
-      ".backups/2019-01-20 13.44.04.zip" : {
-        "sha1" : "RTDNksaD/ohScc27I+dywAfodKY=",
-        "size" : 1966
-      },
-      ".backups/2019-01-20 13.46.05.zip" : {
-        "sha1" : "y0Wo49FnNdexuN4rkAyc6fBnIIg=",
-        "size" : 1970
-      },
-      ".backups/2019-01-20 13.47.17.zip" : {
-        "sha1" : "pPD/Z3JfhIJ4vhJL+ttXTi41Ozw=",
-        "size" : 1957
-      },
-      ".backups/2019-01-20 13.48.17.zip" : {
-        "sha1" : "5VTKPgYg52wVhZCzuQK10hNyjNQ=",
-        "size" : 1997
-      },
-      ".backups/2019-01-20 13.49.17.zip" : {
-        "sha1" : "QSBSxS0I0BoZ8NcmWWmlqVyE6Cg=",
-        "size" : 2332
-      },
-      ".backups/2019-01-20 13.50.17.zip" : {
-        "sha1" : "jKaVRhZ+F+LZXZaTrbjKlUGkzSc=",
-        "size" : 2348
-      },
       ".backups/2019-01-20 13.51.17.zip" : {
         "sha1" : "fuBSCrMjrAop8PCNSx3n1NCj6qc=",
         "size" : 2354
@@ -134,6 +94,82 @@
         "sha1" : "eOtlm9d9ZAe7FnMS17URfD6Sf/k=",
         "size" : 5808
       },
+      ".backups/2019-01-20 16.15.21.zip" : {
+        "sha1" : "1oFwDFJVwSg+NkY+zkGN80DcmqE=",
+        "size" : 5620
+      },
+      ".backups/2019-01-22 09.13.15.zip" : {
+        "sha1" : "5XnCWNSymZQvNHu+iN6HyEa04QI=",
+        "size" : 5620
+      },
+      ".backups/2019-01-22 09.23.26.zip" : {
+        "sha1" : "E23pKC+tEymP2Ts4wSCB8vKP9pg=",
+        "size" : 5837
+      },
+      ".backups/2019-01-22 09.24.26.zip" : {
+        "sha1" : "15hXG+To6bR42TuTGn5trsFuwFM=",
+        "size" : 5626
+      },
+      ".backups/2019-01-22 09.25.27.zip" : {
+        "sha1" : "+o5O6rTSBbjKgbXdf6/bGUMXvQs=",
+        "size" : 5624
+      },
+      ".backups/2019-01-22 09.26.28.zip" : {
+        "sha1" : "NR66+8l977nMZ4M7f2VIJISfzdE=",
+        "size" : 5630
+      },
+      ".backups/2019-01-22 09.27.28.zip" : {
+        "sha1" : "cO4Xq1cNTtY2nLnEjwfLmIAVwBA=",
+        "size" : 5617
+      },
+      ".backups/2019-01-22 09.28.28.zip" : {
+        "sha1" : "3Dv0ir+OpJ57KD4B9GOeO+ELuSU=",
+        "size" : 5627
+      },
+      ".backups/2019-01-22 14.33.43.zip" : {
+        "sha1" : "kLwPiC6K1maaflJSqYwGzix8Djc=",
+        "size" : 5488
+      },
+      ".backups/2019-01-22 14.34.43.zip" : {
+        "sha1" : "QjMzeUlgDvPkS9c5mHGTf5kz1GM=",
+        "size" : 5483
+      },
+      ".backups/2019-01-22 14.36.43.zip" : {
+        "sha1" : "CwPXvGXWol4nc3/QCaGaee/XT5w=",
+        "size" : 5589
+      },
+      ".backups/2019-01-22 14.37.44.zip" : {
+        "sha1" : "YznBBN8m5wmzR0G1l4JUzoy9HH4=",
+        "size" : 5796
+      },
+      ".backups/2019-01-22 14.38.45.zip" : {
+        "sha1" : "617esGM8uu68BsoNkNDTMBU+hHg=",
+        "size" : 5853
+      },
+      ".backups/2019-01-22 15.59.09.zip" : {
+        "sha1" : "wZw4VLcERiRjjYKD/27r8m5zPko=",
+        "size" : 5951
+      },
+      ".backups/2019-01-22 16.00.09.zip" : {
+        "sha1" : "ff+f0/0A4yWMmvYsbEAxUTgxNoI=",
+        "size" : 6038
+      },
+      ".backups/2019-01-22 16.02.11.zip" : {
+        "sha1" : "VQt3/SoeqjsfPigfjJ3qy5tG+HM=",
+        "size" : 6042
+      },
+      ".backups/2019-01-22 16.06.12.zip" : {
+        "sha1" : "34utz3y5LCxhkYMF3bh3PULzg/A=",
+        "size" : 6365
+      },
+      ".backups/2019-01-22 16.07.12.zip" : {
+        "sha1" : "3hu9T5JgmdU2mPqYW6bO+6+8ZdY=",
+        "size" : 6088
+      },
+      ".backups/2019-01-22 16.08.13.zip" : {
+        "sha1" : "gCauh8JGQeb+2L5xqJpaWKcu5Z4=",
+        "size" : 6088
+      },
       ".yarnignore" : {
         "sha1" : "SjOjLrZ6naANd4Um5YZ+asHhTTg=",
         "size" : 53
@@ -147,8 +183,8 @@
         "size" : 519494
       },
       "build/index.js" : {
-        "sha1" : "1WQw0S1Nm+PQzQJLB67sp0A8nhE=",
-        "size" : 23653
+        "sha1" : "NVtz3fvzzMKFwK8h+nJ9LYRG618=",
+        "size" : 81861
       },
       "build/react-dom.development.js" : {
         "sha1" : "nQs4dfjb25VVDNzTtFfYbuF1KQY=",
@@ -183,8 +219,8 @@
         "size" : 776
       },
       "design/document.json" : {
-        "sha1" : "XlHI5lwgj1YLzUp40B1OpADwbsk=",
-        "size" : 44598
+        "sha1" : "k7j7iDqwCxCqBRaBbqj5zyhntgU=",
+        "size" : 54406
       },
       "images/cursors/touch-active.png" : {
         "sha1" : "fYes+h/mpvrQ2z1kPVs0zEFuq5M=",
@@ -207,8 +243,8 @@
         "size" : 14745
       },
       "package.json" : {
-        "sha1" : "I8qIgQrDJSV3vA7lktKJFGdcZpI=",
-        "size" : 310
+        "sha1" : "FYz9oIQf8EveG3UbUAzDl1R0I5o=",
+        "size" : 377
       },
       "README.md" : {
         "sha1" : "2jmj7l5rSw0yVb/vlWAYkK/YBwk=",
@@ -219,11 +255,11 @@
         "size" : 277
       },
       "yarn.lock" : {
-        "sha1" : "fcTpjkhGcheQW/iyFzSk1L3Z/ic=",
-        "size" : 772
+        "sha1" : "lTdPmvCLzIgTkAjpe4n70vliNv8=",
+        "size" : 982
       }
     },
     "uuid" : "6D5693D9-659C-45C0-93E8-193B0C181841"
   },
-  "modificationDate" : "2019-01-20T15:15:03.450Z"
+  "modificationDate" : "2019-01-22T15:08:34.823Z"
 }
