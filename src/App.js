@@ -9,12 +9,24 @@ import SideMenu from './SideMenu';
 import logo from './logo.svg';
 import grey from '@material-ui/core/colors/grey';
 import deepOrange from '@material-ui/core/colors/deepOrange';
+import Button from '@material-ui/core/Button';
 
 const theme = createMuiTheme({
   palette: {
     type: 'dark',
     primary: { main: grey[900] }, // #212121
     secondary: { main: deepOrange.A700 }, // #dd2c00
+  },
+  MuiButton: {
+    text: {
+      background: 'linear-gradient(45deg, #FE6B8B 30%, #FF8E53 90%)',
+      borderRadius: 3,
+      border: 0,
+      color: 'white',
+      height: 48,
+      padding: '0 30px',
+      boxShadow: '0 3px 5px 2px rgba(255, 105, 135, .3)',
+    },
   },
   typography: { useNextVariants: true },
 });
@@ -37,13 +49,10 @@ class App extends React.Component {
             content="minimum-scale=1, initial-scale=1, width=device-width, shrink-to-fit=no"
           />
           <SideMenu></SideMenu>
+          <Button>Overrides CSS</Button>
               <BrowserRouter>
                 <Switch>
                   <Route exact path="/" component={Home} />
-                  <Route exact path="/aufbau" component={Aufbau} />
-                  <Route exact path="/daten" component={Daten} />
-                  <Route exact path="/simulation" component={Simulation} />
-                  <Route exact path="/annwendungen" component={Anwendungen} />
                 </Switch>
                 </BrowserRouter>
                 </MuiThemeProvider>
@@ -58,47 +67,7 @@ const Home = props => (
   <div className="home" style={divStyle} >
      <img src={logo} className="App-logo" alt="logo" />
           <p>
-            Hi, I'm a screensaver.
-          </p>
-  </div>
-);
-
-//Aufbau component
-const Aufbau = props => (
-  <div className="home" style={divStyle} >
-     <img src={logo} className="App-logo" alt="logo" />
-          <p>
-            AUFBAU
-          </p>
-  </div>
-);
-
-//Aufbau component
-const Daten = props => (
-  <div className="home" style={divStyle} >
-     <img src={logo} className="App-logo" alt="logo" />
-          <p>
-            DATEN
-          </p>
-  </div>
-);
-
-//Aufbau component
-const Simulation = props => (
-  <div className="home" style={divStyle} >
-     <img src={logo} className="App-logo" alt="logo" />
-          <p>
-            SIMULATION
-          </p>
-  </div>
-);
-
-//Aufbau component
-const Anwendungen = props => (
-  <div className="home" style={divStyle} >
-     <img src={logo} className="App-logo" alt="logo" />
-          <p>
-            ANWENDUNGEN
+            Hi, I'm test text.
           </p>
   </div>
 );

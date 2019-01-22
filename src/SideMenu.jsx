@@ -8,11 +8,11 @@ import StepContent from '@material-ui/core/StepContent';
 import Button from '@material-ui/core/Button';
 import Paper from '@material-ui/core/Paper';
 import Typography from '@material-ui/core/Typography';
-import { BrowserRouter, Link } from "react-router-dom";
 
 const styles = theme => ({
   root: {
-    width: '10%',
+    width: '20%',
+    height: '100vh',
     minHeight: '1080px',
     position: 'absolute', 
     right: 0,
@@ -27,7 +27,6 @@ const styles = theme => ({
   },
   resetContainer: {
     padding: theme.spacing.unit * 3,
-    backgroundColor: 'rgba(52, 52, 52, 0.0)'
   },
 });
 
@@ -65,23 +64,28 @@ class VerticalLinearStepper extends React.Component {
 
     return (
       <div className={classes.root}>
-        <Stepper activeStep={activeStep} orientation="vertical" style={{backgroundColor: 'rgba(0, 0, 0, 0.0)'}}>
+        <Stepper activeStep={activeStep} orientation="vertical" style={{backgroundColor: 'rgba(52, 52, 52, 0.0)'}}>
           {steps.map((label, index) => (
             <Step key={label}>
-              <StepLabel style={{textAlign: 'left', typography: {marginLeft: '100px'}}}>{label}</StepLabel>
+              <StepLabel>{label}</StepLabel>
               <StepContent>
                 <div className={classes.actionsContainer}>
-                  <div style={{height:"74.7vh"}}>
-                  <BrowserRouter>
-                  <Link to="/"style={{ textDecoration: 'none', color: 'white' }}>
+                  <div style={{height:"74vh"}}>
+                    <Button
+                      disabled={activeStep === 0}
+                      onClick={this.handleBack}
+                      className={classes.button}
+                    >
+                      Back
+                    </Button>
                     <Button
                       variant="contained"
                       color="primary"
                       onClick={this.handleNext}
                       className={classes.button}
                     >
-                      {activeStep === steps.length -1 ? 'Fertig' : 'Weiter'}
-                    </Button></Link></BrowserRouter>
+                      {activeStep === steps.length - 1 ? 'Finish' : 'Next'}
+                    </Button>
                   </div>
                 </div>
               </StepContent>
@@ -90,9 +94,9 @@ class VerticalLinearStepper extends React.Component {
         </Stepper>
         {activeStep === steps.length && (
           <Paper square elevation={0} className={classes.resetContainer}>
-            <Typography>Jetzt weißt Du alles über den digitalen Zwilling!</Typography>
+            <Typography>All steps completed - you&apos;re finished</Typography>
             <Button onClick={this.handleReset} className={classes.button}>
-              Neu starten?
+              Restart
             </Button>
           </Paper>
         )}
