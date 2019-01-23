@@ -38,7 +38,7 @@ class App extends React.Component {
     // 1 Aufbau, 2 Daten, 3 Simulation, 4 Anwendungen
     actualState: 0,
     // screensaver
-    showScreensaverBasic: false,
+    showScreensaverBasic: true,
     // Aufbau
     showAufbauBasic: false,
     // Daten
