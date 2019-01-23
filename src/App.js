@@ -37,32 +37,36 @@ class App extends React.Component {
   state = {
     // 1 Aufbau, 2 Daten, 3 Simulation, 4 Anwendungen
     actualState: 0,
+    // screensaver
+    showScreensaverBasic: false, 
     // Aufbau
-    showAufbauBasic: false,
-    showAufbauExpert1: false,
+    showAufbauBasic: false, 
     // Daten
     showDatenBasic: false,
+    showDatenExpert1: false,
+    showDatenExpert2: false,
+    showDatenExpert3: false,
     // Simulation
     showSimulationBasic: false,
+    showSimulationExpert1: false,
+    showSimulationExpert2: false,
     // Anwendungen
     showAnwendungenBasic: false,
   };
 
   handleClickShowData = param => e => {
     if (param === "aufbau") {
-      this.setState({ actualState: 1, showAufbauBasic: true});
+      this.setState({ actualState: 1, showScreensaverBasic: false, showAufbauBasic: true});
       console.log(this.state.showAufbauBasic);
     } else if (param === "daten") {
-      this.setState({ actualState: 2, showAufbauBasic: false});
-      console.log(this.state.actualState);
+      this.setState({ actualState: 2, showAufbauBasic: false, showDatenBasic: true});
     } else if (param === "simulation") {
-      this.setState({ actualState: 3 });
-      console.log(this.state.actualState);
+      this.setState({ actualState: 3, showDatenBasic: false, showDatenExpert1: false, showDatenExpert2: false, showDatenExpert3: false, showSimulationBasic: true});
     } else if (param === "anwendungen") {
-      this.setState({ actualState: 4 });
-      console.log(this.state.actualState);
-    }
-    else {
+      this.setState({ actualState: 4, showSimulationBasic: false,showSimulationExpert1: false, showSimulationExpert2: false, showAnwendungenBasic: true});
+    } else if (param === "screensaver") {
+      this.setState({ actualState: 0, showAufbauBasic: false, showDatenBasic: false, showDatenExpert1: false, showDatenExpert2: false, showDatenExpert3: false, showSimulationBasic: false, showSimulationExpert1: false, showSimulationExpert2: false, showAnwendungenBasic: false, showScreensaverBasic: true});
+    } else {
       console.log('dont know what to do with ', param);
     }
   };
