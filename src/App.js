@@ -56,7 +56,7 @@ const pExpertStyle = {
   position: 'absolute',
   lineHeight: textLineHeightNormal + 'px',
   color: textColorNormal,
-  left: distanceFromSide * 20,
+  left: distanceFromSide * 21,
   bottom: distanceFromSide * 7 - 40,
   fontSize: textFontNormal + 'px',
   width: '20%',
@@ -108,7 +108,7 @@ class App extends React.Component {
     } else if (param === "showDatenExpert1") {
       console.log("done");
       this.setState({ showDatenExpert1: true });
-    }else {
+    } else {
       console.log('dont know what to do with ', param);
     }
     if (this.state.lastState != this.state.actualState) {
@@ -152,12 +152,12 @@ class App extends React.Component {
             {/* 
             MENU 
             */}
-            <Fade in={!showMenu} timeout={{ enter: fadeTimeBasicIn, exit: fadeTimeBasicOut }}>
+            <Fade in={!showMenu} timeout={{ enter: fadeTimeBasicIn, exit: fadeTimeBasicOut }} mountOnEnter={true} unmountOnExit={true}>
               <div className="menu">
                 <Button className='n1' disabled={showMenu} style={{ position: 'absolute', right: distanceFromSide, bottom: distanceFromSide * 7 - 40, fontSize: '20px' }} onClick={this.handleClickShowData('screensaver')} >mehr erfahren</Button>
               </div>
             </Fade>
-            <Fade in={showMenu} timeout={{ enter: fadeTimeBasicIn, exit: fadeTimeBasicOut }}>
+            <Fade in={showMenu} timeout={{ enter: fadeTimeBasicIn, exit: fadeTimeBasicOut }} mountOnEnter={true} unmountOnExit={true}>
               <div className="menu">
                 <Button className='n1' disabled={!showScreensaverBasic} style={{ position: 'absolute', right: distanceFromSide, top: distanceFromSide, fontSize: '20px' }} onClick={this.handleClickShowData('aufbau')} >Aufbau</Button>
                 <Button className='n1' disabled={!showAufbauBasic} style={{ position: 'absolute', right: distanceFromSide, top: 350, fontSize: '20px' }} onClick={this.handleClickShowData('daten')} >Daten</Button>
@@ -168,7 +168,7 @@ class App extends React.Component {
             {/* 
             SCREENSAVER 
             */}
-            <Fade in={showScreensaverBasic} timeout={{ enter: fadeTimeBasicIn, exit: fadeTimeBasicOut }}>
+            <Fade in={showScreensaverBasic} timeout={{ enter: fadeTimeBasicIn, exit: fadeTimeBasicOut }} mountOnEnter={true} unmountOnExit={true}>
               <div className="aufbauNormal">
                 <h1 className='p1' style={h1Style}>Digitaler Zwilling</h1>
                 <p className='p1' style={pStyle}>
@@ -180,7 +180,7 @@ class App extends React.Component {
             {/* 
             AUFBAU 
             */}
-            <Fade in={showAufbauBasic} timeout={{ enter: fadeTimeBasicIn, exit: fadeTimeBasicOut }}>
+            <Fade in={showAufbauBasic} timeout={{ enter: fadeTimeBasicIn, exit: fadeTimeBasicOut }} mountOnEnter={true} unmountOnExit={true}>
               <div className="aufbauNormal">
                 <h1 className='p1' style={h1Style}>Aufbau</h1>
                 <p className='p1' style={pStyle}>
@@ -191,16 +191,16 @@ class App extends React.Component {
             {/* 
             DATEN 
             */}
-            <Fade in={showDatenBasic} timeout={{ enter: fadeTimeBasicIn, exit: fadeTimeBasicOut }}>
+            <Fade in={showDatenBasic} timeout={{ enter: fadeTimeBasicIn, exit: fadeTimeBasicOut }} mountOnEnter={true} unmountOnExit={true}>
               <div className="aufbauNormal">
                 <h1 className='p1' style={h1Style}>Daten</h1>
-                <p className='p1' style={pStyle} onClick={() => { console.log('onClick'); }}>
+                <p className='p1' style={pStyle} >
                   Um von einem digitalen Zwilling signifikante Vorteile zu ziehen, müssen der physische und der virtuelle Part miteinander verbunden sein.<br /><br />
-                  Das <span style={expertStyleToEnter} onClick={() => this.handleClickShowData("showDatenExpert1")}>Internet der Dinge</span> ermöglicht es real existierenden Objekten mittels <span style={expertStyleToEnter}>Sensoren</span>
+                  Das <span style={expertStyleToEnter} onClick={this.handleClickShowData("showDatenExpert1")}>Internet der Dinge</span> ermöglicht es real existierenden Objekten mittels <span style={expertStyleToEnter}>Sensoren</span>
                   Daten zum eigenen, aktuellen Zustand in einer <span style={expertStyleToEnter}>Cloud</span> zu sammeln und weiterzugeben. Diese Informationen fließen in das digitale Modell ein.</p>
               </div>
             </Fade>
-            <Fade in={showDatenExpert1} timeout={{ enter: fadeTimeBasicIn, exit: fadeTimeBasicOut }}>
+            <Fade in={showDatenExpert1} timeout={{ enter: fadeTimeBasicIn, exit: fadeTimeBasicOut }} mountOnEnter={true} unmountOnExit={true}>
               <div className="expertInfo">
                 <p className='p1' style={pExpertStyle}>
                   Hier steht Expertenwissen<br /><br />
@@ -210,7 +210,7 @@ class App extends React.Component {
             {/* 
             SIMULATION 
             */}
-            <Fade in={showSimulationBasic} timeout={{ enter: fadeTimeBasicIn, exit: fadeTimeBasicOut }}>
+            <Fade in={showSimulationBasic} timeout={{ enter: fadeTimeBasicIn, exit: fadeTimeBasicOut }} mountOnEnter={true} unmountOnExit={true}>
               <div className="aufbauNormal">
                 <h1 className='p1' style={h1Style}>Simulation</h1>
                 <p className='p1' style={pStyle}>
@@ -223,7 +223,7 @@ class App extends React.Component {
             {/* 
             ANWENDUNGSFELDER 
             */}
-            <Fade in={showAnwendungenBasic} timeout={{ enter: fadeTimeBasicIn, exit: fadeTimeBasicOut }}>
+            <Fade in={showAnwendungenBasic} timeout={{ enter: fadeTimeBasicIn, exit: fadeTimeBasicOut }} mountOnEnter={true} unmountOnExit={true}>
               <div className="aufbauNormal">
                 <h1 className='p1' style={h1Style}>Anwendungen</h1>
               </div>
