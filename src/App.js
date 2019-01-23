@@ -53,7 +53,7 @@ class App extends React.Component {
       this.setState({ actualState: 1, showAufbauBasic: true});
       console.log(this.state.showAufbauBasic);
     } else if (param === "daten") {
-      this.setState({ actualState: 2 });
+      this.setState({ actualState: 2, showAufbauBasic: false});
       console.log(this.state.actualState);
     } else if (param === "simulation") {
       this.setState({ actualState: 3 });
