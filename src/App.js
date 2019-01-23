@@ -64,8 +64,7 @@ const pExpertStyle = {
 };
 
 const expertStyleToEnter = {
-  fontSize: '40px',
-  // to do
+  fontWeight: 'bold',
 }
 
 class App extends React.Component {
@@ -195,7 +194,7 @@ class App extends React.Component {
             <Fade in={showDatenBasic} timeout={{ enter: fadeTimeBasicIn, exit: fadeTimeBasicOut }}>
               <div className="aufbauNormal">
                 <h1 className='p1' style={h1Style}>Daten</h1>
-                <p className='p1' style={pStyle}>
+                <p className='p1' style={pStyle} onClick={() => { console.log('onClick'); }}>
                   Um von einem digitalen Zwilling signifikante Vorteile zu ziehen, müssen der physische und der virtuelle Part miteinander verbunden sein.<br /><br />
                   Das <span style={expertStyleToEnter} onClick={() => this.handleClickShowData("showDatenExpert1")}>Internet der Dinge</span> ermöglicht es real existierenden Objekten mittels <span style={expertStyleToEnter}>Sensoren</span>
                   Daten zum eigenen, aktuellen Zustand in einer <span style={expertStyleToEnter}>Cloud</span> zu sammeln und weiterzugeben. Diese Informationen fließen in das digitale Modell ein.</p>
