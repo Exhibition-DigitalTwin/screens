@@ -38,9 +38,9 @@ class App extends React.Component {
     // 1 Aufbau, 2 Daten, 3 Simulation, 4 Anwendungen
     actualState: 0,
     // screensaver
-    showScreensaverBasic: false, 
+    showScreensaverBasic: false,
     // Aufbau
-    showAufbauBasic: false, 
+    showAufbauBasic: false,
     // Daten
     showDatenBasic: false,
     showDatenExpert1: false,
@@ -56,23 +56,23 @@ class App extends React.Component {
 
   handleClickShowData = param => e => {
     if (param === "aufbau") {
-      this.setState({ actualState: 1, showScreensaverBasic: false, showAufbauBasic: true});
+      this.setState({ actualState: 1, showAnwendungenBasic: false, showScreensaverBasic: false, showAufbauBasic: true });
       console.log(this.state.showAufbauBasic);
     } else if (param === "daten") {
-      this.setState({ actualState: 2, showAufbauBasic: false, showDatenBasic: true});
+      this.setState({ actualState: 2, showAufbauBasic: false, showDatenBasic: true });
     } else if (param === "simulation") {
-      this.setState({ actualState: 3, showDatenBasic: false, showDatenExpert1: false, showDatenExpert2: false, showDatenExpert3: false, showSimulationBasic: true});
+      this.setState({ actualState: 3, showDatenBasic: false, showDatenExpert1: false, showDatenExpert2: false, showDatenExpert3: false, showSimulationBasic: true });
     } else if (param === "anwendungen") {
-      this.setState({ actualState: 4, showSimulationBasic: false,showSimulationExpert1: false, showSimulationExpert2: false, showAnwendungenBasic: true});
+      this.setState({ actualState: 4, showAufbauBasic: false, showSimulationBasic: false, showSimulationExpert1: false, showSimulationExpert2: false, showAnwendungenBasic: true });
     } else if (param === "screensaver") {
-      this.setState({ actualState: 0, showAufbauBasic: false, showDatenBasic: false, showDatenExpert1: false, showDatenExpert2: false, showDatenExpert3: false, showSimulationBasic: false, showSimulationExpert1: false, showSimulationExpert2: false, showAnwendungenBasic: false, showScreensaverBasic: true});
+      this.setState({ actualState: 0, showAufbauBasic: false, showDatenBasic: false, showDatenExpert1: false, showDatenExpert2: false, showDatenExpert3: false, showSimulationBasic: false, showSimulationExpert1: false, showSimulationExpert2: false, showAnwendungenBasic: false, showScreensaverBasic: true });
     } else {
       console.log('dont know what to do with ', param);
     }
   };
 
   render() {
-    const { showAufbauBasic } = this.state;
+    const { showScreensaverBasic, showAufbauBasic, showDatenBasic, showDatenExpert1, showDatenExpert2, showDatenExpert3, showSimulationBasic, showSimulationExpert1, showSimulationExpert2, showAnwendungenBasic } = this.state;
     return (
       <div className="App">
         <React.Fragment>
@@ -89,9 +89,34 @@ class App extends React.Component {
               <Button className='n1' style={{ position: 'absolute', right: distanceFromSide, top: 700, fontSize: '20px' }} onClick={this.handleClickShowData('simulation')} >Simulation</Button>
               <Button className='n1' style={{ position: 'absolute', right: distanceFromSide, bottom: distanceFromSide, fontSize: '20px' }} onClick={this.handleClickShowData('anwendungen')} >Anwendungsgebiete</Button>
             </div>
+            {/* SCREENSAVER */}
+            <Fade in={showScreensaverBasic}>
+              <div className="aufbauNormal">
+                <Button className='n1' style={{ position: 'absolute', left: distanceFromSide, top: distanceFromSide, fontSize: '20px' }} onClick={() => Three.handleClick(0, 90, -0.01)} >SCREENSAVER</Button>
+              </div>
+            </Fade>
+            {/* AUFBAU */}
             <Fade in={showAufbauBasic}>
               <div className="aufbauNormal">
                 <Button className='n1' style={{ position: 'absolute', left: distanceFromSide, top: distanceFromSide, fontSize: '20px' }} onClick={() => Three.handleClick(0, 90, -0.01)} >Aufbau</Button>
+              </div>
+            </Fade>
+            {/* DATEN */}
+            <Fade in={showDatenBasic}>
+              <div className="aufbauNormal">
+                <Button className='n1' style={{ position: 'absolute', left: distanceFromSide, top: distanceFromSide, fontSize: '20px' }} onClick={() => Three.handleClick(0, 90, -0.01)} >Daten</Button>
+              </div>
+            </Fade>
+            {/* SIMULATION */}
+            <Fade in={showSimulationBasic}>
+              <div className="aufbauNormal">
+                <Button className='n1' style={{ position: 'absolute', left: distanceFromSide, top: distanceFromSide, fontSize: '20px' }} onClick={() => Three.handleClick(0, 90, -0.01)} >Simulation</Button>
+              </div>
+            </Fade>
+            {/* ANWENDUNGSFELDER */}
+            <Fade in={showAnwendungenBasic}>
+              <div className="aufbauNormal">
+                <Button className='n1' style={{ position: 'absolute', left: distanceFromSide, top: distanceFromSide, fontSize: '20px' }} onClick={() => Three.handleClick(0, 90, -0.01)} >Anwendungsfelder</Button>
               </div>
             </Fade>
           </MuiThemeProvider>
@@ -110,42 +135,6 @@ const Home = props => (
     </p>
     <Button className='n1' onClick={//Three.handleClick(0, 180, (-0.01))
       console.log("test")}>Turn -180°</Button>
-  </div>
-);
-
-//Aufbau component
-const Aufbau = props => (
-  <div className="aufbau" style={{ position: 'absolute', top: distanceFromSideInfoNormal, left: distanceFromSideInfoNormal, }} >
-    <p style={{ color: textColorNormal, fontSize: textFontNormal }}>
-      AUFBAU
-    </p>
-  </div>
-);
-
-//Aufbau component
-const Daten = props => (
-  <div className="daten" style={{ position: 'absolute', top: distanceFromSideInfoNormal, left: distanceFromSideInfoNormal, }} >
-    <p style={{ color: textColorNormal, fontSize: textFontNormal }}>
-      DATEN
-    </p>
-  </div>
-);
-
-//Aufbau component
-const Simulation = props => (
-  <div className="simulation" style={{ position: 'absolute', top: distanceFromSideInfoNormal, left: distanceFromSideInfoNormal, }} >
-    <p style={{ color: textColorNormal, fontSize: textFontNormal }}>
-      SIMULATION
-    </p>
-  </div>
-);
-
-//Aufbau component
-const Anwendungen = props => (
-  <div className="anwendungen" style={divStyle} >
-    <p style={{ color: textColorNormal, fontSize: textFontNormal }}>
-      ANWENDUNGEN
-          </p>
   </div>
 );
 
