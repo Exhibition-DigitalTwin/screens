@@ -34,12 +34,26 @@ const divStyle = {
 
 class App extends React.Component {
   state = {
-    actualState: 0,
+    actualState: 0, // 1 Aufbau, 2 Daten, 3 Simulation, 4 Anwendungen
+    aufbauExpert1: false,
   };
 
   handleClickShowData = param => e => {
     if (param === "aufbau") {
-      console.log('this is correct!', param);
+      this.setState({ actualState: 1 });
+      console.log(this.state.actualState);
+    } else if (param === "daten") {
+      this.setState({ actualState: 2 });
+      console.log(this.state.actualState);
+    } else if (param === "simulation") {
+      this.setState({ actualState: 3 });
+      console.log(this.state.actualState);
+    } else if (param === "anwendungen") {
+      this.setState({ actualState: 4 });
+      console.log(this.state.actualState);
+    }
+    else {
+      console.log('dont know what to do with ', param);
     }
   };
 
@@ -56,9 +70,9 @@ class App extends React.Component {
             <Three />
             <div className="menu">
               <Button className='n1' style={{ position: 'absolute', right: distanceFromSide, top: distanceFromSide, fontSize: '20px' }} onClick={this.handleClickShowData('aufbau')} >Aufbau</Button>
-              <Button className='n1' style={{ position: 'absolute', right: distanceFromSide, top: 350, fontSize: '20px' }}>Daten</Button>
-              <Button className='n1' style={{ position: 'absolute', right: distanceFromSide, top: 700, fontSize: '20px' }}>Simulation</Button>
-              <Button className='n1' style={{ position: 'absolute', right: distanceFromSide, bottom: distanceFromSide, fontSize: '20px' }}>Anwendungsgebiete</Button>
+              <Button className='n1' style={{ position: 'absolute', right: distanceFromSide, top: 350, fontSize: '20px' }} onClick={this.handleClickShowData('daten')} >Daten</Button>
+              <Button className='n1' style={{ position: 'absolute', right: distanceFromSide, top: 700, fontSize: '20px' }} onClick={this.handleClickShowData('simulation')} >Simulation</Button>
+              <Button className='n1' style={{ position: 'absolute', right: distanceFromSide, bottom: distanceFromSide, fontSize: '20px' }} onClick={this.handleClickShowData('anwendungen')} >Anwendungsgebiete</Button>
             </div>
           </MuiThemeProvider>
         </React.Fragment>
