@@ -5,7 +5,6 @@ import './App.css';
 import 'typeface-roboto';
 import Three from './Three';
 import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
-import logo from './logo.svg';
 import grey from '@material-ui/core/colors/grey';
 import deepOrange from '@material-ui/core/colors/deepOrange';
 import Button from '@material-ui/core/Button';
@@ -27,6 +26,7 @@ const distanceFromSide = 30;
 const distanceFromSideInfoNormal = 100;
 const textColorNormal = '#FFFFFF';
 const textFontNormal = 20;
+const textLineHeightNormal = 26;
 const fadeTimeBasicIn = 4000;
 const fadeTimeBasicOut = 500;
 
@@ -43,11 +43,22 @@ const h1Style = {
 
 const pStyle = {
   position: 'absolute',
-  lineHeight: '26px',
+  lineHeight: textLineHeightNormal + 'px',
   color: textColorNormal,
   left: distanceFromSide * 7,
   bottom: distanceFromSide * 7 - 40,
-  fontSize: '20px',
+  fontSize: textFontNormal + 'px',
+  width: '20%',
+  textAlign: 'left',
+};
+
+const pExpertStyle = {
+  position: 'absolute',
+  lineHeight: textLineHeightNormal + 'px',
+  color: textColorNormal,
+  left: distanceFromSide * 20,
+  bottom: distanceFromSide * 7 - 40,
+  fontSize: textFontNormal + 'px',
   width: '20%',
   textAlign: 'left',
 };
@@ -95,7 +106,10 @@ class App extends React.Component {
       this.setState({ actualState: 3 });
     } else if (param === "anwendungen") {
       this.setState({ actualState: 4 });
-    } else {
+    } else if (param === "showDatenExpert1") {
+      console.log("done");
+      this.setState({ showDatenExpert1: true });
+    }else {
       console.log('dont know what to do with ', param);
     }
     if (this.state.lastState != this.state.actualState) {
@@ -136,7 +150,9 @@ class App extends React.Component {
               content="minimum-scale=1, initial-scale=1, width=device-width, shrink-to-fit=no"
             />
             <Three ref={(three) => { this._three = three; }} />
-            {/* MENU */}
+            {/* 
+            MENU 
+            */}
             <Fade in={!showMenu} timeout={{ enter: fadeTimeBasicIn, exit: fadeTimeBasicOut }}>
               <div className="menu">
                 <Button className='n1' disabled={showMenu} style={{ position: 'absolute', right: distanceFromSide, bottom: distanceFromSide * 7 - 40, fontSize: '20px' }} onClick={this.handleClickShowData('screensaver')} >mehr erfahren</Button>
@@ -150,7 +166,9 @@ class App extends React.Component {
                 <Button className='n1' disabled={!showSimulationBasic} style={{ position: 'absolute', right: distanceFromSide, bottom: distanceFromSide, fontSize: '20px' }} onClick={this.handleClickShowData('anwendungen')} >Anwendungsgebiete</Button>
               </div>
             </Fade>
-            {/* SCREENSAVER */}
+            {/* 
+            SCREENSAVER 
+            */}
             <Fade in={showScreensaverBasic} timeout={{ enter: fadeTimeBasicIn, exit: fadeTimeBasicOut }}>
               <div className="aufbauNormal">
                 <h1 className='p1' style={h1Style}>Digitaler Zwilling</h1>
@@ -160,7 +178,9 @@ class App extends React.Component {
                   der realen Welt, ein virtuelles Objekt in der virtuellen Welt und die Verbindung der beiden durch Daten und Informationen.</p>
               </div>
             </Fade>
-            {/* AUFBAU */}
+            {/* 
+            AUFBAU 
+            */}
             <Fade in={showAufbauBasic} timeout={{ enter: fadeTimeBasicIn, exit: fadeTimeBasicOut }}>
               <div className="aufbauNormal">
                 <h1 className='p1' style={h1Style}>Aufbau</h1>
@@ -169,17 +189,28 @@ class App extends React.Component {
                   Der digitale Zwilling besitzt die selben strukturellen Charakteristika wie das Windrad der physischen Welt und ist im Idealfall nicht von seinem physischen Gegenstück zu unterscheiden.</p>
               </div>
             </Fade>
-            {/* DATEN */}
+            {/* 
+            DATEN 
+            */}
             <Fade in={showDatenBasic} timeout={{ enter: fadeTimeBasicIn, exit: fadeTimeBasicOut }}>
               <div className="aufbauNormal">
                 <h1 className='p1' style={h1Style}>Daten</h1>
                 <p className='p1' style={pStyle}>
                   Um von einem digitalen Zwilling signifikante Vorteile zu ziehen, müssen der physische und der virtuelle Part miteinander verbunden sein.<br /><br />
-                  Das <span style={expertStyleToEnter}>Internet der Dinge</span> ermöglicht es real existierenden Objekten mittels <span style={expertStyleToEnter}>Sensoren</span>
+                  Das <span style={expertStyleToEnter} onClick={() => this.handleClickShowData("showDatenExpert1")}>Internet der Dinge</span> ermöglicht es real existierenden Objekten mittels <span style={expertStyleToEnter}>Sensoren</span>
                   Daten zum eigenen, aktuellen Zustand in einer <span style={expertStyleToEnter}>Cloud</span> zu sammeln und weiterzugeben. Diese Informationen fließen in das digitale Modell ein.</p>
               </div>
             </Fade>
-            {/* SIMULATION */}
+            <Fade in={showDatenExpert1} timeout={{ enter: fadeTimeBasicIn, exit: fadeTimeBasicOut }}>
+              <div className="expertInfo">
+                <p className='p1' style={pExpertStyle}>
+                  Hier steht Expertenwissen<br /><br />
+                  &%$§§?=|!110}</p>
+              </div>
+            </Fade>
+            {/* 
+            SIMULATION 
+            */}
             <Fade in={showSimulationBasic} timeout={{ enter: fadeTimeBasicIn, exit: fadeTimeBasicOut }}>
               <div className="aufbauNormal">
                 <h1 className='p1' style={h1Style}>Simulation</h1>
@@ -190,7 +221,9 @@ class App extends React.Component {
                   + Button "Simulation starten"</p>
               </div>
             </Fade>
-            {/* ANWENDUNGSFELDER */}
+            {/* 
+            ANWENDUNGSFELDER 
+            */}
             <Fade in={showAnwendungenBasic} timeout={{ enter: fadeTimeBasicIn, exit: fadeTimeBasicOut }}>
               <div className="aufbauNormal">
                 <h1 className='p1' style={h1Style}>Anwendungen</h1>
@@ -202,18 +235,6 @@ class App extends React.Component {
     );
   }
 }
-
-//Home component
-const Home = props => (
-  <div className="screensaver" style={{ position: 'absolute', top: distanceFromSideInfoNormal, left: distanceFromSideInfoNormal, }} >
-    <img src={logo} className="App-logo" alt="logo" />
-    <p style={{ color: textColorNormal, fontSize: textFontNormal }}>
-      Hi, I'm a screensaver.
-    </p>
-    <Button className='n1' onClick={//Three.handleClick(0, 180, (-0.01))
-      console.log("test")}>Turn -180°</Button>
-  </div>
-);
 
 App.propTypes = {
   classes: PropTypes.object.isRequired,
