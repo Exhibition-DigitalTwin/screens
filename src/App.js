@@ -55,12 +55,12 @@ class App extends React.Component {
             />
             <Three />
             <div className="menu">
-    <Button className='n1' style={{ position: 'absolute', right: distanceFromSide, top: distanceFromSide, fontSize: '20px' }} onClick={this.handleClickShowData('aufbau')} >Aufbau</Button>
-    <Button className='n1' style={{ position: 'absolute', right: distanceFromSide, top: 350, fontSize: '20px' }}>Daten</Button>
-    <Button className='n1' style={{ position: 'absolute', right: distanceFromSide, top: 700, fontSize: '20px' }}>Simulation</Button>
-    <Button className='n1' style={{ position: 'absolute', right: distanceFromSide, bottom: distanceFromSide, fontSize: '20px' }}>Anwendungsgebiete</Button>
-  </div>
-
+              <Button className='n1' style={{ position: 'absolute', right: distanceFromSide, top: distanceFromSide, fontSize: '20px' }} onClick={//this.handleClickShowData('aufbau')
+              () => { console.log('onClick'); }} >Aufbau</Button>
+              <Button className='n1' style={{ position: 'absolute', right: distanceFromSide, top: 350, fontSize: '20px' }}>Daten</Button>
+              <Button className='n1' style={{ position: 'absolute', right: distanceFromSide, top: 700, fontSize: '20px' }}>Simulation</Button>
+              <Button className='n1' style={{ position: 'absolute', right: distanceFromSide, bottom: distanceFromSide, fontSize: '20px' }}>Anwendungsgebiete</Button>
+            </div>
           </MuiThemeProvider>
         </React.Fragment>
       </div>
