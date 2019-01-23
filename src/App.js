@@ -36,8 +36,10 @@ const divStyle = {
 
 class App extends React.Component {
   state = {
-    // 1 Aufbau, 2 Daten, 3 Simulation, 4 Anwendungen
+    // 0 Screensaver, 1 Aufbau, 2 Daten, 3 Simulation, 4 Anwendungen
     actualState: 0,
+    lastState:-1,
+    started: false,
     // screensaver
     showScreensaverBasic: true,
     // Aufbau
@@ -56,7 +58,10 @@ class App extends React.Component {
   };
 
   handleClickShowData = param => e => {
-    if (param === "aufbau") {
+    if (param === "screensaver") {
+      this.setState({ actualState: 1, showAnwendungenBasic: false, showScreensaverBasic: true });
+      this._three.handleClickThree(0, 45, -0.01);
+    } else if (param === "aufbau") {
       this.setState({ actualState: 1, showAnwendungenBasic: false, showScreensaverBasic: false, showAufbauBasic: true });
       console.log(this.state.showAufbauBasic);
     } else if (param === "daten") {
@@ -70,11 +75,11 @@ class App extends React.Component {
     } else {
       console.log('dont know what to do with ', param);
     }
+    if(this.state.lastState != this.state.actualState) {
+      this.setState({ lastState: this.state.actualState});
+      this._three.handleClickThree(0, 90, -0.01);
+    }
   };
-
-  handleThree = () => {
-    Three.handleClick(0, 90, -0.01) // do stuff
-  }
 
   render() {
     const { showScreensaverBasic, showAufbauBasic, showDatenBasic, showDatenExpert1, showDatenExpert2, showDatenExpert3, showSimulationBasic, showSimulationExpert1, showSimulationExpert2, showAnwendungenBasic } = this.state;
@@ -97,7 +102,9 @@ class App extends React.Component {
             {/* SCREENSAVER */}
             <Fade in={showScreensaverBasic} timeout={{ enter: fadeTimeBasic*2, exit: fadeTimeBasic }}>
               <div className="aufbauNormal">
-                <Button className='n1' style={{ position: 'absolute', left: distanceFromSide, top: distanceFromSide, fontSize: '20px' }} onClick={() => this.handleThree()} >SCREENSAVER</Button>
+                <p className='n1' style={{ position: 'absolute', color: textColorNormal , left: distanceFromSide*7, top: distanceFromSide*20, fontSize: '20px', width: '20%', textAlign: 'left' }}>Das Konzept des digitalen Zwillings setzt drei Dinge voraus:<br/><br/>
+                  Es gibt ein physisches Objekt in
+                  der realen Welt, ein virtuelles Objekt in der virtuellen Welt und die Verbindung der beiden durch Daten und Informationen.</p>
               </div>
             </Fade>
             {/* AUFBAU */}
