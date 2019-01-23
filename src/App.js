@@ -9,6 +9,7 @@ import logo from './logo.svg';
 import grey from '@material-ui/core/colors/grey';
 import deepOrange from '@material-ui/core/colors/deepOrange';
 import Button from '@material-ui/core/Button';
+import Fade from '@material-ui/core/Fade';
 
 const theme = createMuiTheme({
   palette: {
@@ -34,14 +35,23 @@ const divStyle = {
 
 class App extends React.Component {
   state = {
-    actualState: 0, // 1 Aufbau, 2 Daten, 3 Simulation, 4 Anwendungen
-    aufbauExpert1: false,
+    // 1 Aufbau, 2 Daten, 3 Simulation, 4 Anwendungen
+    actualState: 0,
+    // Aufbau
+    showAufbauBasic: false,
+    showAufbauExpert1: false,
+    // Daten
+    showDatenBasic: false,
+    // Simulation
+    showSimulationBasic: false,
+    // Anwendungen
+    showAnwendungenBasic: false,
   };
 
   handleClickShowData = param => e => {
     if (param === "aufbau") {
-      this.setState({ actualState: 1 });
-      console.log(this.state.actualState);
+      this.setState({ actualState: 1, showAufbauBasic: true});
+      console.log(this.state.showAufbauBasic);
     } else if (param === "daten") {
       this.setState({ actualState: 2 });
       console.log(this.state.actualState);
@@ -58,6 +68,7 @@ class App extends React.Component {
   };
 
   render() {
+    const { showAufbauBasic } = this.state;
     return (
       <div className="App">
         <React.Fragment>
@@ -74,6 +85,11 @@ class App extends React.Component {
               <Button className='n1' style={{ position: 'absolute', right: distanceFromSide, top: 700, fontSize: '20px' }} onClick={this.handleClickShowData('simulation')} >Simulation</Button>
               <Button className='n1' style={{ position: 'absolute', right: distanceFromSide, bottom: distanceFromSide, fontSize: '20px' }} onClick={this.handleClickShowData('anwendungen')} >Anwendungsgebiete</Button>
             </div>
+            <Fade in={showAufbauBasic}>
+              <div className="aufbauNormal">
+                <Button className='n1' style={{ position: 'absolute', left: distanceFromSide, top: distanceFromSide, fontSize: '20px' }} onClick={() => Three.handleClick(0, 90, -0.01)} >Aufbau</Button>
+              </div>
+            </Fade>
           </MuiThemeProvider>
         </React.Fragment>
       </div>
