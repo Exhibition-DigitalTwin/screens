@@ -27,11 +27,29 @@ const distanceFromSide = 30;
 const distanceFromSideInfoNormal = 100;
 const textColorNormal = '#FFFFFF';
 const textFontNormal = 20;
-const fadeTimeBasic = 2000;
+const fadeTimeBasicIn = 4000;
+const fadeTimeBasicOut = 500;
 
-const divStyle = {
-  width: '70%',
-  height: '100%',
+const h1Style = {
+  position: 'absolute', 
+  lineHeight: '73px', 
+  color: textColorNormal , 
+  left: distanceFromSide*7, 
+  top: distanceFromSide*4, 
+  fontSize: '70px', 
+  width: '20%', 
+  textAlign: 'left',
+};
+
+const pStyle = {
+  position: 'absolute', 
+  lineHeight: '26px', 
+  color: textColorNormal , 
+  left: distanceFromSide*7, 
+  bottom: distanceFromSide*7-40, 
+  fontSize: '20px', 
+  width: '20%', 
+  textAlign: 'left',
 };
 
 class App extends React.Component {
@@ -56,6 +74,8 @@ class App extends React.Component {
     showSimulationExpert2: false,
     // Anwendungen
     showAnwendungenBasic: false,
+    // variables for content
+    leftNormalDistance: distanceFromSide*7,
   };
 
   handleClickShowData = param => e => {
@@ -100,7 +120,7 @@ class App extends React.Component {
   };
 
   render() {
-    const { showMenu, showScreensaverBasic, showAufbauBasic, showDatenBasic, showDatenExpert1, showDatenExpert2, showDatenExpert3, showSimulationBasic, showSimulationExpert1, showSimulationExpert2, showAnwendungenBasic } = this.state;
+    const { leftNormalDistance, showMenu, showScreensaverBasic, showAufbauBasic, showDatenBasic, showDatenExpert1, showDatenExpert2, showDatenExpert3, showSimulationBasic, showSimulationExpert1, showSimulationExpert2, showAnwendungenBasic } = this.state;
     return (
       <div className="App">
         <React.Fragment>
@@ -112,12 +132,12 @@ class App extends React.Component {
             />
             <Three ref={(three) => { this._three = three; }}/>
             {/* MENU */}
-            <Fade in={!showMenu} timeout={{ enter: fadeTimeBasic*2, exit: fadeTimeBasic }}>
+            <Fade in={!showMenu} timeout={{ enter: fadeTimeBasicIn, exit: fadeTimeBasicOut }}>
             <div className="menu">
               <Button className='n1' disabled={showMenu} style={{ position: 'absolute', right: distanceFromSide, bottom: distanceFromSide*7-40, fontSize: '20px' }} onClick={this.handleClickShowData('screensaver')} >mehr erfahren</Button>
             </div>
             </Fade>
-            <Fade in={showMenu} timeout={{ enter: fadeTimeBasic*2, exit: fadeTimeBasic }}>
+            <Fade in={showMenu} timeout={{ enter: fadeTimeBasicIn, exit: fadeTimeBasicOut }}>
             <div className="menu">
               <Button className='n1' disabled={!showScreensaverBasic} style={{ position: 'absolute', right: distanceFromSide, top: distanceFromSide, fontSize: '20px' }} onClick={this.handleClickShowData('aufbau')} >Aufbau</Button>
               <Button className='n1' disabled={!showAufbauBasic} style={{ position: 'absolute', right: distanceFromSide, top: 350, fontSize: '20px' }} onClick={this.handleClickShowData('daten')} >Daten</Button>
@@ -126,36 +146,37 @@ class App extends React.Component {
             </div>
             </Fade>
             {/* SCREENSAVER */}
-            <Fade in={showScreensaverBasic} timeout={{ enter: fadeTimeBasic*2, exit: fadeTimeBasic }}>
+            <Fade in={showScreensaverBasic} timeout={{ enter: fadeTimeBasicIn, exit: fadeTimeBasicOut }}>
               <div className="aufbauNormal">
-                <p className='n1' style={{ position: 'absolute', lineHeight: '26px', color: textColorNormal , left: distanceFromSide*7, bottom: distanceFromSide*7-40, fontSize: '20px', width: '20%', textAlign: 'left' }}>
+                <h1 className='p1' style={h1Style}>Digitaler Zwilling</h1>
+                <p className='p1' style={pStyle}>
                   Das Konzept des digitalen Zwillings setzt drei Dinge voraus:<br/><br/>
                   Es gibt ein physisches Objekt in
                   der realen Welt, ein virtuelles Objekt in der virtuellen Welt und die Verbindung der beiden durch Daten und Informationen.</p>
               </div>
             </Fade>
             {/* AUFBAU */}
-            <Fade in={showAufbauBasic} timeout={{ enter: fadeTimeBasic*2, exit: fadeTimeBasic }}>
+            <Fade in={showAufbauBasic} timeout={{ enter: fadeTimeBasicIn, exit: fadeTimeBasicOut }}>
               <div className="aufbauNormal">
-                <Button className='n1' style={{ position: 'absolute', left: distanceFromSide, top: distanceFromSide, fontSize: '20px' }} onClick={() => this.handleThree()} >Aufbau</Button>
+              <h1 className='p1' style={h1Style}>Aufbau</h1>
               </div>
             </Fade>
             {/* DATEN */}
-            <Fade in={showDatenBasic} timeout={{ enter: fadeTimeBasic*2, exit: fadeTimeBasic }}>
+            <Fade in={showDatenBasic} timeout={{ enter: fadeTimeBasicIn, exit: fadeTimeBasicOut }}>
               <div className="aufbauNormal">
-                <Button className='n1' style={{ position: 'absolute', left: distanceFromSide, top: distanceFromSide, fontSize: '20px' }} onClick={() => this.handleThree()} >Daten</Button>
+              <h1 className='p1' style={h1Style}>Daten</h1>
               </div>
             </Fade>
             {/* SIMULATION */}
-            <Fade in={showSimulationBasic} timeout={{ enter: fadeTimeBasic*2, exit: fadeTimeBasic }}>
+            <Fade in={showSimulationBasic} timeout={{ enter: fadeTimeBasicIn, exit: fadeTimeBasicOut }}>
               <div className="aufbauNormal">
-                <Button className='n1' style={{ position: 'absolute', left: distanceFromSide, top: distanceFromSide, fontSize: '20px' }} onClick={() => this.handleThree(0, 90, -0.01)} >Simulation</Button>
+              <h1 className='p1' style={h1Style}>Simulation</h1>
               </div>
             </Fade>
             {/* ANWENDUNGSFELDER */}
-            <Fade in={showAnwendungenBasic} timeout={{ enter: fadeTimeBasic*2, exit: fadeTimeBasic }}>
+            <Fade in={showAnwendungenBasic} timeout={{ enter: fadeTimeBasicIn, exit: fadeTimeBasicOut }}>
               <div className="aufbauNormal">
-                <Button className='n1' style={{ position: 'absolute', left: distanceFromSide, top: distanceFromSide, fontSize: '20px' }} onClick={() => this._three.handleClickThree(0, 90, -0.01)} >Anwendungsfelder</Button>
+              <h1 className='p1' style={h1Style}>Anwendungen</h1>
               </div>
             </Fade>
           </MuiThemeProvider>
