@@ -36,10 +36,10 @@ class ThreeScene extends Component {
         this.renderer.setSize(width, height)
         this.mount.appendChild(this.renderer.domElement)
 
-        this.keyLight = new THREE.DirectionalLight(new THREE.Color('hsl(30, 100%, 75%)'), 1.0);
+        this.keyLight = new THREE.DirectionalLight(new THREE.Color('hsl(100%, 100%, 75%)'), 1.0);
         this.keyLight.position.set(100, 0, 100);
 
-        this.fillLight = new THREE.DirectionalLight(new THREE.Color('hsl(240, 100%, 75%)'), 0.75);
+        this.fillLight = new THREE.DirectionalLight(new THREE.Color('hsl(80%, 100%, 75%)'), 0.5);
         this.fillLight.position.set(-100, 0, 100);
 
         this.backLight = new THREE.DirectionalLight(0xffffff, 1.0);
@@ -56,30 +56,46 @@ class ThreeScene extends Component {
             materials.name = "white";
         });
 
+        var materialWireframe = new THREE.MeshBasicMaterial({ color: 0xfffff, wireframe: true });
+        var materialWhite = new THREE.MeshPhongMaterial( {color: 0xffffff} )
+
         this.THREE = THREE;
         const objLoader = new this.THREE.OBJLoader();
-        //objLoader.setMaterials(this.materials);
         objLoader.crossOrigin = '';
         objLoader.load(OBJ, (object0) => {
-            //object.material = materials;
+
+            // adding Material
+            object0.traverse(function (child) {
+                if (child instanceof THREE.Mesh) {
+                    child.material = materialWhite;
+                }
+            });
+
             this.scene.add(object0);
             object0.position.y -= 40;
             object0.rotateY(-0.785);
-            //object0.add(new THREE.AxesHelper(2000));
             object0.name = "windrad";
+
         })
 
+
         const objLoader1 = new this.THREE.OBJLoader();
-        //objLoader.setMaterials(this.materials);
         objLoader1.crossOrigin = '';
         objLoader1.load(OBJ1, (object) => {
+
+            // adding Material
+            object.traverse(function (child) {
+                if (child instanceof THREE.Mesh) {
+                    child.material = materialWhite;
+                }
+            });
+
             this.parentBladesBottom = new THREE.Object3D();
             object.position.y -= 43;
             object.rotateY(-0.785);
             this.parentBladesBottom.add(object);
             this.parentBladesBottom.position.y += 3;
             this.parentBladesBottom.rotateY(0.785);
-            //parentBladesBottom.add(new THREE.AxesHelper(20));
             this.parentBladesTop = new THREE.Object3D();
             this.parentBladesTop.add(this.parentBladesBottom);
             this.parentBladesTop.rotateY(-0.785);
@@ -88,7 +104,7 @@ class ThreeScene extends Component {
             console.log("hi" + this.loaded);
         })
 
-        
+
 
         this.start()
     }
