@@ -107,11 +107,11 @@ class ThreeScene extends Component {
         var rad = stop * 3.14159 / 180;
         var steps = rad / Math.sqrt(speed * speed);
         this.stopRotationLoop = steps;
-        console.log("steps" + steps);
+        //console.log("steps" + steps);
     };
 
     animate = () => {
-        console.log(this.initRotationLoop);
+        //console.log(this.initRotationLoop);
         if (this.loaded) {
             this.parentBladesBottom.rotateZ(this.speedRotationBlades);
         }
@@ -129,32 +129,10 @@ class ThreeScene extends Component {
     }
     render() {
         return (
-            <div>
-                <div>
-                    <button id="ninetyDeg" onClick={() => this.handleClickThree(0, 90, 0.01)}>
-                        Turn 90°
-                    </button>
-                </div>
-                <div>
-                    <button id="onehundretEightyDeg" onClick={() => this.handleClickThree(0, 180, 0.01)}>
-                        Turn 180°
-                    </button>
-                </div>
-                <div>
-                    <button id="minusNinetyDeg" onClick={() => this.handleClickThree(0, 90, -0.01)}>
-                        Turn -90°
-                    </button>
-                </div>
-                <div>
-                    <button id="minusOnehundretEightyDeg" onClick={() => this.handleClickThree(0, 180, (-0.01))}>
-                        Turn -180°
-                    </button>
-                </div>
-                <div
-                    style={{ width: '1920px', height: '1080px' }}
-                    ref={(mount) => { this.mount = mount }}
-                />
-            </div >
+            <div
+                style={{ width: '1920px', height: '1080px' }}
+                ref={(mount) => { this.mount = mount }}
+            />
         )
     }
 }
