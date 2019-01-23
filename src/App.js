@@ -28,6 +28,7 @@ const distanceFromSide = 30;
 const distanceFromSideInfoNormal = 100;
 const textColorNormal = '#FFFFFF';
 const textFontNormal = 20;
+const fadeTimeBasic = 2000;
 
 const divStyle = {
   width: '70%',
@@ -91,31 +92,31 @@ class App extends React.Component {
               <Button className='n1' disabled={!showSimulationBasic} style={{ position: 'absolute', right: distanceFromSide, bottom: distanceFromSide, fontSize: '20px' }} onClick={this.handleClickShowData('anwendungen')} >Anwendungsgebiete</Button>
             </div>
             {/* SCREENSAVER */}
-            <Fade in={showScreensaverBasic}>
+            <Fade in={showScreensaverBasic} timeout={{ enter: fadeTimeBasic*2, exit: fadeTimeBasic }}>
               <div className="aufbauNormal">
                 <Button className='n1' style={{ position: 'absolute', left: distanceFromSide, top: distanceFromSide, fontSize: '20px' }} onClick={() => threeHandleClick(0, 90, -0.01)} >SCREENSAVER</Button>
               </div>
             </Fade>
             {/* AUFBAU */}
-            <Fade in={showAufbauBasic}>
+            <Fade in={showAufbauBasic} timeout={{ enter: fadeTimeBasic*2, exit: fadeTimeBasic }}>
               <div className="aufbauNormal">
                 <Button className='n1' style={{ position: 'absolute', left: distanceFromSide, top: distanceFromSide, fontSize: '20px' }} onClick={() => Three.handleClick(0, 90, -0.01)} >Aufbau</Button>
               </div>
             </Fade>
             {/* DATEN */}
-            <Fade in={showDatenBasic}>
+            <Fade in={showDatenBasic} timeout={{ enter: fadeTimeBasic*2, exit: fadeTimeBasic }}>
               <div className="aufbauNormal">
                 <Button className='n1' style={{ position: 'absolute', left: distanceFromSide, top: distanceFromSide, fontSize: '20px' }} onClick={() => Three.handleClick(0, 90, -0.01)} >Daten</Button>
               </div>
             </Fade>
             {/* SIMULATION */}
-            <Fade in={showSimulationBasic}>
+            <Fade in={showSimulationBasic} timeout={{ enter: fadeTimeBasic*2, exit: fadeTimeBasic }}>
               <div className="aufbauNormal">
                 <Button className='n1' style={{ position: 'absolute', left: distanceFromSide, top: distanceFromSide, fontSize: '20px' }} onClick={() => Three.handleClick(0, 90, -0.01)} >Simulation</Button>
               </div>
             </Fade>
             {/* ANWENDUNGSFELDER */}
-            <Fade in={showAnwendungenBasic}>
+            <Fade in={showAnwendungenBasic} timeout={{ enter: fadeTimeBasic*2, exit: fadeTimeBasic }}>
               <div className="aufbauNormal">
                 <Button className='n1' style={{ position: 'absolute', left: distanceFromSide, top: distanceFromSide, fontSize: '20px' }} onClick={() => Three.handleClick(0, 90, -0.01)} >Anwendungsfelder</Button>
               </div>
