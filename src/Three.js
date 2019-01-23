@@ -64,6 +64,7 @@ class ThreeScene extends Component {
             //object.material = materials;
             this.scene.add(object0);
             object0.position.y -= 40;
+            object0.rotateY(-0.785);
             //object0.add(new THREE.AxesHelper(2000));
             object0.name = "windrad";
         })
@@ -81,10 +82,13 @@ class ThreeScene extends Component {
             //parentBladesBottom.add(new THREE.AxesHelper(20));
             this.parentBladesTop = new THREE.Object3D();
             this.parentBladesTop.add(this.parentBladesBottom);
+            this.parentBladesTop.rotateY(-0.785);
             this.scene.add(this.parentBladesTop);
             this.loaded = true;
             console.log("hi" + this.loaded);
         })
+
+        
 
         this.start()
     }
