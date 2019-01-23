@@ -22,6 +22,12 @@ const theme = createMuiTheme({
   },
 });
 
+// variables for screen design
+const distanceFromSide = 30;
+const distanceFromSideInfoNormal = 100;
+const textColorNormal = '#FFFFFF';
+const textFontNormal = 20;
+
 const divStyle = {
   width: '70%',
   height: '100%',
@@ -61,20 +67,20 @@ class App extends React.Component {
 const Menu = props => (
   <div className="menu">
     <BrowserRouter>
-      <Link to="/aufbau" style={{ textDecoration: 'none', color: 'white', position: 'absolute', right: 30, top: 30, }}>
-        <Button className='n1' style={{fontSize:'20px'}}>Aufbau</Button>
+      <Link to="/aufbau" style={{ textDecoration: 'none', color: 'white', position: 'absolute', right: distanceFromSide, top: distanceFromSide, }}>
+        <Button className='n1' style={{ fontSize: '20px' }}>Aufbau</Button>
       </Link>
     </BrowserRouter><BrowserRouter>
-      <Link to="/daten" style={{ textDecoration: 'none', color: 'white', position: 'absolute', right: 30, top: 350, }}>
-        <Button className='n1' style={{fontSize:'20px'}}>Daten</Button>
+      <Link to="/daten" style={{ textDecoration: 'none', color: 'white', position: 'absolute', right: distanceFromSide, top: 350, }}>
+        <Button className='n1' style={{ fontSize: '20px' }}>Daten</Button>
       </Link>
     </BrowserRouter><BrowserRouter>
-      <Link to="/simulation" style={{ textDecoration: 'none', color: 'white', position: 'absolute', right: 30, top: 700, }}>
-        <Button className='n1' style={{fontSize:'20px'}}>Simulation</Button>
+      <Link to="/simulation" style={{ textDecoration: 'none', color: 'white', position: 'absolute', right: distanceFromSide, top: 700, }}>
+        <Button className='n1' style={{ fontSize: '20px' }}>Simulation</Button>
       </Link>
     </BrowserRouter><BrowserRouter>
-      <Link to="/anwendungsgebiete" style={{ textDecoration: 'none', color: 'white', position: 'absolute', right: 30, bottom: 30, }}>
-        <Button className='n1' style={{fontSize:'20px'}}>Anwendungsgebiete</Button>
+      <Link to="/anwendungsgebiete" style={{ textDecoration: 'none', color: 'white', position: 'absolute', right: distanceFromSide, bottom: distanceFromSide, }}>
+        <Button className='n1' style={{ fontSize: '20px' }}>Anwendungsgebiete</Button>
       </Link>
     </BrowserRouter>
   </div>
@@ -82,45 +88,45 @@ const Menu = props => (
 
 //Home component
 const Home = props => (
-  <div className="screensaver" style={{position: 'absolute', top: 30, left: 30,}} >
+  <div className="screensaver" style={{ position: 'absolute', top: distanceFromSideInfoNormal, left: distanceFromSideInfoNormal, }} >
     <img src={logo} className="App-logo" alt="logo" />
-    <p>
+    <p style={{color: textColorNormal, fontSize: textFontNormal}}>
       Hi, I'm a screensaver.
-          </p>
+    </p>
   </div>
 );
 
 //Aufbau component
 const Aufbau = props => (
-  <div className="aufbau" style={divStyle} >
-    <p>
+  <div className="aufbau" style={{ position: 'absolute', top: distanceFromSideInfoNormal, left: distanceFromSideInfoNormal, }} >
+    <p style={{color: textColorNormal, fontSize: textFontNormal}}>
       AUFBAU
-          </p>
+    </p>
   </div>
 );
 
 //Aufbau component
 const Daten = props => (
-  <div className="daten" style={divStyle} >
-    <p>
+  <div className="daten" style={{ position: 'absolute', top: distanceFromSideInfoNormal, left: distanceFromSideInfoNormal, }} >
+    <p style={{color: textColorNormal, fontSize: textFontNormal}}>
       DATEN
-          </p>
+    </p>
   </div>
 );
 
 //Aufbau component
 const Simulation = props => (
-  <div className="simulation" style={divStyle} >
-    <p>
+  <div className="simulation" style={{ position: 'absolute', top: distanceFromSideInfoNormal, left: distanceFromSideInfoNormal, }} >
+    <p style={{color: textColorNormal, fontSize: textFontNormal}}>
       SIMULATION
-          </p>
+    </p>
   </div>
 );
 
 //Aufbau component
 const Anwendungen = props => (
   <div className="anwendungen" style={divStyle} >
-    <p>
+    <p style={{color: textColorNormal, fontSize: textFontNormal}}>
       ANWENDUNGEN
           </p>
   </div>
