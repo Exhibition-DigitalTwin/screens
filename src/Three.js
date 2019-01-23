@@ -15,7 +15,7 @@ class ThreeScene extends Component {
         this.speedRotationBlades = -0.01
         this.speedRotationHead = 0
 
-        this.initRotationLoop = 0
+        this.initRotationLoop = 0;
         this.stopRotationLoop = 0
 
         //ADD SCENE
@@ -101,17 +101,17 @@ class ThreeScene extends Component {
         cancelAnimationFrame(this.frameId)
     }
 
-    handleClick(init, stop, speed) {
+    handleClickThree(init, stop, speed) {
         this.speedRotationHead = speed;
         this.initRotationLoop = init;
         var rad = stop * 3.14159 / 180;
         var steps = rad / Math.sqrt(speed * speed);
-        console.log("steps" + steps);
         this.stopRotationLoop = steps;
+        console.log("steps" + steps);
     };
 
     animate = () => {
-
+        console.log(this.initRotationLoop);
         if (this.loaded) {
             this.parentBladesBottom.rotateZ(this.speedRotationBlades);
         }
@@ -131,22 +131,22 @@ class ThreeScene extends Component {
         return (
             <div>
                 <div>
-                    <button id="ninetyDeg" onClick={() => this.handleClick(0, 90, 0.01)}>
+                    <button id="ninetyDeg" onClick={() => this.handleClickThree(0, 90, 0.01)}>
                         Turn 90°
                     </button>
                 </div>
                 <div>
-                    <button id="onehundretEightyDeg" onClick={() => this.handleClick(0, 180, 0.01)}>
+                    <button id="onehundretEightyDeg" onClick={() => this.handleClickThree(0, 180, 0.01)}>
                         Turn 180°
                     </button>
                 </div>
                 <div>
-                    <button id="minusNinetyDeg" onClick={() => this.handleClick(0, 90, -0.01)}>
+                    <button id="minusNinetyDeg" onClick={() => this.handleClickThree(0, 90, -0.01)}>
                         Turn -90°
                     </button>
                 </div>
                 <div>
-                    <button id="minusOnehundretEightyDeg" onClick={() => this.handleClick(0, 180, (-0.01))}>
+                    <button id="minusOnehundretEightyDeg" onClick={() => this.handleClickThree(0, 180, (-0.01))}>
                         Turn -180°
                     </button>
                 </div>
@@ -159,7 +159,3 @@ class ThreeScene extends Component {
     }
 }
 export default ThreeScene
-
-export const threeHandleClick = (init, stop, speed) =>{
-    this.handleClick(init, stop, speed);
-}

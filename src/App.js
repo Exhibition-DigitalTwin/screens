@@ -10,7 +10,6 @@ import grey from '@material-ui/core/colors/grey';
 import deepOrange from '@material-ui/core/colors/deepOrange';
 import Button from '@material-ui/core/Button';
 import Fade from '@material-ui/core/Fade';
-import {threeHandleClick} from './Three';
 
 const theme = createMuiTheme({
   palette: {
@@ -73,6 +72,10 @@ class App extends React.Component {
     }
   };
 
+  handleThree = () => {
+    Three.handleClick(0, 90, -0.01) // do stuff
+  }
+
   render() {
     const { showScreensaverBasic, showAufbauBasic, showDatenBasic, showDatenExpert1, showDatenExpert2, showDatenExpert3, showSimulationBasic, showSimulationExpert1, showSimulationExpert2, showAnwendungenBasic } = this.state;
     return (
@@ -84,7 +87,7 @@ class App extends React.Component {
               name="viewport"
               content="minimum-scale=1, initial-scale=1, width=device-width, shrink-to-fit=no"
             />
-            <Three />
+            <Three ref={(three) => { this._three = three; }}/>
             <div className="menu">
               <Button className='n1' disabled={!showScreensaverBasic} style={{ position: 'absolute', right: distanceFromSide, top: distanceFromSide, fontSize: '20px' }} onClick={this.handleClickShowData('aufbau')} >Aufbau</Button>
               <Button className='n1' disabled={!showAufbauBasic} style={{ position: 'absolute', right: distanceFromSide, top: 350, fontSize: '20px' }} onClick={this.handleClickShowData('daten')} >Daten</Button>
@@ -94,31 +97,31 @@ class App extends React.Component {
             {/* SCREENSAVER */}
             <Fade in={showScreensaverBasic} timeout={{ enter: fadeTimeBasic*2, exit: fadeTimeBasic }}>
               <div className="aufbauNormal">
-                <Button className='n1' style={{ position: 'absolute', left: distanceFromSide, top: distanceFromSide, fontSize: '20px' }} onClick={() => threeHandleClick(0, 90, -0.01)} >SCREENSAVER</Button>
+                <Button className='n1' style={{ position: 'absolute', left: distanceFromSide, top: distanceFromSide, fontSize: '20px' }} onClick={() => this.handleThree()} >SCREENSAVER</Button>
               </div>
             </Fade>
             {/* AUFBAU */}
             <Fade in={showAufbauBasic} timeout={{ enter: fadeTimeBasic*2, exit: fadeTimeBasic }}>
               <div className="aufbauNormal">
-                <Button className='n1' style={{ position: 'absolute', left: distanceFromSide, top: distanceFromSide, fontSize: '20px' }} onClick={() => Three.handleClick(0, 90, -0.01)} >Aufbau</Button>
+                <Button className='n1' style={{ position: 'absolute', left: distanceFromSide, top: distanceFromSide, fontSize: '20px' }} onClick={() => this.handleThree()} >Aufbau</Button>
               </div>
             </Fade>
             {/* DATEN */}
             <Fade in={showDatenBasic} timeout={{ enter: fadeTimeBasic*2, exit: fadeTimeBasic }}>
               <div className="aufbauNormal">
-                <Button className='n1' style={{ position: 'absolute', left: distanceFromSide, top: distanceFromSide, fontSize: '20px' }} onClick={() => Three.handleClick(0, 90, -0.01)} >Daten</Button>
+                <Button className='n1' style={{ position: 'absolute', left: distanceFromSide, top: distanceFromSide, fontSize: '20px' }} onClick={() => this.handleThree()} >Daten</Button>
               </div>
             </Fade>
             {/* SIMULATION */}
             <Fade in={showSimulationBasic} timeout={{ enter: fadeTimeBasic*2, exit: fadeTimeBasic }}>
               <div className="aufbauNormal">
-                <Button className='n1' style={{ position: 'absolute', left: distanceFromSide, top: distanceFromSide, fontSize: '20px' }} onClick={() => Three.handleClick(0, 90, -0.01)} >Simulation</Button>
+                <Button className='n1' style={{ position: 'absolute', left: distanceFromSide, top: distanceFromSide, fontSize: '20px' }} onClick={() => this.handleThree(0, 90, -0.01)} >Simulation</Button>
               </div>
             </Fade>
             {/* ANWENDUNGSFELDER */}
             <Fade in={showAnwendungenBasic} timeout={{ enter: fadeTimeBasic*2, exit: fadeTimeBasic }}>
               <div className="aufbauNormal">
-                <Button className='n1' style={{ position: 'absolute', left: distanceFromSide, top: distanceFromSide, fontSize: '20px' }} onClick={() => Three.handleClick(0, 90, -0.01)} >Anwendungsfelder</Button>
+                <Button className='n1' style={{ position: 'absolute', left: distanceFromSide, top: distanceFromSide, fontSize: '20px' }} onClick={() => this._three.handleClickThree(0, 90, -0.01)} >Anwendungsfelder</Button>
               </div>
             </Fade>
           </MuiThemeProvider>
