@@ -159,3 +159,7 @@ class ThreeScene extends Component {
     }
 }
 export default ThreeScene
+
+export const threeHandleClick = (init, stop, speed) =>{
+    this.handleClick(init, stop, speed);
+}
