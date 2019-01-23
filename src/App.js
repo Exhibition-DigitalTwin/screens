@@ -59,7 +59,7 @@ class App extends React.Component {
 
 //Home component
 const Menu = props => (
-  <div className="buttonActive" style={divStyle} >
+  <div className="menu">
     <BrowserRouter>
       <Link to="/aufbau" style={{ textDecoration: 'none', color: 'white', position: 'absolute', right: 30, top: 30, }}>
         <Button className='n1' style={{fontSize:'20px'}}>Aufbau</Button>
@@ -82,7 +82,7 @@ const Menu = props => (
 
 //Home component
 const Home = props => (
-  <div className="home" style={divStyle} >
+  <div className="screensaver" style={{position: 'absolute', top: 30, left: 30,}} >
     <img src={logo} className="App-logo" alt="logo" />
     <p>
       Hi, I'm a screensaver.
@@ -92,7 +92,7 @@ const Home = props => (
 
 //Aufbau component
 const Aufbau = props => (
-  <div className="home" style={divStyle} >
+  <div className="aufbau" style={divStyle} >
     <p>
       AUFBAU
           </p>
@@ -101,7 +101,7 @@ const Aufbau = props => (
 
 //Aufbau component
 const Daten = props => (
-  <div className="home" style={divStyle} >
+  <div className="daten" style={divStyle} >
     <p>
       DATEN
           </p>
@@ -110,7 +110,7 @@ const Daten = props => (
 
 //Aufbau component
 const Simulation = props => (
-  <div className="home" style={divStyle} >
+  <div className="simulation" style={divStyle} >
     <p>
       SIMULATION
           </p>
@@ -119,7 +119,7 @@ const Simulation = props => (
 
 //Aufbau component
 const Anwendungen = props => (
-  <div className="home" style={divStyle} >
+  <div className="anwendungen" style={divStyle} >
     <p>
       ANWENDUNGEN
           </p>
