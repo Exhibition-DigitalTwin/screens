@@ -4,6 +4,8 @@ import * as OBJLoader from 'three-obj-loader';
 import OBJ from './objects/Windrad_base_kopf.obj';
 import OBJ1 from './objects/Windrad_flügel.obj';
 import MAT from './objects/Windrad_base_kopf.mtl';
+import TWEEN from 'tween.js'
+
 OBJLoader(THREE);
 class ThreeScene extends Component {
     componentDidMount() {
@@ -57,7 +59,12 @@ class ThreeScene extends Component {
         });
 
         var materialWireframe = new THREE.MeshBasicMaterial({ color: 0xfffff, wireframe: true });
-        var materialWhite = new THREE.MeshPhongMaterial( {color: 0xffffff} )
+        var materialWhite = new THREE.MeshPhongMaterial( {color: 0xffffff, opacity: 0, transparent: true} )
+
+        this.tween = new TWEEN.Tween( materialWhite )
+        this.tween.to( { opacity: 1 }, 1500 )
+        this.tween.delay( 1500 )
+        //tween.start();
 
         this.THREE = THREE;
         const objLoader = new this.THREE.OBJLoader();
@@ -130,8 +137,13 @@ class ThreeScene extends Component {
         //console.log("steps" + steps);
     };
 
+    showWindmill(){
+        this.tween.start();
+    }
+
     animate = () => {
         //console.log(this.initRotationLoop);
+        TWEEN.update();
         if (this.loaded) {
             this.parentBladesBottom.rotateZ(this.speedRotationBlades);
         }

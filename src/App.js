@@ -97,6 +97,7 @@ class App extends React.Component {
     if (param === "screensaver") {
       this.setState({ actualState: 0 });
       this._three.handleClickThree(0, 45, -0.01);
+      this._three.showWindmill();
     } else if (param === "aufbau") {
       this.setState({ actualState: 1 });
     } else if (param === "daten") {
