@@ -4,7 +4,7 @@ import * as OBJLoader from 'three-obj-loader';
 import OBJ from './objects/Windrad_base_kopf.obj';
 import OBJ1 from './objects/Windrad_flügel.obj';
 import MAT from './objects/Windrad_base_kopf.mtl';
-import TWEEN from 'tween.js'
+import TWEEN from 'tween'
 
 OBJLoader(THREE);
 class ThreeScene extends Component {
