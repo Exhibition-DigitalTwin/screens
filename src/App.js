@@ -279,10 +279,10 @@ class App extends React.Component {
             </Fade>
             <Fade in={showMenu} timeout={{ enter: fadeTimeBasicIn, exit: fadeTimeBasicOut }} mountOnEnter={true} unmountOnExit={true}>
               <div className="menu">
-                <Button className='n1' disabled={!showScreensaverBasic} style={{ position: 'absolute', right: distanceFromSide, top: distanceFromSide, fontSize: '20px' }} onClick={this.handleClickShowData('aufbau')} >Aufbau</Button>
-                <Button className='n1' disabled={!showAufbauBasic} style={{ position: 'absolute', right: distanceFromSide, top: 350, fontSize: '20px' }} onClick={this.handleClickShowData('daten')} >Daten</Button>
-                <Button className='n1' disabled={!showDatenBasic} style={{ position: 'absolute', right: distanceFromSide, top: 700, fontSize: '20px' }} onClick={this.handleClickShowData('simulation')} >Simulation</Button>
-                <Button className='n1' disabled={!showSimulationBasic} style={{ position: 'absolute', right: distanceFromSide, bottom: distanceFromSide, fontSize: '20px' }} onClick={this.handleClickShowData('anwendungen')} >Anwendungsgebiete</Button>
+                <Button className='n1' disabled={!showScreensaverBasic} style={{opacity:[showScreensaverBasic ? textClickMeFade : null], position: 'absolute', right: distanceFromSide, top: distanceFromSide, fontSize: '20px' }} onClick={this.handleClickShowData('aufbau')} >Aufbau</Button>
+                <Button className='n1' disabled={!showAufbauBasic} style={{opacity:[showAufbauBasic ? textClickMeFade : null], position: 'absolute', right: distanceFromSide, top: 350, fontSize: '20px' }} onClick={this.handleClickShowData('daten')} >Daten</Button>
+                <Button className='n1' disabled={!showDatenBasic} style={{opacity:[showDatenBasic ? textClickMeFade : null], position: 'absolute', right: distanceFromSide, top: 700, fontSize: '20px' }} onClick={this.handleClickShowData('simulation')} >Simulation</Button>
+                <Button className='n1' disabled={!showSimulationBasic} style={{opacity:[showSimulationBasic ? textClickMeFade : null], position: 'absolute', right: distanceFromSide, bottom: distanceFromSide, fontSize: '20px' }} onClick={this.handleClickShowData('anwendungen')} >Anwendungsgebiete</Button>
               </div>
             </Fade>
             {/* 
