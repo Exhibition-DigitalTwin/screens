@@ -126,10 +126,10 @@ class App extends React.Component {
   handleClickShowData = param => e => {
     if (param === "screensaver") {
       this.setState({ actualState: 0 });
-      this._three.handleClickThree(0, 45, -0.01);
-      this._three.showWindmill();
     } else if (param === "aufbau") {
       this.setState({ actualState: 1 });
+      this._three.handleClickThree(0, 45, -0.01);
+      this._three.showWindmill();
     } else if (param === "daten") {
       this.setState({ actualState: 2 });
     } else if (param === "simulation") {
@@ -253,7 +253,7 @@ class App extends React.Component {
               name="viewport"
               content="minimum-scale=1, initial-scale=1, width=device-width, shrink-to-fit=no"
             />
-            <div className="MOVEANIMATION">
+            {/*<div className="MOVEANIMATION">
               <button onClick={this.handleClick} > Toggle </button>
               <Animate start={() => ({ x: 0, })} update={() => ({ x: [this.state.open ? 200 : 0], timing: { duration: 750, ease: easeExpOut }, })} >
                 {(state) => {
@@ -268,7 +268,7 @@ class App extends React.Component {
                   )
                 }}
               </Animate>
-            </div>
+            </div>*/}
             <Three ref={(three) => { this._three = three; }} />
             {/* 
             MENU 
