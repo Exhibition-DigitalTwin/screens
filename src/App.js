@@ -296,8 +296,8 @@ class App extends React.Component {
             */}
             <Fade in={showMenuPartOne} timeout={{ enter: fadeTimeBasicIn, exit: fadeTimeBasicOut }} mountOnEnter={true} unmountOnExit={true}>
               <div className="firstMenuPoint">
-                <Button className='n1' disabled={!showScreensaverBasic} style={{opacity:[showScreensaverBasic ? textClickMeFade : null], position: 'absolute', right: distanceFromSide*3, top: distanceFromSide, fontSize: '20px' }} onClick={this.handleClickShowData('aufbau')} >Aufbau</Button>
-                <Fab className={"icon1"} disabled={!showScreensaverBasic} style={{opacity:[showScreensaverBasic ? textClickMeFade : null],position: 'absolute', right: distanceFromSide, top: distanceFromSide, fontSize: '20px' }} onClick={this.handleClickShowData('aufbau')}>
+                <Button className='n1' disabled={!showScreensaverBasic} style={{opacity:[showScreensaverBasic ? textClickMeFade : null], position: 'absolute', right: distanceFromSide*3+10, top: distanceFromSide+5, fontSize: '20px' }} onClick={this.handleClickShowData('aufbau')} >Aufbau</Button>
+                <Fab className={"icon1"} disabled={!showScreensaverBasic} style={{opacity:[showScreensaverBasic ? textClickMeFade : null], backgroundColor: 'rgb(230,230,230)', position: 'absolute', right: distanceFromSide, top: distanceFromSide, fontSize: '20px' }} onClick={this.handleClickShowData('aufbau')}>
                 <AufbauIcon className={"aufbau"} color="error"/>
                 </Fab>
               </div>
