@@ -12,6 +12,7 @@ import Fade from '@material-ui/core/Fade';
 import { easeExpOut } from 'd3-ease';
 import Animate from 'react-move/Animate';
 import SvgIcon from '@material-ui/core/SvgIcon';
+import Fab from '@material-ui/core/Fab';
 
 const theme = createMuiTheme({
   palette: {
@@ -296,8 +297,9 @@ class App extends React.Component {
             <Fade in={showMenuPartOne} timeout={{ enter: fadeTimeBasicIn, exit: fadeTimeBasicOut }} mountOnEnter={true} unmountOnExit={true}>
               <div className="firstMenuPoint">
                 <Button className='n1' disabled={!showScreensaverBasic} style={{opacity:[showScreensaverBasic ? textClickMeFade : null], position: 'absolute', right: distanceFromSide*3, top: distanceFromSide, fontSize: '20px' }} onClick={this.handleClickShowData('aufbau')} >Aufbau</Button>
-                <Button className='n1' disabled={!showScreensaverBasic} style={{position: 'absolute', right: distanceFromSide, top: distanceFromSide, fontSize: '20px' }} onClick={this.handleClickShowData('aufbau')} >
-                <AufbauIcon className={"aufbau"} color="error"/></Button>
+                <Fab className={"icon1"} disabled={!showScreensaverBasic} style={{opacity:[showScreensaverBasic ? textClickMeFade : null],position: 'absolute', right: distanceFromSide, top: distanceFromSide, fontSize: '20px' }} onClick={this.handleClickShowData('aufbau')}>
+                <AufbauIcon className={"aufbau"} color="error"/>
+                </Fab>
               </div>
             </Fade>
             <Fade in={showMenu} timeout={{ enter: fadeTimeBasicIn, exit: fadeTimeBasicOut }} mountOnEnter={true} unmountOnExit={true}>
