@@ -9,7 +9,7 @@ import grey from '@material-ui/core/colors/grey';
 import deepOrange from '@material-ui/core/colors/deepOrange';
 import Button from '@material-ui/core/Button';
 import Fade from '@material-ui/core/Fade';
-import { easeExpInOut } from 'd3-ease';
+import { easeExpInOut, easeExpOut } from 'd3-ease';
 import { range } from 'd3-array';
 import Animate from 'react-move/Animate';
 
@@ -103,6 +103,7 @@ class App extends React.Component {
 
     show: false,
     color: '#00cf77',
+    open: false,
   };
 
   handleClickShowData = param => e => {
@@ -158,6 +159,10 @@ class App extends React.Component {
     this.setState(() => ({ show: true, color: getRandomColor() }))
   }
 
+  handleClick = () => {
+    this.setState({ open: !this.state.open })
+  }
+
   render() {
     const { leftNormalDistance, showMenu, showScreensaverBasic, showAufbauBasic, showDatenBasic, showDatenExpert1, showDatenExpert2, showDatenExpert3, showSimulationBasic, showSimulationExpert1, showSimulationExpert2, showAnwendungenBasic } = this.state;
     const { updateShow, updateColor, state: { show, color } } = this
@@ -170,62 +175,38 @@ class App extends React.Component {
               name="viewport"
               content="minimum-scale=1, initial-scale=1, width=device-width, shrink-to-fit=no"
             />
-            <div>
-        <button onClick={updateShow}>
-          Toggle
-        </button>
-        {show ? (
-          <button onClick={updateColor}>
-            Update Color
-          </button>
-        ) : null}
-        <Animate
-          show={show}
-
-          start={{
-            opacity: 0,
-            backgroundColor: color,
-          }}
-
-          enter={{
-            opacity: [1],
-            timing: { duration: 1000, ease: easeExpInOut },
-          }}
-
-          update={{
-            opacity: [1],
-            backgroundColor: [color],
-            timing: { duration: 500, ease: easeExpInOut },
-          }}
-
-          leave={[
-            {
-              backgroundColor: ['#ff0063'],
-              timing: { duration: 500, ease: easeExpInOut },
-            },
-            {
-              opacity: [0],
-              timing: { delay: 500, duration: 500, ease: easeExpInOut },
-            },
-          ]}
-        >
-          {({ opacity, backgroundColor }) => {
-            return (
-              <div style={{
-                opacity,
-                width: 200,
-                height: 200,
-                marginTop: 10,
-                color: 'white',
-                backgroundColor,
-              }}
-              >
-                {opacity.toFixed(3)}
-              </div>
-            )
-          }}
-        </Animate>
-      </div>
+            <div className="COLORANIMATION">
+              <button onClick={updateShow}>Toggle</button>
+              {show ? (<button onClick={updateColor}>Update Color</button>) : null}
+              <Animate show={show} start={{ opacity: 0, backgroundColor: color, }}
+                enter={{ opacity: [1], timing: { duration: 1000, ease: easeExpInOut }, }}
+                update={{ opacity: [1], backgroundColor: [color], timing: { duration: 500, ease: easeExpInOut }, }}
+                leave={[{ backgroundColor: ['#ff0063'], timing: { duration: 500, ease: easeExpInOut }, },
+                { opacity: [0], timing: { delay: 500, duration: 500, ease: easeExpInOut }, },]} >
+                {({ opacity, backgroundColor }) => {
+                  return (
+                    <div style={{ opacity, width: 200, height: 200, marginTop: 10, color: 'white', backgroundColor, }} >
+                      {opacity.toFixed(3)}
+                    </div>
+                  )
+                }}</Animate>
+            </div>
+            <div className="MOVEANIMATION">
+              <button onClick={this.handleClick} > Toggle </button>
+              <Animate start={() => ({ x: 0, })} update={() => ({ x: [this.state.open ? 200 : 0], timing: { duration: 750, ease: easeExpOut }, })} >
+                {(state) => {
+                  const { x } = state
+                  return (
+                    <div>
+                      <div
+                        style={{
+                          position: 'absolute', width: 50, height: 50, borderRadius: 4, opacity: 0.7, backgroundColor: '#00cf77', WebkitTransform: `translate3d(${x}px, 0, 0)`, transform: `translate3d(${x}px, 0, 0)`,
+                        }} />
+                    </div>
+                  )
+                }}
+              </Animate>
+            </div>
             {/* @MarcusIoT <Three ref={(three) => { this._three = three; }} />*/}
             {/* 
             MENU 
