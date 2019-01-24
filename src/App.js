@@ -83,6 +83,7 @@ class App extends React.Component {
     lastState: 0,
     started: false,
     showMenu: false,
+    time: 0,
     // screensaver
     showScreensaverBasic: true,
     // Aufbau
@@ -101,10 +102,16 @@ class App extends React.Component {
     // variables for content
     leftNormalDistance: distanceFromSide * 7,
 
-    show: false,
     color: '#00cf77',
     open: false,
   };
+
+  componentDidMount() {
+    this.clickMeButtonTimer = setInterval(() => this.updateColor(), 1000);
+  }
+  componentWillUnmount() {
+    clearInterval(this.clickMeButtonTimer);
+  }
 
   handleClickShowData = param => e => {
     if (param === "screensaver") {
@@ -125,7 +132,7 @@ class App extends React.Component {
     } else {
       console.log('dont know what to do with ', param);
     }
-    if (this.state.lastState != this.state.actualState) {
+    if (this.state.lastState !== this.state.actualState) {
       this.setState({ lastState: this.state.actualState });
       this._three.handleClickThree(0, 90, -0.01);
     }
@@ -151,10 +158,6 @@ class App extends React.Component {
     }
   };
 
-  updateShow = () => {
-    this.setState((prev) => ({ show: !prev.show }))
-  }
-
   updateColor = () => {
     this.setState(() => ({ show: true, color: getRandomColor() }))
   }
@@ -165,7 +168,7 @@ class App extends React.Component {
 
   render() {
     const { leftNormalDistance, showMenu, showScreensaverBasic, showAufbauBasic, showDatenBasic, showDatenExpert1, showDatenExpert2, showDatenExpert3, showSimulationBasic, showSimulationExpert1, showSimulationExpert2, showAnwendungenBasic } = this.state;
-    const { updateShow, updateColor, state: { show, color } } = this
+    const { updateColor, state: { color } } = this
     return (
       <div className="App">
         <React.Fragment>
@@ -176,9 +179,8 @@ class App extends React.Component {
               content="minimum-scale=1, initial-scale=1, width=device-width, shrink-to-fit=no"
             />
             <div className="COLORANIMATION">
-              <button onClick={updateShow}>Toggle</button>
-              {show ? (<button onClick={updateColor}>Update Color</button>) : null}
-              <Animate show={show} start={{ opacity: 0, backgroundColor: color, }}
+              <button onClick={updateColor}>Update Color</button>
+              <Animate show={true} start={{ opacity: 0, backgroundColor: color, }}
                 enter={{ opacity: [1], timing: { duration: 1000, ease: easeExpInOut }, }}
                 update={{ opacity: [1], backgroundColor: [color], timing: { duration: 500, ease: easeExpInOut }, }}
                 leave={[{ backgroundColor: ['#ff0063'], timing: { duration: 500, ease: easeExpInOut }, },
