@@ -252,20 +252,6 @@ class App extends React.Component {
               name="viewport"
               content="minimum-scale=1, initial-scale=1, width=device-width, shrink-to-fit=no"
             />
-            <div className="COLORANIMATION">
-              <Animate show={true} start={{ opacity: [textClickMeFade], backgroundColor: textColorNormal, }}
-                enter={{ opacity: [textClickMeFade], timing: { duration: 1000, ease: easeExpInOut }, }}
-                update={{ opacity: [textClickMeFade], backgroundColor: [textColorNormal], timing: { duration: 500, ease: easeExpInOut }, }}
-                leave={[{ backgroundColor: ['#ff0063'], timing: { duration: 500, ease: easeExpInOut }, },
-                { opacity: [textClickMeFade], timing: { delay: 500, duration: 500, ease: easeExpInOut }, },]} >
-                {({ opacity, backgroundColor }) => {
-                  return (
-                    <div style={{ opacity: [textClickMeFade], width: 200, height: 200, marginTop: 10, color: 'white', backgroundColor, }} >
-                      {opacity}
-                    </div>
-                  )
-                }}</Animate>
-            </div>
             <div className="MOVEANIMATION">
               <button onClick={this.handleClick} > Toggle </button>
               <Animate start={() => ({ x: 0, })} update={() => ({ x: [this.state.open ? 200 : 0], timing: { duration: 750, ease: easeExpOut }, })} >
@@ -288,7 +274,7 @@ class App extends React.Component {
             */}
             <Fade in={!showMenu} timeout={{ enter: fadeTimeBasicIn, exit: fadeTimeBasicOut }} mountOnEnter={true} unmountOnExit={true}>
               <div className="menu">
-                <Button className='n1' disabled={showMenu} style={{ position: 'absolute', right: distanceFromSide, bottom: distanceFromSide * 7 - 40, fontSize: '20px' }} onClick={this.handleClickShowData('screensaver')} >mehr erfahren</Button>
+                <Button className='n1' disabled={showMenu} style={{opacity:textClickMeFade, position: 'absolute', right: distanceFromSide, bottom: distanceFromSide * 7 - 40, fontSize: '20px' }} onClick={this.handleClickShowData('screensaver')} >mehr erfahren</Button>
               </div>
             </Fade>
             <Fade in={showMenu} timeout={{ enter: fadeTimeBasicIn, exit: fadeTimeBasicOut }} mountOnEnter={true} unmountOnExit={true}>
