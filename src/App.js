@@ -9,6 +9,9 @@ import grey from '@material-ui/core/colors/grey';
 import deepOrange from '@material-ui/core/colors/deepOrange';
 import Button from '@material-ui/core/Button';
 import Fade from '@material-ui/core/Fade';
+import { easeExpInOut } from 'd3-ease';
+import { range } from 'd3-array';
+import Animate from 'react-move/Animate';
 
 const theme = createMuiTheme({
   palette: {
@@ -67,6 +70,12 @@ const expertStyleToEnter = {
   fontWeight: 'bold',
 }
 
+function getRandomColor() {
+  return range(6).reduce((m) => {
+    return `${m}${'0123456789ABCDEF'[Math.floor(Math.random() * 16)]}`
+  }, '#')
+}
+
 class App extends React.Component {
   state = {
     // 0 Screensaver, 1 Aufbau, 2 Daten, 3 Simulation, 4 Anwendungen
@@ -91,6 +100,9 @@ class App extends React.Component {
     showAnwendungenBasic: false,
     // variables for content
     leftNormalDistance: distanceFromSide * 7,
+
+    show: false,
+    color: '#00cf77',
   };
 
   handleClickShowData = param => e => {
@@ -138,8 +150,17 @@ class App extends React.Component {
     }
   };
 
+  updateShow = () => {
+    this.setState((prev) => ({ show: !prev.show }))
+  }
+
+  updateColor = () => {
+    this.setState(() => ({ show: true, color: getRandomColor() }))
+  }
+
   render() {
     const { leftNormalDistance, showMenu, showScreensaverBasic, showAufbauBasic, showDatenBasic, showDatenExpert1, showDatenExpert2, showDatenExpert3, showSimulationBasic, showSimulationExpert1, showSimulationExpert2, showAnwendungenBasic } = this.state;
+    const { updateShow, updateColor, state: { show, color } } = this
     return (
       <div className="App">
         <React.Fragment>
@@ -149,6 +170,62 @@ class App extends React.Component {
               name="viewport"
               content="minimum-scale=1, initial-scale=1, width=device-width, shrink-to-fit=no"
             />
+            <div>
+        <button onClick={updateShow}>
+          Toggle
+        </button>
+        {show ? (
+          <button onClick={updateColor}>
+            Update Color
+          </button>
+        ) : null}
+        <Animate
+          show={show}
+
+          start={{
+            opacity: 0,
+            backgroundColor: color,
+          }}
+
+          enter={{
+            opacity: [1],
+            timing: { duration: 1000, ease: easeExpInOut },
+          }}
+
+          update={{
+            opacity: [1],
+            backgroundColor: [color],
+            timing: { duration: 500, ease: easeExpInOut },
+          }}
+
+          leave={[
+            {
+              backgroundColor: ['#ff0063'],
+              timing: { duration: 500, ease: easeExpInOut },
+            },
+            {
+              opacity: [0],
+              timing: { delay: 500, duration: 500, ease: easeExpInOut },
+            },
+          ]}
+        >
+          {({ opacity, backgroundColor }) => {
+            return (
+              <div style={{
+                opacity,
+                width: 200,
+                height: 200,
+                marginTop: 10,
+                color: 'white',
+                backgroundColor,
+              }}
+              >
+                {opacity.toFixed(3)}
+              </div>
+            )
+          }}
+        </Animate>
+      </div>
             {/* @MarcusIoT <Three ref={(three) => { this._three = three; }} />*/}
             {/* 
             MENU 
