@@ -11,6 +11,7 @@ import Button from '@material-ui/core/Button';
 import Fade from '@material-ui/core/Fade';
 import { easeExpOut } from 'd3-ease';
 import Animate from 'react-move/Animate';
+import SvgIcon from '@material-ui/core/SvgIcon';
 
 const theme = createMuiTheme({
   palette: {
@@ -43,6 +44,17 @@ const h1Style = {
   textAlign: 'left',
 };
 
+const h2Style = {
+  position: 'absolute',
+  lineHeight: '46px',
+  color: textColorNormal,
+  left: distanceFromSide * 7,
+  top: distanceFromSide * 4,
+  fontSize: '40px',
+  width: '20%',
+  textAlign: 'left',
+};
+
 const pStyle = {
   position: 'absolute',
   lineHeight: textLineHeightNormal + 'px',
@@ -67,6 +79,14 @@ const pExpertStyle = {
 
 const expertStyleToEnter = {
   fontWeight: 'bold',
+}
+
+function AufbauIcon(props) {
+  return (
+    <SvgIcon {...props}>
+        <path d="M-2069-22459h0v0h-20l2.018-39h15.3l2.69,39Zm-2.9-42h-14.935l.155-3h14.573l.207,3Zm-.414-6h-14.21l.155-3h13.848l.207,3Zm-.414-6h-13.486l.207-4h13l.276,4Z" transform="translate(2089.002 22517.002)" fill="#484848"/>
+    </SvgIcon>
+  );
 }
 
 class App extends React.Component {
@@ -243,7 +263,7 @@ class App extends React.Component {
 
   render() {
     const { showMenuPartOne, textClickMeFade, leftNormalDistance, showMenu, showScreensaverBasic, showAufbauBasic, showDatenBasic, showDatenExpert1, showDatenExpert2, showDatenExpert3, showSimulationBasic, showSimulationExpert1, showSimulationExpert2, showAnwendungenBasic } = this.state;
-    const { updateColor, state: { color } } = this
+
     return (
       <div className="App">
         <React.Fragment>
@@ -275,14 +295,16 @@ class App extends React.Component {
             */}
             <Fade in={showMenuPartOne} timeout={{ enter: fadeTimeBasicIn, exit: fadeTimeBasicOut }} mountOnEnter={true} unmountOnExit={true}>
               <div className="firstMenuPoint">
-                <Button className='n1' disabled={!showScreensaverBasic} style={{opacity:[showScreensaverBasic ? textClickMeFade : null], position: 'absolute', right: distanceFromSide, top: distanceFromSide, fontSize: '20px' }} onClick={this.handleClickShowData('aufbau')} >Aufbau</Button>
+                <Button className='n1' disabled={!showScreensaverBasic} style={{opacity:[showScreensaverBasic ? textClickMeFade : null], position: 'absolute', right: distanceFromSide*3, top: distanceFromSide, fontSize: '20px' }} onClick={this.handleClickShowData('aufbau')} >Aufbau</Button>
+                <Button className='n1' disabled={!showScreensaverBasic} style={{position: 'absolute', right: distanceFromSide, top: distanceFromSide, fontSize: '20px' }} onClick={this.handleClickShowData('aufbau')} >
+                <AufbauIcon className={"aufbau"} color="error"/></Button>
               </div>
             </Fade>
             <Fade in={showMenu} timeout={{ enter: fadeTimeBasicIn, exit: fadeTimeBasicOut }} mountOnEnter={true} unmountOnExit={true}>
               <div className="menu">
-                <Button className='n1' disabled={!showAufbauBasic} style={{opacity:[showAufbauBasic ? textClickMeFade : null], position: 'absolute', right: distanceFromSide, top: 350, fontSize: '20px' }} onClick={this.handleClickShowData('daten')} >Daten</Button>
-                <Button className='n1' disabled={!showDatenBasic} style={{opacity:[showDatenBasic ? textClickMeFade : null], position: 'absolute', right: distanceFromSide, top: 700, fontSize: '20px' }} onClick={this.handleClickShowData('simulation')} >Simulation</Button>
-                <Button className='n1' disabled={!showSimulationBasic} style={{opacity:[showSimulationBasic ? textClickMeFade : null], position: 'absolute', right: distanceFromSide, bottom: distanceFromSide, fontSize: '20px' }} onClick={this.handleClickShowData('anwendungen')} >Anwendungsgebiete</Button>
+                <Button className='n1' disabled={!showAufbauBasic} style={{opacity:[showAufbauBasic ? textClickMeFade : null], position: 'absolute', right: distanceFromSide*3, top: 350, fontSize: '20px' }} onClick={this.handleClickShowData('daten')} >Daten</Button>
+                <Button className='n1' disabled={!showDatenBasic} style={{opacity:[showDatenBasic ? textClickMeFade : null], position: 'absolute', right: distanceFromSide*3, top: 700, fontSize: '20px' }} onClick={this.handleClickShowData('simulation')} >Simulation</Button>
+                <Button className='n1' disabled={!showSimulationBasic} style={{opacity:[showSimulationBasic ? textClickMeFade : null], position: 'absolute', right: distanceFromSide*3, bottom: distanceFromSide, fontSize: '20px' }} onClick={this.handleClickShowData('anwendungen')} >Anwendungsgebiete</Button>
               </div>
             </Fade>
             {/* 
@@ -302,7 +324,7 @@ class App extends React.Component {
             */}
             <Fade in={showAufbauBasic} timeout={{ enter: fadeTimeBasicIn, exit: fadeTimeBasicOut }} mountOnEnter={true} unmountOnExit={true}>
               <div className="aufbauNormal">
-                <h1 className='p1' style={h1Style}>Aufbau</h1>
+                <h2 className='p1' style={h2Style}>Aufbau</h2>
                 <p className='p1' style={pStyle}>
                   Zunächst  werden 3D Modelle aller Elemente angefertigt und zusammengefügt.<br /><br />
                   Der digitale Zwilling besitzt die selben strukturellen Charakteristika wie das Windrad der physischen Welt und ist im Idealfall nicht von seinem physischen Gegenstück zu unterscheiden.</p>
@@ -313,7 +335,7 @@ class App extends React.Component {
             */}
             <Fade in={showDatenBasic} timeout={{ enter: fadeTimeBasicIn, exit: fadeTimeBasicOut }} mountOnEnter={true} unmountOnExit={true}>
               <div className="aufbauNormal">
-                <h1 className='p1' style={h1Style}>Daten</h1>
+                <h2 className='p1' style={h2Style}>Daten</h2>
                 <p className='p1' style={pStyle} >
                   Um von einem digitalen Zwilling signifikante Vorteile zu ziehen, müssen der physische und der virtuelle Part miteinander verbunden sein.<br /><br />
                   Das <span style={expertStyleToEnter} onClick={this.handleClickShowData("showDatenExpert1")}>Internet der Dinge</span> ermöglicht es real existierenden Objekten mittels <span style={expertStyleToEnter}>Sensoren</span>
@@ -332,7 +354,7 @@ class App extends React.Component {
             */}
             <Fade in={showSimulationBasic} timeout={{ enter: fadeTimeBasicIn, exit: fadeTimeBasicOut }} mountOnEnter={true} unmountOnExit={true}>
               <div className="aufbauNormal">
-                <h1 className='p1' style={h1Style}>Simulation</h1>
+                <h2 className='p1' style={h2Style}>Simulation</h2>
                 <p className='p1' style={pStyle}>
                   Das große Potential des digitalen Zwillings besteht darin, dass jeder Zustand eines physischen Produkts  mit dem virtuellen Prozess überlagert und verglichen werden
                   kann. Der finale Schritt besteht deshalb darin, die Informationen des Datenspeichers in eine Simulation des Windrades einzubinden.<br /><br />
@@ -345,7 +367,7 @@ class App extends React.Component {
             */}
             <Fade in={showAnwendungenBasic} timeout={{ enter: fadeTimeBasicIn, exit: fadeTimeBasicOut }} mountOnEnter={true} unmountOnExit={true}>
               <div className="aufbauNormal">
-                <h1 className='p1' style={h1Style}>Anwendungen</h1>
+                <h2 className='p1' style={h2Style}>Anwendungen</h2>
               </div>
             </Fade>
           </MuiThemeProvider>
