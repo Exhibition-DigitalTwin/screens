@@ -139,19 +139,84 @@ class App extends React.Component {
     switch (this.state.actualState) {
       // screensaver
       case 0:
-        this.setState({ showMenu: true, showAnwendungenBasic: false, showScreensaverBasic: true });
+        this.setState({ 
+          showMenu: true, 
+          showAnwendungenBasic: false, 
+          showScreensaverBasic: true,
+          showAufbauBasic: false,
+          showDatenBasic: false,
+          showDatenExpert1: false, 
+          showDatenExpert2: false, 
+          showDatenExpert3: false, 
+          showSimulationBasic: false,
+          showSimulationExpert1: false, 
+          showSimulationExpert2: false, 
+          showAnwendungenBasic: false,
+        });
         break;
       case 1:
-        this.setState({ showAnwendungenBasic: false, showScreensaverBasic: false, showAufbauBasic: true });
+        this.setState({ 
+          showMenu: true, 
+          showAnwendungenBasic: false, 
+          showScreensaverBasic: false,
+          showAufbauBasic: true,
+          showDatenBasic: false,
+          showDatenExpert1: false, 
+          showDatenExpert2: false, 
+          showDatenExpert3: false, 
+          showSimulationBasic: false,
+          showSimulationExpert1: false, 
+          showSimulationExpert2: false, 
+          showAnwendungenBasic: false,
+        });
         break;
       case 2:
-        this.setState({ showAufbauBasic: false, showDatenBasic: true });
+        this.setState({ 
+          showMenu: true, 
+          showAnwendungenBasic: false, 
+          showScreensaverBasic: false,
+          showAufbauBasic: false,
+          showDatenBasic: true,
+          showDatenExpert1: false, 
+          showDatenExpert2: false, 
+          showDatenExpert3: false, 
+          showSimulationBasic: false,
+          showSimulationExpert1: false, 
+          showSimulationExpert2: false, 
+          showAnwendungenBasic: false,
+        });
         break;
       case 3:
-        this.setState({ showDatenBasic: false, showDatenExpert1: false, showDatenExpert2: false, showDatenExpert3: false, showSimulationBasic: true });
+        this.setState({ 
+          showMenu: true, 
+          showAnwendungenBasic: false, 
+          showScreensaverBasic: false,
+          showAufbauBasic: false,
+          showDatenBasic: false,
+          showDatenExpert1: false, 
+          showDatenExpert2: false, 
+          showDatenExpert3: false, 
+          showSimulationBasic: true,
+          showSimulationExpert1: false, 
+          showSimulationExpert2: false, 
+          showAnwendungenBasic: false,
+        });
         break;
       case 4:
-        this.setState({ showAufbauBasic: false, showSimulationBasic: false, showSimulationExpert1: false, showSimulationExpert2: false, showAnwendungenBasic: true });
+        this.setState({ 
+          showMenu: true, 
+          showAnwendungenBasic: false, 
+          showScreensaverBasic: false,
+          showAufbauBasic: false,
+          showDatenBasic: false,
+          showDatenExpert1: false, 
+          showDatenExpert2: false, 
+          showDatenExpert3: false, 
+          showSimulationBasic: false,
+          showSimulationExpert1: false, 
+          showSimulationExpert2: false, 
+          showAnwendungenBasic: true,
+        });
         break;
       default:
         break;
@@ -179,7 +244,6 @@ class App extends React.Component {
               content="minimum-scale=1, initial-scale=1, width=device-width, shrink-to-fit=no"
             />
             <div className="COLORANIMATION">
-              <button onClick={updateColor}>Update Color</button>
               <Animate show={true} start={{ opacity: 0, backgroundColor: color, }}
                 enter={{ opacity: [1], timing: { duration: 1000, ease: easeExpInOut }, }}
                 update={{ opacity: [1], backgroundColor: [color], timing: { duration: 500, ease: easeExpInOut }, }}
