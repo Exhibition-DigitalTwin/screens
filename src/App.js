@@ -32,6 +32,7 @@ const textFontNormal = 20;
 const textLineHeightNormal = 26;
 const fadeTimeBasicIn = 4000;
 const fadeTimeBasicOut = 500;
+const textClickMeFade = 0.7;
 
 const h1Style = {
   position: 'absolute',
@@ -70,12 +71,6 @@ const expertStyleToEnter = {
   fontWeight: 'bold',
 }
 
-function getRandomColor() {
-  return range(6).reduce((m) => {
-    return `${m}${'0123456789ABCDEF'[Math.floor(Math.random() * 16)]}`
-  }, '#')
-}
-
 class App extends React.Component {
   state = {
     // 0 Screensaver, 1 Aufbau, 2 Daten, 3 Simulation, 4 Anwendungen
@@ -102,7 +97,7 @@ class App extends React.Component {
     // variables for content
     leftNormalDistance: distanceFromSide * 7,
 
-    color: '#00cf77',
+    textClickMeFade: 0.7,
     open: false,
   };
 
@@ -111,6 +106,15 @@ class App extends React.Component {
   }
   componentWillUnmount() {
     clearInterval(this.clickMeButtonTimer);
+  }
+
+  setOpacity() {
+    if(textClickMeFade <= 0.7) {
+      this.textClickMeFade += 0.05;
+    } else if (textClickMeFade >= 1){
+      this.textClickMeFade -= 0.05;
+    } 
+    return "rgba(255,255,255," + textClickMeFade + ")"
   }
 
   handleClickShowData = param => e => {
@@ -224,7 +228,7 @@ class App extends React.Component {
   };
 
   updateColor = () => {
-    this.setState(() => ({ show: true, color: getRandomColor() }))
+    this.setState(() => ({ show: true, color: this.setOpacity() }))
   }
 
   handleClick = () => {
@@ -244,9 +248,9 @@ class App extends React.Component {
               content="minimum-scale=1, initial-scale=1, width=device-width, shrink-to-fit=no"
             />
             <div className="COLORANIMATION">
-              <Animate show={true} start={{ opacity: 0, backgroundColor: color, }}
-                enter={{ opacity: [1], timing: { duration: 1000, ease: easeExpInOut }, }}
-                update={{ opacity: [1], backgroundColor: [color], timing: { duration: 500, ease: easeExpInOut }, }}
+              <Animate show={true} start={{ opacity: 0, backgroundColor: textColorNormal, }}
+                enter={{ opacity: [textClickMeFade], timing: { duration: 1000, ease: easeExpInOut }, }}
+                update={{ opacity: [textClickMeFade], backgroundColor: [textColorNormal], timing: { duration: 500, ease: easeExpInOut }, }}
                 leave={[{ backgroundColor: ['#ff0063'], timing: { duration: 500, ease: easeExpInOut }, },
                 { opacity: [0], timing: { delay: 500, duration: 500, ease: easeExpInOut }, },]} >
                 {({ opacity, backgroundColor }) => {
