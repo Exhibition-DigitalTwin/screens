@@ -274,7 +274,7 @@ class App extends React.Component {
             */}
             <Fade in={!showMenu} timeout={{ enter: fadeTimeBasicIn, exit: fadeTimeBasicOut }} mountOnEnter={true} unmountOnExit={true}>
               <div className="menu">
-                <Button className='n1' disabled={showMenu} style={{opacity:textClickMeFade, position: 'absolute', right: distanceFromSide, bottom: distanceFromSide * 7 - 40, fontSize: '20px' }} onClick={this.handleClickShowData('screensaver')} >mehr erfahren</Button>
+                <Button className='n1' disabled={showMenu} style={{opacity:[!showMenu ? textClickMeFade : null], position: 'absolute', right: distanceFromSide, bottom: distanceFromSide * 7 - 40, fontSize: '20px' }} onClick={this.handleClickShowData('screensaver')} >mehr erfahren</Button>
               </div>
             </Fade>
             <Fade in={showMenu} timeout={{ enter: fadeTimeBasicIn, exit: fadeTimeBasicOut }} mountOnEnter={true} unmountOnExit={true}>
