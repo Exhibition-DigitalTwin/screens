@@ -3,7 +3,7 @@ import CssBaseline from '@material-ui/core/CssBaseline';
 import PropTypes from 'prop-types';
 import './App.css';
 import 'typeface-roboto';
-import Three from './Three';
+// @MarcusIoT import Three from './Three';
 import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
 import grey from '@material-ui/core/colors/grey';
 import deepOrange from '@material-ui/core/colors/deepOrange';
@@ -96,8 +96,8 @@ class App extends React.Component {
   handleClickShowData = param => e => {
     if (param === "screensaver") {
       this.setState({ actualState: 0 });
-      this._three.handleClickThree(0, 45, -0.01);
-      this._three.showWindmill();
+      // @MarcusIoT this._three.handleClickThree(0, 45, -0.01);
+      // @MarcusIoT this._three.showWindmill();
     } else if (param === "aufbau") {
       this.setState({ actualState: 1 });
     } else if (param === "daten") {
@@ -114,7 +114,7 @@ class App extends React.Component {
     }
     if (this.state.lastState != this.state.actualState) {
       this.setState({ lastState: this.state.actualState });
-      this._three.handleClickThree(0, 90, -0.01);
+      // @MarcusIoT this._three.handleClickThree(0, 90, -0.01);
     }
     switch (this.state.actualState) {
       // screensaver
@@ -149,7 +149,7 @@ class App extends React.Component {
               name="viewport"
               content="minimum-scale=1, initial-scale=1, width=device-width, shrink-to-fit=no"
             />
-            <Three ref={(three) => { this._three = three; }} />
+            {/* @MarcusIoT <Three ref={(three) => { this._three = three; }} />*/}
             {/* 
             MENU 
             */}
