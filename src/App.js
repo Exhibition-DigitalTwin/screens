@@ -9,7 +9,7 @@ import grey from '@material-ui/core/colors/grey';
 import deepOrange from '@material-ui/core/colors/deepOrange';
 import Button from '@material-ui/core/Button';
 import Fade from '@material-ui/core/Fade';
-import { easeExpInOut, easeExpOut } from 'd3-ease';
+import { easeExpOut } from 'd3-ease';
 import Animate from 'react-move/Animate';
 
 const theme = createMuiTheme({
@@ -95,14 +95,14 @@ class App extends React.Component {
     // variables for content
     leftNormalDistance: distanceFromSide * 7,
 
-    standardTextClickMeFadeStart: 0.7,
-    textClickMeFade: 0.7,
+    standardTextClickMeFadeStart: 0.6,
+    textClickMeFade: 0.6,
     textClickMeFadeStatus: false,
     open: false,
   };
 
   componentDidMount() {
-    this.clickMeButtonTimer = setInterval(() => this.updateColor(), 60);
+    this.clickMeButtonTimer = setInterval(() => this.updateColor(), 30);
   }
   componentWillUnmount() {
     clearInterval(this.clickMeButtonTimer);
