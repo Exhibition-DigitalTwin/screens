@@ -10,7 +10,6 @@ import deepOrange from '@material-ui/core/colors/deepOrange';
 import Button from '@material-ui/core/Button';
 import Fade from '@material-ui/core/Fade';
 import { easeExpInOut, easeExpOut } from 'd3-ease';
-import { range } from 'd3-array';
 import Animate from 'react-move/Animate';
 
 const theme = createMuiTheme({
@@ -32,7 +31,6 @@ const textFontNormal = 20;
 const textLineHeightNormal = 26;
 const fadeTimeBasicIn = 4000;
 const fadeTimeBasicOut = 500;
-const textClickMeFade = 0.7;
 
 const h1Style = {
   position: 'absolute',
@@ -97,24 +95,32 @@ class App extends React.Component {
     // variables for content
     leftNormalDistance: distanceFromSide * 7,
 
+    standardTextClickMeFadeStart: 0.7,
     textClickMeFade: 0.7,
+    textClickMeFadeStatus: false,
     open: false,
   };
 
   componentDidMount() {
-    this.clickMeButtonTimer = setInterval(() => this.updateColor(), 1000);
+    this.clickMeButtonTimer = setInterval(() => this.updateColor(), 60);
   }
   componentWillUnmount() {
     clearInterval(this.clickMeButtonTimer);
   }
 
   setOpacity() {
-    if(textClickMeFade <= 0.7) {
-      this.textClickMeFade += 0.05;
-    } else if (textClickMeFade >= 1){
-      this.textClickMeFade -= 0.05;
-    } 
-    return "rgba(255,255,255," + textClickMeFade + ")"
+    if(this.state.textClickMeFade >= 1) {
+      this.setState({ textClickMeFadeStatus: false });
+    } else if (this.state.textClickMeFade <= this.state.standardTextClickMeFadeStart){
+      this.setState({ textClickMeFadeStatus: true });
+    }
+    if(this.state.textClickMeFadeStatus === true) {
+      this.setState({ textClickMeFade: this.state.textClickMeFade + 0.01 });
+    } else {
+      this.setState({ textClickMeFade: this.state.textClickMeFade - 0.01 });
+    }
+    console.log(this.state.textClickMeFade); 
+    return "rgba(255,255,255," + this.state.textClickMeFade + ")"
   }
 
   handleClickShowData = param => e => {
@@ -236,7 +242,7 @@ class App extends React.Component {
   }
 
   render() {
-    const { leftNormalDistance, showMenu, showScreensaverBasic, showAufbauBasic, showDatenBasic, showDatenExpert1, showDatenExpert2, showDatenExpert3, showSimulationBasic, showSimulationExpert1, showSimulationExpert2, showAnwendungenBasic } = this.state;
+    const { textClickMeFade, leftNormalDistance, showMenu, showScreensaverBasic, showAufbauBasic, showDatenBasic, showDatenExpert1, showDatenExpert2, showDatenExpert3, showSimulationBasic, showSimulationExpert1, showSimulationExpert2, showAnwendungenBasic } = this.state;
     const { updateColor, state: { color } } = this
     return (
       <div className="App">
@@ -248,15 +254,15 @@ class App extends React.Component {
               content="minimum-scale=1, initial-scale=1, width=device-width, shrink-to-fit=no"
             />
             <div className="COLORANIMATION">
-              <Animate show={true} start={{ opacity: 0, backgroundColor: textColorNormal, }}
+              <Animate show={true} start={{ opacity: [textClickMeFade], backgroundColor: textColorNormal, }}
                 enter={{ opacity: [textClickMeFade], timing: { duration: 1000, ease: easeExpInOut }, }}
                 update={{ opacity: [textClickMeFade], backgroundColor: [textColorNormal], timing: { duration: 500, ease: easeExpInOut }, }}
                 leave={[{ backgroundColor: ['#ff0063'], timing: { duration: 500, ease: easeExpInOut }, },
-                { opacity: [0], timing: { delay: 500, duration: 500, ease: easeExpInOut }, },]} >
+                { opacity: [textClickMeFade], timing: { delay: 500, duration: 500, ease: easeExpInOut }, },]} >
                 {({ opacity, backgroundColor }) => {
                   return (
-                    <div style={{ opacity, width: 200, height: 200, marginTop: 10, color: 'white', backgroundColor, }} >
-                      {opacity.toFixed(3)}
+                    <div style={{ opacity: [textClickMeFade], width: 200, height: 200, marginTop: 10, color: 'white', backgroundColor, }} >
+                      {opacity}
                     </div>
                   )
                 }}</Animate>
