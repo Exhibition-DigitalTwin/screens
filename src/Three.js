@@ -59,13 +59,38 @@ class ThreeScene extends Component {
         });
 
         var materialWireframe = new THREE.MeshBasicMaterial({ color: 0xfffff, wireframe: true });
-        var materialWhite = new THREE.MeshPhongMaterial( {color: 0xffffff, opacity: 0, transparent: true} )
+        var materialWhite = new THREE.MeshPhongMaterial({ color: 0xffffff, opacity: 0, transparent: true })
 
-        this.tween = new TWEEN.Tween( materialWhite )
-        this.tween.to( { opacity: 1 }, 1500 )
-        this.tween.delay( 1500 )
+        this.tween = new TWEEN.Tween(materialWhite)
+        this.tween.to({ opacity: 1 }, 1500)
+        this.tween.delay(1500)
         //tween.start();
 
+
+        //--------------------------------- Try moving camera -----------------------------
+        //this.from = {
+        //    x: this.camera.position.x,
+        //    y: this.camera.position.y,
+        //    z: this.camera.position.z
+        //};
+//
+        //this.to = {
+        //    x: 600,
+        //    y: 20,
+        //    z: -30
+        //};
+        //this.tweenCamera = new TWEEN.Tween(this.from)
+        //this.tweenCamera.to(this.to, 600)
+        //this.tweenCamera.easing(TWEEN.Easing.Linear.None)
+        //this.tweenCamera.onUpdate(function () {
+        //    this.camera.position.y = this.this.y;
+        //    this.camera.lookAt(new THREE.Vector3(0, 0, 0));
+        //})
+        //this.tweenCamera.onComplete(function () {
+        //    this.camera.lookAt(new THREE.Vector3(0, 0, 0));
+        //})
+//
+//
         this.THREE = THREE;
         const objLoader = new this.THREE.OBJLoader();
         objLoader.crossOrigin = '';
@@ -137,9 +162,13 @@ class ThreeScene extends Component {
         //console.log("steps" + steps);
     };
 
-    showWindmill(){
+    showWindmill() {
         this.tween.start();
     }
+
+    //showSimulation() {
+    //    this.tweenCamera.start();
+    //}
 
     animate = () => {
         //console.log(this.initRotationLoop);
