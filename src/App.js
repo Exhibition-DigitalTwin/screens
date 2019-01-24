@@ -119,7 +119,6 @@ class App extends React.Component {
     } else {
       this.setState({ textClickMeFade: this.state.textClickMeFade - 0.01 });
     }
-    console.log(this.state.textClickMeFade); 
     return "rgba(255,255,255," + this.state.textClickMeFade + ")"
   }
 
