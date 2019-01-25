@@ -86,10 +86,98 @@ function AufbauIcon(props) {
   return (
     <SvgIcon {...props}>
       <g>
-	<polygon class="st0" points="15.7,8.9 8.1,8.9 7.1,28.3 17,28.3 17,28.3 	"/>
-	<polygon class="st0" points="15.3,3 8.4,3 8.3,4.5 15.4,4.5 	"/>
-	<polygon class="st0" points="15.5,5.9 8.2,5.9 8.1,7.4 15.6,7.4 	"/>
-	<polygon class="st0" points="8.5,1.5 15.2,1.5 15.1,0 8.5,0 	"/>
+        <polygon class="st0" points="15.7,8.9 8.1,8.9 7.1,28.3 17,28.3 17,28.3 	" />
+        <polygon class="st0" points="15.3,3 8.4,3 8.3,4.5 15.4,4.5 	" />
+        <polygon class="st0" points="15.5,5.9 8.2,5.9 8.1,7.4 15.6,7.4 	" />
+        <polygon class="st0" points="8.5,1.5 15.2,1.5 15.1,0 8.5,0 	" />
+      </g>
+    </SvgIcon>
+  );
+}
+
+function DatenIcon(props) {
+  return (
+    <SvgIcon {...props}>
+      <path id="Pfad_1634" class="st0" d="M0.1,6c0,0.6,0.1,1.2,0.3,1.7c0.2,0.5,0.8,0.8,1.3,0.8c0.4,0,0.7-0.1,1-0.4
+	C3.2,7.7,3.4,7,3.4,5.9c0-0.9-0.2-2.5-1.7-2.5C0.1,3.3,0.1,5.2,0.1,6z M0.8,5.9c0-0.9,0.1-2,1-2c0.8,0,1,0.8,1,2c0,0.9-0.1,2-1,2
+	C1,7.9,0.8,7.1,0.8,5.9z M5.3,8.4H6v-5H5.4C5,3.7,4.6,4,4.1,4.2v0.7c0.4-0.2,0.8-0.4,1.2-0.7L5.3,8.4z M7.3,6c0,0.6,0.1,1.2,0.3,1.7
+	c0.4,0.7,1.3,1,2,0.7c0.1-0.1,0.2-0.1,0.3-0.2c0.5-0.4,0.7-1.1,0.7-2.3c0-0.9-0.2-2.5-1.7-2.5C7.4,3.3,7.3,5.2,7.3,6z M8,5.9
+	c0-0.9,0.1-2,1-2c0.8,0,1,0.8,1,2c0,0.9-0.1,2-1,2C8.2,7.9,8,7.1,8,5.9z M12.5,8.4h0.7v-5h-0.6c-0.4,0.3-0.8,0.6-1.2,0.8v0.7
+	c0.4-0.2,0.8-0.4,1.2-0.7V8.4z M15.6,8.4h0.7v-5h-0.6c-0.4,0.3-0.8,0.6-1.2,0.8v0.7c0.4-0.2,0.8-0.4,1.2-0.7V8.4z M17.5,6
+	c0,0.6,0.1,1.2,0.3,1.7c0.4,0.7,1.3,1,2,0.7c0.1-0.1,0.2-0.1,0.3-0.2c0.5-0.4,0.7-1.1,0.7-2.3c0-0.9-0.2-2.5-1.7-2.5
+	C17.6,3.3,17.5,5.2,17.5,6z M18.2,5.9c0-0.9,0.1-2,1-2c0.8,0,1,0.8,1,2c0,0.9-0.1,2-1,2C18.5,7.9,18.2,7.1,18.2,5.9z M21.8,6
+	c0,0.6,0.1,1.2,0.3,1.7c0.4,0.7,1.3,1,2,0.7c0.1-0.1,0.2-0.1,0.3-0.2c0.5-0.4,0.7-1.1,0.7-2.3c0-0.9-0.2-2.5-1.7-2.5
+	C21.9,3.3,21.8,5.2,21.8,6z M22.5,5.9c0-0.9,0.1-2,1-2c0.8,0,1,0.8,1,2c0,0.9-0.1,2-1,2C22.7,7.9,22.5,7.1,22.5,5.9z M27.1,8.4h0.7
+	v-5h-0.6c-0.4,0.3-0.8,0.6-1.2,0.8v0.7c0.4-0.2,0.8-0.4,1.2-0.7V8.4z M6.1,12.1c0,0.6,0.1,1.2,0.3,1.7c0.2,0.5,0.8,0.8,1.3,0.8
+	c0.4,0,0.7-0.1,1-0.4c0.5-0.4,0.7-1.1,0.7-2.3c0-0.9-0.2-2.5-1.7-2.5C6.2,9.5,6.1,11.4,6.1,12.1z M6.8,12.1c0-0.9,0.1-2,1-2
+	c0.8,0,1,0.8,1,2c0,0.9-0.1,2-1,2C7,14,6.8,13.2,6.8,12.1z M10.4,12.1c0,0.6,0.1,1.2,0.3,1.7c0.4,0.7,1.3,1,2,0.7
+	c0.1-0.1,0.2-0.1,0.3-0.2c0.5-0.4,0.7-1.1,0.7-2.3c0-0.9-0.2-2.5-1.7-2.5C10.5,9.5,10.4,11.4,10.4,12.1z M11.1,12.1c0-0.9,0.1-2,1-2
+	c0.8,0,1,0.8,1,2c0,0.9-0.1,2-1,2C11.3,14,11.1,13.2,11.1,12.1z M14.7,12.1c0,0.6,0.1,1.2,0.3,1.7c0.4,0.7,1.3,1,2,0.7
+	c0.1-0.1,0.2-0.1,0.3-0.2c0.5-0.4,0.7-1.1,0.7-2.3c0-0.9-0.2-2.5-1.7-2.5C14.8,9.5,14.7,11.4,14.7,12.1z M15.4,12.1c0-0.9,0.1-2,1-2
+	c0.8,0,1,0.8,1,2c0,0.9-0.1,2-1,2C15.6,14,15.4,13.2,15.4,12.1z M19.9,14.5h0.7v-5H20c-0.4,0.3-0.8,0.6-1.2,0.8v0.7
+	c0.4-0.2,0.8-0.4,1.2-0.7V14.5z M23,14.5h0.7v-5H23c-0.4,0.3-0.8,0.6-1.2,0.8v0.7c0.4-0.2,0.8-0.4,1.2-0.7L23,14.5z M24.9,12.1
+	c0,0.6,0.1,1.2,0.3,1.7c0.4,0.7,1.3,1,2,0.7c0.1-0.1,0.2-0.1,0.3-0.2c0.5-0.4,0.7-1.1,0.7-2.3c0-0.9-0.2-2.5-1.7-2.5
+	C25,9.5,24.9,11.4,24.9,12.1z M25.6,12.1c0-0.9,0.1-2,1-2c0.8,0,1,0.8,1,2c0,0.9-0.1,2-1,2C25.9,14,25.6,13.2,25.6,12.1z M1.2,14.5
+	h0.7v-5H1.3c-0.4,0.3-0.8,0.6-1.2,0.8v0.7c0.4-0.2,0.8-0.4,1.2-0.7V14.5z M4.3,14.5h0.7v-5H4.3c-0.4,0.3-0.8,0.6-1.2,0.8v0.7
+	c0.4-0.2,0.8-0.4,1.2-0.7L4.3,14.5z M0.1,18.2c0,0.6,0.1,1.2,0.3,1.7c0.2,0.5,0.8,0.8,1.3,0.8c0.4,0,0.7-0.1,1-0.4
+	c0.5-0.4,0.7-1.1,0.7-2.3c0-0.9-0.2-2.5-1.7-2.5C0.1,15.6,0.1,17.5,0.1,18.2z M0.8,18.2c0-0.9,0.1-2,1-2c0.8,0,1,0.8,1,2
+	c0,0.9-0.1,2-1,2C1,20.2,0.8,19.3,0.8,18.2z M5.3,20.7H6v-5H5.4C5,16,4.6,16.2,4.1,16.5v0.7c0.4-0.2,0.8-0.4,1.2-0.7L5.3,20.7z
+	 M8.3,20.7H9v-5H8.4C8,16,7.6,16.2,7.2,16.5v0.7C7.6,17,8,16.7,8.3,16.5L8.3,20.7z M10.3,18.2c0,0.6,0.1,1.2,0.3,1.7
+	c0.4,0.7,1.3,1,2,0.7c0.1-0.1,0.2-0.1,0.3-0.2c0.5-0.4,0.7-1.1,0.7-2.3c0-0.9-0.2-2.5-1.7-2.5C10.4,15.6,10.3,17.5,10.3,18.2z
+	 M11,18.2c0-0.9,0.1-2,1-2c0.8,0,1,0.8,1,2c0,0.9-0.1,2-1,2C11.2,20.2,11,19.3,11,18.2z M15.6,20.7h0.7v-5h-0.6
+	c-0.4,0.3-0.8,0.6-1.2,0.8v0.7c0.4-0.2,0.8-0.4,1.2-0.7V20.7z M17.5,18.2c0,0.6,0.1,1.2,0.3,1.7c0.4,0.7,1.3,1,2,0.7
+	c0.1-0.1,0.2-0.1,0.3-0.2c0.5-0.4,0.7-1.1,0.7-2.3c0-0.9-0.2-2.5-1.7-2.5C17.6,15.6,17.5,17.5,17.5,18.2z M18.2,18.2
+	c0-0.9,0.1-2,1-2c0.8,0,1,0.8,1,2c0,0.9-0.1,2-1,2C18.5,20.2,18.2,19.3,18.2,18.2z M21.8,18.2c0,0.6,0.1,1.2,0.3,1.7
+	c0.4,0.7,1.3,1,2,0.7c0.1-0.1,0.2-0.1,0.3-0.2c0.5-0.4,0.7-1.1,0.7-2.3c0-0.9-0.2-2.5-1.7-2.5C21.9,15.6,21.8,17.5,21.8,18.2z
+	 M22.5,18.2c0-0.9,0.1-2,1-2c0.8,0,1,0.8,1,2c0,0.9-0.1,2-1,2C22.7,20.2,22.5,19.3,22.5,18.2z M27.1,20.7h0.7v-5h-0.6
+	c-0.4,0.3-0.8,0.6-1.2,0.8v0.7c0.4-0.2,0.8-0.4,1.2-0.7V20.7z"/>
+    </SvgIcon>
+  );
+}
+
+function SimulationIcon(props) {
+  return (
+    <SvgIcon {...props}>
+      <polygon class="st0" points="0,15.3 2.2,17.4 8.2,11.1 10.4,13.5 16,11.6 21.6,15.3 28.3,9.2 26.3,7 21.3,11.6 16.4,8.3 11.3,10 8.2,6.7 "/>
+    </SvgIcon>
+  );
+}
+
+function AnwendungenIcon(props) {
+  return (
+    <SvgIcon {...props}>
+      <g id="der_Gerät" transform="translate(-1778 -911.744)">
+	<g id="Pfad_1600" transform="translate(1778 944.014)">
+		<path class="st0" d="M7.3-8.3H1.7l0.9-10.5h3.5L7.3-8.3z"/>
+		<path class="st1" d="M2.8-18.7L2-8.6H7L5.9-18.7H2.8 M2.4-19.1h3.9L7.5-8.1h-6L2.4-19.1z"/>
+	</g>
+	<path id="Pfad_1644" class="st0" d="M1789.1,914.4l2.4,2.4l-7.1,7.1l-2.4-2.4L1789.1,914.4z"/>
+	<g id="Pfad_1643" transform="translate(1778 933)">
+		<path class="st0" d="M4.5-7C2.9-7,1.7-8.2,1.7-9.8s1.2-2.7,2.7-2.7s2.7,1.2,2.7,2.7S6-7,4.5-7z"/>
+		<path class="st1" d="M4.5-12.3c-1.4,0-2.5,1.1-2.5,2.5s1.1,2.5,2.5,2.5S7-8.4,7-9.8S5.8-12.3,4.5-12.3 M4.5-12.7
+			c1.6,0,2.9,1.3,2.9,2.9S6.1-6.8,4.5-6.8S1.5-8.1,1.5-9.8S2.8-12.7,4.5-12.7z"/>
+	</g>
+	<path id="Pfad_1642" class="st0" d="M1798.5,914.2l0,2.4l-7.2-0.1l0-2.4L1798.5,914.2z"/>
+	<g id="Pfad_1641" transform="matrix(0.695, 0.719, -0.719, 0.695, 1804.502, 913.744)">
+		<path class="st0" d="M-8.6,12.9c-1,0-1.9-0.9-1.9-1.9s0.9-1.9,1.9-1.9s1.9,0.9,1.9,1.9S-7.6,12.9-8.6,12.9z"/>
+		<path class="st1" d="M-8.6,9.3c-0.9,0-1.7,0.8-1.7,1.7s0.8,1.7,1.7,1.7c0.9,0,1.7-0.8,1.7-1.7C-6.9,10-7.7,9.3-8.6,9.3 M-8.6,8.9
+			c1.2,0,2.1,0.9,2.1,2.1s-0.9,2.1-2.1,2.1c-1.2,0-2.1-0.9-2.1-2.1S-9.8,8.9-8.6,8.9z"/>
+	</g>
+	<path id="Pfad_1640" class="st0" d="M1800.6,911.9l0.8,0.8l-3,3l-0.8-0.8L1800.6,911.9z"/>
+	<path id="Pfad_1639" class="st0" d="M1801.4,917.9l-0.8,0.8l-3-3l0.8-0.8L1801.4,917.9z"/>
+	<path id="Pfad_1638" class="st0" d="M1804.5,914l-0.6,1l-3.7-2.1l0.6-1L1804.5,914z"/>
+	<path id="Pfad_1637" class="st0" d="M1804.3,916.4l0.3,1.1l-4.1,1.3l-0.3-1.1L1804.3,916.4z"/>
+	<g id="Pfad_1636" transform="matrix(0.695, 0.719, -0.719, 0.695, 1828.502, 911.744)">
+		<path class="st0" d="M-18.7,21.1c-0.4,0-0.6-0.3-0.6-0.6s0.3-0.6,0.6-0.6c0.4,0,0.6,0.3,0.6,0.6S-18.4,21.1-18.7,21.1z"/>
+		<path class="st1" d="M-18.7,20.1c-0.2,0-0.4,0.2-0.4,0.4c0,0.2,0.2,0.4,0.4,0.4s0.4-0.2,0.4-0.4C-18.3,20.3-18.5,20.1-18.7,20.1
+			 M-18.7,19.7c0.5,0,0.8,0.4,0.8,0.8s-0.4,0.8-0.8,0.8c-0.5,0-0.8-0.4-0.8-0.8S-19.2,19.7-18.7,19.7z"/>
+	</g>
+	<g id="Pfad_1635" transform="matrix(0.695, 0.719, -0.719, 0.695, 1828.502, 924.744)">
+		<path class="st0" d="M-24.1,15.9c-0.4,0-0.6-0.3-0.6-0.6c0-0.4,0.3-0.6,0.6-0.6c0.4,0,0.6,0.3,0.6,0.6
+			C-23.5,15.6-23.8,15.9-24.1,15.9z"/>
+		<path class="st1" d="M-24.1,14.9c-0.2,0-0.4,0.2-0.4,0.4s0.2,0.4,0.4,0.4s0.4-0.2,0.4-0.4S-23.9,14.9-24.1,14.9 M-24.1,14.4
+			c0.5,0,0.8,0.4,0.8,0.8s-0.4,0.8-0.8,0.8s-0.8-0.4-0.8-0.8S-24.6,14.4-24.1,14.4z"/>
+	</g>
 </g>
     </SvgIcon>
   );
@@ -304,7 +392,7 @@ class App extends React.Component {
               <div className="firstMenuPoint">
                 <Button className='n1' disabled={!showScreensaverBasic} style={{ opacity: [showScreensaverBasic ? textClickMeFade : null], position: 'absolute', right: distanceFromSide * 3 + 10, top: distanceFromSide + 5, fontSize: '20px' }} onClick={this.handleClickShowData('aufbau')} >Aufbau</Button>
                 <Fab className={"icon1"} disabled={!showScreensaverBasic} style={{ opacity: [showScreensaverBasic ? textClickMeFade : null], position: 'absolute', right: distanceFromSide, top: distanceFromSide, fontSize: '20px' }} onClick={this.handleClickShowData('aufbau')}>
-                  <AufbauIcon className={"aufbau"} color={fabColor} />
+                  <AufbauIcon className={"aufbauIcon"} color={fabColor} />
                 </Fab>
               </div>
             </Fade>
@@ -312,15 +400,15 @@ class App extends React.Component {
               <div className="menu">
                 <Button className='n1' disabled={!showAufbauBasic} style={{ opacity: [showAufbauBasic ? textClickMeFade : null], position: 'absolute', right: distanceFromSide * 3 + 10, top: 345, fontSize: '20px' }} onClick={this.handleClickShowData('daten')} >Daten</Button>
                 <Fab className={"icon1"} disabled={!showAufbauBasic} style={{ opacity: [showAufbauBasic ? textClickMeFade : null], position: 'absolute', right: distanceFromSide, top: 340, fontSize: '20px' }} onClick={this.handleClickShowData('daten')}>
-                  <AufbauIcon className={"daten"} color={fabColor} />
+                  <DatenIcon className={"datenIcon"} color={fabColor} />
                 </Fab>
                 <Button className='n1' disabled={!showDatenBasic} style={{ opacity: [showDatenBasic ? textClickMeFade : null], position: 'absolute', right: distanceFromSide * 3 + 10, top: 685, fontSize: '20px' }} onClick={this.handleClickShowData('simulation')} >Simulation</Button>
                 <Fab className={"icon1"} disabled={!showDatenBasic} style={{ opacity: [showDatenBasic ? textClickMeFade : null], position: 'absolute', right: distanceFromSide, top: 680, fontSize: '20px' }} onClick={this.handleClickShowData('simulation')}>
-                  <AufbauIcon className={"simulation"} color={fabColor} />
+                  <SimulationIcon className={"simulationIcon"} color={fabColor} />
                 </Fab>
                 <Button className='n1' disabled={!showSimulationBasic} style={{ opacity: [showSimulationBasic ? textClickMeFade : null], position: 'absolute', right: distanceFromSide * 3 + 10, bottom: distanceFromSide + 5, fontSize: '20px' }} onClick={this.handleClickShowData('anwendungen')} >Anwendungsgebiete</Button>
                 <Fab className={"icon1"} disabled={!showSimulationBasic} style={{ opacity: [showSimulationBasic ? textClickMeFade : null], position: 'absolute', right: distanceFromSide, bottom: distanceFromSide, fontSize: '20px' }} onClick={this.handleClickShowData('anwendungen')}>
-                  <AufbauIcon className={"anwendungen"} color={fabColor} />
+                  <AnwendungenIcon className={"anwendungenIcon"} color={fabColor} />
                 </Fab>
               </div>
             </Fade>
