@@ -121,6 +121,7 @@ class App extends React.Component {
     showAnwendungenBasic: false,
     // variables for content
     leftNormalDistance: distanceFromSide * 7,
+    fabColor: "default",
 
     standardTextClickMeFadeStart: 0.6,
     textClickMeFade: 0.6,
@@ -268,7 +269,7 @@ class App extends React.Component {
   }
 
   render() {
-    const { showMenuPartOne, textClickMeFade, leftNormalDistance, showMenu, showScreensaverBasic, showAufbauBasic, showDatenBasic, showDatenExpert1, showDatenExpert2, showDatenExpert3, showSimulationBasic, showSimulationExpert1, showSimulationExpert2, showAnwendungenBasic } = this.state;
+    const { fabColor, showMenuPartOne, textClickMeFade, leftNormalDistance, showMenu, showScreensaverBasic, showAufbauBasic, showDatenBasic, showDatenExpert1, showDatenExpert2, showDatenExpert3, showSimulationBasic, showSimulationExpert1, showSimulationExpert2, showAnwendungenBasic } = this.state;
 
     return (
       <div className="App">
@@ -302,16 +303,25 @@ class App extends React.Component {
             <Fade in={showMenuPartOne} timeout={{ enter: fadeTimeBasicIn, exit: fadeTimeBasicOut }} mountOnEnter={true} unmountOnExit={true}>
               <div className="firstMenuPoint">
                 <Button className='n1' disabled={!showScreensaverBasic} style={{ opacity: [showScreensaverBasic ? textClickMeFade : null], position: 'absolute', right: distanceFromSide * 3 + 10, top: distanceFromSide + 5, fontSize: '20px' }} onClick={this.handleClickShowData('aufbau')} >Aufbau</Button>
-                <Fab className={"icon1"} disabled={!showScreensaverBasic} style={{ opacity: [showScreensaverBasic ? textClickMeFade : null], backgroundColor: 'rgb(230,230,230)', position: 'absolute', right: distanceFromSide, top: distanceFromSide, fontSize: '20px' }} onClick={this.handleClickShowData('aufbau')}>
-                  <AufbauIcon className={"aufbau"} color="error" />
+                <Fab className={"icon1"} disabled={!showScreensaverBasic} style={{ opacity: [showScreensaverBasic ? textClickMeFade : null], position: 'absolute', right: distanceFromSide, top: distanceFromSide, fontSize: '20px' }} onClick={this.handleClickShowData('aufbau')}>
+                  <AufbauIcon className={"aufbau"} color={fabColor} />
                 </Fab>
               </div>
             </Fade>
             <Fade in={showMenu} timeout={{ enter: fadeTimeBasicIn, exit: fadeTimeBasicOut }} mountOnEnter={true} unmountOnExit={true}>
               <div className="menu">
-                <Button className='n1' disabled={!showAufbauBasic} style={{ opacity: [showAufbauBasic ? textClickMeFade : null], position: 'absolute', right: distanceFromSide * 3, top: 350, fontSize: '20px' }} onClick={this.handleClickShowData('daten')} >Daten</Button>
-                <Button className='n1' disabled={!showDatenBasic} style={{ opacity: [showDatenBasic ? textClickMeFade : null], position: 'absolute', right: distanceFromSide * 3, top: 700, fontSize: '20px' }} onClick={this.handleClickShowData('simulation')} >Simulation</Button>
-                <Button className='n1' disabled={!showSimulationBasic} style={{ opacity: [showSimulationBasic ? textClickMeFade : null], position: 'absolute', right: distanceFromSide * 3, bottom: distanceFromSide, fontSize: '20px' }} onClick={this.handleClickShowData('anwendungen')} >Anwendungsgebiete</Button>
+                <Button className='n1' disabled={!showAufbauBasic} style={{ opacity: [showAufbauBasic ? textClickMeFade : null], position: 'absolute', right: distanceFromSide * 3 + 10, top: 345, fontSize: '20px' }} onClick={this.handleClickShowData('daten')} >Daten</Button>
+                <Fab className={"icon1"} disabled={!showAufbauBasic} style={{ opacity: [showAufbauBasic ? textClickMeFade : null], position: 'absolute', right: distanceFromSide, top: 340, fontSize: '20px' }} onClick={this.handleClickShowData('daten')}>
+                  <AufbauIcon className={"daten"} color={fabColor} />
+                </Fab>
+                <Button className='n1' disabled={!showDatenBasic} style={{ opacity: [showDatenBasic ? textClickMeFade : null], position: 'absolute', right: distanceFromSide * 3 + 10, top: 685, fontSize: '20px' }} onClick={this.handleClickShowData('simulation')} >Simulation</Button>
+                <Fab className={"icon1"} disabled={!showDatenBasic} style={{ opacity: [showDatenBasic ? textClickMeFade : null], position: 'absolute', right: distanceFromSide, top: 680, fontSize: '20px' }} onClick={this.handleClickShowData('simulation')}>
+                  <AufbauIcon className={"simulation"} color={fabColor} />
+                </Fab>
+                <Button className='n1' disabled={!showSimulationBasic} style={{ opacity: [showSimulationBasic ? textClickMeFade : null], position: 'absolute', right: distanceFromSide * 3 + 10, bottom: distanceFromSide + 5, fontSize: '20px' }} onClick={this.handleClickShowData('anwendungen')} >Anwendungsgebiete</Button>
+                <Fab className={"icon1"} disabled={!showSimulationBasic} style={{ opacity: [showSimulationBasic ? textClickMeFade : null], position: 'absolute', right: distanceFromSide, bottom: distanceFromSide, fontSize: '20px' }} onClick={this.handleClickShowData('anwendungen')}>
+                  <AufbauIcon className={"anwendungen"} color={fabColor} />
+                </Fab>
               </div>
             </Fade>
             {/* 
