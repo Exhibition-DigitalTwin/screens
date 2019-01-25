@@ -85,7 +85,12 @@ const expertStyleToEnter = {
 function AufbauIcon(props) {
   return (
     <SvgIcon {...props}>
-        <path d="M-2069-22459h0v0h-20l2.018-39h15.3l2.69,39Zm-2.9-42h-14.935l.155-3h14.573l.207,3Zm-.414-6h-14.21l.155-3h13.848l.207,3Zm-.414-6h-13.486l.207-4h13l.276,4Z" transform="translate(2089.002 22517.002)" fill="#484848"/>
+      <g>
+	<polygon class="st0" points="15.7,8.9 8.1,8.9 7.1,28.3 17,28.3 17,28.3 	"/>
+	<polygon class="st0" points="15.3,3 8.4,3 8.3,4.5 15.4,4.5 	"/>
+	<polygon class="st0" points="15.5,5.9 8.2,5.9 8.1,7.4 15.6,7.4 	"/>
+	<polygon class="st0" points="8.5,1.5 15.2,1.5 15.1,0 8.5,0 	"/>
+</g>
     </SvgIcon>
   );
 }
@@ -131,12 +136,12 @@ class App extends React.Component {
   }
 
   setOpacity() {
-    if(this.state.textClickMeFade >= 1) {
+    if (this.state.textClickMeFade >= 1) {
       this.setState({ textClickMeFadeStatus: false });
-    } else if (this.state.textClickMeFade <= this.state.standardTextClickMeFadeStart){
+    } else if (this.state.textClickMeFade <= this.state.standardTextClickMeFadeStart) {
       this.setState({ textClickMeFadeStatus: true });
     }
-    if(this.state.textClickMeFadeStatus === true) {
+    if (this.state.textClickMeFadeStatus === true) {
       this.setState({ textClickMeFade: this.state.textClickMeFade + 0.01 });
     } else {
       this.setState({ textClickMeFade: this.state.textClickMeFade - 0.01 });
@@ -170,82 +175,82 @@ class App extends React.Component {
     switch (this.state.actualState) {
       // screensaver
       case 0:
-        this.setState({ 
-          showMenu: true, 
-          showAnwendungenBasic: false, 
+        this.setState({
+          showMenu: true,
+          showAnwendungenBasic: false,
           showScreensaverBasic: true,
           showAufbauBasic: false,
           showDatenBasic: false,
-          showDatenExpert1: false, 
-          showDatenExpert2: false, 
-          showDatenExpert3: false, 
+          showDatenExpert1: false,
+          showDatenExpert2: false,
+          showDatenExpert3: false,
           showSimulationBasic: false,
-          showSimulationExpert1: false, 
-          showSimulationExpert2: false, 
+          showSimulationExpert1: false,
+          showSimulationExpert2: false,
           showAnwendungenBasic: false,
         });
         break;
       case 1:
-        this.setState({ 
-          showMenu: true, 
-          showAnwendungenBasic: false, 
+        this.setState({
+          showMenu: true,
+          showAnwendungenBasic: false,
           showScreensaverBasic: false,
           showAufbauBasic: true,
           showDatenBasic: false,
-          showDatenExpert1: false, 
-          showDatenExpert2: false, 
-          showDatenExpert3: false, 
+          showDatenExpert1: false,
+          showDatenExpert2: false,
+          showDatenExpert3: false,
           showSimulationBasic: false,
-          showSimulationExpert1: false, 
-          showSimulationExpert2: false, 
+          showSimulationExpert1: false,
+          showSimulationExpert2: false,
           showAnwendungenBasic: false,
         });
         break;
       case 2:
-        this.setState({ 
-          showMenu: true, 
-          showAnwendungenBasic: false, 
+        this.setState({
+          showMenu: true,
+          showAnwendungenBasic: false,
           showScreensaverBasic: false,
           showAufbauBasic: false,
           showDatenBasic: true,
-          showDatenExpert1: false, 
-          showDatenExpert2: false, 
-          showDatenExpert3: false, 
+          showDatenExpert1: false,
+          showDatenExpert2: false,
+          showDatenExpert3: false,
           showSimulationBasic: false,
-          showSimulationExpert1: false, 
-          showSimulationExpert2: false, 
+          showSimulationExpert1: false,
+          showSimulationExpert2: false,
           showAnwendungenBasic: false,
         });
         break;
       case 3:
-        this.setState({ 
-          showMenu: true, 
-          showAnwendungenBasic: false, 
+        this.setState({
+          showMenu: true,
+          showAnwendungenBasic: false,
           showScreensaverBasic: false,
           showAufbauBasic: false,
           showDatenBasic: false,
-          showDatenExpert1: false, 
-          showDatenExpert2: false, 
-          showDatenExpert3: false, 
+          showDatenExpert1: false,
+          showDatenExpert2: false,
+          showDatenExpert3: false,
           showSimulationBasic: true,
-          showSimulationExpert1: false, 
-          showSimulationExpert2: false, 
+          showSimulationExpert1: false,
+          showSimulationExpert2: false,
           showAnwendungenBasic: false,
         });
         break;
       case 4:
-        this.setState({ 
-          showMenu: true, 
-          showAnwendungenBasic: false, 
+        this.setState({
+          showMenu: true,
+          showAnwendungenBasic: false,
           showScreensaverBasic: false,
           showAufbauBasic: false,
           showDatenBasic: false,
-          showDatenExpert1: false, 
-          showDatenExpert2: false, 
-          showDatenExpert3: false, 
+          showDatenExpert1: false,
+          showDatenExpert2: false,
+          showDatenExpert3: false,
           showSimulationBasic: false,
-          showSimulationExpert1: false, 
-          showSimulationExpert2: false, 
+          showSimulationExpert1: false,
+          showSimulationExpert2: false,
           showAnwendungenBasic: true,
         });
         break;
@@ -296,17 +301,17 @@ class App extends React.Component {
             */}
             <Fade in={showMenuPartOne} timeout={{ enter: fadeTimeBasicIn, exit: fadeTimeBasicOut }} mountOnEnter={true} unmountOnExit={true}>
               <div className="firstMenuPoint">
-                <Button className='n1' disabled={!showScreensaverBasic} style={{opacity:[showScreensaverBasic ? textClickMeFade : null], position: 'absolute', right: distanceFromSide*3+10, top: distanceFromSide+5, fontSize: '20px' }} onClick={this.handleClickShowData('aufbau')} >Aufbau</Button>
-                <Fab className={"icon1"} disabled={!showScreensaverBasic} style={{opacity:[showScreensaverBasic ? textClickMeFade : null], backgroundColor: 'rgb(230,230,230)', position: 'absolute', right: distanceFromSide, top: distanceFromSide, fontSize: '20px' }} onClick={this.handleClickShowData('aufbau')}>
-                <AufbauIcon className={"aufbau"} color="error"/>
+                <Button className='n1' disabled={!showScreensaverBasic} style={{ opacity: [showScreensaverBasic ? textClickMeFade : null], position: 'absolute', right: distanceFromSide * 3 + 10, top: distanceFromSide + 5, fontSize: '20px' }} onClick={this.handleClickShowData('aufbau')} >Aufbau</Button>
+                <Fab className={"icon1"} disabled={!showScreensaverBasic} style={{ opacity: [showScreensaverBasic ? textClickMeFade : null], backgroundColor: 'rgb(230,230,230)', position: 'absolute', right: distanceFromSide, top: distanceFromSide, fontSize: '20px' }} onClick={this.handleClickShowData('aufbau')}>
+                  <AufbauIcon className={"aufbau"} color="error" />
                 </Fab>
               </div>
             </Fade>
             <Fade in={showMenu} timeout={{ enter: fadeTimeBasicIn, exit: fadeTimeBasicOut }} mountOnEnter={true} unmountOnExit={true}>
               <div className="menu">
-                <Button className='n1' disabled={!showAufbauBasic} style={{opacity:[showAufbauBasic ? textClickMeFade : null], position: 'absolute', right: distanceFromSide*3, top: 350, fontSize: '20px' }} onClick={this.handleClickShowData('daten')} >Daten</Button>
-                <Button className='n1' disabled={!showDatenBasic} style={{opacity:[showDatenBasic ? textClickMeFade : null], position: 'absolute', right: distanceFromSide*3, top: 700, fontSize: '20px' }} onClick={this.handleClickShowData('simulation')} >Simulation</Button>
-                <Button className='n1' disabled={!showSimulationBasic} style={{opacity:[showSimulationBasic ? textClickMeFade : null], position: 'absolute', right: distanceFromSide*3, bottom: distanceFromSide, fontSize: '20px' }} onClick={this.handleClickShowData('anwendungen')} >Anwendungsgebiete</Button>
+                <Button className='n1' disabled={!showAufbauBasic} style={{ opacity: [showAufbauBasic ? textClickMeFade : null], position: 'absolute', right: distanceFromSide * 3, top: 350, fontSize: '20px' }} onClick={this.handleClickShowData('daten')} >Daten</Button>
+                <Button className='n1' disabled={!showDatenBasic} style={{ opacity: [showDatenBasic ? textClickMeFade : null], position: 'absolute', right: distanceFromSide * 3, top: 700, fontSize: '20px' }} onClick={this.handleClickShowData('simulation')} >Simulation</Button>
+                <Button className='n1' disabled={!showSimulationBasic} style={{ opacity: [showSimulationBasic ? textClickMeFade : null], position: 'absolute', right: distanceFromSide * 3, bottom: distanceFromSide, fontSize: '20px' }} onClick={this.handleClickShowData('anwendungen')} >Anwendungsgebiete</Button>
               </div>
             </Fade>
             {/* 
