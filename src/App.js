@@ -13,6 +13,7 @@ import { easeExpOut } from 'd3-ease';
 import Animate from 'react-move/Animate';
 import SvgIcon from '@material-ui/core/SvgIcon';
 import Fab from '@material-ui/core/Fab';
+import Websocket from 'react-websocket';
 
 const theme = createMuiTheme({
   palette: {
@@ -263,6 +264,7 @@ class App extends React.Component {
     if (this.state.lastState !== this.state.actualState && this.state.actualState !== 1) {
       this.setState({ lastState: this.state.actualState });
       this._three.handleClickThree(0, 90, -0.01);
+      this.sendMessage("1");
     }
     switch (this.state.actualState) {
       // screensaver
@@ -359,11 +361,29 @@ class App extends React.Component {
     this.setState({ open: !this.state.open })
   }
 
+  handleOpen() {
+    console.log("connected");
+  };
+
+  handleClose() {
+    console.log("disconnected");
+  };
+
+  sendMessage(message) {
+    this.refWebSocket.sendMessage(message);
+  };
+
   render() {
     const { fabColor, showMenuPartOne, textClickMeFade, leftNormalDistance, showMenu, showScreensaverBasic, showAufbauBasic, showDatenBasic, showDatenExpert1, showDatenExpert2, showDatenExpert3, showSimulationBasic, showSimulationExpert1, showSimulationExpert2, showAnwendungenBasic } = this.state;
 
     return (
       <div className="App">
+      <Websocket url='ws://localhost:8080/'
+          onOpen={this.handleOpen} onClose={this.handleClose}
+          reconnect={true} debug={true}
+          ref={Websocket => {
+            this.refWebSocket = Websocket;
+          }} />
         <React.Fragment>
           <MuiThemeProvider theme={theme}>
             <CssBaseline />
