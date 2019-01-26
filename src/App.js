@@ -243,7 +243,6 @@ class App extends React.Component {
       this.setState({ actualState: 0 });
     } else if (param === "aufbau") {
       this.setState({ actualState: 1 });
-      this._three.handleClickThree(0, 45, -0.01);
       this._three.showWindmill();
     } else if (param === "daten") {
       this.setState({ actualState: 2 });
@@ -257,7 +256,11 @@ class App extends React.Component {
     } else {
       console.log('dont know what to do with ', param);
     }
-    if (this.state.lastState !== this.state.actualState) {
+    if (this.state.lastState !== this.state.actualState && this.state.actualState == 1) {
+      this.setState({ lastState: this.state.actualState });
+      this._three.handleClickThree(0, 45, -0.01);
+    }
+    if (this.state.lastState !== this.state.actualState && this.state.actualState !== 1) {
       this.setState({ lastState: this.state.actualState });
       this._three.handleClickThree(0, 90, -0.01);
     }
