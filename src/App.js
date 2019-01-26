@@ -264,7 +264,8 @@ class App extends React.Component {
     if (this.state.lastState !== this.state.actualState && this.state.actualState !== 1) {
       this.setState({ lastState: this.state.actualState });
       this._three.handleClickThree(0, 90, -0.01);
-      this.sendMessage("1");
+      this.sendMessage(1);
+      this.sendMessage(0);
     }
     switch (this.state.actualState) {
       // screensaver

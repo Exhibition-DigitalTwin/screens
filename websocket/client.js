@@ -26,6 +26,7 @@ ws.on("open", function open() {
 
 ws.on("message", function incoming(data) {
   console.log(data);
+  port.write(data);
 });
 
 const parser = port.pipe(new ReadlineParser({ delimiter: "\r\n" }));
