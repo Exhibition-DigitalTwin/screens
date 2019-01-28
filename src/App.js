@@ -216,6 +216,7 @@ class App extends React.Component {
     showLine1: false,
     showLine2: false,
     showLine3: false,
+    lineMenuColor: "#1f1f1f",
 
     standardTextClickMeFadeStart: 0.6,
     textClickMeFade: 0.6,
@@ -395,7 +396,7 @@ class App extends React.Component {
   };
 
   render() {
-    const { showLine1, showLine2, showLine3,fabColor, showMenuPartOne, textClickMeFade, leftNormalDistance, showMenu, showScreensaverBasic, showAufbauBasic, showDatenBasic, showDatenExpert1, showDatenExpert2, showDatenExpert3, showSimulationBasic, showSimulationExpert1, showSimulationExpert2, showAnwendungenBasic } = this.state;
+    const { lineMenuColor, showLine1, showLine2, showLine3,fabColor, showMenuPartOne, textClickMeFade, leftNormalDistance, showMenu, showScreensaverBasic, showAufbauBasic, showDatenBasic, showDatenExpert1, showDatenExpert2, showDatenExpert3, showSimulationBasic, showSimulationExpert1, showSimulationExpert2, showAnwendungenBasic } = this.state;
 
     return (
       <div className="App">
@@ -442,11 +443,11 @@ class App extends React.Component {
             </Fade>
             <Fade in={showMenu} timeout={{ enter: fadeTimeBasicIn, exit: fadeTimeBasicOut }} mountOnEnter={true} unmountOnExit={true}>
               <div className="menu">
-                <Button className='n1' disabled={!showAufbauBasic} style={{ opacity: [showAufbauBasic ? textClickMeFade : null], position: 'absolute', right: distanceFromSide * 3 + 10, top: 370, fontSize: '20px' }} onClick={this.handleClickShowData('daten')} >Daten</Button>
+                <Button className='n1' disabled={!showAufbauBasic} style={{ opacity: [showAufbauBasic ? textClickMeFade : null], position: 'absolute', right: distanceFromSide * 3 + 10, top: 355, fontSize: '20px' }} onClick={this.handleClickShowData('daten')} >Daten</Button>
                 <Fab className={"icon1"} disabled={!showAufbauBasic} style={{ opacity: [showAufbauBasic ? textClickMeFade : null], position: 'absolute', right: distanceFromSide, top: 350, fontSize: '20px' }} onClick={this.handleClickShowData('daten')}>
                   <DatenIcon className={"datenIcon"} color={fabColor} />
                 </Fab>
-                <Button className='n1' disabled={!showDatenBasic} style={{ opacity: [showDatenBasic ? textClickMeFade : null], position: 'absolute', right: distanceFromSide * 3 + 10, top: 665, fontSize: '20px' }} onClick={this.handleClickShowData('simulation')} >Simulation</Button>
+                <Button className='n1' disabled={!showDatenBasic} style={{ opacity: [showDatenBasic ? textClickMeFade : null], position: 'absolute', right: distanceFromSide * 3 + 10, top: 675, fontSize: '20px' }} onClick={this.handleClickShowData('simulation')} >Simulation</Button>
                 <Fab className={"icon1"} disabled={!showDatenBasic} style={{ opacity: [showDatenBasic ? textClickMeFade : null], position: 'absolute', right: distanceFromSide, top: 670, fontSize: '20px' }} onClick={this.handleClickShowData('simulation')}>
                   <SimulationIcon className={"simulationIcon"} color={fabColor} />
                 </Fab>
@@ -461,19 +462,19 @@ class App extends React.Component {
             */}
             <div className={"line1"} style={{position: 'absolute', right: distanceFromSide + 23, top: 85 }}>
               <Collapse in={showLine1} timeout={{ enter: fadeTimeBasicIn, exit: fadeTimeBasicOut }} mountOnEnter={true} unmountOnExit={true}>
-                <div style={{backgroundColor: "#FFFFFF", width: "10px", height: "265px" }}>
+                <div style={{backgroundColor: lineMenuColor, width: "10px", height: "265px" }}>
                 </div>
               </Collapse>
             </div>
             <div className={"line2"} style={{position: 'absolute', right: distanceFromSide + 23, top: 405 }}>
               <Collapse in={showLine2} timeout={{ enter: fadeTimeBasicIn, exit: fadeTimeBasicOut }} mountOnEnter={true} unmountOnExit={true}>
-                <div style={{backgroundColor: "#FFFFFF", width: "10px", height: "265px" }}>
+                <div style={{backgroundColor: lineMenuColor, width: "10px", height: "265px" }}>
                 </div>
               </Collapse>
             </div>
             <div className={"line3"} style={{position: 'absolute', right: distanceFromSide + 23, top: 725 }}>
               <Collapse in={showLine3} timeout={{ enter: fadeTimeBasicIn, exit: fadeTimeBasicOut }} mountOnEnter={true} unmountOnExit={true}>
-                <div style={{backgroundColor: "#FFFFFF", width: "10px", height: "265px" }}>
+                <div style={{backgroundColor: lineMenuColor, width: "10px", height: "265px" }}>
                 </div>
               </Collapse>
             </div>
