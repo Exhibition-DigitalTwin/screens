@@ -9,6 +9,7 @@ import grey from '@material-ui/core/colors/grey';
 import deepOrange from '@material-ui/core/colors/deepOrange';
 import Button from '@material-ui/core/Button';
 import Fade from '@material-ui/core/Fade';
+import Collapse from '@material-ui/core/Collapse';
 import { easeExpOut } from 'd3-ease';
 import Animate from 'react-move/Animate';
 import SvgIcon from '@material-ui/core/SvgIcon';
@@ -211,6 +212,10 @@ class App extends React.Component {
     // variables for content
     leftNormalDistance: distanceFromSide * 7,
     fabColor: "default",
+    // var for lines between menu points
+    showLine1: false,
+    showLine2: false,
+    showLine3: false,
 
     standardTextClickMeFadeStart: 0.6,
     textClickMeFade: 0.6,
@@ -283,6 +288,9 @@ class App extends React.Component {
           showSimulationExpert1: false,
           showSimulationExpert2: false,
           showAnwendungenBasic: false,
+          showLine1: false,
+          showLine2: false,
+          showLine3: false,
         });
         break;
       case 1:
@@ -299,6 +307,9 @@ class App extends React.Component {
           showSimulationExpert1: false,
           showSimulationExpert2: false,
           showAnwendungenBasic: false,
+          showLine1: true,
+          showLine2: false,
+          showLine3: false,
         });
         break;
       case 2:
@@ -315,6 +326,9 @@ class App extends React.Component {
           showSimulationExpert1: false,
           showSimulationExpert2: false,
           showAnwendungenBasic: false,
+          showLine1: true,
+          showLine2: true,
+          showLine3: false,
         });
         break;
       case 3:
@@ -331,6 +345,9 @@ class App extends React.Component {
           showSimulationExpert1: false,
           showSimulationExpert2: false,
           showAnwendungenBasic: false,
+          showLine1: true,
+          showLine2: true,
+          showLine3: true,
         });
         break;
       case 4:
@@ -347,6 +364,9 @@ class App extends React.Component {
           showSimulationExpert1: false,
           showSimulationExpert2: false,
           showAnwendungenBasic: true,
+          showLine1: true,
+          showLine2: true,
+          showLine3: true,
         });
         break;
       default:
@@ -375,7 +395,7 @@ class App extends React.Component {
   };
 
   render() {
-    const { fabColor, showMenuPartOne, textClickMeFade, leftNormalDistance, showMenu, showScreensaverBasic, showAufbauBasic, showDatenBasic, showDatenExpert1, showDatenExpert2, showDatenExpert3, showSimulationBasic, showSimulationExpert1, showSimulationExpert2, showAnwendungenBasic } = this.state;
+    const { showLine1, showLine2, showLine3,fabColor, showMenuPartOne, textClickMeFade, leftNormalDistance, showMenu, showScreensaverBasic, showAufbauBasic, showDatenBasic, showDatenExpert1, showDatenExpert2, showDatenExpert3, showSimulationBasic, showSimulationExpert1, showSimulationExpert2, showAnwendungenBasic } = this.state;
 
     return (
       <div className="App">
@@ -422,20 +442,41 @@ class App extends React.Component {
             </Fade>
             <Fade in={showMenu} timeout={{ enter: fadeTimeBasicIn, exit: fadeTimeBasicOut }} mountOnEnter={true} unmountOnExit={true}>
               <div className="menu">
-                <Button className='n1' disabled={!showAufbauBasic} style={{ opacity: [showAufbauBasic ? textClickMeFade : null], position: 'absolute', right: distanceFromSide * 3 + 10, top: 345, fontSize: '20px' }} onClick={this.handleClickShowData('daten')} >Daten</Button>
-                <Fab className={"icon1"} disabled={!showAufbauBasic} style={{ opacity: [showAufbauBasic ? textClickMeFade : null], position: 'absolute', right: distanceFromSide, top: 340, fontSize: '20px' }} onClick={this.handleClickShowData('daten')}>
+                <Button className='n1' disabled={!showAufbauBasic} style={{ opacity: [showAufbauBasic ? textClickMeFade : null], position: 'absolute', right: distanceFromSide * 3 + 10, top: 370, fontSize: '20px' }} onClick={this.handleClickShowData('daten')} >Daten</Button>
+                <Fab className={"icon1"} disabled={!showAufbauBasic} style={{ opacity: [showAufbauBasic ? textClickMeFade : null], position: 'absolute', right: distanceFromSide, top: 350, fontSize: '20px' }} onClick={this.handleClickShowData('daten')}>
                   <DatenIcon className={"datenIcon"} color={fabColor} />
                 </Fab>
-                <Button className='n1' disabled={!showDatenBasic} style={{ opacity: [showDatenBasic ? textClickMeFade : null], position: 'absolute', right: distanceFromSide * 3 + 10, top: 685, fontSize: '20px' }} onClick={this.handleClickShowData('simulation')} >Simulation</Button>
-                <Fab className={"icon1"} disabled={!showDatenBasic} style={{ opacity: [showDatenBasic ? textClickMeFade : null], position: 'absolute', right: distanceFromSide, top: 680, fontSize: '20px' }} onClick={this.handleClickShowData('simulation')}>
+                <Button className='n1' disabled={!showDatenBasic} style={{ opacity: [showDatenBasic ? textClickMeFade : null], position: 'absolute', right: distanceFromSide * 3 + 10, top: 665, fontSize: '20px' }} onClick={this.handleClickShowData('simulation')} >Simulation</Button>
+                <Fab className={"icon1"} disabled={!showDatenBasic} style={{ opacity: [showDatenBasic ? textClickMeFade : null], position: 'absolute', right: distanceFromSide, top: 670, fontSize: '20px' }} onClick={this.handleClickShowData('simulation')}>
                   <SimulationIcon className={"simulationIcon"} color={fabColor} />
                 </Fab>
-                <Button className='n1' disabled={!showSimulationBasic} style={{ opacity: [showSimulationBasic ? textClickMeFade : null], position: 'absolute', right: distanceFromSide * 3 + 10, bottom: distanceFromSide + 5, fontSize: '20px' }} onClick={this.handleClickShowData('anwendungen')} >Anwendungsgebiete</Button>
-                <Fab className={"icon1"} disabled={!showSimulationBasic} style={{ opacity: [showSimulationBasic ? textClickMeFade : null], position: 'absolute', right: distanceFromSide, bottom: distanceFromSide, fontSize: '20px' }} onClick={this.handleClickShowData('anwendungen')}>
+                <Button className='n1' disabled={!showSimulationBasic} style={{ opacity: [showSimulationBasic ? textClickMeFade : null], position: 'absolute', right: distanceFromSide * 3 + 10, bottom: distanceFromSide + 10, fontSize: '20px' }} onClick={this.handleClickShowData('anwendungen')} >Anwendungsgebiete</Button>
+                <Fab className={"icon1"} disabled={!showSimulationBasic} style={{ opacity: [showSimulationBasic ? textClickMeFade : null], position: 'absolute', right: distanceFromSide, bottom: distanceFromSide+5, fontSize: '20px' }} onClick={this.handleClickShowData('anwendungen')}>
                   <AnwendungenIcon className={"anwendungenIcon"} color={fabColor} />
                 </Fab>
               </div>
-            </Fade>
+            </Fade>    
+            {/* 
+            LINES BETWEEN MENU POINTS
+            */}
+            <div className={"line1"} style={{position: 'absolute', right: distanceFromSide + 23, top: 85 }}>
+              <Collapse in={showLine1} timeout={{ enter: fadeTimeBasicIn, exit: fadeTimeBasicOut }} mountOnEnter={true} unmountOnExit={true}>
+                <div style={{backgroundColor: "#FFFFFF", width: "10px", height: "265px" }}>
+                </div>
+              </Collapse>
+            </div>
+            <div className={"line2"} style={{position: 'absolute', right: distanceFromSide + 23, top: 405 }}>
+              <Collapse in={showLine2} timeout={{ enter: fadeTimeBasicIn, exit: fadeTimeBasicOut }} mountOnEnter={true} unmountOnExit={true}>
+                <div style={{backgroundColor: "#FFFFFF", width: "10px", height: "265px" }}>
+                </div>
+              </Collapse>
+            </div>
+            <div className={"line3"} style={{position: 'absolute', right: distanceFromSide + 23, top: 725 }}>
+              <Collapse in={showLine3} timeout={{ enter: fadeTimeBasicIn, exit: fadeTimeBasicOut }} mountOnEnter={true} unmountOnExit={true}>
+                <div style={{backgroundColor: "#FFFFFF", width: "10px", height: "265px" }}>
+                </div>
+              </Collapse>
+            </div>
             {/* 
             SCREENSAVER 
             */}
