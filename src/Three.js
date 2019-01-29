@@ -39,7 +39,7 @@ class ThreeScene extends Component {
         this.camera.position.x = -25
         this.camera.rotation.x = -0.05
 
-        this.camera.lookAt(new THREE.Vector3(0, 12, 0))
+        //this.camera.lookAt(new THREE.Vector3(0, 12, 0))
 
         //ADD RENDERER
         this.renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true })

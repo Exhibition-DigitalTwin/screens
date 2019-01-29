@@ -265,11 +265,14 @@ class App extends React.Component {
 
   setContentOpacity() {
     if(this.state.showDisableExpertDiv && this.state.contentOpacity >= 0.2 && !this.state.contentFadedOut) {
-      this.setState({ contentOpacity: this.state.contentOpacity - 0.01 });
-    } else if (this.state.contentOpacity <= 0.2) {
+      this.setState({ contentOpacity: this.state.contentOpacity - 0.015 });
+    } else if (this.state.contentOpacity <= 0.2 && this.state.showDisableExpertDiv) {
       this.setState({ contentFadedOut: true });
     } else {
-      this.setState({ contentOpacity: 1 });
+      this.setState({ contentOpacity: this.state.contentOpacity + 0.03 });
+      if (this.state.contentOpacity >= 1) {
+        this.setState({ contentOpacity: 1, contentFadedOut: false });
+      }
     }
   }
 
