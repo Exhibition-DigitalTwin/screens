@@ -62,21 +62,22 @@ class ThreeScene extends Component {
 
         //ADD MATERIALS 
         var materialWireframe = new THREE.MeshBasicMaterial({ color: 0xfffff, wireframe: true });
-        this.materialWhite = new THREE.MeshPhongMaterial({ color: 0xffffff, opacity: 0, transparent: true })
-        this.materialWhiteSimulation = new THREE.MeshPhongMaterial({ color: 0xffffff, opacity: 0, transparent: true })
+        this.materialWhite = new THREE.MeshPhongMaterial({ color: 0xffffff, opacity: 0, transparent: true, alphaTest: 0.5 })
+        this.materialWhiteSimulation = new THREE.MeshPhongMaterial({ color: 0xffffff, opacity: 0, transparent: true, alphaTest: 0.5 })
 
 
         //ADD FADING OF ROOT MODEL
         this.tween = new TWEEN.Tween(this.materialWhite)
         this.tween.to({ opacity: 1 }, 300)
         this.tweenSimulation = new TWEEN.Tween(this.materialWhiteSimulation)
-        this.tweenSimulation.to({ opacity: 1 }, 300)
-        this.tweenSimulation.delay(600)
+        this.tweenSimulation.to({ opacity: 1, transparent: false }, 300)
         //tween.start();
 
         this.THREE = THREE;
 
+        this.createSecondModel()
         this.createRootModel()
+
 
         this.start()
     }
@@ -137,6 +138,7 @@ class ThreeScene extends Component {
         objLoader1.crossOrigin = '';
         objLoader1.load(OBJBladesRootModel, (bladesRootModel) => {
             // ADD MATERIALS
+            //bladesRootModel.add(new THREE.AxesHelper(20));
             bladesRootModel.traverse(function (child) {
                 if (child instanceof THREE.Mesh) {
                     child.material = materialWhite;
@@ -150,10 +152,10 @@ class ThreeScene extends Component {
             this.bottomParentBladesRootModel.rotateY(1.5708);
             //this.bottomParentBladesRootModel.add(new THREE.AxesHelper(20));
             this.topParentBladesRootModel = new THREE.Object3D();
+            //this.topParentBladesRootModel.add(new THREE.AxesHelper(20));
             this.topParentBladesRootModel.add(this.bottomParentBladesRootModel);
             this.topParentBladesRootModel.rotateY(-1.5708);
             this.scene.add(this.topParentBladesRootModel);
-            this.loaded = true;
         })
 
         //CASE ROOT MODEL
@@ -189,7 +191,6 @@ class ThreeScene extends Component {
             });
             this.scene.add(baseSimulationModel);
             baseSimulationModel.position.y -= 40;
-            baseSimulationModel.position.x -= 40;
             baseSimulationModel.rotateY(-1.5708);
             baseSimulationModel.name = "baseSimulationModel";
         })
@@ -199,7 +200,8 @@ class ThreeScene extends Component {
         objLoader4.crossOrigin = '';
         objLoader4.load(OBJBladesRootModel, (bladesSimulationModel) => {
             //ADD MATERIALS
-            bladesSimulationModel.name = "object4";
+            //bladesSimulationModel.add(new THREE.AxesHelper(20));
+            bladesSimulationModel.name = "bladesSimulationModel";
             bladesSimulationModel.traverse(function (child) {
                 if (child instanceof THREE.Mesh) {
                     child.material = materialWhite;
@@ -208,15 +210,15 @@ class ThreeScene extends Component {
             this.bottomParentBladesSimulationModel = new THREE.Object3D();
             this.bottomParentBladesSimulationModel.name = "bottomParentBladesSimulationModel";
             bladesSimulationModel.position.y -= 44.3;
-            bladesSimulationModel.position.x -= 40;
             bladesSimulationModel.rotateY(-1.5708);
             this.bottomParentBladesSimulationModel.add(bladesSimulationModel);
             this.bottomParentBladesSimulationModel.position.y += 4.3;
 
             this.bottomParentBladesSimulationModel.rotateY(1.5708);
-            //this.bottomParentBladesRootModel.add(new THREE.AxesHelper(20));
+            //this.bottomParentBladesSimulationModel.add(new THREE.AxesHelper(20));
             this.topParentBladesSimulationModel = new THREE.Object3D();
             this.topParentBladesSimulationModel.name = "topParentBladesSimulationModel";
+            //this.topParentBladesSimulationModel.add(new THREE.AxesHelper(20));
             this.topParentBladesSimulationModel.add(this.bottomParentBladesSimulationModel);
             this.topParentBladesSimulationModel.rotateY(-1.5708);
 
@@ -237,7 +239,6 @@ class ThreeScene extends Component {
             });
             this.scene.add(caseSimulationModel);
             caseSimulationModel.position.y -= 40;
-            caseSimulationModel.position.x -= 40;
             caseSimulationModel.rotateY(-1.5708);
         })
     }
@@ -256,6 +257,33 @@ class ThreeScene extends Component {
     }
 
     showSecondModel() {
+        var destination = new THREE.Vector3(-40, -40, 0);
+        var destination1 = new THREE.Vector3(-40, -44.3, 0);
+        var destination2 = new THREE.Vector3(0, 4.3, 0);
+        var destination3 = new THREE.Vector3(-40, 0, 0);
+        this.case = this.scene.getObjectByName("caseSimulationModel");
+        this.blades = this.scene.getObjectByName("bladesSimulationModel");
+        this.base = this.scene.getObjectByName("baseSimulationModel");
+        new TWEEN.Tween(this.case.position)
+            .to(destination, 600)
+            .start()
+            .easing(TWEEN.Easing.Cubic.InOut)
+
+        new TWEEN.Tween(this.base.position)
+            .to(destination, 600)
+            .start()
+            .easing(TWEEN.Easing.Cubic.InOut)
+
+        new TWEEN.Tween(this.bottomParentBladesSimulationModel.position)
+            .to(destination2, 600)
+            .start()
+            .easing(TWEEN.Easing.Cubic.InOut)
+
+        new TWEEN.Tween(this.topParentBladesSimulationModel.position)
+            .to(destination3, 600)
+            .start()
+            .easing(TWEEN.Easing.Cubic.InOut)
+
         this.tweenSimulation.start();
     }
 
@@ -295,15 +323,21 @@ class ThreeScene extends Component {
         //TURNING BLADES OF ROOT MODEL
         if (this.loaded) {
             this.bottomParentBladesRootModel.rotateZ(this.speedRotationBlades);
+            this.bottomParentBladesSimulationModel.rotateZ(this.speedRotationBlades);
         }
 
         //TURNING HEAD OF ROOT MODEL
         this.baseRootModel = this.scene.getObjectByName("baseRootModel");
         this.caseRootModel = this.scene.getObjectByName("caseRootModel");
+        this.baseSimulationModel = this.scene.getObjectByName("baseSimulationModel");
+        this.caseSimulationModel = this.scene.getObjectByName("caseSimulationModel");
         if (this.initRotationLoop < this.stopRotationLoop) {
             this.baseRootModel.rotateY(this.speedRotationHead);
             this.caseRootModel.rotateY(this.speedRotationHead);
             this.topParentBladesRootModel.rotateY(this.speedRotationHead);
+            this.baseSimulationModel.rotateY(this.speedRotationHead);
+            this.caseSimulationModel.rotateY(this.speedRotationHead);
+            this.topParentBladesSimulationModel.rotateY(this.speedRotationHead);
             this.initRotationLoop++;
         }
 
