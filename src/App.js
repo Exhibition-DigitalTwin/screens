@@ -275,6 +275,15 @@ class App extends React.Component {
     } else if (param === "showDatenExpert1") {
       console.log("done");
       this.setState({ showDatenExpert1: true });
+    }else if (param === "closeDatenExpert") {
+      this.setState({
+        showDatenExpert1: false,
+        showDatenExpert2: false,
+        showDatenExpert3: false,
+        showSimulationBasic: false,
+        showSimulationExpert1: false,
+        showSimulationExpert2: false,
+       });
     } else {
       console.log('dont know what to do with ', param);
     }
@@ -283,7 +292,14 @@ class App extends React.Component {
       this._three.handleClickThree(0, 45, -0.01);
     }
     if (this.state.lastState !== this.state.actualState && this.state.actualState !== 1) {
-      this.setState({ lastState: this.state.actualState });
+      this.setState({ lastState: this.state.actualState,
+        showDatenExpert1: false,
+        showDatenExpert2: false,
+        showDatenExpert3: false,
+        showSimulationBasic: false,
+        showSimulationExpert1: false,
+        showSimulationExpert2: false, 
+      });
       this._three.handleClickThree(0, 90, -0.01);
       this.sendMessage(1);
       this.sendMessage(0);
@@ -297,9 +313,6 @@ class App extends React.Component {
           showScreensaverBasic: true,
           showAufbauBasic: false,
           showDatenBasic: false,
-          showDatenExpert1: false,
-          showDatenExpert2: false,
-          showDatenExpert3: false,
           showSimulationBasic: false,
           showSimulationExpert1: false,
           showSimulationExpert2: false,
@@ -316,9 +329,6 @@ class App extends React.Component {
           showScreensaverBasic: false,
           showAufbauBasic: true,
           showDatenBasic: false,
-          showDatenExpert1: false,
-          showDatenExpert2: false,
-          showDatenExpert3: false,
           showSimulationBasic: false,
           showSimulationExpert1: false,
           showSimulationExpert2: false,
@@ -335,9 +345,6 @@ class App extends React.Component {
           showScreensaverBasic: false,
           showAufbauBasic: false,
           showDatenBasic: true,
-          showDatenExpert1: false,
-          showDatenExpert2: false,
-          showDatenExpert3: false,
           showSimulationBasic: false,
           showSimulationExpert1: false,
           showSimulationExpert2: false,
@@ -354,9 +361,6 @@ class App extends React.Component {
           showScreensaverBasic: false,
           showAufbauBasic: false,
           showDatenBasic: false,
-          showDatenExpert1: false,
-          showDatenExpert2: false,
-          showDatenExpert3: false,
           showSimulationBasic: true,
           showSimulationExpert1: false,
           showSimulationExpert2: false,
@@ -373,9 +377,6 @@ class App extends React.Component {
           showScreensaverBasic: false,
           showAufbauBasic: false,
           showDatenBasic: false,
-          showDatenExpert1: false,
-          showDatenExpert2: false,
-          showDatenExpert3: false,
           showSimulationBasic: false,
           showSimulationExpert1: false,
           showSimulationExpert2: false,
