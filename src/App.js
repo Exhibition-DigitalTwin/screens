@@ -225,8 +225,8 @@ class App extends React.Component {
     showLine3: false,
     lineMenuColor: "#1f1f1f",
 
-    standardTextClickMeFadeStart: 0.6,
-    textClickMeFade: 0.6,
+    standardTextClickMeFadeStart: 0.4,
+    textClickMeFade: 0.4,
     textClickMeFadeStatus: false,
     open: false,
 
