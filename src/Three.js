@@ -63,12 +63,15 @@ class ThreeScene extends Component {
         //ADD MATERIALS 
         var materialWireframe = new THREE.MeshBasicMaterial({ color: 0xfffff, wireframe: true });
         this.materialWhite = new THREE.MeshPhongMaterial({ color: 0xffffff, opacity: 0, transparent: true })
+        this.materialWhiteSimulation = new THREE.MeshPhongMaterial({ color: 0xffffff, opacity: 0, transparent: true })
 
 
         //ADD FADING OF ROOT MODEL
         this.tween = new TWEEN.Tween(this.materialWhite)
-        this.tween.to({ opacity: 1 }, 1500)
-        this.tween.delay(1500)
+        this.tween.to({ opacity: 1 }, 300)
+        this.tweenSimulation = new TWEEN.Tween(this.materialWhiteSimulation)
+        this.tweenSimulation.to({ opacity: 1 }, 300)
+        this.tweenSimulation.delay(600)
         //tween.start();
 
         this.THREE = THREE;
@@ -172,7 +175,7 @@ class ThreeScene extends Component {
 
     createSecondModel() {
         //DEFINE MATERIALS 
-        var materialWhite = new THREE.MeshPhongMaterial({ color: 0xffffff, opacity: 1, transparent: true })
+        var materialWhite = this.materialWhiteSimulation;
 
         //BASE SIMULATION MODEL
         const objLoader3 = new this.THREE.OBJLoader();
@@ -250,6 +253,10 @@ class ThreeScene extends Component {
 
     showWindmill() {
         this.tween.start();
+    }
+
+    showSecondModel() {
+        this.tweenSimulation.start();
     }
 
     deleteModel() {
