@@ -339,7 +339,7 @@ class App extends React.Component {
           showSimulationExpert1: false,
           showSimulationExpert2: false,
           showAnwendungenBasic: false,
-          showLine1: true,
+          showLine1: false,
           showLine2: false,
           showLine3: false,
         });
@@ -355,7 +355,7 @@ class App extends React.Component {
           showSimulationExpert2: false,
           showAnwendungenBasic: false,
           showLine1: true,
-          showLine2: true,
+          showLine2: false,
           showLine3: false,
         });
         break;
@@ -371,7 +371,7 @@ class App extends React.Component {
           showAnwendungenBasic: false,
           showLine1: true,
           showLine2: true,
-          showLine3: true,
+          showLine3: false,
         });
         break;
       case 4:
