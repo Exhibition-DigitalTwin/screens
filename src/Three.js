@@ -39,7 +39,7 @@ class ThreeScene extends Component {
         this.camera.position.x = -25
         this.camera.rotation.x = -0.05
 
-        this.camera.lookAt(new THREE.Vector3(0, 12, 0))
+        //this.camera.lookAt(new THREE.Vector3(0, 12, 0))
 
         //ADD RENDERER
         this.renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true })
@@ -124,7 +124,7 @@ class ThreeScene extends Component {
             this.parentBladesTop.rotateY(-1.5708);
             this.scene.add(this.parentBladesTop);
             this.loaded = true;
-            console.log("hi" + this.loaded);
+            //console.log("hi" + this.loaded);
         })
 
 
@@ -173,7 +173,7 @@ class ThreeScene extends Component {
     };
 
     changePositionHead(valueSlider) {
-        console.log(valueSlider);
+        //console.log(valueSlider);
         this.head = this.scene.getObjectByName("Ueberbau");
         this.head.position.y = this.rootPositionHead + valueSlider;
     }
@@ -190,7 +190,68 @@ class ThreeScene extends Component {
         //    this.camera.lookAt(look);
         //})
 
-        console.log(this.camera.position);
+        //console.log(this.camera.position);
+    }
+
+    createSecondModel() {
+        var materialWhite = new THREE.MeshPhongMaterial({ color: 0xffffff, opacity: 1, transparent: true })
+        this.THREE = THREE;
+        const objLoader3 = new this.THREE.OBJLoader();
+        objLoader3.crossOrigin = '';
+        objLoader3.load(OBJ, (object3) => {
+            // adding Material
+            object3.traverse(function (child) {
+                if (child instanceof THREE.Mesh) {
+                    child.material = materialWhite;
+                }
+            });
+            this.scene.add(object3);
+            object3.position.y -= 40;
+            object3.position.x -= 40;
+            object3.rotateY(-1.5708);
+            object3.name = "windrad";
+        })
+        const objLoader4 = new this.THREE.OBJLoader();
+        objLoader4.crossOrigin = '';
+        objLoader4.load(OBJ1, (object4) => {
+            // adding Material
+            object4.traverse(function (child) {
+                if (child instanceof THREE.Mesh) {
+                    child.material = materialWhite;
+                }
+            });
+            this.parentBladesBottom1 = new THREE.Object3D();
+            object4.position.y -= 44.3;
+            object4.position.x -= 40;
+            object4.rotateY(-1.5708);
+            this.parentBladesBottom1.add(object4);
+            this.parentBladesBottom1.position.y += 4.3;
+            
+            this.parentBladesBottom1.rotateY(1.5708);
+            //this.parentBladesBottom.add(new THREE.AxesHelper(20));
+            this.parentBladesTop1 = new THREE.Object3D();
+            this.parentBladesTop1.add(this.parentBladesBottom1);
+            this.parentBladesTop1.rotateY(-1.5708);
+            
+            this.scene.add(this.parentBladesTop1);
+            this.loaded = true;
+            //console.log("hi" + this.loaded);
+        })
+        const objLoader5 = new this.THREE.OBJLoader();
+        objLoader5.crossOrigin = '';
+        objLoader5.load(OBJ2, (object5) => {
+            // adding Material
+            object5.traverse(function (child) {
+                if (child instanceof THREE.Mesh) {
+                    child.material = materialWhite;
+                }
+            });
+            this.scene.add(object5);
+            object5.position.y -= 40;
+            object5.position.x -= 40;
+            object5.rotateY(-1.5708);
+            object5.name = "Ueberbau";
+        })
     }
 
     resetPosition() {
@@ -200,7 +261,7 @@ class ThreeScene extends Component {
             .to(destination, 1500) // destinationPoint is the object of destination
             .start()
             .easing(TWEEN.Easing.Cubic.InOut)
-        console.log("reset");
+        //console.log("reset");
     }
 
     showWindmill() {

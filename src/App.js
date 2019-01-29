@@ -274,7 +274,8 @@ class App extends React.Component {
       this._three.resetPosition();
       this.setState({ actualState: 2 });
     } else if (param === "simulation") {
-      this._three.moveCamera();
+      //this._three.moveCamera();
+      this._three.createSecondModel();
       this.setState({ actualState: 3 });
     } else if (param === "anwendungen") {
       this.setState({ actualState: 4 });
