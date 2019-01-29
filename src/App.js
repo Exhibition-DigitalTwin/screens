@@ -42,6 +42,10 @@ const textFontNormal = 20;
 const textLineHeightNormal = 26;
 const fadeTimeBasicIn = 4000;
 const fadeTimeBasicOut = 500;
+const ledSize = 20;
+const ledShadowSize = ledSize*2;
+const ledDistance = 50;
+const ledDistanceStartTop = ledDistance-ledSize;
 
 const h1Style = {
   position: 'absolute',
@@ -238,6 +242,11 @@ class App extends React.Component {
 
     // Slider
     valueSlider: 0,
+
+    // LEDs
+    showLEDs: true,
+    ledColor1: '#FF2222',
+    ledColor2: '#FF2222',
   };
 
   componentDidMount() {
@@ -446,7 +455,7 @@ class App extends React.Component {
   };
 
   render() {
-    const { contentOpacity, showDisableExpertDiv, lineMenuColor, showLine1, showLine2, showLine3,fabColor, showMenuPartOne, textClickMeFade, leftNormalDistance, showMenu, showScreensaverBasic, showAufbauBasic, showDatenBasic, showDatenExpert1, showDatenExpert2, showDatenExpert3, showSimulationBasic, showSimulationExpert1, showSimulationExpert2, showAnwendungenBasic, valueSlider } = this.state;
+    const { ledColor2, ledColor1, showLEDs, contentOpacity, showDisableExpertDiv, lineMenuColor, showLine1, showLine2, showLine3,fabColor, showMenuPartOne, textClickMeFade, leftNormalDistance, showMenu, showScreensaverBasic, showAufbauBasic, showDatenBasic, showDatenExpert1, showDatenExpert2, showDatenExpert3, showSimulationBasic, showSimulationExpert1, showSimulationExpert2, showAnwendungenBasic, valueSlider } = this.state;
 
     return (
       <div className="App">
@@ -501,13 +510,24 @@ class App extends React.Component {
                 <Fab className={"icon1"} disabled={!showDatenBasic} style={{ opacity: [showDatenBasic ? textClickMeFade : null], position: 'absolute', right: distanceFromSide, top: 670, fontSize: '20px' }} onClick={this.handleClickShowData('simulation')}>
                   <SimulationIcon className={"simulationIcon"} color={fabColor} />
                 </Fab>
-                <Button className='n1' disabled={!showSimulationBasic} style={{ opacity: [showSimulationBasic ? textClickMeFade : null], position: 'absolute', right: distanceFromSide * 3 + 10, bottom: distanceFromSide + 10, fontSize: '20px' }} onClick={this.handleClickShowData('anwendungen')} >Anwendungsgebiete</Button>
+                <Button className='n1' disabled={!showSimulationBasic} style={{ opacity: [showSimulationBasic ? textClickMeFade : null], position: 'absolute', right: distanceFromSide * 3 + 10, bottom: distanceFromSide + 10, fontSize: '20px' }} onClick={this.handleClickShowData('anwendungen')} >Anwendungen</Button>
                 <Fab className={"icon1"} disabled={!showSimulationBasic} style={{ opacity: [showSimulationBasic ? textClickMeFade : null], position: 'absolute', right: distanceFromSide, bottom: distanceFromSide+5, fontSize: '20px' }} onClick={this.handleClickShowData('anwendungen')}>
                   <AnwendungenIcon className={"anwendungenIcon"} color={fabColor} />
                 </Fab>
               </div>
-            </Fade>    
+            </Fade>
             {/* 
+            LEDs
+            */}
+            <Fade in={showLEDs} timeout={{ enter: fadeTimeBasicIn, exit: fadeTimeBasicOut }} mountOnEnter={true} unmountOnExit={true}>
+              <div className={"ledStrip"}>
+                <div className={"led1"} style={{ opacity: [showSimulationBasic ? textClickMeFade : null], backgroundColor: ledColor1, boxShadow: '0px 0px '+ledShadowSize+'px' + ledColor1, position: 'absolute', height: ledSize+'px', width: ledSize+'px', borderRadius: ledSize/2+'px', right: 960-ledSize/2+'px', top: ledDistanceStartTop }}>
+                </div>
+                <div className={"led1"} style={{ opacity: [showSimulationBasic ? textClickMeFade : null], backgroundColor: ledColor2, boxShadow: '0px 0px '+ledShadowSize+'px' + ledColor2, position: 'absolute', height: ledSize+'px', width: ledSize+'px', borderRadius: ledSize/2+'px', right: 960-ledSize/2+'px', top: ledDistanceStartTop+ledDistance }}>
+                </div>
+              </div>
+            </Fade>    
+            {/*
             LINES BETWEEN MENU POINTS
             */}
             <div className={"line1"} style={{position: 'absolute', right: distanceFromSide + 23, top: 85 }}>
