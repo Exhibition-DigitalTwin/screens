@@ -274,10 +274,13 @@ class App extends React.Component {
       this._three.resetPosition();
       this.setState({ actualState: 2 });
     } else if (param === "simulation") {
-      //this._three.moveCamera();
+      this._three.moveCamera(-50, 15, 700);
       this._three.createSecondModel();
       this.setState({ actualState: 3 });
     } else if (param === "anwendungen") {
+      this._three.deleteModel();
+      this._three.moveCamera(-25, 15, 500);
+      
       this.setState({ actualState: 4 });
     } else if (param === "showDatenExpert1") {
       console.log("done");
@@ -297,7 +300,7 @@ class App extends React.Component {
     }
     if (this.state.lastState !== this.state.actualState && this.state.actualState === 1) {
       this.setState({ lastState: this.state.actualState });
-      this._three.handleClickThree(0, 45, -0.01);
+      this._three.rotateHeadRootModel(0, 45, -0.01);
     }
     if (this.state.lastState !== this.state.actualState && this.state.actualState !== 1) {
       this.setState({ 
@@ -310,7 +313,7 @@ class App extends React.Component {
         showSimulationExpert2: false, 
         showDisableExpertDiv: false,
       });
-      this._three.handleClickThree(0, 90, -0.01);
+      this._three.rotateHeadRootModel(0, 90, -0.01);
       this.sendMessage(1);
       this.sendMessage(0);
     }
