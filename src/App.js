@@ -267,6 +267,7 @@ class App extends React.Component {
       this.setState({ actualState: 1 });
       this._three.showWindmill();
     } else if (param === "daten") {
+      this._three.resetPosition();
       this.setState({ actualState: 2 });
     } else if (param === "simulation") {
       this.setState({ actualState: 3 });
