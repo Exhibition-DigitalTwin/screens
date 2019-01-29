@@ -41,7 +41,7 @@ class ThreeScene extends Component {
         //ADD RENDERER
         this.renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true })
         this.renderer.setSize(width, height)
-        this.renderer.setClearColor( 0x000000, 0 ); // the default
+        this.renderer.setClearColor(0x000000, 0); // the default
         this.mount.appendChild(this.renderer.domElement)
 
         this.keyLight = new THREE.DirectionalLight(new THREE.Color('hsl(100%, 100%, 75%)'), 1.0);
@@ -192,6 +192,15 @@ class ThreeScene extends Component {
         console.log(valueSlider);
         this.head = this.scene.getObjectByName("Ueberbau");
         this.head.position.y = this.rootPositionHead + valueSlider;
+    }
+
+    resetPosition() {
+        var destination = new THREE.Vector3(0, -40, 0);
+        this.head = this.scene.getObjectByName("Ueberbau");
+        new TWEEN.Tween(this.head.position)
+            .to(destination, 1500) // destinationPoint is the object of destination
+            .start();
+        console.log("reset");
     }
 
     showWindmill() {
