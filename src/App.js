@@ -319,10 +319,11 @@ class App extends React.Component {
       this._three.showWindmill();
     } else if (param === "daten") {
       this._three.resetPosition();
+      this._three.createSecondModel();
       this.setState({ actualState: 2 }, () => this.callback());
     } else if (param === "simulation") {
       this._three.moveCamera(-50, 15, 700);
-      this._three.createSecondModel();
+      this._three.showSecondModel();
       this.setState({ actualState: 3 }, () => this.callback());
     } else if (param === "anwendungen") {
       this._three.deleteModel();
@@ -606,7 +607,7 @@ class App extends React.Component {
             */}
             <Fade in={showAufbauBasic} timeout={{ enter: fadeTimeBasicIn, exit: fadeTimeBasicOut }} mountOnEnter={true} unmountOnExit={true}>
               <div className="aufbauNormal">
-              <div style={{ position: "absolute", bottom: "90px", left: "900px", height: "400px"}}>
+              <div style={{ position: "absolute", bottom: "90px", left: "1500px", height: "400px"}}>
               <Slider value={valueSlider} onChange={this.handleChangeSlider} style={{padding: '22px 0px'}} vertical max={20} size="medium"/>
               </div>
                 <h2 className='p1' style={h2Style}>Aufbau</h2>
