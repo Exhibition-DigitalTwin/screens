@@ -269,7 +269,6 @@ class App extends React.Component {
         showSimulationExpert1: false,
         showSimulationExpert2: false,
        });
-       console.log("done");
     } else {
       console.log('dont know what to do with ', param);
     }

@@ -30,6 +30,7 @@ class ThreeScene extends Component {
             0.1,
             1000
         )
+        this.scene.background = new THREE.Color( 0, 0, 0 );
         this.camera.position.z = 500
         this.camera.position.y = 15
         this.camera.position.x = -25
