@@ -269,6 +269,7 @@ class App extends React.Component {
   };
 
   componentDidMount() {
+    this.marcus = 0;
     this.clickMeButtonTimer = setInterval(() => this.updateColor(), 30);
     this.clickMeButtonTimer = setInterval(() => this.setContentOpacity(), 30);
   }
@@ -310,23 +311,23 @@ class App extends React.Component {
   };
 
   handleClickShowData = param => e => {
+    console.log("hi");
     if (param === "screensaver") {
-      this.setState({ actualState: 0 });
+      this.setState({ actualState: 0 }, () => this.callback());
     } else if (param === "aufbau") {
-      this.setState({ actualState: 1 });
+      this.setState({ actualState: 1 }, () => this.callback());
       this._three.showWindmill();
     } else if (param === "daten") {
       this._three.resetPosition();
-      this.setState({ actualState: 2 });
+      this.setState({ actualState: 2 }, () => this.callback());
     } else if (param === "simulation") {
       this._three.moveCamera(-50, 15, 700);
       this._three.createSecondModel();
-      this.setState({ actualState: 3 });
+      this.setState({ actualState: 3 }, () => this.callback());
     } else if (param === "anwendungen") {
       this._three.deleteModel();
       this._three.moveCamera(-25, 15, 500);
-      
-      this.setState({ actualState: 4 });
+      this.setState({ actualState: 4 }, () => this.callback());
     } else if (param === "showDatenExpert1") {
       console.log("done");
       this.setState({ showDatenExpert1: true, showDisableExpertDiv: true, contentFadedOut: false });
@@ -340,10 +341,11 @@ class App extends React.Component {
         showSimulationExpert2: false,
         showDisableExpertDiv: false,
         contentOpacity: 1,
-       });
-    } else {
-      console.log('dont know what to do with ', param);
-    }
+       }, () => this.callback());
+    } 
+  };
+
+  callback(){
     if (this.state.lastState !== this.state.actualState && this.state.actualState === 1) {
       this.setState({ lastState: this.state.actualState });
       this._three.rotateHeadRootModel(0, 45, -0.01);
