@@ -287,7 +287,7 @@ class App extends React.Component {
     } else {
       console.log('dont know what to do with ', param);
     }
-    if (this.state.lastState !== this.state.actualState && this.state.actualState == 1) {
+    if (this.state.lastState !== this.state.actualState && this.state.actualState === 1) {
       this.setState({ lastState: this.state.actualState });
       this._three.handleClickThree(0, 45, -0.01);
     }
@@ -309,7 +309,6 @@ class App extends React.Component {
       case 0:
         this.setState({
           showMenu: true,
-          showAnwendungenBasic: false,
           showScreensaverBasic: true,
           showAufbauBasic: false,
           showDatenBasic: false,
@@ -325,7 +324,6 @@ class App extends React.Component {
       case 1:
         this.setState({
           showMenu: true,
-          showAnwendungenBasic: false,
           showScreensaverBasic: false,
           showAufbauBasic: true,
           showDatenBasic: false,
@@ -341,7 +339,6 @@ class App extends React.Component {
       case 2:
         this.setState({
           showMenu: true,
-          showAnwendungenBasic: false,
           showScreensaverBasic: false,
           showAufbauBasic: false,
           showDatenBasic: true,
@@ -357,7 +354,6 @@ class App extends React.Component {
       case 3:
         this.setState({
           showMenu: true,
-          showAnwendungenBasic: false,
           showScreensaverBasic: false,
           showAufbauBasic: false,
           showDatenBasic: false,
@@ -373,7 +369,6 @@ class App extends React.Component {
       case 4:
         this.setState({
           showMenu: true,
-          showAnwendungenBasic: false,
           showScreensaverBasic: false,
           showAufbauBasic: false,
           showDatenBasic: false,
