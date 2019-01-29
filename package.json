@@ -5,6 +5,7 @@
   "dependencies": {
     "@material-ui/core": "^3.9.0",
     "@material-ui/icons": "^3.0.1",
+    "@material-ui/lab": "^3.0.0-alpha.29",
     "@serialport/parser-readline": "^2.0.2",
     "d3-array": "^2.0.3",
     "d3-ease": "^1.0.5",

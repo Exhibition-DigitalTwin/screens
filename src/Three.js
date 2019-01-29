@@ -19,7 +19,10 @@ class ThreeScene extends Component {
         this.speedRotationHead = 0
 
         this.initRotationLoop = 0;
-        this.stopRotationLoop = 0
+        this.stopRotationLoop = 0;
+
+        this.rootPositionHead = -40;
+        this.newPositionHead = -40;
 
         //ADD SCENE
         this.scene = new THREE.Scene()
@@ -74,7 +77,7 @@ class ThreeScene extends Component {
         //    y: this.camera.position.y,
         //    z: this.camera.position.z
         //};
-//
+        //
         //this.to = {
         //    x: 600,
         //    y: 20,
@@ -90,8 +93,8 @@ class ThreeScene extends Component {
         //this.tweenCamera.onComplete(function () {
         //    this.camera.lookAt(new THREE.Vector3(0, 0, 0));
         //})
-//
-//
+        //
+        //
         this.THREE = THREE;
         const objLoader = new this.THREE.OBJLoader();
         objLoader.crossOrigin = '';
@@ -183,6 +186,12 @@ class ThreeScene extends Component {
         //console.log("steps" + steps);
     };
 
+    changePositionHead(valueSlider) {
+        console.log(valueSlider);
+        this.head = this.scene.getObjectByName("Ueberbau");
+        this.head.position.y = this.rootPositionHead + valueSlider;
+    }
+
     showWindmill() {
         this.tween.start();
     }
@@ -205,6 +214,7 @@ class ThreeScene extends Component {
             this.parentBladesTop.rotateY(this.speedRotationHead);
             this.initRotationLoop++;
         }
+        //this.head.translateY(this.newPositionHead);
         this.renderScene()
         this.frameId = window.requestAnimationFrame(this.animate)
     }

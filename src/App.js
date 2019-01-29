@@ -15,6 +15,7 @@ import Animate from 'react-move/Animate';
 import SvgIcon from '@material-ui/core/SvgIcon';
 import Fab from '@material-ui/core/Fab';
 import Websocket from 'react-websocket';
+import Slider from '@material-ui/lab/Slider';
 
 const theme = createMuiTheme({
   palette: {
@@ -25,6 +26,12 @@ const theme = createMuiTheme({
   typography: {
     useNextVariants: true,
   },
+  overrides: {
+    MuiSlider: {
+      track: { backgroundColor: 'white' },
+      thumb: { backgroundColor: 'white' },
+    },
+  }
 });
 
 // variables for screen design
@@ -222,6 +229,9 @@ class App extends React.Component {
     textClickMeFade: 0.6,
     textClickMeFadeStatus: false,
     open: false,
+
+    // Slider
+    valueSlider: 10,
   };
 
   componentDidMount() {
@@ -244,6 +254,11 @@ class App extends React.Component {
     }
     return "rgba(255,255,255," + this.state.textClickMeFade + ")"
   }
+
+  handleChangeSlider = (event, valueSlider) => {
+    this.setState({ valueSlider });
+    this._three.changePositionHead(valueSlider);
+  };
 
   handleClickShowData = param => e => {
     if (param === "screensaver") {
@@ -396,7 +411,7 @@ class App extends React.Component {
   };
 
   render() {
-    const { lineMenuColor, showLine1, showLine2, showLine3,fabColor, showMenuPartOne, textClickMeFade, leftNormalDistance, showMenu, showScreensaverBasic, showAufbauBasic, showDatenBasic, showDatenExpert1, showDatenExpert2, showDatenExpert3, showSimulationBasic, showSimulationExpert1, showSimulationExpert2, showAnwendungenBasic } = this.state;
+    const { lineMenuColor, showLine1, showLine2, showLine3,fabColor, showMenuPartOne, textClickMeFade, leftNormalDistance, showMenu, showScreensaverBasic, showAufbauBasic, showDatenBasic, showDatenExpert1, showDatenExpert2, showDatenExpert3, showSimulationBasic, showSimulationExpert1, showSimulationExpert2, showAnwendungenBasic, valueSlider } = this.state;
 
     return (
       <div className="App">
@@ -495,6 +510,9 @@ class App extends React.Component {
             */}
             <Fade in={showAufbauBasic} timeout={{ enter: fadeTimeBasicIn, exit: fadeTimeBasicOut }} mountOnEnter={true} unmountOnExit={true}>
               <div className="aufbauNormal">
+              <div style={{ position: "absolute", top: "600px", left: "1000px", height: "200px"}}>
+              <Slider value={valueSlider} onChange={this.handleChangeSlider} style={{padding: '22px 0px'}} vertical/>
+              </div>
                 <h2 className='p1' style={h2Style}>Aufbau</h2>
                 <p className='p1' style={pStyle}>
                   Zunächst  werden 3D Modelle aller Elemente angefertigt und zusammengefügt.<br /><br />
