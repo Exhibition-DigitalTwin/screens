@@ -38,6 +38,9 @@ class ThreeScene extends Component {
         this.camera.position.y = 15
         this.camera.position.x = -25
         this.camera.rotation.x = -0.05
+
+        this.camera.lookAt(new THREE.Vector3(0, 12, 0))
+
         //ADD RENDERER
         this.renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true })
         this.renderer.setSize(width, height)
@@ -74,26 +77,7 @@ class ThreeScene extends Component {
 
 
         //--------------------------------- Try moving camera -----------------------------
-        //this.from = {
-        //    x: this.camera.position.x,
-        //    y: this.camera.position.y,
-        //    z: this.camera.position.z
-        //};
-        //
-        //this.to = {
-        //    x: 600,
-        //    y: 20,
-        //    z: -30
-        //};
-        //this.tweenCamera = new TWEEN.Tween(this.from)
-        //this.tweenCamera.to(this.to, 600)
-        //this.tweenCamera.easing(TWEEN.Easing.Linear.None)
-        //this.tweenCamera.onUpdate(function () {
-        //    this.camera.position.y = this.this.y;
-        //    this.camera.lookAt(new THREE.Vector3(0, 0, 0));
-        //})
-        //this.tweenCamera.onComplete(function () {
-        //    this.camera.lookAt(new THREE.Vector3(0, 0, 0));
+
         //})
         //
         //
@@ -194,12 +178,28 @@ class ThreeScene extends Component {
         this.head.position.y = this.rootPositionHead + valueSlider;
     }
 
+    moveCamera() {
+        var destination = new THREE.Vector3(0, 50, 0);
+        var look = new THREE.Vector3(0, 0, 0)
+        new TWEEN.Tween(this.camera.position)
+            .to(destination, 600)
+            .start()
+            .easing(TWEEN.Easing.Linear.None)
+        // Camera look at does not work yet
+        //.onUpdate(function () {
+        //    this.camera.lookAt(look);
+        //})
+
+        console.log(this.camera.position);
+    }
+
     resetPosition() {
         var destination = new THREE.Vector3(0, -40, 0);
         this.head = this.scene.getObjectByName("Ueberbau");
         new TWEEN.Tween(this.head.position)
             .to(destination, 1500) // destinationPoint is the object of destination
-            .start();
+            .start()
+            .easing(TWEEN.Easing.Cubic.InOut)
         console.log("reset");
     }
 
