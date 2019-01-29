@@ -327,7 +327,7 @@ class App extends React.Component {
       this.setState({ actualState: 3 }, () => this.callback());
     } else if (param === "anwendungen") {
       this._three.deleteModel();
-      this._three.moveCamera(-25, 15, 500);
+      this._three.moveCamera(-29, 15, 500);
       this.setState({ actualState: 4 }, () => this.callback());
     } else if (param === "showDatenExpert1") {
       console.log("done");
