@@ -219,6 +219,7 @@ class App extends React.Component {
     // variables for content
     leftNormalDistance: distanceFromSide * 7,
     fabColor: "default",
+    showDisableExpertDiv: false,
     // var for lines between menu points
     showLine1: false,
     showLine2: false,
@@ -274,7 +275,7 @@ class App extends React.Component {
       this.setState({ actualState: 4 });
     } else if (param === "showDatenExpert1") {
       console.log("done");
-      this.setState({ showDatenExpert1: true });
+      this.setState({ showDatenExpert1: true, showDisableExpertDiv: true });
     }else if (param === "closeDatenExpert") {
       this.setState({
         showDatenExpert1: false,
@@ -283,6 +284,7 @@ class App extends React.Component {
         showSimulationBasic: false,
         showSimulationExpert1: false,
         showSimulationExpert2: false,
+        showDisableExpertDiv: false,
        });
     } else {
       console.log('dont know what to do with ', param);
@@ -292,13 +294,15 @@ class App extends React.Component {
       this._three.handleClickThree(0, 45, -0.01);
     }
     if (this.state.lastState !== this.state.actualState && this.state.actualState !== 1) {
-      this.setState({ lastState: this.state.actualState,
+      this.setState({ 
+        lastState: this.state.actualState,
         showDatenExpert1: false,
         showDatenExpert2: false,
         showDatenExpert3: false,
         showSimulationBasic: false,
         showSimulationExpert1: false,
         showSimulationExpert2: false, 
+        showDisableExpertDiv: false,
       });
       this._three.handleClickThree(0, 90, -0.01);
       this.sendMessage(1);
@@ -394,6 +398,18 @@ class App extends React.Component {
     this.setState({ open: !this.state.open })
   }
 
+  handleShowDisableExpertDiv = () => {
+    this.setState({ 
+      showDisableExpertDiv: false,
+      showDatenExpert1: false,
+      showDatenExpert2: false,
+      showDatenExpert3: false,
+      showSimulationBasic: false,
+      showSimulationExpert1: false,
+      showSimulationExpert2: false, 
+    })
+  }
+
   handleOpen() {
     console.log("connected");
   };
@@ -407,7 +423,7 @@ class App extends React.Component {
   };
 
   render() {
-    const { lineMenuColor, showLine1, showLine2, showLine3,fabColor, showMenuPartOne, textClickMeFade, leftNormalDistance, showMenu, showScreensaverBasic, showAufbauBasic, showDatenBasic, showDatenExpert1, showDatenExpert2, showDatenExpert3, showSimulationBasic, showSimulationExpert1, showSimulationExpert2, showAnwendungenBasic, valueSlider } = this.state;
+    const { showDisableExpertDiv, lineMenuColor, showLine1, showLine2, showLine3,fabColor, showMenuPartOne, textClickMeFade, leftNormalDistance, showMenu, showScreensaverBasic, showAufbauBasic, showDatenBasic, showDatenExpert1, showDatenExpert2, showDatenExpert3, showSimulationBasic, showSimulationExpert1, showSimulationExpert2, showAnwendungenBasic, valueSlider } = this.state;
 
     return (
       <div className="App">
@@ -553,6 +569,13 @@ class App extends React.Component {
             <Fade in={showAnwendungenBasic} timeout={{ enter: fadeTimeBasicIn, exit: fadeTimeBasicOut }} mountOnEnter={true} unmountOnExit={true}>
               <div className="aufbauNormal">
                 <h2 className='p1' style={h2Style}>Anwendungen</h2>
+              </div>
+            </Fade>
+            {/* 
+            EXPERT CONTENT UNSHOW 
+            */}
+            <Fade in={showDisableExpertDiv} timeout={0} mountOnEnter={true} unmountOnExit={true}>
+              <div style={{opacity: "0", position: "absolute", height: "1080px", width: "1500px", top: "0px", left: "0px" }} onClick={() => { this.handleShowDisableExpertDiv()}}>
               </div>
             </Fade>
           </MuiThemeProvider>
