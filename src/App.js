@@ -222,6 +222,8 @@ class App extends React.Component {
     leftNormalDistance: distanceFromSide * 7,
     fabColor: "default",
     showDisableExpertDiv: false,
+    contentFadedOut: false,
+
     // var for lines between menu points
     showLine1: false,
     showLine2: false,
@@ -240,7 +242,9 @@ class App extends React.Component {
 
   componentDidMount() {
     this.clickMeButtonTimer = setInterval(() => this.updateColor(), 30);
+    this.clickMeButtonTimer = setInterval(() => this.setContentOpacity(), 30);
   }
+
   componentWillUnmount() {
     clearInterval(this.clickMeButtonTimer);
   }
@@ -257,6 +261,16 @@ class App extends React.Component {
       this.setState({ textClickMeFade: this.state.textClickMeFade - 0.01 });
     }
     return "rgba(255,255,255," + this.state.textClickMeFade + ")"
+  }
+
+  setContentOpacity() {
+    if(this.state.showDisableExpertDiv && this.state.contentOpacity >= 0.2 && !this.state.contentFadedOut) {
+      this.setState({ contentOpacity: this.state.contentOpacity - 0.01 });
+    } else if (this.state.contentOpacity <= 0.2) {
+      this.setState({ contentFadedOut: true });
+    } else {
+      this.setState({ contentOpacity: 1 });
+    }
   }
 
   handleChangeSlider = (event, valueSlider) => {
@@ -279,7 +293,7 @@ class App extends React.Component {
       this.setState({ actualState: 4 });
     } else if (param === "showDatenExpert1") {
       console.log("done");
-      this.setState({ showDatenExpert1: true, showDisableExpertDiv: true });
+      this.setState({ showDatenExpert1: true, showDisableExpertDiv: true, contentFadedOut: false });
     }else if (param === "closeDatenExpert") {
       this.setState({
         showDatenExpert1: false,
@@ -289,6 +303,7 @@ class App extends React.Component {
         showSimulationExpert1: false,
         showSimulationExpert2: false,
         showDisableExpertDiv: false,
+        contentOpacity: 1,
        });
     } else {
       console.log('dont know what to do with ', param);
@@ -543,8 +558,8 @@ class App extends React.Component {
                 <h2 className='p1' style={h2Style}>Daten</h2>
                 <p className='p1' style={{...pStyle, ...{opacity:contentOpacity}}} >
                   Um von einem digitalen Zwilling signifikante Vorteile zu ziehen, müssen der physische und der virtuelle Part miteinander verbunden sein.<br /><br />
-                  Das <span style={expertStyleToEnter} onClick={this.handleClickShowData("showDatenExpert1")}>Internet der Dinge</span> ermöglicht es real existierenden Objekten mittels <span style={expertStyleToEnter}>Sensoren</span>
-                  Daten zum eigenen, aktuellen Zustand in einer <span style={expertStyleToEnter}>Cloud</span> zu sammeln und weiterzugeben. Diese Informationen fließen in das digitale Modell ein.</p>
+                  Das <span style={{...expertStyleToEnter, ...{opacity: 1, color: "#FFFFFF"}}} onClick={this.handleClickShowData("showDatenExpert1")}>Internet der Dinge</span> ermöglicht es real existierenden Objekten mittels <span style={expertStyleToEnter}>Sensoren</span> 
+                   Daten zum eigenen, aktuellen Zustand in einer <span style={expertStyleToEnter}>Cloud</span> zu sammeln und weiterzugeben. Diese Informationen fließen in das digitale Modell ein.</p>
               </div>
             </Fade>
             <Fade in={showDatenExpert1} timeout={{ enter: fadeTimeBasicIn, exit: fadeTimeBasicOut }} mountOnEnter={true} unmountOnExit={true}>
