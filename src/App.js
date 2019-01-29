@@ -339,11 +339,8 @@ class App extends React.Component {
       this._three.showWindmill();
     } else if (param === "daten") {
       this._three.resetPosition();
-      this._three.createSecondModel();
       this.setState({ actualState: 2 }, () => this.callback());
     } else if (param === "simulation") {
-      this._three.moveCamera(-50, 15, 700);
-      this._three.showSecondModel();
       this.setState({ actualState: 3 }, () => this.callback());
     } else if (param === "anwendungen") {
       this._three.deleteModel();
@@ -671,12 +668,9 @@ class App extends React.Component {
                   Das große Potential des digitalen Zwillings besteht darin, dass jeder Zustand eines physischen Produkts  mit dem virtuellen Prozess überlagert und verglichen werden
                   kann. Der finale Schritt besteht deshalb darin, die Informationen des Datenspeichers in eine Simulation des Windrades einzubinden.<br /><br />
                   In dieser Simulation können unterschiedliche Faktoren virtuell ausprobiert und deren Einfluss berechnet werden.</p>
-                  <Button className='n1' style={{ position: 'absolute', left: 300, top: 300, fontSize: '20px' }} onClick={() => { console.log("starte Simulation")}}>Starte Simulation</Button>        
+                  <Button className='n1' style={{ position: 'absolute', left: 300, top: 300, fontSize: '20px' }} onClick={() => { this._three.moveCamera(-50, 15, 700); this._three.showSecondModel();}}>Starte Simulation</Button>        
 
               </div>
-              {/* 
-            @MarcusIoT 
-            */}
             </Fade>
             {/* 
             ANWENDUNGSFELDER 
