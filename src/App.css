@@ -15,7 +15,7 @@
   align-items: center;
   justify-content: center;
   font-size: calc(10px + 2vmin);
-  color: white;
+  background-image: radial-gradient(red, green, blue);
 }
 
 .App-link {
@@ -39,5 +39,5 @@ body {
 
 canvas {
   display: block;
-  background-color: #F1F1F9;
+  background-image: radial-gradient(#2e2e2e, #000000);
 }

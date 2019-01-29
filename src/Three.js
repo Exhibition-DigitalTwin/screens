@@ -30,14 +30,15 @@ class ThreeScene extends Component {
             0.1,
             1000
         )
-        this.scene.background = new THREE.Color( 0, 0, 0 );
+        //this.scene.background = new THREE.Color( 0, 0, 0 );
         this.camera.position.z = 500
         this.camera.position.y = 15
         this.camera.position.x = -25
         this.camera.rotation.x = -0.05
         //ADD RENDERER
-        this.renderer = new THREE.WebGLRenderer({ antialias: true })
+        this.renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true })
         this.renderer.setSize(width, height)
+        this.renderer.setClearColor( 0x000000, 0 ); // the default
         this.mount.appendChild(this.renderer.domElement)
 
         this.keyLight = new THREE.DirectionalLight(new THREE.Color('hsl(100%, 100%, 75%)'), 1.0);
