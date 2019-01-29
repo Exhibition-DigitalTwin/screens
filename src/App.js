@@ -43,9 +43,10 @@ const textLineHeightNormal = 26;
 const fadeTimeBasicIn = 4000;
 const fadeTimeBasicOut = 500;
 const ledSize = 20;
-const ledShadowSize = ledSize*2;
-const ledDistance = 50;
-const ledDistanceStartTop = ledDistance-ledSize;
+const ledShadowSize = ledSize*1.5;
+const ledDistance = 55;
+const ledDistanceAngleSide = 37;
+const ledDistanceStartTop = 22;
 
 const h1Style = {
   position: 'absolute',
@@ -247,6 +248,24 @@ class App extends React.Component {
     showLEDs: true,
     ledColor1: '#FF2222',
     ledColor2: '#FF2222',
+    ledColor3: '#FF2222',
+    ledColor4: '#FF2222',
+    ledColor5: '#FF2222',
+    ledColor6: '#FF2222',
+    ledColor7: '#FF2222',
+    ledColor8: '#FF2222',
+    ledColor9: '#FF2222',
+    ledColor10: '#FF2222',
+    ledColor11: '#FF2222',
+    ledColor12: '#FF2222',
+    ledColor13: '#FF2222',
+    ledColor14: '#FF2222',
+    ledColor15: '#FF2222',
+    ledColor16: '#FF2222',
+    ledColor17: '#FF2222',
+    ledColor18: '#FF2222',
+    ledColor19: '#FF2222',
+    ledColor20: '#FF2222',
   };
 
   componentDidMount() {
@@ -462,7 +481,7 @@ class App extends React.Component {
   };
 
   render() {
-    const { ledColor2, ledColor1, showLEDs, contentOpacity, showDisableExpertDiv, lineMenuColor, showLine1, showLine2, showLine3,fabColor, showMenuPartOne, textClickMeFade, leftNormalDistance, showMenu, showScreensaverBasic, showAufbauBasic, showDatenBasic, showDatenExpert1, showDatenExpert2, showDatenExpert3, showSimulationBasic, showSimulationExpert1, showSimulationExpert2, showAnwendungenBasic, valueSlider } = this.state;
+    const { ledColor20, ledColor19, ledColor18, ledColor17, ledColor16, ledColor15, ledColor14, ledColor13, ledColor12, ledColor11, ledColor10, ledColor9, ledColor8, ledColor7, ledColor6, ledColor5, ledColor4, ledColor3, ledColor2, ledColor1, showLEDs, contentOpacity, showDisableExpertDiv, lineMenuColor, showLine1, showLine2, showLine3,fabColor, showMenuPartOne, textClickMeFade, leftNormalDistance, showMenu, showScreensaverBasic, showAufbauBasic, showDatenBasic, showDatenExpert1, showDatenExpert2, showDatenExpert3, showSimulationBasic, showSimulationExpert1, showSimulationExpert2, showAnwendungenBasic, valueSlider } = this.state;
 
     return (
       <div className="App">
@@ -528,10 +547,26 @@ class App extends React.Component {
             */}
             <Fade in={showLEDs} timeout={{ enter: fadeTimeBasicIn, exit: fadeTimeBasicOut }} mountOnEnter={true} unmountOnExit={true}>
               <div className={"ledStrip"}>
-                <div className={"led1"} style={{ opacity: [showSimulationBasic ? textClickMeFade : null], backgroundColor: ledColor1, boxShadow: '0px 0px '+ledShadowSize+'px' + ledColor1, position: 'absolute', height: ledSize+'px', width: ledSize+'px', borderRadius: ledSize/2+'px', right: 960-ledSize/2+'px', top: ledDistanceStartTop }}>
-                </div>
-                <div className={"led1"} style={{ opacity: [showSimulationBasic ? textClickMeFade : null], backgroundColor: ledColor2, boxShadow: '0px 0px '+ledShadowSize+'px' + ledColor2, position: 'absolute', height: ledSize+'px', width: ledSize+'px', borderRadius: ledSize/2+'px', right: 960-ledSize/2+'px', top: ledDistanceStartTop+ledDistance }}>
-                </div>
+                <div className={"led1"} style={{ backgroundColor: ledColor1, boxShadow: '0px 0px '+ledShadowSize+'px' + ledColor1, position: 'absolute', height: ledSize, width: ledSize, borderRadius: ledSize/2, left: 960-ledSize/2, top: ledDistanceStartTop }}></div>
+                <div className={"led2"} style={{ backgroundColor: ledColor2, boxShadow: '0px 0px '+ledShadowSize+'px' + ledColor2, position: 'absolute', height: ledSize, width: ledSize, borderRadius: ledSize/2, left: 960-ledSize/2, top: ledDistanceStartTop+ledDistance }}></div>
+                <div className={"led3"} style={{ backgroundColor: ledColor3, boxShadow: '0px 0px '+ledShadowSize+'px' + ledColor3, position: 'absolute', height: ledSize, width: ledSize, borderRadius: ledSize/2, left: 960-ledSize/2, top: ledDistanceStartTop+ledDistance*2 }}></div>
+                <div className={"led4"} style={{ backgroundColor: ledColor4, boxShadow: '0px 0px '+ledShadowSize+'px' + ledColor4, position: 'absolute', height: ledSize, width: ledSize, borderRadius: ledSize/2, left: 960-ledSize/2, top: ledDistanceStartTop+ledDistance*3 }}></div>
+                <div className={"led5"} style={{ backgroundColor: ledColor5, boxShadow: '0px 0px '+ledShadowSize+'px' + ledColor5, position: 'absolute', height: ledSize, width: ledSize, borderRadius: ledSize/2, left: 960-ledSize/2, top: ledDistanceStartTop+ledDistance*4 }}></div>
+                <div className={"led6"} style={{ backgroundColor: ledColor6, boxShadow: '0px 0px '+ledShadowSize+'px' + ledColor6, position: 'absolute', height: ledSize, width: ledSize, borderRadius: ledSize/2, left: 960-ledSize/2, top: ledDistanceStartTop+ledDistance*5 }}></div>
+                <div className={"led7"} style={{ backgroundColor: ledColor7, boxShadow: '0px 0px '+ledShadowSize+'px' + ledColor7, position: 'absolute', height: ledSize, width: ledSize, borderRadius: ledSize/2, left: 960-ledSize/2, top: ledDistanceStartTop+ledDistance*6 }}></div>
+                <div className={"led8"} style={{ backgroundColor: ledColor8, boxShadow: '0px 0px '+ledShadowSize+'px' + ledColor8, position: 'absolute', height: ledSize, width: ledSize, borderRadius: ledSize/2, left: 960-ledSize/2, top: ledDistanceStartTop+ledDistance*7 }}></div>
+                <div className={"led9"} style={{ backgroundColor: ledColor9, boxShadow: '0px 0px '+ledShadowSize+'px' + ledColor9, position: 'absolute', height: ledSize, width: ledSize, borderRadius: ledSize/2, left: 960-ledSize/2, top: ledDistanceStartTop+ledDistance*8 }}></div>
+                <div className={"led10"} style={{ backgroundColor: ledColor10, boxShadow: '0px 0px '+ledShadowSize+'px' + ledColor10, position: 'absolute', height: ledSize, width: ledSize, borderRadius: ledSize/2, left: 960-ledSize/2, top: ledDistanceStartTop+ledDistance*9 }}></div>
+                <div className={"led11"} style={{ backgroundColor: ledColor11, boxShadow: '0px 0px '+ledShadowSize+'px' + ledColor11, position: 'absolute', height: ledSize, width: ledSize, borderRadius: ledSize/2, left: 960-ledSize/2, top: ledDistanceStartTop+ledDistance*10 }}></div>
+                <div className={"led12"} style={{ backgroundColor: ledColor12, boxShadow: '0px 0px '+ledShadowSize+'px' + ledColor12, position: 'absolute', height: ledSize, width: ledSize, borderRadius: ledSize/2, left: 960-ledSize/2, top: ledDistanceStartTop+ledDistance*11 }}></div>
+                <div className={"led13"} style={{ backgroundColor: ledColor13, boxShadow: '0px 0px '+ledShadowSize+'px' + ledColor13, position: 'absolute', height: ledSize, width: ledSize, borderRadius: ledSize/2, left: 960-ledSize/2+ledDistanceAngleSide, top: ledDistanceStartTop+ledDistance*11+ledDistanceAngleSide }}></div>
+                <div className={"led14"} style={{ backgroundColor: ledColor14, boxShadow: '0px 0px '+ledShadowSize+'px' + ledColor14, position: 'absolute', height: ledSize, width: ledSize, borderRadius: ledSize/2, left: 960-ledSize/2+ledDistanceAngleSide*2, top: ledDistanceStartTop+ledDistance*11+ledDistanceAngleSide*2 }}></div>
+                <div className={"led15"} style={{ backgroundColor: ledColor15, boxShadow: '0px 0px '+ledShadowSize+'px' + ledColor15, position: 'absolute', height: ledSize, width: ledSize, borderRadius: ledSize/2, left: 960-ledSize/2+ledDistanceAngleSide*3, top: ledDistanceStartTop+ledDistance*11+ledDistanceAngleSide*3 }}></div>
+                <div className={"led17"} style={{ backgroundColor: ledColor17, boxShadow: '0px 0px '+ledShadowSize+'px' + ledColor17, position: 'absolute', height: ledSize, width: ledSize, borderRadius: ledSize/2, left: 960-ledSize/2+ledDistanceAngleSide*4, top: ledDistanceStartTop+ledDistance*11+ledDistanceAngleSide*4 }}></div>
+                <div className={"led16"} style={{ backgroundColor: ledColor16, boxShadow: '0px 0px '+ledShadowSize+'px' + ledColor16, position: 'absolute', height: ledSize, width: ledSize, borderRadius: ledSize/2, left: 960-ledSize/2+ledDistanceAngleSide*5, top: ledDistanceStartTop+ledDistance*11+ledDistanceAngleSide*5 }}></div>
+                <div className={"led18"} style={{ backgroundColor: ledColor18, boxShadow: '0px 0px '+ledShadowSize+'px' + ledColor18, position: 'absolute', height: ledSize, width: ledSize, borderRadius: ledSize/2, left: 960-ledSize/2+ledDistanceAngleSide*6, top: ledDistanceStartTop+ledDistance*11+ledDistanceAngleSide*6 }}></div>
+                <div className={"led19"} style={{ backgroundColor: ledColor19, boxShadow: '0px 0px '+ledShadowSize+'px' + ledColor19, position: 'absolute', height: ledSize, width: ledSize, borderRadius: ledSize/2, left: 960-ledSize/2+ledDistanceAngleSide*7, top: ledDistanceStartTop+ledDistance*11+ledDistanceAngleSide*7 }}></div>
+                <div className={"led20"} style={{ backgroundColor: ledColor20, boxShadow: '0px 0px '+ledShadowSize+'px' + ledColor20, position: 'absolute', height: ledSize, width: ledSize, borderRadius: ledSize/2, left: 960-ledSize/2+ledDistanceAngleSide*8, top: ledDistanceStartTop+ledDistance*11+ledDistanceAngleSide*8 }}></div>
               </div>
             </Fade>    
             {/*
