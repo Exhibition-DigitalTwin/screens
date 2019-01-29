@@ -41,3 +41,16 @@ canvas {
   display: block;
   background-image: radial-gradient(#202020, #000000);
 }
+
+.MuiSlider-track-62.MuiSlider-vertical-73 {
+  width: 10px !important;
+}
+
+.MuiSlider-thumb-66 {
+  width: 30px !important;
+  height: 30px !important;
+}
+
+.MuiSlider-thumbWrapper-65.MuiSlider-activated-72.MuiSlider-vertical-73 {
+  color: #ffffff !important;
+}
