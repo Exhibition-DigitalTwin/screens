@@ -85,10 +85,12 @@ const pExpertStyle = {
   fontSize: textFontNormal + 'px',
   width: '20%',
   textAlign: 'left',
+  opacity: '1',
 };
 
 const expertStyleToEnter = {
   fontWeight: 'bold',
+  opacity: '1',
 }
 
 function AufbauIcon(props) {
@@ -230,10 +232,11 @@ class App extends React.Component {
     textClickMeFade: 0.4,
     textClickMeFadeStatus: false,
     open: false,
+    contentOpacity: 0.5,
 
     // Slider
     valueSlider: 10,
-  };
+  }; 
 
   componentDidMount() {
     this.clickMeButtonTimer = setInterval(() => this.updateColor(), 30);
@@ -424,7 +427,7 @@ class App extends React.Component {
   };
 
   render() {
-    const { showDisableExpertDiv, lineMenuColor, showLine1, showLine2, showLine3,fabColor, showMenuPartOne, textClickMeFade, leftNormalDistance, showMenu, showScreensaverBasic, showAufbauBasic, showDatenBasic, showDatenExpert1, showDatenExpert2, showDatenExpert3, showSimulationBasic, showSimulationExpert1, showSimulationExpert2, showAnwendungenBasic, valueSlider } = this.state;
+    const { contentOpacity, showDisableExpertDiv, lineMenuColor, showLine1, showLine2, showLine3,fabColor, showMenuPartOne, textClickMeFade, leftNormalDistance, showMenu, showScreensaverBasic, showAufbauBasic, showDatenBasic, showDatenExpert1, showDatenExpert2, showDatenExpert3, showSimulationBasic, showSimulationExpert1, showSimulationExpert2, showAnwendungenBasic, valueSlider } = this.state;
 
     return (
       <div className="App">
@@ -538,7 +541,7 @@ class App extends React.Component {
             <Fade in={showDatenBasic} timeout={{ enter: fadeTimeBasicIn, exit: fadeTimeBasicOut }} mountOnEnter={true} unmountOnExit={true}>
               <div className="aufbauNormal">
                 <h2 className='p1' style={h2Style}>Daten</h2>
-                <p className='p1' style={pStyle} >
+                <p className='p1' style={{...pStyle, ...{opacity:contentOpacity}}} >
                   Um von einem digitalen Zwilling signifikante Vorteile zu ziehen, müssen der physische und der virtuelle Part miteinander verbunden sein.<br /><br />
                   Das <span style={expertStyleToEnter} onClick={this.handleClickShowData("showDatenExpert1")}>Internet der Dinge</span> ermöglicht es real existierenden Objekten mittels <span style={expertStyleToEnter}>Sensoren</span>
                   Daten zum eigenen, aktuellen Zustand in einer <span style={expertStyleToEnter}>Cloud</span> zu sammeln und weiterzugeben. Diese Informationen fließen in das digitale Modell ein.</p>
@@ -573,7 +576,7 @@ class App extends React.Component {
               </div>
             </Fade>
             {/* 
-            EXPERT CONTENT UNSHOW 
+            EXPERT CONTENT HIDE 
             */}
             <Fade in={showDisableExpertDiv} timeout={0} mountOnEnter={true} unmountOnExit={true}>
               <div style={{opacity: "0", position: "absolute", height: "1080px", width: "1500px", top: "0px", left: "0px" }} onClick={() => { this.handleShowDisableExpertDiv()}}>
