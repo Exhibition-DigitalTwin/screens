@@ -1,14 +1,14 @@
 import React, { Component } from 'react';
 import * as THREE from 'three';
 import * as OBJLoader from 'three-obj-loader';
-import OBJ from './objects/Base.obj';
-import OBJ1 from './objects/Propeller.obj';
-import OBJ2 from './objects/Ueberbau.obj';
-import MAT from './objects/Windrad_base_kopf.mtl';
+import OBJBaseRootModel from './objects/Base.obj';
+import OBJBladesRootModel from './objects/Propeller.obj';
+import OBJCaseRootModel from './objects/Ueberbau.obj';
 import TWEEN from 'tween'
 
 OBJLoader(THREE);
 class ThreeScene extends Component {
+
     componentDidMount() {
         const width = this.mount.clientWidth
         const height = this.mount.clientHeight
@@ -33,7 +33,6 @@ class ThreeScene extends Component {
             0.1,
             1000
         )
-        //this.scene.background = new THREE.Color( 0, 0, 0 );
         this.camera.position.z = 500
         this.camera.position.y = 15
         this.camera.position.x = -25
@@ -47,6 +46,7 @@ class ThreeScene extends Component {
         this.renderer.setClearColor(0x000000, 0); // the default
         this.mount.appendChild(this.renderer.domElement)
 
+        //ADD LIGHTS
         this.keyLight = new THREE.DirectionalLight(new THREE.Color('hsl(100%, 100%, 75%)'), 1.0);
         this.keyLight.position.set(100, 0, 100);
 
@@ -60,172 +60,246 @@ class ThreeScene extends Component {
         this.scene.add(this.fillLight);
         this.scene.add(this.backLight);
 
-        var MTLLoader = require('three-mtl-loader')
-        const mtlLoader = new MTLLoader();
-        mtlLoader.load(MAT, function (materials) {
-            materials.preload();
-            materials.name = "white";
-        });
-
+        //ADD MATERIALS 
         var materialWireframe = new THREE.MeshBasicMaterial({ color: 0xfffff, wireframe: true });
-        var materialWhite = new THREE.MeshPhongMaterial({ color: 0xffffff, opacity: 0, transparent: true })
+        this.materialWhite = new THREE.MeshPhongMaterial({ color: 0xffffff, opacity: 0, transparent: true })
 
-        this.tween = new TWEEN.Tween(materialWhite)
+
+        //ADD FADING OF ROOT MODEL
+        this.tween = new TWEEN.Tween(this.materialWhite)
         this.tween.to({ opacity: 1 }, 1500)
         this.tween.delay(1500)
         //tween.start();
 
-
-        //--------------------------------- Try moving camera -----------------------------
-
-        //})
-        //
-        //
         this.THREE = THREE;
-        const objLoader = new this.THREE.OBJLoader();
-        objLoader.crossOrigin = '';
-        objLoader.load(OBJ, (object0) => {
 
-            // adding Material
-            object0.traverse(function (child) {
-                if (child instanceof THREE.Mesh) {
-                    child.material = materialWhite;
-                }
-            });
-
-            this.scene.add(object0);
-            object0.position.y -= 40;
-            object0.rotateY(-1.5708);
-            object0.name = "windrad";
-
-        })
-
-
-        const objLoader1 = new this.THREE.OBJLoader();
-        objLoader1.crossOrigin = '';
-        objLoader1.load(OBJ1, (object) => {
-
-            // adding Material
-            object.traverse(function (child) {
-                if (child instanceof THREE.Mesh) {
-                    child.material = materialWhite;
-                }
-            });
-
-            this.parentBladesBottom = new THREE.Object3D();
-            object.position.y -= 44.3;
-            object.rotateY(-1.5708);
-            this.parentBladesBottom.add(object);
-            this.parentBladesBottom.position.y += 4.3;
-            this.parentBladesBottom.rotateY(1.5708);
-            //this.parentBladesBottom.add(new THREE.AxesHelper(20));
-            this.parentBladesTop = new THREE.Object3D();
-            this.parentBladesTop.add(this.parentBladesBottom);
-            this.parentBladesTop.rotateY(-1.5708);
-            this.scene.add(this.parentBladesTop);
-            this.loaded = true;
-            console.log("hi" + this.loaded);
-        })
-
-
-        const objLoader2 = new this.THREE.OBJLoader();
-        objLoader2.crossOrigin = '';
-        objLoader2.load(OBJ2, (object1) => {
-
-            // adding Material
-            object1.traverse(function (child) {
-                if (child instanceof THREE.Mesh) {
-                    child.material = materialWhite;
-                }
-            });
-
-            this.scene.add(object1);
-            object1.position.y -= 40;
-            object1.rotateY(-1.5708);
-            object1.name = "Ueberbau";
-
-        })
-
-
+        this.createRootModel()
 
         this.start()
     }
-    componentWillUnmount() {
-        this.stop()
-        this.mount.removeChild(this.renderer.domElement)
-    }
-    start = () => {
-        if (!this.frameId) {
-            this.frameId = requestAnimationFrame(this.animate)
-        }
-    }
-    stop = () => {
-        cancelAnimationFrame(this.frameId)
-    }
 
-    handleClickThree(init, stop, speed) {
+
+    // ------------------------------------------ OWN FUNCTIONS ----------------------------------------------
+
+    rotateHeadRootModel(init, stop, speed) {
         this.speedRotationHead = speed;
         this.initRotationLoop = init;
         var rad = stop * 3.14159 / 180;
         var steps = rad / Math.sqrt(speed * speed);
         this.stopRotationLoop = steps;
-        //console.log("steps" + steps);
     };
 
     changePositionHead(valueSlider) {
-        console.log(valueSlider);
-        this.head = this.scene.getObjectByName("Ueberbau");
+        this.head = this.scene.getObjectByName("caseRootModel");
         this.head.position.y = this.rootPositionHead + valueSlider;
     }
 
-    moveCamera() {
-        var destination = new THREE.Vector3(0, 50, 0);
-        var look = new THREE.Vector3(0, 0, 0)
+    moveCamera(x, y, z) {
+        var destination = new THREE.Vector3(x, y, z);
         new TWEEN.Tween(this.camera.position)
             .to(destination, 600)
             .start()
-            .easing(TWEEN.Easing.Linear.None)
+            .easing(TWEEN.Easing.Cubic.InOut)
         // Camera look at does not work yet
         //.onUpdate(function () {
         //    this.camera.lookAt(look);
         //})
 
-        console.log(this.camera.position);
+        //console.log(this.camera.position);
+    }
+
+    createRootModel() {
+        //DEFINE MATERIALS 
+        var materialWhite = this.materialWhite;
+
+        //BASE ROOT MODEL
+        const objLoader = new this.THREE.OBJLoader();
+        objLoader.crossOrigin = '';
+        objLoader.load(OBJBaseRootModel, (baseRootModel) => {
+            //ADD MATERIALS
+            baseRootModel.traverse(function (child) {
+                var material = materialWhite;
+                if (child instanceof THREE.Mesh) {
+                    child.material = material;
+                }
+            });
+            this.scene.add(baseRootModel);
+            baseRootModel.position.y -= 40;
+            baseRootModel.rotateY(-1.5708);
+            baseRootModel.name = "baseRootModel";
+        })
+
+        //BLADES ROOT MODEL
+        const objLoader1 = new this.THREE.OBJLoader();
+        objLoader1.crossOrigin = '';
+        objLoader1.load(OBJBladesRootModel, (bladesRootModel) => {
+            // ADD MATERIALS
+            bladesRootModel.traverse(function (child) {
+                if (child instanceof THREE.Mesh) {
+                    child.material = materialWhite;
+                }
+            });
+            this.bottomParentBladesRootModel = new THREE.Object3D();
+            bladesRootModel.position.y -= 44.3;
+            bladesRootModel.rotateY(-1.5708);
+            this.bottomParentBladesRootModel.add(bladesRootModel);
+            this.bottomParentBladesRootModel.position.y += 4.3;
+            this.bottomParentBladesRootModel.rotateY(1.5708);
+            //this.bottomParentBladesRootModel.add(new THREE.AxesHelper(20));
+            this.topParentBladesRootModel = new THREE.Object3D();
+            this.topParentBladesRootModel.add(this.bottomParentBladesRootModel);
+            this.topParentBladesRootModel.rotateY(-1.5708);
+            this.scene.add(this.topParentBladesRootModel);
+            this.loaded = true;
+        })
+
+        //CASE ROOT MODEL
+        const objLoader2 = new this.THREE.OBJLoader();
+        objLoader2.crossOrigin = '';
+        objLoader2.load(OBJCaseRootModel, (caseRootModel) => {
+            // ADD MATERIALS
+            caseRootModel.traverse(function (child) {
+                if (child instanceof THREE.Mesh) {
+                    child.material = materialWhite;
+                }
+            });
+            this.scene.add(caseRootModel);
+            caseRootModel.position.y -= 40;
+            caseRootModel.rotateY(-1.5708);
+            caseRootModel.name = "caseRootModel";
+        })
+    }
+
+    createSecondModel() {
+        //DEFINE MATERIALS 
+        var materialWhite = new THREE.MeshPhongMaterial({ color: 0xffffff, opacity: 1, transparent: true })
+
+        //BASE SIMULATION MODEL
+        const objLoader3 = new this.THREE.OBJLoader();
+        objLoader3.crossOrigin = '';
+        objLoader3.load(OBJBaseRootModel, (baseSimulationModel) => {
+            //ADD MATERIALS
+            baseSimulationModel.traverse(function (child) {
+                if (child instanceof THREE.Mesh) {
+                    child.material = materialWhite;
+                }
+            });
+            this.scene.add(baseSimulationModel);
+            baseSimulationModel.position.y -= 40;
+            baseSimulationModel.position.x -= 40;
+            baseSimulationModel.rotateY(-1.5708);
+            baseSimulationModel.name = "baseSimulationModel";
+        })
+
+        //BLADES SIMULATION MODEL
+        const objLoader4 = new this.THREE.OBJLoader();
+        objLoader4.crossOrigin = '';
+        objLoader4.load(OBJBladesRootModel, (bladesSimulationModel) => {
+            //ADD MATERIALS
+            bladesSimulationModel.name = "object4";
+            bladesSimulationModel.traverse(function (child) {
+                if (child instanceof THREE.Mesh) {
+                    child.material = materialWhite;
+                }
+            });
+            this.bottomParentBladesSimulationModel = new THREE.Object3D();
+            this.bottomParentBladesSimulationModel.name = "bottomParentBladesSimulationModel";
+            bladesSimulationModel.position.y -= 44.3;
+            bladesSimulationModel.position.x -= 40;
+            bladesSimulationModel.rotateY(-1.5708);
+            this.bottomParentBladesSimulationModel.add(bladesSimulationModel);
+            this.bottomParentBladesSimulationModel.position.y += 4.3;
+
+            this.bottomParentBladesSimulationModel.rotateY(1.5708);
+            //this.bottomParentBladesRootModel.add(new THREE.AxesHelper(20));
+            this.topParentBladesSimulationModel = new THREE.Object3D();
+            this.topParentBladesSimulationModel.name = "topParentBladesSimulationModel";
+            this.topParentBladesSimulationModel.add(this.bottomParentBladesSimulationModel);
+            this.topParentBladesSimulationModel.rotateY(-1.5708);
+
+            this.scene.add(this.topParentBladesSimulationModel);
+            this.loaded = true;
+        })
+
+        //CASE SIMULATION MODEL
+        const objLoader5 = new this.THREE.OBJLoader();
+        objLoader5.crossOrigin = '';
+        objLoader5.load(OBJCaseRootModel, (caseSimulationModel) => {
+            //ADD MATERIALS
+            caseSimulationModel.name = "caseSimulationModel";
+            caseSimulationModel.traverse(function (child) {
+                if (child instanceof THREE.Mesh) {
+                    child.material = materialWhite;
+                }
+            });
+            this.scene.add(caseSimulationModel);
+            caseSimulationModel.position.y -= 40;
+            caseSimulationModel.position.x -= 40;
+            caseSimulationModel.rotateY(-1.5708);
+        })
     }
 
     resetPosition() {
         var destination = new THREE.Vector3(0, -40, 0);
-        this.head = this.scene.getObjectByName("Ueberbau");
+        this.head = this.scene.getObjectByName("caseRootModel");
         new TWEEN.Tween(this.head.position)
-            .to(destination, 1500) // destinationPoint is the object of destination
+            .to(destination, 1500)
             .start()
             .easing(TWEEN.Easing.Cubic.InOut)
-        console.log("reset");
     }
 
     showWindmill() {
         this.tween.start();
     }
 
-    //showSimulation() {
-    //    this.tweenCamera.start();
-    //}
+    deleteModel() {
+        this.baseSimulationModel = this.scene.getObjectByName("baseSimulationModel");
+        this.bladesSimulationModel = this.scene.getObjectByName("bladesSimulationModel");
+        this.caseSimulationModel = this.scene.getObjectByName("caseSimulationModel");
+        this.bottomParentBladesSimulationModel = this.scene.getObjectByName("bottomParentBladesSimulationModel");
+        this.topParentBladesSimulationModel = this.scene.getObjectByName("topParentBladesSimulationModel");
+        this.scene.remove(this.baseSimulationModel);
+        this.scene.remove(this.bladesSimulationModel);
+        this.scene.remove(this.caseSimulationModel);
+        this.scene.remove(this.bottomParentBladesSimulationModel);
+        this.scene.remove(this.topParentBladesSimulationModel);
+    }
+
+    // ------------------------------------------ THREE.JS FUNCTIONS ----------------------------------------------
+
+    componentWillUnmount() {
+        this.stop()
+        this.mount.removeChild(this.renderer.domElement)
+    }
+
+    start = () => {
+        if (!this.frameId) {
+            this.frameId = requestAnimationFrame(this.animate)
+        }
+    }
+
+    stop = () => {
+        cancelAnimationFrame(this.frameId)
+    }
 
     animate = () => {
-        //console.log(this.initRotationLoop);
         TWEEN.update();
+
+        //TURNING BLADES OF ROOT MODEL
         if (this.loaded) {
-            this.parentBladesBottom.rotateZ(this.speedRotationBlades);
+            this.bottomParentBladesRootModel.rotateZ(this.speedRotationBlades);
         }
-        this.headBody = this.scene.getObjectByName("windrad");
-        this.head = this.scene.getObjectByName("Ueberbau");
+
+        //TURNING HEAD OF ROOT MODEL
+        this.baseRootModel = this.scene.getObjectByName("baseRootModel");
+        this.caseRootModel = this.scene.getObjectByName("caseRootModel");
         if (this.initRotationLoop < this.stopRotationLoop) {
-            this.headBody.rotateY(this.speedRotationHead);
-            this.head.rotateY(this.speedRotationHead);
-            this.parentBladesTop.rotateY(this.speedRotationHead);
+            this.baseRootModel.rotateY(this.speedRotationHead);
+            this.caseRootModel.rotateY(this.speedRotationHead);
+            this.topParentBladesRootModel.rotateY(this.speedRotationHead);
             this.initRotationLoop++;
         }
-        //this.head.translateY(this.newPositionHead);
+
         this.renderScene()
         this.frameId = window.requestAnimationFrame(this.animate)
     }
