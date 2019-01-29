@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
 import * as THREE from 'three';
 import * as OBJLoader from 'three-obj-loader';
-import OBJ from './objects/Windrad_base_kopf.obj';
-import OBJ1 from './objects/Windrad_flügel.obj';
+import OBJ from './objects/Base.obj';
+import OBJ1 from './objects/Propeller.obj';
+import OBJ2 from './objects/Ueberbau.obj';
 import MAT from './objects/Windrad_base_kopf.mtl';
 import TWEEN from 'tween'
 
@@ -105,7 +106,7 @@ class ThreeScene extends Component {
 
             this.scene.add(object0);
             object0.position.y -= 40;
-            object0.rotateY(-0.785);
+            object0.rotateY(-1.5708);
             object0.name = "windrad";
 
         })
@@ -123,17 +124,37 @@ class ThreeScene extends Component {
             });
 
             this.parentBladesBottom = new THREE.Object3D();
-            object.position.y -= 43;
-            object.rotateY(-0.785);
+            object.position.y -= 44.3;
+            object.rotateY(-1.5708);
             this.parentBladesBottom.add(object);
-            this.parentBladesBottom.position.y += 3;
-            this.parentBladesBottom.rotateY(0.785);
+            this.parentBladesBottom.position.y += 4.3;
+            this.parentBladesBottom.rotateY(1.5708);
+            //this.parentBladesBottom.add(new THREE.AxesHelper(20));
             this.parentBladesTop = new THREE.Object3D();
             this.parentBladesTop.add(this.parentBladesBottom);
-            this.parentBladesTop.rotateY(-0.785);
+            this.parentBladesTop.rotateY(-1.5708);
             this.scene.add(this.parentBladesTop);
             this.loaded = true;
             console.log("hi" + this.loaded);
+        })
+
+
+        const objLoader2 = new this.THREE.OBJLoader();
+        objLoader2.crossOrigin = '';
+        objLoader2.load(OBJ2, (object1) => {
+
+            // adding Material
+            object1.traverse(function (child) {
+                if (child instanceof THREE.Mesh) {
+                    child.material = materialWhite;
+                }
+            });
+
+            this.scene.add(object1);
+            object1.position.y -= 40;
+            object1.rotateY(-1.5708);
+            object1.name = "Ueberbau";
+
         })
 
 
@@ -177,8 +198,10 @@ class ThreeScene extends Component {
             this.parentBladesBottom.rotateZ(this.speedRotationBlades);
         }
         this.headBody = this.scene.getObjectByName("windrad");
+        this.head = this.scene.getObjectByName("Ueberbau");
         if (this.initRotationLoop < this.stopRotationLoop) {
             this.headBody.rotateY(this.speedRotationHead);
+            this.head.rotateY(this.speedRotationHead);
             this.parentBladesTop.rotateY(this.speedRotationHead);
             this.initRotationLoop++;
         }
