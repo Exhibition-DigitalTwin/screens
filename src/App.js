@@ -54,7 +54,7 @@ const ledOpacityOff = 0.2;
 
 const h1Style = {
   position: 'absolute',
-  lineHeight: '73px',
+  lineHeight: '80px',
   color: textColorNormal,
   left: distanceFromSide * 7,
   top: distanceFromSide * 4,
@@ -79,7 +79,7 @@ const pStyle = {
   lineHeight: textLineHeightNormal + 'px',
   color: textColorNormal,
   left: distanceFromSide * 7,
-  bottom: distanceFromSide * 7 - 40,
+  top: distanceFromSide * 10+27,
   fontSize: textFontNormal + 'px',
   width: '20%',
   textAlign: 'left',
@@ -90,7 +90,7 @@ const pExpertStyle = {
   lineHeight: textLineHeightNormal + 'px',
   color: textColorNormal,
   left: distanceFromSide * 21,
-  bottom: distanceFromSide * 7 - 40,
+  top: distanceFromSide * 10+27,
   fontSize: textFontNormal + 'px',
   width: '20%',
   textAlign: 'left',
