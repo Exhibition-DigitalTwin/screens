@@ -742,7 +742,7 @@ class App extends React.Component {
             <Fade in={showScreensaverBasic} timeout={{ enter: fadeTimeBasicIn, exit: fadeTimeBasicOut }} mountOnEnter={true} unmountOnExit={true}>
               <div className="aufbauNormal">
                 <h1 className='p1' style={h1Style}>Digitaler Zwilling</h1>
-                <p className='p1' style={pStyle}>
+                <p className='p1' style={{...pStyle, ...{top:690}}}>
                   Das Konzept des digitalen Zwillings setzt drei Dinge voraus:<br /><br />
                   Es gibt ein physisches Objekt in
                   der realen Welt, ein virtuelles Objekt in der virtuellen Welt und die Verbindung der beiden durch Daten und Informationen.</p>
