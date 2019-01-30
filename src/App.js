@@ -753,13 +753,13 @@ class App extends React.Component {
             */}
             <Fade in={showAufbauBasic} timeout={{ enter: fadeTimeBasicIn, exit: fadeTimeBasicOut }} mountOnEnter={true} unmountOnExit={true}>
               <div className="aufbauNormal">
-              <div style={{ position: "absolute", bottom: "170px", left: "205px", width: "340px"}}>
-              <Slider value={valueSlider} onChange={this.handleChangeSlider} style={{padding: '22px 0px'}} max={20} size="medium"/>
-              </div>
                 <h2 className='p1' style={{...h2Style, ...{opacity:contentOpacity}}}>Aufbau</h2>
                 <p className='p1' style={{...pStyle, ...{opacity:contentOpacity}}}>
                   Zunächst  werden 3D Modelle aller Elemente angefertigt und zusammengefügt.<br /><br />
                   Der digitale Zwilling besitzt die selben strukturellen Charakteristika wie das Windrad der physischen Welt und ist im Idealfall nicht von seinem physischen Gegenstück zu unterscheiden.</p>
+                <div style={{ position: "absolute", bottom: "170px", left: "225px", width: "320px"}}>
+                  <Slider value={valueSlider} onChange={this.handleChangeSlider} style={{padding: '22px 0px'}} max={20} size="medium"/>
+                </div>
               </div>
             </Fade>
             {/* 
