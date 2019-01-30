@@ -85,6 +85,14 @@ const pStyle = {
   textAlign: 'left',
 };
 
+const menuPointButtonStyle = {
+  position: 'absolute',
+  color: textColorNormal,
+  left: distanceFromSide * 7-5,
+  bottom: distanceFromSide * 7 - 40,
+  fontSize: textFontNormal + 'px',
+};
+
 const pExpertStyle = {
   position: 'absolute',
   lineHeight: textLineHeightNormal + 'px',
@@ -718,7 +726,7 @@ class App extends React.Component {
                   Um von einem digitalen Zwilling signifikante Vorteile zu ziehen, müssen der physische und der virtuelle Part miteinander verbunden sein.<br /><br />
                   Das <span style={{...expertStyleToEnter, ...{opacity: 1, color: "#FFFFFF"}}} onClick={this.handleClickShowData("showDatenExpert1")}>Internet der Dinge</span> ermöglicht es real existierenden Objekten mittels <span style={expertStyleToEnter}>Sensoren</span> 
                    Daten zum eigenen, aktuellen Zustand in einer <span style={expertStyleToEnter}>Cloud</span> zu sammeln und weiterzugeben. Diese Informationen fließen in das digitale Modell ein.</p>
-                   <Button className='n1' style={{ position: 'absolute', left: 300, top: 300, fontSize: '20px' }} onClick={() => { this._three.startRotation()}}>Starte Datentransfer</Button>        
+                   <Button className='n1' style={menuPointButtonStyle} onClick={() => { this._three.startRotation()}}>Starte Datentransfer</Button>        
               </div>
             </Fade>
             <Fade in={showDatenExpert1} timeout={{ enter: fadeTimeBasicIn, exit: fadeTimeBasicOut }} mountOnEnter={true} unmountOnExit={true}>
@@ -738,7 +746,7 @@ class App extends React.Component {
                   Das große Potential des digitalen Zwillings besteht darin, dass jeder Zustand eines physischen Produkts  mit dem virtuellen Prozess überlagert und verglichen werden
                   kann. Der finale Schritt besteht deshalb darin, die Informationen des Datenspeichers in eine Simulation des Windrades einzubinden.<br /><br />
                   In dieser Simulation können unterschiedliche Faktoren virtuell ausprobiert und deren Einfluss berechnet werden.</p>
-                  <Button className='n1' style={{ position: 'absolute', left: 300, top: 300, fontSize: '20px' }} onClick={() => { this._three.moveCamera(-50, 15, 700); this._three.showSecondModel();}}>Starte Simulation</Button>        
+                  <Button className='n1' style={menuPointButtonStyle} onClick={() => { this._three.moveCamera(-50, 15, 700); this._three.showSecondModel();}}>Starte Simulation</Button>        
 
               </div>
             </Fade>
@@ -748,7 +756,7 @@ class App extends React.Component {
             <Fade in={showAnwendungenBasic} timeout={{ enter: fadeTimeBasicIn, exit: fadeTimeBasicOut }} mountOnEnter={true} unmountOnExit={true}>
               <div className="aufbauNormal">
                 <h2 className='p1' style={h2Style}>Anwendungen</h2>
-                <Button className='n1' style={{ position: 'absolute', left: 300, top: 300, fontSize: '20px' }} onClick={() => { window.location.reload()}}>Reload</Button>        
+                <Button className='n1' style={menuPointButtonStyle} onClick={() => { window.location.reload()}}>Reload</Button>        
               </div>
             </Fade>
             {/* 
