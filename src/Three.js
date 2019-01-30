@@ -4,6 +4,10 @@ import * as OBJLoader from 'three-obj-loader';
 import OBJBaseRootModel from './objects/Base.obj';
 import OBJBladesRootModel from './objects/Propeller.obj';
 import OBJCaseRootModel from './objects/Ueberbau.obj';
+import OBJWing1RootModel from './objects/Flügel_1.obj';
+import OBJWing2RootModel from './objects/Flügel_2.obj';
+import OBJWing3RootModel from './objects/Flügel_3.obj';
+import OBJHubRootModel from './objects/Nabe.obj';
 import TWEEN from 'tween'
 
 OBJLoader(THREE);
@@ -24,6 +28,8 @@ class ThreeScene extends Component {
 
         this.rootPositionHead = -40;
         this.newPositionHead = -40;
+
+        this.rotation = false;
 
         //ADD SCENE
         this.scene = new THREE.Scene()
@@ -98,6 +104,7 @@ class ThreeScene extends Component {
     changePositionHead(valueSlider) {
         this.head = this.scene.getObjectByName("caseRootModel");
         this.head.position.y = this.rootPositionHead + valueSlider;
+        this.bottomParentBladesRootModel.position.z = 0 + valueSlider;
     }
 
     moveCamera(x, y, z) {
@@ -135,24 +142,97 @@ class ThreeScene extends Component {
             baseRootModel.name = "baseRootModel";
         })
 
+        const objLoader10 = new this.THREE.OBJLoader();
+        objLoader10.crossOrigin = '';
+        objLoader10.load(OBJWing1RootModel, (wing) => {
+            // ADD MATERIALS
+            //bladesRootModel.add(new THREE.AxesHelper(20));
+            wing.traverse(function (child) {
+                if (child instanceof THREE.Mesh) {
+                    child.material = materialWhite;
+                }
+            });
+            wing.name = "Wing1";
+            wing.position.y -= 44.3;
+            wing.rotateY(-1.5708);
+            this.scene.add(wing);
+        })
+
+        const objLoader11 = new this.THREE.OBJLoader();
+        objLoader11.crossOrigin = '';
+        objLoader11.load(OBJWing2RootModel, (wing) => {
+            // ADD MATERIALS
+            //bladesRootModel.add(new THREE.AxesHelper(20));
+            wing.traverse(function (child) {
+                if (child instanceof THREE.Mesh) {
+                    child.material = materialWhite;
+                }
+            });
+            wing.name = "Wing2";
+            wing.position.y -= 44.3;
+            wing.rotateY(-1.5708);
+            this.scene.add(wing);
+        })
+
+        const objLoader12 = new this.THREE.OBJLoader();
+        objLoader12.crossOrigin = '';
+        objLoader12.load(OBJWing3RootModel, (wing) => {
+            // ADD MATERIALS
+            //wing.add(new THREE.AxesHelper(20));
+            wing.traverse(function (child) {
+                if (child instanceof THREE.Mesh) {
+                    child.material = materialWhite;
+                }
+            });
+            wing.name = "Wing3";
+            wing.position.y -= 44.3;
+            wing.rotateY(-1.5708);
+            this.scene.add(wing);
+            
+        })
+
+        const objLoader13 = new this.THREE.OBJLoader();
+        objLoader13.crossOrigin = '';
+        objLoader13.load(OBJHubRootModel, (hub) => {
+            // ADD MATERIALS
+            //bladesRootModel.add(new THREE.AxesHelper(20));
+            hub.traverse(function (child) {
+                if (child instanceof THREE.Mesh) {
+                    child.material = materialWhite;
+                }
+            });
+            hub.name = "Hub";
+            hub.position.y -= 44.3;
+            hub.rotateY(-1.5708);
+            this.scene.add(hub);
+        })
+
+       
+
+
+
         //BLADES ROOT MODEL
         const objLoader1 = new this.THREE.OBJLoader();
         objLoader1.crossOrigin = '';
         objLoader1.load(OBJBladesRootModel, (bladesRootModel) => {
             // ADD MATERIALS
-            //bladesRootModel.add(new THREE.AxesHelper(20));
             bladesRootModel.traverse(function (child) {
                 if (child instanceof THREE.Mesh) {
                     child.material = materialWhite;
                 }
             });
+            this.hub = this.scene.getObjectByName("Hub");
+            this.wing1 = this.scene.getObjectByName("Wing1");
+            this.wing2 = this.scene.getObjectByName("Wing2");
+            this.wing3 = this.scene.getObjectByName("Wing3");
             this.bottomParentBladesRootModel = new THREE.Object3D();
-            bladesRootModel.position.y -= 44.3;
-            bladesRootModel.rotateY(-1.5708);
-            this.bottomParentBladesRootModel.add(bladesRootModel);
+            this.bottomParentBladesRootModel.add(this.hub);
+            this.bottomParentBladesRootModel.add(this.wing1);
+            this.bottomParentBladesRootModel.add(this.wing2);
+            this.bottomParentBladesRootModel.add(this.wing3);
             this.bottomParentBladesRootModel.position.y += 4.3;
             this.bottomParentBladesRootModel.rotateY(1.5708);
-            //this.bottomParentBladesRootModel.add(new THREE.AxesHelper(20));
+            this.bottomParentBladesRootModel.add(new THREE.AxesHelper(20));
             this.topParentBladesRootModel = new THREE.Object3D();
             //this.topParentBladesRootModel.add(new THREE.AxesHelper(20));
             this.topParentBladesRootModel.add(this.bottomParentBladesRootModel);
@@ -303,6 +383,10 @@ class ThreeScene extends Component {
         this.deletedSimulation = true;
     }
 
+    startRotation() {
+        this.rotation = true;
+    }
+
     // ------------------------------------------ THREE.JS FUNCTIONS ----------------------------------------------
 
     componentWillUnmount() {
@@ -324,11 +408,11 @@ class ThreeScene extends Component {
         TWEEN.update();
 
         //TURNING BLADES OF ROOT MODEL
-        if (this.loadedSimulation === true && this.deletedSimulation === false) {
+        if (this.loadedSimulation === true && this.deletedSimulation === false && this.rotation === true) {
             this.bottomParentBladesRootModel.rotateZ(this.speedRotationBlades);
             this.bottomParentBladesSimulationModel.rotateZ(this.speedRotationBlades);
         }
-        else if (this.loadedSimulation === true){
+        else if (this.loadedSimulation === true && this.rotation === true){
             this.bottomParentBladesRootModel.rotateZ(this.speedRotationBlades);
         }
 
