@@ -10,8 +10,6 @@ import deepOrange from '@material-ui/core/colors/deepOrange';
 import Button from '@material-ui/core/Button';
 import Fade from '@material-ui/core/Fade';
 import Collapse from '@material-ui/core/Collapse';
-import { easeExpOut } from 'd3-ease';
-import Animate from 'react-move/Animate';
 import SvgIcon from '@material-ui/core/SvgIcon';
 import Fab from '@material-ui/core/Fab';
 import Websocket from 'react-websocket';
@@ -253,7 +251,7 @@ class App extends React.Component {
     // LEDs
     currentLedOn: 0,
     showLEDs: true,
-    ledsMoving: 1, // 1 up, 2 down
+    ledsMoving: 0, // 0 off, 1 up, 2 down
     ledColor1: '#191919',
     ledColor2: '#191919',
     ledColor3: '#191919',
@@ -495,7 +493,6 @@ class App extends React.Component {
   };
 
   runLedStrip = () => {
-    console.log(this.state.ledColor1);
     if (this.state.ledsMoving === 1) { // up
       switch(this.state.currentLedOn)
       {
@@ -551,7 +548,11 @@ class App extends React.Component {
         default: this.setState({ ledsMoving: 0 }, () => this.callback()); break;
       }
     } else {
-      this.setState({ ledColor1: ledColorOff, ledColor2: ledColorOff, ledColor3: ledColorOff, ledColor4: ledColorOff, ledColor5: ledColorOff, ledColor6: ledColorOff, ledColor7: ledColorOff, ledColor8: ledColorOff, ledColor9: ledColorOff, ledColor10: ledColorOff, ledColor11: ledColorOff, ledColor12: ledColorOff, ledColor13: ledColorOff, ledColor14: ledColorOff, ledColor15: ledColorOff, ledColor16: ledColorOff, ledColor17: ledColorOff, ledColor18: ledColorOff, ledColor19: ledColorOff, ledColor20: ledColorOff, ledShadowSize1: ledShadowOff, ledShadowSize2: ledShadowOff, ledShadowSize3: ledShadowOff, ledShadowSize4: ledShadowOff, ledShadowSize5: ledShadowOff, ledShadowSize6: ledShadowOff, ledShadowSize7: ledShadowOff, ledShadowSize8: ledShadowOff, ledShadowSize9: ledShadowOff, ledShadowSize10: ledShadowOff, ledShadowSize11: ledShadowOff, ledShadowSize12: ledShadowOff, ledShadowSize13: ledShadowOff, ledShadowSize14: ledShadowOff, ledShadowSize15: ledShadowOff, ledShadowSize16: ledShadowOff, ledShadowSize17: ledShadowOff, ledShadowSize18: ledShadowOff, ledShadowSize19: ledShadowOff, ledShadowSize20: ledShadowOff, currentLedOn: 0 }, () => this.callback());
+      this.setState({ 
+        ledColor1: ledColorOff, ledColor2: ledColorOff, ledColor3: ledColorOff, ledColor4: ledColorOff, ledColor5: ledColorOff, ledColor6: ledColorOff, ledColor7: ledColorOff, ledColor8: ledColorOff, ledColor9: ledColorOff, ledColor10: ledColorOff, ledColor11: ledColorOff, ledColor12: ledColorOff, ledColor13: ledColorOff, ledColor14: ledColorOff, ledColor15: ledColorOff, ledColor16: ledColorOff, ledColor17: ledColorOff, ledColor18: ledColorOff, ledColor19: ledColorOff, ledColor20: ledColorOff, 
+        ledShadowSize1: ledShadowOff, ledShadowSize2: ledShadowOff, ledShadowSize3: ledShadowOff, ledShadowSize4: ledShadowOff, ledShadowSize5: ledShadowOff, ledShadowSize6: ledShadowOff, ledShadowSize7: ledShadowOff, ledShadowSize8: ledShadowOff, ledShadowSize9: ledShadowOff, ledShadowSize10: ledShadowOff, ledShadowSize11: ledShadowOff, ledShadowSize12: ledShadowOff, ledShadowSize13: ledShadowOff, ledShadowSize14: ledShadowOff, ledShadowSize15: ledShadowOff, ledShadowSize16: ledShadowOff, ledShadowSize17: ledShadowOff, ledShadowSize18: ledShadowOff, ledShadowSize19: ledShadowOff, ledShadowSize20: ledShadowOff, 
+        ledOpacity1: ledOpacityOff, ledOpacity2: ledOpacityOff, ledOpacity3: ledOpacityOff, ledOpacity4: ledOpacityOff, ledOpacity5: ledOpacityOff, ledOpacity6: ledOpacityOff, ledOpacity7: ledOpacityOff, ledOpacity8: ledOpacityOff, ledOpacity9: ledOpacityOff, ledOpacity10: ledOpacityOff, ledOpacity11: ledOpacityOff, ledOpacity12: ledOpacityOff, ledOpacity13: ledOpacityOff, ledOpacity14: ledOpacityOff, ledOpacity15: ledOpacityOff, ledOpacity16: ledOpacityOff, ledOpacity17: ledOpacityOff, ledOpacity18: ledOpacityOff, ledOpacity19: ledOpacityOff, ledOpacity20: ledOpacityOff, 
+        currentLedOn: 0 }, () => this.callback());
     }
   }
 
@@ -576,11 +577,11 @@ class App extends React.Component {
   }
 
   handleOpen() {
-    console.log("connected");
+    console.log("ws connected");
   };
 
   handleClose() {
-    console.log("disconnected");
+    console.log("ws disconnected");
   };
 
   sendMessage(message) {
@@ -605,22 +606,6 @@ class App extends React.Component {
               name="viewport"
               content="minimum-scale=1, initial-scale=1, width=device-width, shrink-to-fit=no"
             />
-            {/*<div className="MOVEANIMATION">
-              <button onClick={this.handleClick} > Toggle </button>
-              <Animate start={() => ({ x: 0, })} update={() => ({ x: [this.state.open ? 200 : 0], timing: { duration: 750, ease: easeExpOut }, })} >
-                {(state) => {
-                  const { x } = state
-                  return (
-                    <div>
-                      <div
-                        style={{
-                          position: 'absolute', width: 50, height: 50, borderRadius: 4, opacity: 0.7, backgroundColor: '#00cf77', WebkitTransform: `translate3d(${x}px, 0, 0)`, transform: `translate3d(${x}px, 0, 0)`,
-                        }} />
-                    </div>
-                  )
-                }}
-              </Animate>
-            </div>*/}
             <Three ref={(three) => { this._three = three; }} />
             {/* 
             MENU 
@@ -733,6 +718,7 @@ class App extends React.Component {
                   Um von einem digitalen Zwilling signifikante Vorteile zu ziehen, müssen der physische und der virtuelle Part miteinander verbunden sein.<br /><br />
                   Das <span style={{...expertStyleToEnter, ...{opacity: 1, color: "#FFFFFF"}}} onClick={this.handleClickShowData("showDatenExpert1")}>Internet der Dinge</span> ermöglicht es real existierenden Objekten mittels <span style={expertStyleToEnter}>Sensoren</span> 
                    Daten zum eigenen, aktuellen Zustand in einer <span style={expertStyleToEnter}>Cloud</span> zu sammeln und weiterzugeben. Diese Informationen fließen in das digitale Modell ein.</p>
+                   <Button className='n1' style={{ position: 'absolute', left: 300, top: 300, fontSize: '20px' }} onClick={() => { console.log("Daten")}}>Starte Datentransfer</Button>        
               </div>
             </Fade>
             <Fade in={showDatenExpert1} timeout={{ enter: fadeTimeBasicIn, exit: fadeTimeBasicOut }} mountOnEnter={true} unmountOnExit={true}>
