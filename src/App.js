@@ -215,6 +215,7 @@ class App extends React.Component {
   state = {
     // 0 Screensaver, 1 Aufbau, 2 Daten, 3 Simulation, 4 Anwendungen
     actualState: 0,
+    actualStateFade: 0,
     lastState: 0,
     started: false,
     time: 0,
@@ -338,6 +339,12 @@ class App extends React.Component {
     fadeMenu2Daten: false,
     fadeMenu3Simulation: false,
     fadeMenu4Anwendung: false,
+
+    fadeStartData: false,
+    fadeStartSimulation: false,
+    fadeReload: false,
+    fadeStartDataDisable: false,
+    fadeStartSimulationDisable: false,
   };
 
   componentDidMount() {
@@ -379,56 +386,161 @@ class App extends React.Component {
   }
 
   handleFadeActive() {
-    
-    if(Date.now() - this.state.interval >= this.state.time) {
-      this.setState({ time: Date.now() })
-      console.log(this.state.time);
-    }
-    switch (this.state.actualState) {
+    switch (this.state.actualStateFade) { //actualStateFade
       // screensaver
       case 0:
         this.setState({
-        fadeMenu1Aufbau: true,
-        fadeMenu2Daten: false,
-        fadeMenu3Simulation: false,
-        fadeMenu4Anwendung: false,
+          fadeReload: false,
         })
         break;
       case 1:
         this.setState({
-        fadeMenu1Aufbau: false,
-        fadeMenu2Daten: true,
-        fadeMenu3Simulation: false,
-        fadeMenu4Anwendung: false,
+          fadeMenu1Aufbau: false,
         })
         break;
       case 2:
         this.setState({
-        fadeMenu1Aufbau: false,
-        fadeMenu2Daten: false,
-        fadeMenu3Simulation: true,
-        fadeMenu4Anwendung: false,
+          fadeMenu2Daten: false,
         })
         break;
       case 3:
         this.setState({
-          fadeMenu1Aufbau: false,
-          fadeMenu2Daten: false,
-          fadeMenu3Simulation: false,
-          fadeMenu4Anwendung: true,
+          fadeStartData: false,
         })
         break;
       case 4:
         this.setState({
-          fadeMenu1Aufbau: false,
-          fadeMenu2Daten: false,
           fadeMenu3Simulation: false,
+        })
+        break;
+      case 5:
+        this.setState({
+          fadeStartSimulation: false,
+        })
+        break;
+      case 6:
+        this.setState({
           fadeMenu4Anwendung: false,
         })
         break;
       default: 
         console.log("wrong "+this.state.actualState);
         break;
+      }
+    if(Date.now() - this.state.interval >= this.state.time) {
+      this.setState({ time: Date.now() })
+      console.log(this.state.time);
+
+    switch (this.state.actualStateFade) {
+      case 0: // Aufbau (Menu)
+        this.setState({
+          fadeMenu1Aufbau: true,
+          fadeMenu2Daten: false,
+          fadeStartData: false,
+          fadeMenu3Simulation: false,
+          fadeStartSimulation: false,
+          fadeMenu4Anwendung: false,
+          fadeReload: false,
+          menu1AufbauDisabled: false,
+          menu2DatenDisabled: true,
+          menu3SimulationDisabled: true,
+          menu4AnwendungenDisabled: true,
+        })
+        break;
+      case 1: // Daten (Menu)
+        this.setState({
+          fadeMenu1Aufbau: false,
+          fadeMenu2Daten: true,
+          fadeStartData: false,
+          fadeMenu3Simulation: false,
+          fadeStartSimulation: false,
+          fadeMenu4Anwendung: false,
+          fadeReload: false,
+          menu1AufbauDisabled: false,
+          menu2DatenDisabled: false,
+          menu3SimulationDisabled: true,
+          menu4AnwendungenDisabled: true,
+        })
+        break;
+      case 2: // start data transfer
+        this.setState({
+          fadeMenu1Aufbau: false,
+          fadeMenu2Daten: false,
+          fadeStartData: true,
+          fadeMenu3Simulation: false,
+          fadeStartSimulation: false,
+          fadeMenu4Anwendung: false,
+          fadeReload: false,
+          menu1AufbauDisabled: false,
+          menu2DatenDisabled: false,
+          menu3SimulationDisabled: true,
+          menu4AnwendungenDisabled: true,
+        })
+        break;
+      case 3: // Simulation (Menu)
+        this.setState({
+          fadeMenu1Aufbau: false,
+          fadeMenu2Daten: false,
+          fadeStartData: false,
+          fadeMenu3Simulation: true,
+          fadeStartSimulation: false,
+          fadeMenu4Anwendung: false,
+          fadeReload: false,
+          menu1AufbauDisabled: true,
+          menu2DatenDisabled: false,
+          menu3SimulationDisabled: false,
+          menu4AnwendungenDisabled: true,
+        })
+        break;
+      case 4: // start simulation
+        this.setState({
+          fadeMenu1Aufbau: false,
+          fadeMenu2Daten: false,
+          fadeStartData: false,
+          fadeMenu3Simulation: false,
+          fadeStartSimulation: true,
+          fadeMenu4Anwendung: false,
+          fadeReload: false,
+          menu1AufbauDisabled: true,
+          menu2DatenDisabled: false,
+          menu3SimulationDisabled: false,
+          menu4AnwendungenDisabled: true,
+        })
+        break;
+      case 5: // Anwendungen (Menu)
+        this.setState({
+          fadeMenu1Aufbau: false,
+          fadeMenu2Daten: false,
+          fadeStartData: false,
+          fadeMenu3Simulation: false,
+          fadeStartSimulation: false,
+          fadeMenu4Anwendung: true,
+          fadeReload: false,
+          menu1AufbauDisabled: true,
+          menu2DatenDisabled: true,
+          menu3SimulationDisabled: false,
+          menu4AnwendungenDisabled: false,
+          menu1AufbauDisabled: true,
+          menu2DatenDisabled: true,
+          menu3SimulationDisabled: false,
+          menu4AnwendungenDisabled: false,
+        })
+        break;
+      case 6: // reload
+        this.setState({
+          fadeMenu1Aufbau: false,
+          fadeMenu2Daten: false,
+          fadeStartData: false,
+          fadeMenu3Simulation: false,
+          fadeStartSimulation: false,
+          fadeMenu4Anwendung: false,
+          fadeReload: true,
+        })
+        break;
+      default: 
+        console.log("wrong "+this.state.actualState);
+        break;
+      }
     }
   }
 
@@ -439,20 +551,20 @@ class App extends React.Component {
 
   handleClickShowData = param => e => {
     if (param === "screensaver") {
-      this.setState({ actualState: 0 }, () => this.callback());
+      this.setState({ actualState: 0, actualStateFade: 0, time: Date.now() }, () => this.callback());
     } else if (param === "aufbau") {
-      this.setState({ actualState: 1 }, () => this.callback());
+      this.setState({ actualState: 1, actualStateFade: 1, time: Date.now() }, () => this.callback());
       this._three.showWindmill();
       this.runLedStrip();
     } else if (param === "daten") {
       this._three.resetPosition();
-      this.setState({ actualState: 2 }, () => this.callback());
+      this.setState({ actualState: 2, actualStateFade: 3, menu1AufbauDisabled: true, time: Date.now() }, () => this.callback());
     } else if (param === "simulation") {
-      this.setState({ actualState: 3 }, () => this.callback());
+      this.setState({ actualState: 3, actualStateFade: 5, menu2DatenDisabled: true, time: Date.now() }, () => this.callback());
     } else if (param === "anwendungen") {
       this._three.deleteModel();
       this._three.moveCamera(-29, 15, 500);
-      this.setState({ actualState: 4 }, () => this.callback());
+      this.setState({ actualState: 4, actualStateFade: 6, menu3SimulationDisabled: true, time: Date.now() }, () => this.callback());
     } else if (param === "showDatenExpert1") {
       this.setState({ showDatenExpert1: true, showDisableExpertDiv: true, contentFadedOut: false });
     } else if (param === "showDatenExpert2") {
@@ -525,10 +637,6 @@ class App extends React.Component {
           showLine1: false,
           showLine2: false,
           showLine3: false,
-          menu1AufbauDisabled: false,
-          menu2DatenDisabled: true,
-          menu3SimulationDisabled: true,
-          menu4AnwendungenDisabled: true,
           contentOpacity: 1,
           showDisableExpertDiv: false,
         });
@@ -551,10 +659,6 @@ class App extends React.Component {
           showLine1: false,
           showLine2: false,
           showLine3: false,
-          menu1AufbauDisabled: false,
-          menu2DatenDisabled: false,
-          menu3SimulationDisabled: true,
-          menu4AnwendungenDisabled: true,
           contentOpacity: 1,
           showDisableExpertDiv: false,
         });
@@ -577,10 +681,6 @@ class App extends React.Component {
           showLine1: true,
           showLine2: false,
           showLine3: false,
-          menu1AufbauDisabled: true,
-          menu2DatenDisabled: false,
-          menu3SimulationDisabled: false,
-          menu4AnwendungenDisabled: true,
           contentOpacity: 1,
           showDisableExpertDiv: false,
         });
@@ -603,10 +703,6 @@ class App extends React.Component {
           showLine1: true,
           showLine2: true,
           showLine3: false,
-          menu1AufbauDisabled: true,
-          menu2DatenDisabled: true,
-          menu3SimulationDisabled: false,
-          menu4AnwendungenDisabled: false,
           contentOpacity: 1,
           showDisableExpertDiv: false,
         });
@@ -629,10 +725,6 @@ class App extends React.Component {
           showLine1: true,
           showLine2: true,
           showLine3: true,
-          menu1AufbauDisabled: true,
-          menu2DatenDisabled: true,
-          menu3SimulationDisabled: true,
-          menu4AnwendungenDisabled: false,
           contentOpacity: 1,
           showDisableExpertDiv: false,
         });
@@ -754,7 +846,7 @@ class App extends React.Component {
   };
 
   render() {
-    const { fadeMenu1Aufbau, fadeMenu2Daten, fadeMenu3Simulation, fadeMenu4Anwendung, menu1AufbauDisabled, menu2DatenDisabled, menu3SimulationDisabled, menu4AnwendungenDisabled, rotationBlades, ledOpacity1, ledOpacity2, ledOpacity3, ledOpacity4, ledOpacity5, ledOpacity6, ledOpacity7, ledOpacity8, ledOpacity9, ledOpacity10, ledOpacity11, ledOpacity12, ledOpacity13, ledOpacity14, ledOpacity15, ledOpacity16, ledOpacity17, ledOpacity18, ledOpacity19, ledOpacity20, ledShadowSize1, ledShadowSize2, ledShadowSize3, ledShadowSize4, ledShadowSize5, ledShadowSize6, ledShadowSize7, ledShadowSize8, ledShadowSize9, ledShadowSize10, ledShadowSize11, ledShadowSize12, ledShadowSize13, ledShadowSize14, ledShadowSize15, ledShadowSize16, ledShadowSize17, ledShadowSize18, ledShadowSize19, ledShadowSize20, ledColor20, ledColor19, ledColor18, ledColor17, ledColor16, ledColor15, ledColor14, ledColor13, ledColor12, ledColor11, ledColor10, ledColor9, ledColor8, ledColor7, ledColor6, ledColor5, ledColor4, ledColor3, ledColor2, ledColor1, showLEDs, contentOpacity, showDisableExpertDiv, lineMenuColor, showLine1, showLine2, showLine3,fabColor, showMenuPartOne, textClickMeFade, leftNormalDistance, showMenu, showScreensaverBasic, showAufbauBasic, showDatenBasic, showDatenExpert1, showDatenExpert2, showDatenExpert3, showSimulationBasic, showAnwendungenExpert3, showAnwendungenExpert4, showAnwendungenExpert1, showAnwendungenExpert2, showAnwendungenBasic, valueSlider } = this.state;
+    const { fadeStartDataDisable, fadeStartSimulationDisable, fadeStartData, fadeStartSimulation, fadeReload, fadeMenu1Aufbau, fadeMenu2Daten, fadeMenu3Simulation, fadeMenu4Anwendung, menu1AufbauDisabled, menu2DatenDisabled, menu3SimulationDisabled, menu4AnwendungenDisabled, rotationBlades, ledOpacity1, ledOpacity2, ledOpacity3, ledOpacity4, ledOpacity5, ledOpacity6, ledOpacity7, ledOpacity8, ledOpacity9, ledOpacity10, ledOpacity11, ledOpacity12, ledOpacity13, ledOpacity14, ledOpacity15, ledOpacity16, ledOpacity17, ledOpacity18, ledOpacity19, ledOpacity20, ledShadowSize1, ledShadowSize2, ledShadowSize3, ledShadowSize4, ledShadowSize5, ledShadowSize6, ledShadowSize7, ledShadowSize8, ledShadowSize9, ledShadowSize10, ledShadowSize11, ledShadowSize12, ledShadowSize13, ledShadowSize14, ledShadowSize15, ledShadowSize16, ledShadowSize17, ledShadowSize18, ledShadowSize19, ledShadowSize20, ledColor20, ledColor19, ledColor18, ledColor17, ledColor16, ledColor15, ledColor14, ledColor13, ledColor12, ledColor11, ledColor10, ledColor9, ledColor8, ledColor7, ledColor6, ledColor5, ledColor4, ledColor3, ledColor2, ledColor1, showLEDs, contentOpacity, showDisableExpertDiv, lineMenuColor, showLine1, showLine2, showLine3,fabColor, showMenuPartOne, textClickMeFade, leftNormalDistance, showMenu, showScreensaverBasic, showAufbauBasic, showDatenBasic, showDatenExpert1, showDatenExpert2, showDatenExpert3, showSimulationBasic, showAnwendungenExpert3, showAnwendungenExpert4, showAnwendungenExpert1, showAnwendungenExpert2, showAnwendungenBasic, valueSlider } = this.state;
 
     return (
       <div className="App">
@@ -882,7 +974,7 @@ class App extends React.Component {
                 <p className='p1' style={{...pStyle, ...{opacity:contentOpacity}}} >
                   Um von einem digitalen Zwilling signifikante Vorteile zu ziehen, müssen der physische und der virtuelle Part miteinander verbunden sein.<br /><br />
                   Das <span style={{...expertStyleToEnter, ...{opacity: 1, color: "#FFFFFF"}}} onClick={this.handleClickShowData("showDatenExpert1")}>Internet der Dinge</span> ermöglicht es real existierenden Objekten mittels <span style={{...expertStyleToEnter, ...{opacity: 1, color: "#FFFFFF"}}} onClick={this.handleClickShowData("showDatenExpert2")}>Sensoren</span> Daten zum eigenen, aktuellen Zustand in einer <span style={{...expertStyleToEnter, ...{opacity: 1, color: "#FFFFFF"}}} onClick={this.handleClickShowData("showDatenExpert3")}>Cloud</span> zu sammeln und weiterzugeben. Diese Informationen fließen in das digitale Modell ein.</p>
-                   <Button className='n1' style={{...menuPointButtonStyle, ...{opacity:contentOpacity}}} onClick={ () => { this.dataTransfer("drehungEin")(); this.dataTransfer("datenDown")()}}>Starte Datentransfer</Button>        
+                   <Button className='n1' style={{...menuPointButtonStyle, ...{opacity: [fadeStartDataDisable ? fadeStartData : contentOpacity]}}} onClick={ () => { this.dataTransfer("drehungEin")(); this.dataTransfer("datenDown")()}}>Starte Datentransfer</Button>        
               </div>
             </Fade>
             <Fade in={showDatenExpert1} timeout={{ enter: fadeTimeBasicIn, exit: fadeTimeBasicOut }} mountOnEnter={true} unmountOnExit={true}>
