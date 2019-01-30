@@ -725,8 +725,8 @@ class App extends React.Component {
             */}
             <Fade in={showAufbauBasic} timeout={{ enter: fadeTimeBasicIn, exit: fadeTimeBasicOut }} mountOnEnter={true} unmountOnExit={true}>
               <div className="aufbauNormal">
-              <div style={{ position: "absolute", bottom: "90px", left: "1500px", height: "400px"}}>
-              <Slider value={valueSlider} onChange={this.handleChangeSlider} style={{padding: '22px 0px'}} vertical max={20} size="medium"/>
+              <div style={{ position: "absolute", bottom: "170px", left: "205px", width: "340px"}}>
+              <Slider value={valueSlider} onChange={this.handleChangeSlider} style={{padding: '22px 0px'}} max={20} size="medium"/>
               </div>
                 <h2 className='p1' style={h2Style}>Aufbau</h2>
                 <p className='p1' style={pStyle}>

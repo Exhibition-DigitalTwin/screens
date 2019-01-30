@@ -1,12 +1,16 @@
 import React, { Component } from 'react';
 import * as THREE from 'three';
 import * as OBJLoader from 'three-obj-loader';
-import OBJBaseRootModel from './objects/Base.obj';
+import OBJBaseRootModel from './objects/Base_Leer.obj';
 import OBJBladesRootModel from './objects/Propeller.obj';
 import OBJCaseRootModel from './objects/Ueberbau.obj';
 import OBJWing1RootModel from './objects/Flügel_1.obj';
 import OBJWing2RootModel from './objects/Flügel_2.obj';
 import OBJWing3RootModel from './objects/Flügel_3.obj';
+import OBJStepper1RootModel from './objects/NEMA17_1.obj';
+import OBJStepper2RootModel from './objects/NEMA17_2.obj';
+import OBJZahnradSRootModel from './objects/Zahnrad_Senkrecht.obj';
+import OBJZahnradWRootModel from './objects/Zahnrad_Waagerecht.obj';
 import OBJHubRootModel from './objects/Nabe.obj';
 import TWEEN from 'tween'
 
@@ -103,8 +107,86 @@ class ThreeScene extends Component {
 
     changePositionHead(valueSlider) {
         this.head = this.scene.getObjectByName("caseRootModel");
-        this.head.position.y = this.rootPositionHead + valueSlider;
-        this.bottomParentBladesRootModel.position.z = 0 + valueSlider;
+        this.wing1 = this.scene.getObjectByName("Wing1");
+        this.wing2 = this.scene.getObjectByName("Wing2");
+        this.wing3 = this.scene.getObjectByName("Wing3");
+        this.stepper1 = this.scene.getObjectByName("Stepper1");
+        this.stepper2 = this.scene.getObjectByName("Stepper2");
+        this.zahnradS = this.scene.getObjectByName("ZahnradSenkrecht");
+        this.zahnradW = this.scene.getObjectByName("ZahnradWaagerecht");
+        this.head.position.y = this.rootPositionHead + (valueSlider / 1.5);
+        this.bottomParentBladesRootModel.position.x = 0 + valueSlider;
+        this.wing1.position.x = 0 - (valueSlider / 4);
+        this.wing2.position.x = 0 + (valueSlider / 8);
+        this.wing2.position.y = -44.3 - (valueSlider / 4);
+        this.wing3.position.x = 0 + (valueSlider / 8);
+        this.wing3.position.y = -44.3 + (valueSlider / 4);
+        
+        if(valueSlider >= 5){
+            this.stepper1.position.x = 0 - ((valueSlider-5) / 4);
+            this.stepper1.position.y = -40 + ((valueSlider-5) / 6);
+            this.stepper2.position.x = 0 + ((valueSlider-5) / 4);
+            this.stepper2.position.y = -40 + ((valueSlider-5) / 6);
+            this.zahnradS.position.y = -40 + ((valueSlider-5) / 6);
+            this.zahnradS.position.x = 0 + ((valueSlider-5) / 8);
+            this.zahnradS.position.z = 0 + ((valueSlider-5) / 8);
+            this.zahnradW.position.y = -40 + ((valueSlider-5) / 8);
+        }
+        
+    }
+
+    resetPosition() {
+        var destinationHead = new THREE.Vector3(0, -40, 0);
+        var destinationBottomParentBladesRootModel = new THREE.Vector3(0, 4.3, 0);
+        var destinationWingRootModel = new THREE.Vector3(0, -44.3, 0);
+        var destinationStepperRootModel = new THREE.Vector3(0, -40, 0);
+        var destinationZahnradRootModel = new THREE.Vector3(0, -40, 0);
+        
+        this.head = this.scene.getObjectByName("caseRootModel");
+        this.wing1 = this.scene.getObjectByName("Wing1");
+        this.wing2 = this.scene.getObjectByName("Wing2");
+        this.wing3 = this.scene.getObjectByName("Wing3");
+        this.stepper1 = this.scene.getObjectByName("Stepper1");
+        this.stepper2 = this.scene.getObjectByName("Stepper2");
+        this.zahnradS = this.scene.getObjectByName("ZahnradSenkrecht");
+        this.zahnradW = this.scene.getObjectByName("ZahnradWaagerecht");
+
+        new TWEEN.Tween(this.head.position)
+            .to(destinationHead, 1500)
+            .start()
+            .easing(TWEEN.Easing.Cubic.InOut)
+        new TWEEN.Tween(this.bottomParentBladesRootModel.position)
+            .to(destinationBottomParentBladesRootModel, 1500)
+            .start()
+            .easing(TWEEN.Easing.Cubic.InOut)
+        new TWEEN.Tween(this.wing1.position)
+            .to(destinationWingRootModel, 1500)
+            .start()
+            .easing(TWEEN.Easing.Cubic.InOut)
+        new TWEEN.Tween(this.wing2.position)
+            .to(destinationWingRootModel, 1500)
+            .start()
+            .easing(TWEEN.Easing.Cubic.InOut)
+        new TWEEN.Tween(this.wing3.position)
+            .to(destinationWingRootModel, 1500)
+            .start()
+            .easing(TWEEN.Easing.Cubic.InOut)
+        new TWEEN.Tween(this.stepper1.position)
+            .to(destinationStepperRootModel, 1200)
+            .start()
+            .easing(TWEEN.Easing.Cubic.InOut)
+        new TWEEN.Tween(this.stepper2.position)
+            .to(destinationStepperRootModel, 1200)
+            .start()
+            .easing(TWEEN.Easing.Cubic.InOut)
+        new TWEEN.Tween(this.zahnradS.position)
+            .to(destinationZahnradRootModel, 1200)
+            .start()
+            .easing(TWEEN.Easing.Cubic.InOut)
+        new TWEEN.Tween(this.zahnradW.position)
+            .to(destinationZahnradRootModel, 1200)
+            .start()
+            .easing(TWEEN.Easing.Cubic.InOut)
     }
 
     moveCamera(x, y, z) {
@@ -126,9 +208,77 @@ class ThreeScene extends Component {
         var materialWhite = this.materialWhite;
 
         //BASE ROOT MODEL
-        const objLoader = new this.THREE.OBJLoader();
-        objLoader.crossOrigin = '';
-        objLoader.load(OBJBaseRootModel, (baseRootModel) => {
+        const objLoader15 = new this.THREE.OBJLoader();
+        objLoader15.crossOrigin = '';
+        objLoader15.load(OBJStepper1RootModel, (stepper) => {
+            // ADD MATERIALS
+            //bladesRootModel.add(new THREE.AxesHelper(20));
+            stepper.traverse(function (child) {
+                if (child instanceof THREE.Mesh) {
+                    child.material = materialWhite;
+                }
+            });
+            stepper.name = "Stepper1";
+            stepper.position.y -= 40;
+            stepper.rotateY(-1.5708);
+           
+            this.scene.add(stepper);
+        })
+        
+        const objLoader16 = new this.THREE.OBJLoader();
+        objLoader16.crossOrigin = '';
+        objLoader16.load(OBJStepper2RootModel, (stepper) => {
+            // ADD MATERIALS
+            //bladesRootModel.add(new THREE.AxesHelper(20));
+            stepper.traverse(function (child) {
+                if (child instanceof THREE.Mesh) {
+                    child.material = materialWhite;
+                }
+            });
+            stepper.name = "Stepper2";
+            stepper.position.y -= 40;
+            stepper.rotateY(-1.5708);
+            
+            this.scene.add(stepper);
+        })
+
+        const objLoader17 = new this.THREE.OBJLoader();
+        objLoader17.crossOrigin = '';
+        objLoader17.load(OBJZahnradSRootModel, (zahnrad) => {
+            // ADD MATERIALS
+            //zahnrad.add(new THREE.AxesHelper(20));
+            zahnrad.traverse(function (child) {
+                if (child instanceof THREE.Mesh) {
+                    child.material = materialWhite;
+                }
+            });
+            zahnrad.name = "ZahnradSenkrecht";
+            zahnrad.position.y -= 40;
+            zahnrad.rotateY(-1.5708);
+            
+            this.scene.add(zahnrad);
+        })
+
+        const objLoader18 = new this.THREE.OBJLoader();
+        objLoader18.crossOrigin = '';
+        objLoader18.load(OBJZahnradWRootModel, (zahnrad) => {
+            // ADD MATERIALS
+            //zahnrad.add(new THREE.AxesHelper(20));
+            zahnrad.traverse(function (child) {
+                if (child instanceof THREE.Mesh) {
+                    child.material = materialWhite;
+                }
+            });
+            zahnrad.name = "ZahnradWaagerecht";
+            zahnrad.position.y -= 40;
+            zahnrad.rotateY(-1.5708);
+            
+            this.scene.add(zahnrad);
+        })
+
+        const objLoader30 = new this.THREE.OBJLoader();
+        objLoader30.crossOrigin = '';
+        objLoader30.load(OBJBaseRootModel, (baseRootModel) => {
             //ADD MATERIALS
             baseRootModel.traverse(function (child) {
                 var material = materialWhite;
@@ -136,12 +286,15 @@ class ThreeScene extends Component {
                     child.material = material;
                 }
             });
-            this.scene.add(baseRootModel);
             baseRootModel.position.y -= 40;
             baseRootModel.rotateY(-1.5708);
-            baseRootModel.name = "baseRootModel";
+            this.parentBaseRootModel = new THREE.Object3D();  
+            this.parentBaseRootModel.add(baseRootModel)
+            //this.parentBaseRootModel.add(new THREE.AxesHelper(20));
+            this.scene.add(this.parentBaseRootModel);          
         })
 
+        //BLADES ROOT MODEL
         const objLoader10 = new this.THREE.OBJLoader();
         objLoader10.crossOrigin = '';
         objLoader10.load(OBJWing1RootModel, (wing) => {
@@ -157,7 +310,6 @@ class ThreeScene extends Component {
             wing.rotateY(-1.5708);
             this.scene.add(wing);
         })
-
         const objLoader11 = new this.THREE.OBJLoader();
         objLoader11.crossOrigin = '';
         objLoader11.load(OBJWing2RootModel, (wing) => {
@@ -173,7 +325,6 @@ class ThreeScene extends Component {
             wing.rotateY(-1.5708);
             this.scene.add(wing);
         })
-
         const objLoader12 = new this.THREE.OBJLoader();
         objLoader12.crossOrigin = '';
         objLoader12.load(OBJWing3RootModel, (wing) => {
@@ -190,7 +341,6 @@ class ThreeScene extends Component {
             this.scene.add(wing);
             
         })
-
         const objLoader13 = new this.THREE.OBJLoader();
         objLoader13.crossOrigin = '';
         objLoader13.load(OBJHubRootModel, (hub) => {
@@ -206,12 +356,6 @@ class ThreeScene extends Component {
             hub.rotateY(-1.5708);
             this.scene.add(hub);
         })
-
-       
-
-
-
-        //BLADES ROOT MODEL
         const objLoader1 = new this.THREE.OBJLoader();
         objLoader1.crossOrigin = '';
         objLoader1.load(OBJBladesRootModel, (bladesRootModel) => {
@@ -232,7 +376,7 @@ class ThreeScene extends Component {
             this.bottomParentBladesRootModel.add(this.wing3);
             this.bottomParentBladesRootModel.position.y += 4.3;
             this.bottomParentBladesRootModel.rotateY(1.5708);
-            this.bottomParentBladesRootModel.add(new THREE.AxesHelper(20));
+            //this.bottomParentBladesRootModel.add(new THREE.AxesHelper(20));
             this.topParentBladesRootModel = new THREE.Object3D();
             //this.topParentBladesRootModel.add(new THREE.AxesHelper(20));
             this.topParentBladesRootModel.add(this.bottomParentBladesRootModel);
@@ -325,15 +469,6 @@ class ThreeScene extends Component {
 
     }
 
-    resetPosition() {
-        var destination = new THREE.Vector3(0, -40, 0);
-        this.head = this.scene.getObjectByName("caseRootModel");
-        new TWEEN.Tween(this.head.position)
-            .to(destination, 1500)
-            .start()
-            .easing(TWEEN.Easing.Cubic.InOut)
-    }
-
     showWindmill() {
         this.tween.start();
     }
@@ -417,17 +552,24 @@ class ThreeScene extends Component {
         }
 
         //TURNING HEAD OF ROOT MODEL
-        this.baseRootModel = this.scene.getObjectByName("baseRootModel");
         this.caseRootModel = this.scene.getObjectByName("caseRootModel");
         this.baseSimulationModel = this.scene.getObjectByName("baseSimulationModel");
         this.caseSimulationModel = this.scene.getObjectByName("caseSimulationModel");
+        this.stepper1 = this.scene.getObjectByName("Stepper1");
+        this.stepper2 = this.scene.getObjectByName("Stepper2");
+        this.zahnradS = this.scene.getObjectByName("ZahnradSenkrecht");
+        this.zahnradW = this.scene.getObjectByName("ZahnradWaagerecht");
         if (this.initRotationLoop < this.stopRotationLoop) {
             if(this.deletedSimulation === false) {
                 this.baseSimulationModel.rotateY(this.speedRotationHead);
                 this.caseSimulationModel.rotateY(this.speedRotationHead);
                 this.topParentBladesSimulationModel.rotateY(this.speedRotationHead);
             }
-            this.baseRootModel.rotateY(this.speedRotationHead);
+            this.parentBaseRootModel.rotateY(this.speedRotationHead);
+            this.stepper1.rotateY(this.speedRotationHead);
+            this.stepper2.rotateY(this.speedRotationHead);
+            this.zahnradS.rotateY(this.speedRotationHead);
+            this.zahnradW.rotateY(this.speedRotationHead);
             this.caseRootModel.rotateY(this.speedRotationHead);
             this.topParentBladesRootModel.rotateY(this.speedRotationHead);
             
