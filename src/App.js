@@ -471,7 +471,7 @@ class App extends React.Component {
           fadeStartSimulation: false,
           fadeMenu4Anwendung: false,
           fadeReload: false,
-          menu1AufbauDisabled: false,
+          menu1AufbauDisabled: true,
           menu2DatenDisabled: false,
           menu3SimulationDisabled: true,
           menu4AnwendungenDisabled: true,
@@ -558,7 +558,7 @@ class App extends React.Component {
       this.runLedStrip();
     } else if (param === "daten") {
       this._three.resetPosition();
-      this.setState({ actualState: 2, actualStateFade: 3, menu1AufbauDisabled: true, time: Date.now() }, () => this.callback());
+      this.setState({ actualState: 2, actualStateFade: 2, menu1AufbauDisabled: true, time: Date.now() }, () => this.callback());
     } else if (param === "simulation") {
       this.setState({ actualState: 3, actualStateFade: 5, menu2DatenDisabled: true, time: Date.now() }, () => this.callback());
     } else if (param === "anwendungen") {
@@ -741,6 +741,7 @@ class App extends React.Component {
     } else if (param === "starteDrehung" && this.state.rotationBlades) {
       this._three.rotateHeadRootModel(0, 90, -0.01);
       this._three.startRotation();
+      this.setState({actualStateFade: 3});
     } else if (param === "drehungEin") {
       this.setState({rotationBlades: true});
     } else {
@@ -1005,7 +1006,7 @@ class App extends React.Component {
                   Das große Potential des digitalen Zwillings besteht darin, dass jeder Zustand eines physischen Produkts  mit dem virtuellen Prozess überlagert und verglichen werden
                   kann. Der finale Schritt besteht deshalb darin, die Informationen des Datenspeichers in eine Simulation des Windrades einzubinden.<br /><br />
                   In dieser Simulation können unterschiedliche Faktoren virtuell ausprobiert und deren Einfluss berechnet werden.</p>
-                  <Button className='n1' style={{...menuPointButtonStyle, ...{opacity:contentOpacity}}} onClick={() => { this._three.moveCamera(-50, 15, 700); this._three.showSecondModel();}}>Starte Simulation</Button>        
+                  <Button className='n1' style={{...menuPointButtonStyle, ...{opacity:[fadeStartData ? textClickMeFade : contentOpacity]}}} onClick={() => { this._three.moveCamera(-50, 15, 700); this._three.showSecondModel();}}>Starte Simulation</Button>        
 
               </div>
             </Fade>
