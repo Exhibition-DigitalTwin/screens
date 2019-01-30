@@ -231,10 +231,12 @@ class App extends React.Component {
     showDatenExpert3: false,
     // Simulation
     showSimulationBasic: false,
-    showSimulationExpert1: false,
-    showSimulationExpert2: false,
     // Anwendungen
     showAnwendungenBasic: false,
+    showAnwendungenExpert1: false,
+    showAnwendungenExpert2: false,
+    showAnwendungenExpert3: false,
+    showAnwendungenExpert4: false,
     // variables for content
     leftNormalDistance: distanceFromSide * 7,
     fabColor: "default",
@@ -385,16 +387,29 @@ class App extends React.Component {
       this._three.moveCamera(-29, 15, 500);
       this.setState({ actualState: 4 }, () => this.callback());
     } else if (param === "showDatenExpert1") {
-      console.log("done");
       this.setState({ showDatenExpert1: true, showDisableExpertDiv: true, contentFadedOut: false });
-    }else if (param === "closeDatenExpert") {
+    } else if (param === "showDatenExpert2") {
+      this.setState({ showDatenExpert2: true, showDisableExpertDiv: true, contentFadedOut: false });
+    } else if (param === "showDatenExpert3") {
+      this.setState({ showDatenExpert3: true, showDisableExpertDiv: true, contentFadedOut: false });
+    } else if (param === "showAnwendungenExpert1") {
+      this.setState({ showAnwendungenExpert1: true, showDisableExpertDiv: true, contentFadedOut: false });
+    } else if (param === "showAnwendungenExpert2") {
+      this.setState({ showAnwendungenExpert2: true, showDisableExpertDiv: true, contentFadedOut: false });
+    } else if (param === "showAnwendungenExpert3") {
+      this.setState({ showAnwendungenExpert3: true, showDisableExpertDiv: true, contentFadedOut: false });
+    } else if (param === "showAnwendungenExpert4") {
+      this.setState({ showAnwendungenExpert4: true, showDisableExpertDiv: true, contentFadedOut: false });
+    } else if (param === "closeDatenExpert") {
       this.setState({
         showDatenExpert1: false,
         showDatenExpert2: false,
         showDatenExpert3: false,
         showSimulationBasic: false,
-        showSimulationExpert1: false,
-        showSimulationExpert2: false,
+        showAnwendungenExpert1: false,
+        showAnwendungenExpert2: false,
+        showAnwendungenExpert3: false,
+        showAnwendungenExpert4: false,
         showDisableExpertDiv: false,
         contentOpacity: 1,
        }, () => this.callback());
@@ -413,8 +428,10 @@ class App extends React.Component {
         showDatenExpert2: false,
         showDatenExpert3: false,
         showSimulationBasic: false,
-        showSimulationExpert1: false,
-        showSimulationExpert2: false, 
+        showAnwendungenExpert1: false,
+        showAnwendungenExpert2: false,
+        showAnwendungenExpert3: false,
+        showAnwendungenExpert4: false, 
         showDisableExpertDiv: false,
       });
       this._three.rotateHeadRootModel(0, 90, -0.01);
@@ -430,8 +447,10 @@ class App extends React.Component {
           showAufbauBasic: false,
           showDatenBasic: false,
           showSimulationBasic: false,
-          showSimulationExpert1: false,
-          showSimulationExpert2: false,
+          showAnwendungenExpert1: false,
+          showAnwendungenExpert2: false,
+          showAnwendungenExpert3: false,
+          showAnwendungenExpert4: false,
           showAnwendungenBasic: false,
           showLine1: false,
           showLine2: false,
@@ -445,8 +464,10 @@ class App extends React.Component {
           showAufbauBasic: true,
           showDatenBasic: false,
           showSimulationBasic: false,
-          showSimulationExpert1: false,
-          showSimulationExpert2: false,
+          showAnwendungenExpert1: false,
+          showAnwendungenExpert2: false,
+          showAnwendungenExpert3: false,
+          showAnwendungenExpert4: false,
           showAnwendungenBasic: false,
           showLine1: false,
           showLine2: false,
@@ -460,8 +481,10 @@ class App extends React.Component {
           showAufbauBasic: false,
           showDatenBasic: true,
           showSimulationBasic: false,
-          showSimulationExpert1: false,
-          showSimulationExpert2: false,
+          showAnwendungenExpert1: false,
+          showAnwendungenExpert2: false,
+          showAnwendungenExpert3: false,
+          showAnwendungenExpert4: false,
           showAnwendungenBasic: false,
           showLine1: true,
           showLine2: false,
@@ -475,8 +498,10 @@ class App extends React.Component {
           showAufbauBasic: false,
           showDatenBasic: false,
           showSimulationBasic: true,
-          showSimulationExpert1: false,
-          showSimulationExpert2: false,
+          showAnwendungenExpert1: false,
+          showAnwendungenExpert2: false,
+          showAnwendungenExpert3: false,
+          showAnwendungenExpert4: false,
           showAnwendungenBasic: false,
           showLine1: true,
           showLine2: true,
@@ -490,8 +515,10 @@ class App extends React.Component {
           showAufbauBasic: false,
           showDatenBasic: false,
           showSimulationBasic: false,
-          showSimulationExpert1: false,
-          showSimulationExpert2: false,
+          showAnwendungenExpert1: false,
+          showAnwendungenExpert2: false,
+          showAnwendungenExpert3: false,
+          showAnwendungenExpert4: false,
           showAnwendungenBasic: true,
           showLine1: true,
           showLine2: true,
@@ -596,9 +623,10 @@ class App extends React.Component {
       showDatenExpert1: false,
       showDatenExpert2: false,
       showDatenExpert3: false,
-      showSimulationBasic: false,
-      showSimulationExpert1: false,
-      showSimulationExpert2: false, 
+      showAnwendungenExpert1: false,
+      showAnwendungenExpert2: false, 
+      showAnwendungenExpert3: false,
+      showAnwendungenExpert4: false,
     })
   }
 
@@ -615,7 +643,7 @@ class App extends React.Component {
   };
 
   render() {
-    const { ledOpacity1, ledOpacity2, ledOpacity3, ledOpacity4, ledOpacity5, ledOpacity6, ledOpacity7, ledOpacity8, ledOpacity9, ledOpacity10, ledOpacity11, ledOpacity12, ledOpacity13, ledOpacity14, ledOpacity15, ledOpacity16, ledOpacity17, ledOpacity18, ledOpacity19, ledOpacity20, ledShadowSize1, ledShadowSize2, ledShadowSize3, ledShadowSize4, ledShadowSize5, ledShadowSize6, ledShadowSize7, ledShadowSize8, ledShadowSize9, ledShadowSize10, ledShadowSize11, ledShadowSize12, ledShadowSize13, ledShadowSize14, ledShadowSize15, ledShadowSize16, ledShadowSize17, ledShadowSize18, ledShadowSize19, ledShadowSize20, ledColor20, ledColor19, ledColor18, ledColor17, ledColor16, ledColor15, ledColor14, ledColor13, ledColor12, ledColor11, ledColor10, ledColor9, ledColor8, ledColor7, ledColor6, ledColor5, ledColor4, ledColor3, ledColor2, ledColor1, showLEDs, contentOpacity, showDisableExpertDiv, lineMenuColor, showLine1, showLine2, showLine3,fabColor, showMenuPartOne, textClickMeFade, leftNormalDistance, showMenu, showScreensaverBasic, showAufbauBasic, showDatenBasic, showDatenExpert1, showDatenExpert2, showDatenExpert3, showSimulationBasic, showSimulationExpert1, showSimulationExpert2, showAnwendungenBasic, valueSlider } = this.state;
+    const { rotationBlades, ledOpacity1, ledOpacity2, ledOpacity3, ledOpacity4, ledOpacity5, ledOpacity6, ledOpacity7, ledOpacity8, ledOpacity9, ledOpacity10, ledOpacity11, ledOpacity12, ledOpacity13, ledOpacity14, ledOpacity15, ledOpacity16, ledOpacity17, ledOpacity18, ledOpacity19, ledOpacity20, ledShadowSize1, ledShadowSize2, ledShadowSize3, ledShadowSize4, ledShadowSize5, ledShadowSize6, ledShadowSize7, ledShadowSize8, ledShadowSize9, ledShadowSize10, ledShadowSize11, ledShadowSize12, ledShadowSize13, ledShadowSize14, ledShadowSize15, ledShadowSize16, ledShadowSize17, ledShadowSize18, ledShadowSize19, ledShadowSize20, ledColor20, ledColor19, ledColor18, ledColor17, ledColor16, ledColor15, ledColor14, ledColor13, ledColor12, ledColor11, ledColor10, ledColor9, ledColor8, ledColor7, ledColor6, ledColor5, ledColor4, ledColor3, ledColor2, ledColor1, showLEDs, contentOpacity, showDisableExpertDiv, lineMenuColor, showLine1, showLine2, showLine3,fabColor, showMenuPartOne, textClickMeFade, leftNormalDistance, showMenu, showScreensaverBasic, showAufbauBasic, showDatenBasic, showDatenExpert1, showDatenExpert2, showDatenExpert3, showSimulationBasic, showAnwendungenExpert3, showAnwendungenExpert4, showAnwendungenExpert1, showAnwendungenExpert2, showAnwendungenBasic, valueSlider } = this.state;
 
     return (
       <div className="App">
@@ -728,8 +756,8 @@ class App extends React.Component {
               <div style={{ position: "absolute", bottom: "170px", left: "205px", width: "340px"}}>
               <Slider value={valueSlider} onChange={this.handleChangeSlider} style={{padding: '22px 0px'}} max={20} size="medium"/>
               </div>
-                <h2 className='p1' style={h2Style}>Aufbau</h2>
-                <p className='p1' style={pStyle}>
+                <h2 className='p1' style={{...h2Style, ...{opacity:contentOpacity}}}>Aufbau</h2>
+                <p className='p1' style={{...pStyle, ...{opacity:contentOpacity}}}>
                   Zunächst  werden 3D Modelle aller Elemente angefertigt und zusammengefügt.<br /><br />
                   Der digitale Zwilling besitzt die selben strukturellen Charakteristika wie das Windrad der physischen Welt und ist im Idealfall nicht von seinem physischen Gegenstück zu unterscheiden.</p>
               </div>
@@ -739,19 +767,29 @@ class App extends React.Component {
             */}
             <Fade in={showDatenBasic} timeout={{ enter: fadeTimeBasicIn, exit: fadeTimeBasicOut }} mountOnEnter={true} unmountOnExit={true}>
               <div className="aufbauNormal">
-                <h2 className='p1' style={h2Style}>Daten</h2>
+                <h2 className='p1' style={{...h2Style, ...{opacity:contentOpacity}}}>Daten</h2>
                 <p className='p1' style={{...pStyle, ...{opacity:contentOpacity}}} >
                   Um von einem digitalen Zwilling signifikante Vorteile zu ziehen, müssen der physische und der virtuelle Part miteinander verbunden sein.<br /><br />
-                  Das <span style={{...expertStyleToEnter, ...{opacity: 1, color: "#FFFFFF"}}} onClick={this.handleClickShowData("showDatenExpert1")}>Internet der Dinge</span> ermöglicht es real existierenden Objekten mittels <span style={expertStyleToEnter}>Sensoren</span> 
-                   Daten zum eigenen, aktuellen Zustand in einer <span style={expertStyleToEnter}>Cloud</span> zu sammeln und weiterzugeben. Diese Informationen fließen in das digitale Modell ein.</p>
-                   <Button className='n1' style={menuPointButtonStyle} onClick={ () => { this.dataTransfer("drehungEin")(); this.dataTransfer("datenDown")()}}>Starte Datentransfer</Button>        
+                  Das <span style={{...expertStyleToEnter, ...{opacity: 1, color: "#FFFFFF"}}} onClick={this.handleClickShowData("showDatenExpert1")}>Internet der Dinge</span> ermöglicht es real existierenden Objekten mittels <span style={{...expertStyleToEnter, ...{opacity: 1, color: "#FFFFFF"}}} onClick={this.handleClickShowData("showDatenExpert2")}>Sensoren</span> Daten zum eigenen, aktuellen Zustand in einer <span style={{...expertStyleToEnter, ...{opacity: 1, color: "#FFFFFF"}}} onClick={this.handleClickShowData("showDatenExpert3")}>Cloud</span> zu sammeln und weiterzugeben. Diese Informationen fließen in das digitale Modell ein.</p>
+                   <Button className='n1' style={{...menuPointButtonStyle, ...{opacity:contentOpacity}}} onClick={ () => { this.dataTransfer("drehungEin")(); this.dataTransfer("datenDown")()}}>Starte Datentransfer</Button>        
               </div>
             </Fade>
             <Fade in={showDatenExpert1} timeout={{ enter: fadeTimeBasicIn, exit: fadeTimeBasicOut }} mountOnEnter={true} unmountOnExit={true}>
               <div className="expertInfo">
                 <p className='p1' style={pExpertStyle}>
-                  Hier steht Expertenwissen<br /><br />
-                  &%$§§?=|!110}</p>
+                Die Vernetzung von Gegenständen mit dem Internet, damit diese selbstständig untereinander kommunizieren, wird als Internet der Dinge (IoT) bezeichnet.</p>
+              </div>
+            </Fade>
+            <Fade in={showDatenExpert2} timeout={{ enter: fadeTimeBasicIn, exit: fadeTimeBasicOut }} mountOnEnter={true} unmountOnExit={true}>
+              <div className="expertInfo">
+                <p className='p1' style={pExpertStyle}>
+                Sensoren sammlen als Schnittstelle zur Außenwelt Daten und sind für die Digitalisierung unabdingbar. <br/><br/>Ein reales, mit Sensoren ausgestattetes Produkt sammelt relevante Daten und Informationen über sich selbst und seine Umgebung.</p>
+              </div>
+            </Fade>
+            <Fade in={showDatenExpert3} timeout={{ enter: fadeTimeBasicIn, exit: fadeTimeBasicOut }} mountOnEnter={true} unmountOnExit={true}>
+              <div className="expertInfo">
+                <p className='p1' style={pExpertStyle}>
+                Cloud steht für eine Technologie, die es ermöglicht, Anwendungen und Services nicht mehr lokal zu betreiben, sondern als Dienstleistung aus einem Netzwerk wie dem Internet zu beziehen.<br/><br/>Die gesammelten Daten fließen in einen großen Datenspeicher. In diesem werten Analyse-Tools  und selbstlernende Algorithmen die Informationen in Hinsicht auf Zusammenhänge, Muster und Auffälligkeiten aus.</p>
               </div>
             </Fade>
             {/* 
@@ -759,12 +797,12 @@ class App extends React.Component {
             */}
             <Fade in={showSimulationBasic} timeout={{ enter: fadeTimeBasicIn, exit: fadeTimeBasicOut }} mountOnEnter={true} unmountOnExit={true}>
               <div className="aufbauNormal">
-                <h2 className='p1' style={h2Style}>Simulation</h2>
-                <p className='p1' style={pStyle}>
+                <h2 className='p1' style={{...h2Style, ...{opacity:contentOpacity}}}>Simulation</h2>
+                <p className='p1' style={{...pStyle, ...{opacity:contentOpacity}}}>
                   Das große Potential des digitalen Zwillings besteht darin, dass jeder Zustand eines physischen Produkts  mit dem virtuellen Prozess überlagert und verglichen werden
                   kann. Der finale Schritt besteht deshalb darin, die Informationen des Datenspeichers in eine Simulation des Windrades einzubinden.<br /><br />
                   In dieser Simulation können unterschiedliche Faktoren virtuell ausprobiert und deren Einfluss berechnet werden.</p>
-                  <Button className='n1' style={menuPointButtonStyle} onClick={() => { this._three.moveCamera(-50, 15, 700); this._three.showSecondModel();}}>Starte Simulation</Button>        
+                  <Button className='n1' style={{...menuPointButtonStyle, ...{opacity:contentOpacity}}} onClick={() => { this._three.moveCamera(-50, 15, 700); this._three.showSecondModel();}}>Starte Simulation</Button>        
 
               </div>
             </Fade>
@@ -773,8 +811,35 @@ class App extends React.Component {
             */}
             <Fade in={showAnwendungenBasic} timeout={{ enter: fadeTimeBasicIn, exit: fadeTimeBasicOut }} mountOnEnter={true} unmountOnExit={true}>
               <div className="aufbauNormal">
-                <h2 className='p1' style={h2Style}>Anwendungen</h2>
-                <Button className='n1' style={menuPointButtonStyle} onClick={() => { window.location.reload()}}>Reload</Button>        
+                <h2 className='p1' style={{...h2Style, ...{opacity:contentOpacity}}}>Anwendungen</h2>
+                <p className='p1' style={{...pStyle, ...{opacity:contentOpacity}}} >
+                Digitale Zwillinge von Windrädern ermöglichen unter Anderem <span style={{...expertStyleToEnter, ...{opacity: 1, color: "#FFFFFF"}}} onClick={this.handleClickShowData("showAnwendungenExpert1")}>Predicitve Maintenance</span>  - die Sensordaten von Windfarmen machen eine kontinuierliche Überwachung möglich. Aber Digital Twins finden zukünftig noch sehr vielfältige Anwendungsfelder. Insbesondere die <span style={{...expertStyleToEnter, ...{opacity: 1, color: "#FFFFFF"}}} onClick={this.handleClickShowData("showAnwendungenExpert2")}>Produktion</span> profitiert bereits heute von dem Einsatz der Zwillinge.
+                <br/><br/>Ein digitaler Zwilling in der <span style={{...expertStyleToEnter, ...{opacity: 1, color: "#FFFFFF"}}} onClick={this.handleClickShowData("showAnwendungenExpert3")}>Medizin</span> kann Auskunft darüber geben, ob ein Medikament wirkt oder eine  Therapie anschlägt. Und auch im Bereich <span style={{...expertStyleToEnter, ...{opacity: 1, color: "#FFFFFF"}}} onClick={this.handleClickShowData("showAnwendungenExpert4")}>Smart City</span> ist der Einsatz virtueller Repräsentanzen von großem Interesse.</p>
+                <Button className='n1' style={{...menuPointButtonStyle, ...{opacity:contentOpacity}}} onClick={() => { window.location.reload()}}>Reload</Button>        
+              </div>
+            </Fade>
+            <Fade in={showAnwendungenExpert1} timeout={{ enter: fadeTimeBasicIn, exit: fadeTimeBasicOut }} mountOnEnter={true} unmountOnExit={true}>
+              <div className="expertInfo">
+                <p className='p1' style={pExpertStyle}>
+                Die Lebensdauer eines Maschinenteils hängt von verschiedenen Einflüssen ab: die Größe der Last, verschiedene Umgebungsfakoren, die Nutzungsdauer – all das wirkt sich auf die Abnutzung und Leistung aus. Häufig werden Fehler erst angezeigt, wenn ein Teil ausfällt. Mithilfe des digitalen Zwillings können Ausfälle schon vorher prognostiziert werden und um ca. 70 Prozent verringert werden.</p>
+              </div>
+            </Fade>
+            <Fade in={showAnwendungenExpert2} timeout={{ enter: fadeTimeBasicIn, exit: fadeTimeBasicOut }} mountOnEnter={true} unmountOnExit={true}>
+              <div className="expertInfo">
+                <p className='p1' style={pExpertStyle}>
+                In der industriellen Produktionsphase hilft der Zwilling die Effizienz und Qualität der Produktionsprozesse zu verbessern. Analysetools überwachen Maschinen, Fertigungsprozesse und Produktionsstraßen des Digital  Twin und können bei Fehlern und Störung nicht nur auf das Problem aufmerksam machen, sondern auch Lösungsvorschläge zur Behebung aussprechen.</p>
+              </div>
+            </Fade>
+            <Fade in={showAnwendungenExpert3} timeout={{ enter: fadeTimeBasicIn, exit: fadeTimeBasicOut }} mountOnEnter={true} unmountOnExit={true}>
+              <div className="expertInfo">
+                <p className='p1' style={pExpertStyle}>
+                Im Bereich Digital Health gewinnt der einzelne Patient durch den virtuellen Zwilling eines deutlich optimierten Behandlungsprozess. Diabetespatienten können ihre Blutzuckerwerte nicht nur über vernetzte Messgeräte speichern, sondern ihre Daten auch in Echtzeit an den behandelnden Arzt schicken. Der Patient profitiert von engmaschigeren Kontrollen und angepassten Behandlungsmethoden.<br/><br/>In Simulationen kann vorab die Verträglichkeit und der Erfolg von Medikamenten und  Therapiemöglichkeiten getestet werden, sodass es zu deutlich weniger Fehlbehandlungen kommt.</p>
+              </div>
+            </Fade>
+            <Fade in={showAnwendungenExpert4} timeout={{ enter: fadeTimeBasicIn, exit: fadeTimeBasicOut }} mountOnEnter={true} unmountOnExit={true}>
+              <div className="expertInfo">
+                <p className='p1' style={pExpertStyle}>
+                Selbst ganze Städte können einen digitalen Zwilling besitzen und mithilfe unterschiedlichster Standortsensoren ein smartes Parkmanagement, intelligente Verkehrssteuerung und Straßenbeleutung ermöglichen.</p>
               </div>
             </Fade>
             {/* 
