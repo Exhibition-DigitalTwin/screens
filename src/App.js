@@ -339,10 +339,10 @@ class App extends React.Component {
   };
 
   componentDidMount() {
-    this.marcus = 0;
     this.clickMeButtonTimer = setInterval(() => this.updateColor(), 30);
     this.clickMeButtonTimer = setInterval(() => this.setContentOpacity(), 30);
     this.clickMeButtonTimer = setInterval(() => this.runLedStrip(), 100);
+    this.clickMeButtonTimer = setInterval(() => this.handleFadeActive(), 20);
   }
 
   componentWillUnmount() {
@@ -373,6 +373,55 @@ class App extends React.Component {
       if (this.state.contentOpacity >= 1) {
         this.setState({ contentOpacity: 1, contentFadedOut: false });
       }
+    }
+  }
+
+  handleFadeActive() {
+    switch (this.state.actualState) {
+      // screensaver
+      case 0:
+        this.setState({
+        fadeMenu1Aufbau: true,
+        fadeMenu2Daten: false,
+        fadeMenu3Simulation: false,
+        fadeMenu4Anwendung: false,
+        })
+        break;
+      case 1:
+        this.setState({
+        fadeMenu1Aufbau: false,
+        fadeMenu2Daten: true,
+        fadeMenu3Simulation: false,
+        fadeMenu4Anwendung: false,
+        })
+        break;
+      case 2:
+        this.setState({
+        fadeMenu1Aufbau: false,
+        fadeMenu2Daten: false,
+        fadeMenu3Simulation: true,
+        fadeMenu4Anwendung: false,
+        })
+        break;
+      case 3:
+        this.setState({
+          fadeMenu1Aufbau: false,
+          fadeMenu2Daten: false,
+          fadeMenu3Simulation: false,
+          fadeMenu4Anwendung: true,
+        })
+        break;
+      case 4:
+        this.setState({
+          fadeMenu1Aufbau: false,
+          fadeMenu2Daten: false,
+          fadeMenu3Simulation: false,
+          fadeMenu4Anwendung: false,
+        })
+        break;
+      default: 
+        console.log("wrong "+this.state.actualState);
+        break;
     }
   }
 
@@ -458,6 +507,9 @@ class App extends React.Component {
           showAufbauBasic: false,
           showDatenBasic: false,
           showSimulationBasic: false,
+          showDatenExpert1: false,
+          showDatenExpert2: false,
+          showDatenExpert3: false,
           showAnwendungenExpert1: false,
           showAnwendungenExpert2: false,
           showAnwendungenExpert3: false,
@@ -470,10 +522,8 @@ class App extends React.Component {
           menu2DatenDisabled: true,
           menu3SimulationDisabled: true,
           menu4AnwendungenDisabled: true,
-          fadeMenu1Aufbau: true,
-          fadeMenu2Daten: false,
-          fadeMenu3Simulation: false,
-          fadeMenu4Anwendung: false,
+          contentOpacity: 1,
+          showDisableExpertDiv: false,
         });
         break;
       case 1:
@@ -483,6 +533,9 @@ class App extends React.Component {
           showAufbauBasic: true,
           showDatenBasic: false,
           showSimulationBasic: false,
+          showDatenExpert1: false,
+          showDatenExpert2: false,
+          showDatenExpert3: false,
           showAnwendungenExpert1: false,
           showAnwendungenExpert2: false,
           showAnwendungenExpert3: false,
@@ -495,10 +548,8 @@ class App extends React.Component {
           menu2DatenDisabled: false,
           menu3SimulationDisabled: true,
           menu4AnwendungenDisabled: true,
-          fadeMenu1Aufbau: false,
-          fadeMenu2Daten: true,
-          fadeMenu3Simulation: false,
-          fadeMenu4Anwendung: false,
+          contentOpacity: 1,
+          showDisableExpertDiv: false,
         });
         break;
       case 2:
@@ -508,6 +559,9 @@ class App extends React.Component {
           showAufbauBasic: false,
           showDatenBasic: true,
           showSimulationBasic: false,
+          showDatenExpert1: false,
+          showDatenExpert2: false,
+          showDatenExpert3: false,
           showAnwendungenExpert1: false,
           showAnwendungenExpert2: false,
           showAnwendungenExpert3: false,
@@ -520,10 +574,8 @@ class App extends React.Component {
           menu2DatenDisabled: false,
           menu3SimulationDisabled: false,
           menu4AnwendungenDisabled: true,
-          fadeMenu1Aufbau: false,
-          fadeMenu2Daten: false,
-          fadeMenu3Simulation: true,
-          fadeMenu4Anwendung: false,
+          contentOpacity: 1,
+          showDisableExpertDiv: false,
         });
         break;
       case 3:
@@ -533,6 +585,9 @@ class App extends React.Component {
           showAufbauBasic: false,
           showDatenBasic: false,
           showSimulationBasic: true,
+          showDatenExpert1: false,
+          showDatenExpert2: false,
+          showDatenExpert3: false,
           showAnwendungenExpert1: false,
           showAnwendungenExpert2: false,
           showAnwendungenExpert3: false,
@@ -545,10 +600,8 @@ class App extends React.Component {
           menu2DatenDisabled: true,
           menu3SimulationDisabled: false,
           menu4AnwendungenDisabled: false,
-          fadeMenu1Aufbau: false,
-          fadeMenu2Daten: false,
-          fadeMenu3Simulation: false,
-          fadeMenu4Anwendung: true,
+          contentOpacity: 1,
+          showDisableExpertDiv: false,
         });
         break;
       case 4:
@@ -558,6 +611,9 @@ class App extends React.Component {
           showAufbauBasic: false,
           showDatenBasic: false,
           showSimulationBasic: false,
+          showDatenExpert1: false,
+          showDatenExpert2: false,
+          showDatenExpert3: false,
           showAnwendungenExpert1: false,
           showAnwendungenExpert2: false,
           showAnwendungenExpert3: false,
@@ -570,13 +626,12 @@ class App extends React.Component {
           menu2DatenDisabled: true,
           menu3SimulationDisabled: true,
           menu4AnwendungenDisabled: false,
-          fadeMenu1Aufbau: false,
-          fadeMenu2Daten: false,
-          fadeMenu3Simulation: false,
-          fadeMenu4Anwendung: false,
+          contentOpacity: 1,
+          showDisableExpertDiv: false,
         });
         break;
       default:
+        console.log("wrong: "+this.state.actualState);
         break;
     }
   };
