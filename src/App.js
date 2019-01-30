@@ -428,7 +428,7 @@ class App extends React.Component {
       this.setState({ lastState: this.state.actualState });
       this._three.rotateHeadRootModel(0, 45, -0.01);
     }
-    if (this.state.lastState !== this.state.actualState && this.state.actualState !== 1) {
+    if (this.state.lastState !== this.state.actualState && this.state.actualState >= 3 && this.state.rotationBlades) {
       this.setState({ 
         lastState: this.state.actualState,
         showDatenExpert1: false,
@@ -558,15 +558,13 @@ class App extends React.Component {
   };
 
   dataTransfer = param => e => {
-    console.log(param +"-"+this.state.rotationBlades);
     if (param === "datenDown") {
       this.setState({ ledsMoving: 2 }); 
     } else if (param === "starteDrehung" && this.state.rotationBlades) {
+      this._three.rotateHeadRootModel(0, 90, -0.01);
       this._three.startRotation();
-      console.log("starteDrehung")
     } else if (param === "drehungEin") {
       this.setState({rotationBlades: true});
-      console.log("drehungEingeschaltet")
     } else {
       console.log(param);
     }
