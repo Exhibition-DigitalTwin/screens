@@ -13,7 +13,8 @@ class ThreeScene extends Component {
         const width = this.mount.clientWidth
         const height = this.mount.clientHeight
 
-        this.loaded = false;
+        this.loadedSimulation = false;
+        this.deletedSimulation = false;
 
         this.speedRotationBlades = -0.01
         this.speedRotationHead = 0
@@ -75,8 +76,9 @@ class ThreeScene extends Component {
 
         this.THREE = THREE;
 
-        this.createSecondModel()
+      
         this.createRootModel()
+        this.createSecondModel()
 
 
         this.start()
@@ -221,9 +223,8 @@ class ThreeScene extends Component {
             //this.topParentBladesSimulationModel.add(new THREE.AxesHelper(20));
             this.topParentBladesSimulationModel.add(this.bottomParentBladesSimulationModel);
             this.topParentBladesSimulationModel.rotateY(-1.5708);
-
             this.scene.add(this.topParentBladesSimulationModel);
-            this.loaded = true;
+            this.loadedSimulation = true;
         })
 
         //CASE SIMULATION MODEL
@@ -241,6 +242,7 @@ class ThreeScene extends Component {
             caseSimulationModel.position.y -= 40;
             caseSimulationModel.rotateY(-1.5708);
         })
+
     }
 
     resetPosition() {
@@ -298,6 +300,7 @@ class ThreeScene extends Component {
         this.scene.remove(this.caseSimulationModel);
         this.scene.remove(this.bottomParentBladesSimulationModel);
         this.scene.remove(this.topParentBladesSimulationModel);
+        this.deletedSimulation = true;
     }
 
     // ------------------------------------------ THREE.JS FUNCTIONS ----------------------------------------------
@@ -321,9 +324,12 @@ class ThreeScene extends Component {
         TWEEN.update();
 
         //TURNING BLADES OF ROOT MODEL
-        if (this.loaded) {
+        if (this.loadedSimulation === true && this.deletedSimulation === false) {
             this.bottomParentBladesRootModel.rotateZ(this.speedRotationBlades);
             this.bottomParentBladesSimulationModel.rotateZ(this.speedRotationBlades);
+        }
+        else if (this.loadedSimulation === true){
+            this.bottomParentBladesRootModel.rotateZ(this.speedRotationBlades);
         }
 
         //TURNING HEAD OF ROOT MODEL
@@ -332,12 +338,15 @@ class ThreeScene extends Component {
         this.baseSimulationModel = this.scene.getObjectByName("baseSimulationModel");
         this.caseSimulationModel = this.scene.getObjectByName("caseSimulationModel");
         if (this.initRotationLoop < this.stopRotationLoop) {
+            if(this.deletedSimulation === false) {
+                this.baseSimulationModel.rotateY(this.speedRotationHead);
+                this.caseSimulationModel.rotateY(this.speedRotationHead);
+                this.topParentBladesSimulationModel.rotateY(this.speedRotationHead);
+            }
             this.baseRootModel.rotateY(this.speedRotationHead);
             this.caseRootModel.rotateY(this.speedRotationHead);
             this.topParentBladesRootModel.rotateY(this.speedRotationHead);
-            this.baseSimulationModel.rotateY(this.speedRotationHead);
-            this.caseSimulationModel.rotateY(this.speedRotationHead);
-            this.topParentBladesSimulationModel.rotateY(this.speedRotationHead);
+            
             this.initRotationLoop++;
         }
 
