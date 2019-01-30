@@ -748,6 +748,7 @@ class App extends React.Component {
             <Fade in={showAnwendungenBasic} timeout={{ enter: fadeTimeBasicIn, exit: fadeTimeBasicOut }} mountOnEnter={true} unmountOnExit={true}>
               <div className="aufbauNormal">
                 <h2 className='p1' style={h2Style}>Anwendungen</h2>
+                <Button className='n1' style={{ position: 'absolute', left: 300, top: 300, fontSize: '20px' }} onClick={() => { window.location.reload()}}>Reload</Button>        
               </div>
             </Fade>
             {/* 
