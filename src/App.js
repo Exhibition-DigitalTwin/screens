@@ -218,6 +218,8 @@ class App extends React.Component {
     lastState: 0,
     started: false,
     time: 0,
+    startTime: -100000,
+    interval: fadeTimeBasicIn,
     // screensaver
     showScreensaverBasic: true,
     // Aufbau
@@ -377,6 +379,11 @@ class App extends React.Component {
   }
 
   handleFadeActive() {
+    
+    if(Date.now() - this.state.interval >= this.state.time) {
+      this.setState({ time: Date.now() })
+      console.log(this.state.time);
+    }
     switch (this.state.actualState) {
       // screensaver
       case 0:
