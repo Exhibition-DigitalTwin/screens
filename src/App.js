@@ -445,6 +445,8 @@ class App extends React.Component {
           menu2DatenDisabled: true,
           menu3SimulationDisabled: true,
           menu4AnwendungenDisabled: true,
+          fadeStartDataDisable: true,
+          fadeStartSimulationDisable: true,
         })
         break;
       case 1: // Daten (Menu)
@@ -460,6 +462,8 @@ class App extends React.Component {
           menu2DatenDisabled: false,
           menu3SimulationDisabled: true,
           menu4AnwendungenDisabled: true,
+          fadeStartDataDisable: true,
+          fadeStartSimulationDisable: true,          
         })
         break;
       case 2: // start data transfer
@@ -475,6 +479,8 @@ class App extends React.Component {
           menu2DatenDisabled: false,
           menu3SimulationDisabled: true,
           menu4AnwendungenDisabled: true,
+          fadeStartDataDisable: false,
+          fadeStartSimulationDisable: true,
         })
         break;
       case 3: // Simulation (Menu)
@@ -490,6 +496,8 @@ class App extends React.Component {
           menu2DatenDisabled: false,
           menu3SimulationDisabled: false,
           menu4AnwendungenDisabled: true,
+          fadeStartDataDisable: true,
+          fadeStartSimulationDisable: true,
         })
         break;
       case 4: // start simulation
@@ -502,9 +510,11 @@ class App extends React.Component {
           fadeMenu4Anwendung: false,
           fadeReload: false,
           menu1AufbauDisabled: true,
-          menu2DatenDisabled: false,
+          menu2DatenDisabled: true,
           menu3SimulationDisabled: false,
           menu4AnwendungenDisabled: true,
+          fadeStartDataDisable: true,
+          fadeStartSimulationDisable: false,
         })
         break;
       case 5: // Anwendungen (Menu)
@@ -522,8 +532,10 @@ class App extends React.Component {
           menu4AnwendungenDisabled: false,
           menu1AufbauDisabled: true,
           menu2DatenDisabled: true,
-          menu3SimulationDisabled: false,
+          menu3SimulationDisabled: true,
           menu4AnwendungenDisabled: false,
+          fadeStartDataDisable: true,
+          fadeStartSimulationDisable: true,
         })
         break;
       case 6: // reload
@@ -535,6 +547,8 @@ class App extends React.Component {
           fadeStartSimulation: false,
           fadeMenu4Anwendung: false,
           fadeReload: true,
+          fadeStartDataDisable: true,
+          fadeStartSimulationDisable: true,
         })
         break;
       default: 
@@ -560,7 +574,7 @@ class App extends React.Component {
       this._three.resetPosition();
       this.setState({ actualState: 2, actualStateFade: 2, menu1AufbauDisabled: true, time: Date.now() }, () => this.callback());
     } else if (param === "simulation") {
-      this.setState({ actualState: 3, actualStateFade: 5, menu2DatenDisabled: true, time: Date.now() }, () => this.callback());
+      this.setState({ actualState: 3, actualStateFade: 4, menu2DatenDisabled: true, time: Date.now() }, () => this.callback());
     } else if (param === "anwendungen") {
       this._three.deleteModel();
       this._three.moveCamera(-29, 15, 500);
@@ -738,12 +752,18 @@ class App extends React.Component {
   dataTransfer = param => e => {
     if (param === "datenDown") {
       this.setState({ ledsMoving: 2 }); 
+    } else if (param === "datenUp") {
+      this.setState({ ledsMoving: 1 }); 
     } else if (param === "starteDrehung" && this.state.rotationBlades) {
       this._three.rotateHeadRootModel(0, 90, -0.01);
       this._three.startRotation();
       this.setState({actualStateFade: 3});
     } else if (param === "drehungEin") {
       this.setState({rotationBlades: true});
+    } else if (param === "SimulationStarten") {
+      this._three.moveCamera(-50, 15, 700); 
+      this._three.showSecondModel();
+      this.setState({ actualStateFade: 5 }); 
     } else {
       console.log(param);
     }
@@ -975,7 +995,7 @@ class App extends React.Component {
                 <p className='p1' style={{...pStyle, ...{opacity:contentOpacity}}} >
                   Um von einem digitalen Zwilling signifikante Vorteile zu ziehen, müssen der physische und der virtuelle Part miteinander verbunden sein.<br /><br />
                   Das <span style={{...expertStyleToEnter, ...{opacity: 1, color: "#FFFFFF"}}} onClick={this.handleClickShowData("showDatenExpert1")}>Internet der Dinge</span> ermöglicht es real existierenden Objekten mittels <span style={{...expertStyleToEnter, ...{opacity: 1, color: "#FFFFFF"}}} onClick={this.handleClickShowData("showDatenExpert2")}>Sensoren</span> Daten zum eigenen, aktuellen Zustand in einer <span style={{...expertStyleToEnter, ...{opacity: 1, color: "#FFFFFF"}}} onClick={this.handleClickShowData("showDatenExpert3")}>Cloud</span> zu sammeln und weiterzugeben. Diese Informationen fließen in das digitale Modell ein.</p>
-                   <Button className='n1' style={{...menuPointButtonStyle, ...{opacity: [fadeStartDataDisable ? fadeStartData : contentOpacity]}}} onClick={ () => { this.dataTransfer("drehungEin")(); this.dataTransfer("datenDown")()}}>Starte Datentransfer</Button>        
+                   <Button className='n1' disabled={fadeStartDataDisable} style={{...menuPointButtonStyle, ...{opacity: [fadeStartData ? textClickMeFade*contentOpacity : contentOpacity]}}} onClick={ () => { this.dataTransfer("drehungEin")(); this.dataTransfer("datenDown")()}}>Starte Datentransfer</Button>        
               </div>
             </Fade>
             <Fade in={showDatenExpert1} timeout={{ enter: fadeTimeBasicIn, exit: fadeTimeBasicOut }} mountOnEnter={true} unmountOnExit={true}>
@@ -1006,7 +1026,7 @@ class App extends React.Component {
                   Das große Potential des digitalen Zwillings besteht darin, dass jeder Zustand eines physischen Produkts  mit dem virtuellen Prozess überlagert und verglichen werden
                   kann. Der finale Schritt besteht deshalb darin, die Informationen des Datenspeichers in eine Simulation des Windrades einzubinden.<br /><br />
                   In dieser Simulation können unterschiedliche Faktoren virtuell ausprobiert und deren Einfluss berechnet werden.</p>
-                  <Button className='n1' style={{...menuPointButtonStyle, ...{opacity:[fadeStartData ? textClickMeFade : contentOpacity]}}} onClick={() => { this._three.moveCamera(-50, 15, 700); this._three.showSecondModel();}}>Starte Simulation</Button>        
+                  <Button className='n1' disabled={fadeStartSimulationDisable} style={{...menuPointButtonStyle, ...{opacity: [fadeStartSimulation ? textClickMeFade*contentOpacity : contentOpacity]}}} onClick={() => { this.dataTransfer("SimulationStarten")(); this.dataTransfer("datenUp")}}>Starte Simulation</Button>        
 
               </div>
             </Fade>
@@ -1019,7 +1039,7 @@ class App extends React.Component {
                 <p className='p1' style={{...pStyle, ...{opacity:contentOpacity}}} >
                 Digitale Zwillinge von Windrädern ermöglichen unter Anderem <span style={{...expertStyleToEnter, ...{opacity: 1, color: "#FFFFFF"}}} onClick={this.handleClickShowData("showAnwendungenExpert1")}>Predicitve Maintenance</span>  - die Sensordaten von Windfarmen machen eine kontinuierliche Überwachung möglich. Aber Digital Twins finden zukünftig noch sehr vielfältige Anwendungsfelder. Insbesondere die <span style={{...expertStyleToEnter, ...{opacity: 1, color: "#FFFFFF"}}} onClick={this.handleClickShowData("showAnwendungenExpert2")}>Produktion</span> profitiert bereits heute von dem Einsatz der Zwillinge.
                 <br/><br/>Ein digitaler Zwilling in der <span style={{...expertStyleToEnter, ...{opacity: 1, color: "#FFFFFF"}}} onClick={this.handleClickShowData("showAnwendungenExpert3")}>Medizin</span> kann Auskunft darüber geben, ob ein Medikament wirkt oder eine  Therapie anschlägt. Und auch im Bereich <span style={{...expertStyleToEnter, ...{opacity: 1, color: "#FFFFFF"}}} onClick={this.handleClickShowData("showAnwendungenExpert4")}>Smart City</span> ist der Einsatz virtueller Repräsentanzen von großem Interesse.</p>
-                <Button className='n1' style={{...menuPointButtonStyle, ...{opacity:contentOpacity}}} onClick={() => { window.location.reload()}}>Reload</Button>        
+                <Button className='n1' style={{...menuPointButtonStyle, ...{opacity: [fadeReload ? textClickMeFade*contentOpacity : contentOpacity]}}} onClick={() => { window.location.reload()}}>Reload</Button>        
               </div>
             </Fade>
             <Fade in={showAnwendungenExpert1} timeout={{ enter: fadeTimeBasicIn, exit: fadeTimeBasicOut }} mountOnEnter={true} unmountOnExit={true}>
