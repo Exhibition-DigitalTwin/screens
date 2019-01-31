@@ -15,6 +15,7 @@ We recommend at least 8GB RAM and a mediocre graphic card or 16GB RAM when you c
 
 #### 3D models
 All 3d models of our physical and digital model can be found in /src/objects
+The assembly of all the parts should be clear by looking at the structure tab in the application.
 
 #### physical model parts
 1. 3D-Printed Models
@@ -26,6 +27,9 @@ All 3d models of our physical and digital model can be found in /src/objects
 7. LED Stripe
 8. Arduino Uno/Mega
 
+#### micro controller
+The code just has to be uploaded to the Arduino once, then communication via websocket takes care of the input and the handles.
+For the LEDs to work you have to include the FastLED library in the Arduin IDE.
 
 ### installation
 1. Make sure you have Version 10.12.0 node.js installed
