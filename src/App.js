@@ -107,6 +107,7 @@ const pExpertStyle = {
 
 const expertStyleToEnter = {
   fontWeight: 'bold',
+  //textTransform: 'uppercase',
   opacity: '1',
 }
 
@@ -232,6 +233,7 @@ class App extends React.Component {
     showDatenExpert3: false,
     // Simulation
     showSimulationBasic: false,
+    showSimulationRunning: false,
     // Anwendungen
     showAnwendungenBasic: false,
     showAnwendungenExpert1: false,
@@ -496,7 +498,7 @@ class App extends React.Component {
             menu3SimulationDisabled: false,
             menu4AnwendungenDisabled: true,
             fadeStartDataDisable: true,
-            fadeStartSimulationDisable: true,
+            fadeStartSimulationDisable: false,
           })
           break;
         case 4: // start simulation
@@ -514,6 +516,7 @@ class App extends React.Component {
             menu4AnwendungenDisabled: true,
             fadeStartDataDisable: true,
             fadeStartSimulationDisable: false,
+            showSimulationRunning: false,
           })
           break;
         case 5: // Anwendungen (Menu)
@@ -533,6 +536,7 @@ class App extends React.Component {
             menu4AnwendungenDisabled: false,
             fadeStartDataDisable: true,
             fadeStartSimulationDisable: true,
+            showSimulationRunning: true,
           })
           break;
         case 6: // reload
@@ -546,6 +550,7 @@ class App extends React.Component {
             fadeReload: true,
             fadeStartDataDisable: true,
             fadeStartSimulationDisable: true,
+            showSimulationRunning: false,
           })
           break;
         default: 
@@ -565,7 +570,6 @@ class App extends React.Component {
       this.setState({ actualState: 0, actualStateFade: 0, time: Date.now() }, () => this.callback());
     } else if (param === "aufbau") {
       this.setState({ actualState: 1, actualStateFade: 1, time: Date.now() }, () => this.callback());
-      console.log("ich war hier");
       this._three.showWindmill();
       this.runLedStrip();
     } else if (param === "daten") {
@@ -576,7 +580,7 @@ class App extends React.Component {
     } else if (param === "anwendungen") {
       this._three.deleteModel();
       this._three.moveCamera(-29, 15, 500);
-      this.setState({ actualState: 4, actualStateFade: 6, menu3SimulationDisabled: true, time: Date.now() }, () => this.callback());
+      this.setState({ actualState: 4, actualStateFade: 6, showSimulationRunning: false, menu3SimulationDisabled: true, time: Date.now() }, () => this.callback());
     } else if (param === "showDatenExpert1") {
       this.setState({ showDatenExpert1: true, showDisableExpertDiv: true, contentFadedOut: false });
     } else if (param === "showDatenExpert2") {
@@ -758,13 +762,12 @@ class App extends React.Component {
       this.setState({actualStateFade: 3});
     }else if (param === "starteDrehung") {
       this.handleClickShowData('aufbau')();
-      console.log("ASHDKASLKDLKJSADKJAHSDKJHSAD");
     } else if (param === "drehungEin") {
       this.setState({rotationBlades: true});
     } else if (param === "SimulationStarten") {
       this._three.moveCamera(-50, 15, 700); 
       this._three.showSecondModel();
-      this.setState({ actualStateFade: 5 }); 
+      this.setState({ actualStateFade: 5, showSimulationRunning: true, }); 
     } else {
       console.log(param);
     }
@@ -870,7 +873,7 @@ class App extends React.Component {
   };
 
   render() {
-    const { fadeStartDataDisable, fadeStartSimulationDisable, fadeStartData, fadeStartSimulation, fadeReload, fadeMenu1Aufbau, fadeMenu2Daten, fadeMenu3Simulation, fadeMenu4Anwendung, menu1AufbauDisabled, menu2DatenDisabled, menu3SimulationDisabled, menu4AnwendungenDisabled, rotationBlades, ledOpacity1, ledOpacity2, ledOpacity3, ledOpacity4, ledOpacity5, ledOpacity6, ledOpacity7, ledOpacity8, ledOpacity9, ledOpacity10, ledOpacity11, ledOpacity12, ledOpacity13, ledOpacity14, ledOpacity15, ledOpacity16, ledOpacity17, ledOpacity18, ledOpacity19, ledOpacity20, ledShadowSize1, ledShadowSize2, ledShadowSize3, ledShadowSize4, ledShadowSize5, ledShadowSize6, ledShadowSize7, ledShadowSize8, ledShadowSize9, ledShadowSize10, ledShadowSize11, ledShadowSize12, ledShadowSize13, ledShadowSize14, ledShadowSize15, ledShadowSize16, ledShadowSize17, ledShadowSize18, ledShadowSize19, ledShadowSize20, ledColor20, ledColor19, ledColor18, ledColor17, ledColor16, ledColor15, ledColor14, ledColor13, ledColor12, ledColor11, ledColor10, ledColor9, ledColor8, ledColor7, ledColor6, ledColor5, ledColor4, ledColor3, ledColor2, ledColor1, showLEDs, contentOpacity, showDisableExpertDiv, lineMenuColor, showLine1, showLine2, showLine3,fabColor, showMenuPartOne, textClickMeFade, leftNormalDistance, showMenu, showScreensaverBasic, showAufbauBasic, showDatenBasic, showDatenExpert1, showDatenExpert2, showDatenExpert3, showSimulationBasic, showAnwendungenExpert3, showAnwendungenExpert4, showAnwendungenExpert1, showAnwendungenExpert2, showAnwendungenBasic, valueSlider } = this.state;
+    const { showSimulationRunning, fadeStartDataDisable, fadeStartSimulationDisable, fadeStartData, fadeStartSimulation, fadeReload, fadeMenu1Aufbau, fadeMenu2Daten, fadeMenu3Simulation, fadeMenu4Anwendung, menu1AufbauDisabled, menu2DatenDisabled, menu3SimulationDisabled, menu4AnwendungenDisabled, rotationBlades, ledOpacity1, ledOpacity2, ledOpacity3, ledOpacity4, ledOpacity5, ledOpacity6, ledOpacity7, ledOpacity8, ledOpacity9, ledOpacity10, ledOpacity11, ledOpacity12, ledOpacity13, ledOpacity14, ledOpacity15, ledOpacity16, ledOpacity17, ledOpacity18, ledOpacity19, ledOpacity20, ledShadowSize1, ledShadowSize2, ledShadowSize3, ledShadowSize4, ledShadowSize5, ledShadowSize6, ledShadowSize7, ledShadowSize8, ledShadowSize9, ledShadowSize10, ledShadowSize11, ledShadowSize12, ledShadowSize13, ledShadowSize14, ledShadowSize15, ledShadowSize16, ledShadowSize17, ledShadowSize18, ledShadowSize19, ledShadowSize20, ledColor20, ledColor19, ledColor18, ledColor17, ledColor16, ledColor15, ledColor14, ledColor13, ledColor12, ledColor11, ledColor10, ledColor9, ledColor8, ledColor7, ledColor6, ledColor5, ledColor4, ledColor3, ledColor2, ledColor1, showLEDs, contentOpacity, showDisableExpertDiv, lineMenuColor, showLine1, showLine2, showLine3,fabColor, showMenuPartOne, textClickMeFade, leftNormalDistance, showMenu, showScreensaverBasic, showAufbauBasic, showDatenBasic, showDatenExpert1, showDatenExpert2, showDatenExpert3, showSimulationBasic, showAnwendungenExpert3, showAnwendungenExpert4, showAnwendungenExpert1, showAnwendungenExpert2, showAnwendungenBasic, valueSlider } = this.state;
 
     return (
       <div className="App">
@@ -1033,6 +1036,14 @@ class App extends React.Component {
                   In dieser Simulation können unterschiedliche Faktoren virtuell ausprobiert und deren Einfluss berechnet werden.</p>
                   <Button className='n1' disabled={fadeStartSimulationDisable} style={{...menuPointButtonStyle, ...{opacity: [fadeStartSimulation ? textClickMeFade*contentOpacity : contentOpacity]}}} onClick={() => { this.dataTransfer("SimulationStarten")(); this.dataTransfer("datenUp")}}>Starte Simulation</Button>        
 
+              </div>
+            </Fade>
+            <Fade in={showSimulationRunning} timeout={{ enter: fadeTimeBasicIn, exit: fadeTimeBasicOut }} mountOnEnter={true} unmountOnExit={true}>
+              <div className="simulationText">
+                <p className='p1' style={{position: 'absolute', left: 910, top: 790, fontSize: textFontNormal/1.7 + 'px', color: textColorNormal, width: '10%', textAlign: 'left'}}>
+                Simulation Nr. 1<br/><br/>Windgeschwindigkeit: 'hoch'<br/><br/>Belastung: 'kritisch'</p>
+                <p className='p1' style={{position: 'absolute', left: 910+360, top: 790, fontSize: textFontNormal/1.7 + 'px', color: textColorNormal, width: '10%', textAlign: 'left'}}>
+                Simulation Nr. 265<br/><br/>Windgeschwindigkeit: 'hoch'<br/><br/>Belastung: 'normal'<br/><br/>Bremsvorgang aktiviert</p>
               </div>
             </Fade>
             {/* 
