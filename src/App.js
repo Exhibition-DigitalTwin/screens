@@ -44,7 +44,7 @@ const ledSize = 20;
 const ledDistance = 55;
 const ledDistanceAngleSide = 37;
 const ledDistanceStartTop = 22;
-const ledColorOn = '#FFFFFF';
+const ledColorOn = '#d80404';
 const ledColorOff = '#191919';
 const ledShadowOn = ledSize*1.5;
 const ledShadowOff = 0;
@@ -222,6 +222,8 @@ class App extends React.Component {
     time: 0,
     startTime: -100000,
     interval: fadeTimeBasicIn,
+    timeForLedDown: 0,
+    intervalLed: 3000,
     // screensaver
     showScreensaverBasic: true,
     // Aufbau
@@ -750,17 +752,21 @@ class App extends React.Component {
 
   dataTransfer = param => e => {
     if (param === "datenDown") {
-      this.setState({ ledsMoving: 2 }); 
-      this.sendMessage(2);
+      this.setState({ ledsMoving: 2, timeForLedDown: Date.now() }); 
+      this.sendMessage(3);
     } else if (param === "datenUp") {
       this.setState({ ledsMoving: 1 }); 
-      this.sendMessage(3);
+      this.sendMessage(2);
     } else if (param === "starteDrehung" && this.state.rotationBlades) {
       this._three.rotateHeadRootModel(0, 90, -0.01);
       this.sendMessage(1);
       this._three.startRotation();
       this.setState({actualStateFade: 3});
-    }else if (param === "starteDrehung") {
+    } else if (param === "45Drehung" ) {
+      if(this.state.actualState <= 1) {
+      this._three.rotateHeadRootModel(0, 45, -0.1);
+      }
+    } else if (param === "starteDrehung") {
       this.handleClickShowData('aufbau')();
     } else if (param === "drehungEin") {
       this.setState({rotationBlades: true});
@@ -802,34 +808,35 @@ class App extends React.Component {
         default: this.setState({ ledsMoving: 0 }); break;
       }
     }else if (this.state.ledsMoving === 2) { // down
-      switch(this.state.currentLedOn)
-      {
-        case 0: this.setState({ ledColor1: ledColorOn, ledShadowSize1: ledShadowOn, ledOpacity1: ledOpacityOn, currentLedOn: this.state.currentLedOn +=1 }, () => this.callback()); break;
-        case 1: this.setState({ ledColor2: ledColorOn, ledShadowSize2: ledShadowOn, ledOpacity2: ledOpacityOn, ledColor1: ledColorOn, ledShadowSize1: ledShadowOn, ledOpacity1: ledOpacityOnToOff, currentLedOn: this.state.currentLedOn +=1 }); break;
-        case 2: this.setState({ ledColor3: ledColorOn, ledShadowSize3: ledShadowOn, ledOpacity3: ledOpacityOn, ledColor2: ledColorOn, ledShadowSize2: ledShadowOn, ledOpacity2: ledOpacityOnToOff, ledColor1: ledColorOff, ledShadowSize1: ledShadowOff, ledOpacity1: ledOpacityOnToOff, currentLedOn: this.state.currentLedOn +=1 }, () => {
-          this._three.rotateHeadRootModel(0, 45, -0.1); }); break;
-        case 3: this.setState({ ledColor4: ledColorOn, ledShadowSize4: ledShadowOn, ledOpacity4: ledOpacityOn, ledColor3: ledColorOn, ledShadowSize3: ledShadowOn, ledOpacity3: ledOpacityOnToOff, ledColor2: ledColorOff, ledShadowSize2: ledShadowOff, ledOpacity2: ledOpacityOff, currentLedOn: this.state.currentLedOn +=1 } ); break;
-        case 4: this.setState({ ledColor5: ledColorOn, ledShadowSize5: ledShadowOn, ledOpacity5: ledOpacityOn, ledColor4: ledColorOn, ledShadowSize4: ledShadowOn, ledOpacity4: ledOpacityOnToOff, ledColor3: ledColorOff, ledShadowSize3: ledShadowOff, ledOpacity3: ledOpacityOff, currentLedOn: this.state.currentLedOn +=1 }); break;
-        case 5: this.setState({ ledColor6: ledColorOn, ledShadowSize6: ledShadowOn, ledOpacity6: ledOpacityOn, ledColor5: ledColorOn, ledShadowSize5: ledShadowOn, ledOpacity5: ledOpacityOnToOff, ledColor4: ledColorOff, ledShadowSize4: ledShadowOff, ledOpacity4: ledOpacityOff, currentLedOn: this.state.currentLedOn +=1 }); break;
-        case 6: this.setState({ ledColor7: ledColorOn, ledShadowSize7: ledShadowOn, ledOpacity7: ledOpacityOn, ledColor6: ledColorOn, ledShadowSize6: ledShadowOn, ledOpacity6: ledOpacityOnToOff, ledColor5: ledColorOff, ledShadowSize5: ledShadowOff, ledOpacity5: ledOpacityOff, currentLedOn: this.state.currentLedOn +=1 }); break;
-        case 7: this.setState({ ledColor8: ledColorOn, ledShadowSize8: ledShadowOn, ledOpacity8: ledOpacityOn, ledColor7: ledColorOn, ledShadowSize7: ledShadowOn, ledOpacity7: ledOpacityOnToOff, ledColor6: ledColorOff, ledShadowSize6: ledShadowOff, ledOpacity6: ledOpacityOff, currentLedOn: this.state.currentLedOn +=1 }); break;
-        case 8: this.setState({ ledColor9: ledColorOn, ledShadowSize9: ledShadowOn, ledOpacity9: ledOpacityOn, ledColor8: ledColorOn, ledShadowSize8: ledShadowOn, ledOpacity8: ledOpacityOnToOff, ledColor7: ledColorOff, ledShadowSize7: ledShadowOff, ledOpacity7: ledOpacityOff, currentLedOn: this.state.currentLedOn +=1 }); break;
-        case 9: this.setState({ ledColor10: ledColorOn, ledShadowSize10: ledShadowOn, ledOpacity10: ledOpacityOn, ledColor9: ledColorOn, ledShadowSize9: ledShadowOn, ledOpacity9: ledOpacityOnToOff, ledColor8: ledColorOff, ledShadowSize8: ledShadowOff, ledOpacity8: ledOpacityOff, currentLedOn: this.state.currentLedOn +=1 }); break;
-        case 10: this.setState({ ledColor11: ledColorOn, ledShadowSize11: ledShadowOn, ledOpacity11: ledOpacityOn, ledColor10: ledColorOn, ledShadowSize10: ledShadowOn, ledOpacity10: ledOpacityOnToOff, ledColor9: ledColorOff, ledShadowSize9: ledShadowOff, ledOpacity9: ledOpacityOff, currentLedOn: this.state.currentLedOn +=1 }); break;
-        case 11: this.setState({ ledColor12: ledColorOn, ledShadowSize12: ledShadowOn, ledOpacity12: ledOpacityOn, ledColor11: ledColorOn, ledShadowSize11: ledShadowOn, ledOpacity11: ledOpacityOnToOff, ledColor10: ledColorOff, ledShadowSize10: ledShadowOff, ledOpacity10: ledOpacityOff, currentLedOn: this.state.currentLedOn +=1 }); break;
-        case 12: this.setState({ ledColor13: ledColorOn, ledShadowSize13: ledShadowOn, ledOpacity13: ledOpacityOn, ledColor12: ledColorOn, ledShadowSize12: ledShadowOn, ledOpacity12: ledOpacityOnToOff, ledColor11: ledColorOff, ledShadowSize11: ledShadowOff, ledOpacity11: ledOpacityOff, currentLedOn: this.state.currentLedOn +=1 }); break;
-        case 13: this.setState({ ledColor14: ledColorOn, ledShadowSize14: ledShadowOn, ledOpacity14: ledOpacityOn, ledColor13: ledColorOn, ledShadowSize13: ledShadowOn, ledOpacity13: ledOpacityOnToOff, ledColor12: ledColorOff, ledShadowSize12: ledShadowOff, ledOpacity12: ledOpacityOff, currentLedOn: this.state.currentLedOn +=1 }); break;
-        case 14: this.setState({ ledColor15: ledColorOn, ledShadowSize15: ledShadowOn, ledOpacity15: ledOpacityOn, ledColor14: ledColorOn, ledShadowSize14: ledShadowOn, ledOpacity14: ledOpacityOnToOff, ledColor13: ledColorOff, ledShadowSize13: ledShadowOff, ledOpacity13: ledOpacityOff, currentLedOn: this.state.currentLedOn +=1 }); break;
-        case 15: this.setState({ ledColor16: ledColorOn, ledShadowSize16: ledShadowOn, ledOpacity16: ledOpacityOn, ledColor15: ledColorOn, ledShadowSize15: ledShadowOn, ledOpacity15: ledOpacityOnToOff, ledColor14: ledColorOff, ledShadowSize14: ledShadowOff, ledOpacity14: ledOpacityOff, currentLedOn: this.state.currentLedOn +=1 }); break;
-        case 16: this.setState({ ledColor17: ledColorOn, ledShadowSize17: ledShadowOn, ledOpacity17: ledOpacityOn, ledColor16: ledColorOn, ledShadowSize16: ledShadowOn, ledOpacity16: ledOpacityOnToOff, ledColor15: ledColorOff, ledShadowSize15: ledShadowOff, ledOpacity15: ledOpacityOff, currentLedOn: this.state.currentLedOn +=1 }); break;
-        case 17: this.setState({ ledColor18: ledColorOn, ledShadowSize18: ledShadowOn, ledOpacity18: ledOpacityOn, ledColor17: ledColorOn, ledShadowSize17: ledShadowOn, ledOpacity17: ledOpacityOnToOff, ledColor16: ledColorOff, ledShadowSize16: ledShadowOff, ledOpacity16: ledOpacityOff, currentLedOn: this.state.currentLedOn +=1 }); break;
-        case 18: this.setState({ ledColor19: ledColorOn, ledShadowSize19: ledShadowOn, ledOpacity19: ledOpacityOn, ledColor18: ledColorOn, ledShadowSize18: ledShadowOn, ledOpacity18: ledOpacityOnToOff, ledColor17: ledColorOff, ledShadowSize17: ledShadowOff, ledOpacity17: ledOpacityOff, currentLedOn: this.state.currentLedOn +=1 }); break;
-        case 19: this.setState({ ledColor20: ledColorOn, ledShadowSize20: ledShadowOn, ledOpacity20: ledOpacityOn, ledColor19: ledColorOn, ledShadowSize19: ledShadowOn, ledOpacity19: ledOpacityOnToOff, ledColor18: ledColorOff, ledShadowSize18: ledShadowOff, ledOpacity18: ledOpacityOff, currentLedOn: this.state.currentLedOn +=1 }); break;
-        case 20: this.setState({ ledColor20: ledColorOn, ledShadowSize20: ledShadowOn, ledOpacity20: ledOpacityOnToOff, ledColor19: ledColorOff, ledShadowSize19: ledShadowOff, ledOpacity19: ledOpacityOff, currentLedOn: this.state.currentLedOn +=1 }, 
-          () => {
-            this.dataTransfer("starteDrehung")()}); break;
-        case 21: this.setState({ ledColor20: ledColorOff, ledShadowSize20: ledShadowOff, ledOpacity20: ledOpacityOff, currentLedOn: this.state.currentLedOn +=1 }); break;
-        default: this.setState({ ledsMoving: 0 }); break;
+      if(Date.now() - this.state.intervalLed >= this.state.timeForLedDown) {
+        switch(this.state.currentLedOn)
+        {
+          case 0: this.setState({ ledColor1: ledColorOn, ledShadowSize1: ledShadowOn, ledOpacity1: ledOpacityOn, currentLedOn: this.state.currentLedOn +=1 }, () => this.callback()); break;
+          case 1: this.setState({ ledColor2: ledColorOn, ledShadowSize2: ledShadowOn, ledOpacity2: ledOpacityOn, ledColor1: ledColorOn, ledShadowSize1: ledShadowOn, ledOpacity1: ledOpacityOnToOff, currentLedOn: this.state.currentLedOn +=1 }); break;
+          case 2: this.setState({ ledColor3: ledColorOn, ledShadowSize3: ledShadowOn, ledOpacity3: ledOpacityOn, ledColor2: ledColorOn, ledShadowSize2: ledShadowOn, ledOpacity2: ledOpacityOnToOff, ledColor1: ledColorOff, ledShadowSize1: ledShadowOff, ledOpacity1: ledOpacityOnToOff, currentLedOn: this.state.currentLedOn +=1 }, () => console.log("asd")); break;
+          case 3: this.setState({ ledColor4: ledColorOn, ledShadowSize4: ledShadowOn, ledOpacity4: ledOpacityOn, ledColor3: ledColorOn, ledShadowSize3: ledShadowOn, ledOpacity3: ledOpacityOnToOff, ledColor2: ledColorOff, ledShadowSize2: ledShadowOff, ledOpacity2: ledOpacityOff, currentLedOn: this.state.currentLedOn +=1 } ); break;
+          case 4: this.setState({ ledColor5: ledColorOn, ledShadowSize5: ledShadowOn, ledOpacity5: ledOpacityOn, ledColor4: ledColorOn, ledShadowSize4: ledShadowOn, ledOpacity4: ledOpacityOnToOff, ledColor3: ledColorOff, ledShadowSize3: ledShadowOff, ledOpacity3: ledOpacityOff, currentLedOn: this.state.currentLedOn +=1 }); break;
+          case 5: this.setState({ ledColor6: ledColorOn, ledShadowSize6: ledShadowOn, ledOpacity6: ledOpacityOn, ledColor5: ledColorOn, ledShadowSize5: ledShadowOn, ledOpacity5: ledOpacityOnToOff, ledColor4: ledColorOff, ledShadowSize4: ledShadowOff, ledOpacity4: ledOpacityOff, currentLedOn: this.state.currentLedOn +=1 }); break;
+          case 6: this.setState({ ledColor7: ledColorOn, ledShadowSize7: ledShadowOn, ledOpacity7: ledOpacityOn, ledColor6: ledColorOn, ledShadowSize6: ledShadowOn, ledOpacity6: ledOpacityOnToOff, ledColor5: ledColorOff, ledShadowSize5: ledShadowOff, ledOpacity5: ledOpacityOff, currentLedOn: this.state.currentLedOn +=1 }); break;
+          case 7: this.setState({ ledColor8: ledColorOn, ledShadowSize8: ledShadowOn, ledOpacity8: ledOpacityOn, ledColor7: ledColorOn, ledShadowSize7: ledShadowOn, ledOpacity7: ledOpacityOnToOff, ledColor6: ledColorOff, ledShadowSize6: ledShadowOff, ledOpacity6: ledOpacityOff, currentLedOn: this.state.currentLedOn +=1 }); break;
+          case 8: this.setState({ ledColor9: ledColorOn, ledShadowSize9: ledShadowOn, ledOpacity9: ledOpacityOn, ledColor8: ledColorOn, ledShadowSize8: ledShadowOn, ledOpacity8: ledOpacityOnToOff, ledColor7: ledColorOff, ledShadowSize7: ledShadowOff, ledOpacity7: ledOpacityOff, currentLedOn: this.state.currentLedOn +=1 }); break;
+          case 9: this.setState({ ledColor10: ledColorOn, ledShadowSize10: ledShadowOn, ledOpacity10: ledOpacityOn, ledColor9: ledColorOn, ledShadowSize9: ledShadowOn, ledOpacity9: ledOpacityOnToOff, ledColor8: ledColorOff, ledShadowSize8: ledShadowOff, ledOpacity8: ledOpacityOff, currentLedOn: this.state.currentLedOn +=1 }); break;
+          case 10: this.setState({ ledColor11: ledColorOn, ledShadowSize11: ledShadowOn, ledOpacity11: ledOpacityOn, ledColor10: ledColorOn, ledShadowSize10: ledShadowOn, ledOpacity10: ledOpacityOnToOff, ledColor9: ledColorOff, ledShadowSize9: ledShadowOff, ledOpacity9: ledOpacityOff, currentLedOn: this.state.currentLedOn +=1 }); break;
+          case 11: this.setState({ ledColor12: ledColorOn, ledShadowSize12: ledShadowOn, ledOpacity12: ledOpacityOn, ledColor11: ledColorOn, ledShadowSize11: ledShadowOn, ledOpacity11: ledOpacityOnToOff, ledColor10: ledColorOff, ledShadowSize10: ledShadowOff, ledOpacity10: ledOpacityOff, currentLedOn: this.state.currentLedOn +=1 }); break;
+          case 12: this.setState({ ledColor13: ledColorOn, ledShadowSize13: ledShadowOn, ledOpacity13: ledOpacityOn, ledColor12: ledColorOn, ledShadowSize12: ledShadowOn, ledOpacity12: ledOpacityOnToOff, ledColor11: ledColorOff, ledShadowSize11: ledShadowOff, ledOpacity11: ledOpacityOff, currentLedOn: this.state.currentLedOn +=1 }); break;
+          case 13: this.setState({ ledColor14: ledColorOn, ledShadowSize14: ledShadowOn, ledOpacity14: ledOpacityOn, ledColor13: ledColorOn, ledShadowSize13: ledShadowOn, ledOpacity13: ledOpacityOnToOff, ledColor12: ledColorOff, ledShadowSize12: ledShadowOff, ledOpacity12: ledOpacityOff, currentLedOn: this.state.currentLedOn +=1 }); break;
+          case 14: this.setState({ ledColor15: ledColorOn, ledShadowSize15: ledShadowOn, ledOpacity15: ledOpacityOn, ledColor14: ledColorOn, ledShadowSize14: ledShadowOn, ledOpacity14: ledOpacityOnToOff, ledColor13: ledColorOff, ledShadowSize13: ledShadowOff, ledOpacity13: ledOpacityOff, currentLedOn: this.state.currentLedOn +=1 }); break;
+          case 15: this.setState({ ledColor16: ledColorOn, ledShadowSize16: ledShadowOn, ledOpacity16: ledOpacityOn, ledColor15: ledColorOn, ledShadowSize15: ledShadowOn, ledOpacity15: ledOpacityOnToOff, ledColor14: ledColorOff, ledShadowSize14: ledShadowOff, ledOpacity14: ledOpacityOff, currentLedOn: this.state.currentLedOn +=1 }); break;
+          case 16: this.setState({ ledColor17: ledColorOn, ledShadowSize17: ledShadowOn, ledOpacity17: ledOpacityOn, ledColor16: ledColorOn, ledShadowSize16: ledShadowOn, ledOpacity16: ledOpacityOnToOff, ledColor15: ledColorOff, ledShadowSize15: ledShadowOff, ledOpacity15: ledOpacityOff, currentLedOn: this.state.currentLedOn +=1 }); break;
+          case 17: this.setState({ ledColor18: ledColorOn, ledShadowSize18: ledShadowOn, ledOpacity18: ledOpacityOn, ledColor17: ledColorOn, ledShadowSize17: ledShadowOn, ledOpacity17: ledOpacityOnToOff, ledColor16: ledColorOff, ledShadowSize16: ledShadowOff, ledOpacity16: ledOpacityOff, currentLedOn: this.state.currentLedOn +=1 }); break;
+          case 18: this.setState({ ledColor19: ledColorOn, ledShadowSize19: ledShadowOn, ledOpacity19: ledOpacityOn, ledColor18: ledColorOn, ledShadowSize18: ledShadowOn, ledOpacity18: ledOpacityOnToOff, ledColor17: ledColorOff, ledShadowSize17: ledShadowOff, ledOpacity17: ledOpacityOff, currentLedOn: this.state.currentLedOn +=1 }); break;
+          case 19: this.setState({ ledColor20: ledColorOn, ledShadowSize20: ledShadowOn, ledOpacity20: ledOpacityOn, ledColor19: ledColorOn, ledShadowSize19: ledShadowOn, ledOpacity19: ledOpacityOnToOff, ledColor18: ledColorOff, ledShadowSize18: ledShadowOff, ledOpacity18: ledOpacityOff, currentLedOn: this.state.currentLedOn +=1 }); break;
+          case 20: this.setState({ ledColor20: ledColorOn, ledShadowSize20: ledShadowOn, ledOpacity20: ledOpacityOnToOff, ledColor19: ledColorOff, ledShadowSize19: ledShadowOff, ledOpacity19: ledOpacityOff, currentLedOn: this.state.currentLedOn +=1 }, 
+            () => {
+              this.dataTransfer("starteDrehung")()}); break;
+          case 21: this.setState({ ledColor20: ledColorOff, ledShadowSize20: ledShadowOff, ledOpacity20: ledOpacityOff, currentLedOn: this.state.currentLedOn +=1 }); break;
+          default: this.setState({ ledsMoving: 0 }); break;
+        }
       }
     } else {
       this.setState({ 
