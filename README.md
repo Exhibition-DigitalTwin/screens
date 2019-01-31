@@ -27,7 +27,12 @@ Execute the batch file named "start.bat" to start the react app, the arduino cli
 1. Start the react app with 'npm start'.
 2. Start the arduino client and the websocket server with 'node (client or server).js' in the right directory.
 
-## React information
+## more
+
+### issues & help
+If there is any problem, issue or question you can open an issue at [GitHub](https://github.com/Exhibition-DigitalTwin/screens/issues).
+
+### React information
 You can find the most recent version of react information [here](https://github.com/facebook/create-react-app/blob/master/packages/react-scripts/template/README.md).
 
 ---
