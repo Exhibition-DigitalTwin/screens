@@ -223,7 +223,7 @@ class App extends React.Component {
     startTime: -100000,
     interval: fadeTimeBasicIn,
     timeForLedDown: 0,
-    intervalLed: 3000,
+    intervalLed: 1500,
     // screensaver
     showScreensaverBasic: true,
     // Aufbau
