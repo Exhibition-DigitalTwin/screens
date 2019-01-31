@@ -2,7 +2,7 @@ const WebSocket = require("ws");
 const readline = require("readline");
 var SerialPort = require("serialport");
 const ReadlineParser = require("@serialport/parser-readline");
-var port = new SerialPort("COM5"); //"/dev/cu.SLAB_USBtoUART"  Anas Port
+var port = new SerialPort("COM3"); //"/dev/cu.SLAB_USBtoUART"  Anas Port
 
 const ws = new WebSocket("ws://localhost:8080");
 const rl = readline.createInterface({
