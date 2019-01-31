@@ -429,131 +429,130 @@ class App extends React.Component {
       }
     if(Date.now() - this.state.interval >= this.state.time) {
       this.setState({ time: Date.now() })
-      console.log(this.state.time);
 
-    switch (this.state.actualStateFade) {
-      case 0: // Aufbau (Menu)
-        this.setState({
-          fadeMenu1Aufbau: true,
-          fadeMenu2Daten: false,
-          fadeStartData: false,
-          fadeMenu3Simulation: false,
-          fadeStartSimulation: false,
-          fadeMenu4Anwendung: false,
-          fadeReload: false,
-          menu1AufbauDisabled: false,
-          menu2DatenDisabled: true,
-          menu3SimulationDisabled: true,
-          menu4AnwendungenDisabled: true,
-          fadeStartDataDisable: true,
-          fadeStartSimulationDisable: true,
-        })
-        break;
-      case 1: // Daten (Menu)
-        this.setState({
-          fadeMenu1Aufbau: false,
-          fadeMenu2Daten: true,
-          fadeStartData: false,
-          fadeMenu3Simulation: false,
-          fadeStartSimulation: false,
-          fadeMenu4Anwendung: false,
-          fadeReload: false,
-          menu1AufbauDisabled: false,
-          menu2DatenDisabled: false,
-          menu3SimulationDisabled: true,
-          menu4AnwendungenDisabled: true,
-          fadeStartDataDisable: true,
-          fadeStartSimulationDisable: true,          
-        })
-        break;
-      case 2: // start data transfer
-        this.setState({
-          fadeMenu1Aufbau: false,
-          fadeMenu2Daten: false,
-          fadeStartData: true,
-          fadeMenu3Simulation: false,
-          fadeStartSimulation: false,
-          fadeMenu4Anwendung: false,
-          fadeReload: false,
-          menu1AufbauDisabled: true,
-          menu2DatenDisabled: false,
-          menu3SimulationDisabled: true,
-          menu4AnwendungenDisabled: true,
-          fadeStartDataDisable: false,
-          fadeStartSimulationDisable: true,
-        })
-        break;
-      case 3: // Simulation (Menu)
-        this.setState({
-          fadeMenu1Aufbau: false,
-          fadeMenu2Daten: false,
-          fadeStartData: false,
-          fadeMenu3Simulation: true,
-          fadeStartSimulation: false,
-          fadeMenu4Anwendung: false,
-          fadeReload: false,
-          menu1AufbauDisabled: true,
-          menu2DatenDisabled: false,
-          menu3SimulationDisabled: false,
-          menu4AnwendungenDisabled: true,
-          fadeStartDataDisable: true,
-          fadeStartSimulationDisable: true,
-        })
-        break;
-      case 4: // start simulation
-        this.setState({
-          fadeMenu1Aufbau: false,
-          fadeMenu2Daten: false,
-          fadeStartData: false,
-          fadeMenu3Simulation: false,
-          fadeStartSimulation: true,
-          fadeMenu4Anwendung: false,
-          fadeReload: false,
-          menu1AufbauDisabled: true,
-          menu2DatenDisabled: true,
-          menu3SimulationDisabled: false,
-          menu4AnwendungenDisabled: true,
-          fadeStartDataDisable: true,
-          fadeStartSimulationDisable: false,
-        })
-        break;
-      case 5: // Anwendungen (Menu)
-        this.setState({
-          fadeMenu1Aufbau: false,
-          fadeMenu2Daten: false,
-          fadeStartData: false,
-          fadeMenu3Simulation: false,
-          fadeStartSimulation: false,
-          fadeMenu4Anwendung: true,
-          fadeReload: false,
-          menu1AufbauDisabled: true,
-          menu2DatenDisabled: true,
-          menu3SimulationDisabled: false,
-          menu4AnwendungenDisabled: false,
-          menu1AufbauDisabled: true,
-          menu2DatenDisabled: true,
-          menu3SimulationDisabled: true,
-          menu4AnwendungenDisabled: false,
-          fadeStartDataDisable: true,
-          fadeStartSimulationDisable: true,
-        })
-        break;
-      case 6: // reload
-        this.setState({
-          fadeMenu1Aufbau: false,
-          fadeMenu2Daten: false,
-          fadeStartData: false,
-          fadeMenu3Simulation: false,
-          fadeStartSimulation: false,
-          fadeMenu4Anwendung: false,
-          fadeReload: true,
-          fadeStartDataDisable: true,
-          fadeStartSimulationDisable: true,
-        })
-        break;
-      default: 
-        console.log("wrong "+this.state.actualState);
-        break;
+      switch (this.state.actualStateFade) {
+        case 0: // Aufbau (Menu)
+          this.setState({
+            fadeMenu1Aufbau: true,
+            fadeMenu2Daten: false,
+            fadeStartData: false,
+            fadeMenu3Simulation: false,
+            fadeStartSimulation: false,
+            fadeMenu4Anwendung: false,
+            fadeReload: false,
+            menu1AufbauDisabled: false,
+            menu2DatenDisabled: true,
+            menu3SimulationDisabled: true,
+            menu4AnwendungenDisabled: true,
+            fadeStartDataDisable: true,
+            fadeStartSimulationDisable: true,
+          })
+          break;
+        case 1: // Daten (Menu)
+          this.setState({
+            fadeMenu1Aufbau: false,
+            fadeMenu2Daten: true,
+            fadeStartData: false,
+            fadeMenu3Simulation: false,
+            fadeStartSimulation: false,
+            fadeMenu4Anwendung: false,
+            fadeReload: false,
+            menu1AufbauDisabled: false,
+            menu2DatenDisabled: false,
+            menu3SimulationDisabled: true,
+            menu4AnwendungenDisabled: true,
+            fadeStartDataDisable: true,
+            fadeStartSimulationDisable: true,          
+          })
+          break;
+        case 2: // start data transfer
+          this.setState({
+            fadeMenu1Aufbau: false,
+            fadeMenu2Daten: false,
+            fadeStartData: true,
+            fadeMenu3Simulation: false,
+            fadeStartSimulation: false,
+            fadeMenu4Anwendung: false,
+            fadeReload: false,
+            menu1AufbauDisabled: true,
+            menu2DatenDisabled: false,
+            menu3SimulationDisabled: true,
+            menu4AnwendungenDisabled: true,
+            fadeStartDataDisable: false,
+            fadeStartSimulationDisable: true,
+          })
+          break;
+        case 3: // Simulation (Menu)
+          this.setState({
+            fadeMenu1Aufbau: false,
+            fadeMenu2Daten: false,
+            fadeStartData: false,
+            fadeMenu3Simulation: true,
+            fadeStartSimulation: false,
+            fadeMenu4Anwendung: false,
+            fadeReload: false,
+            menu1AufbauDisabled: true,
+            menu2DatenDisabled: false,
+            menu3SimulationDisabled: false,
+            menu4AnwendungenDisabled: true,
+            fadeStartDataDisable: true,
+            fadeStartSimulationDisable: true,
+          })
+          break;
+        case 4: // start simulation
+          this.setState({
+            fadeMenu1Aufbau: false,
+            fadeMenu2Daten: false,
+            fadeStartData: false,
+            fadeMenu3Simulation: false,
+            fadeStartSimulation: true,
+            fadeMenu4Anwendung: false,
+            fadeReload: false,
+            menu1AufbauDisabled: true,
+            menu2DatenDisabled: true,
+            menu3SimulationDisabled: false,
+            menu4AnwendungenDisabled: true,
+            fadeStartDataDisable: true,
+            fadeStartSimulationDisable: false,
+          })
+          break;
+        case 5: // Anwendungen (Menu)
+          this.setState({
+            fadeMenu1Aufbau: false,
+            fadeMenu2Daten: false,
+            fadeStartData: false,
+            fadeMenu3Simulation: false,
+            fadeStartSimulation: false,
+            fadeMenu4Anwendung: true,
+            fadeReload: false,
+            menu1AufbauDisabled: true,
+            menu2DatenDisabled: true,
+            menu3SimulationDisabled: false,
+            menu4AnwendungenDisabled: false,
+            menu1AufbauDisabled: true,
+            menu2DatenDisabled: true,
+            menu3SimulationDisabled: true,
+            menu4AnwendungenDisabled: false,
+            fadeStartDataDisable: true,
+            fadeStartSimulationDisable: true,
+          })
+          break;
+        case 6: // reload
+          this.setState({
+            fadeMenu1Aufbau: false,
+            fadeMenu2Daten: false,
+            fadeStartData: false,
+            fadeMenu3Simulation: false,
+            fadeStartSimulation: false,
+            fadeMenu4Anwendung: false,
+            fadeReload: true,
+            fadeStartDataDisable: true,
+            fadeStartSimulationDisable: true,
+          })
+          break;
+        default: 
+          console.log("wrong "+this.state.actualState);
+          break;
       }
     }
   }
@@ -568,6 +567,7 @@ class App extends React.Component {
       this.setState({ actualState: 0, actualStateFade: 0, time: Date.now() }, () => this.callback());
     } else if (param === "aufbau") {
       this.setState({ actualState: 1, actualStateFade: 1, time: Date.now() }, () => this.callback());
+      console.log("ich war hier");
       this._three.showWindmill();
       this.runLedStrip();
     } else if (param === "daten") {
@@ -758,6 +758,9 @@ class App extends React.Component {
       this._three.rotateHeadRootModel(0, 90, -0.01);
       this._three.startRotation();
       this.setState({actualStateFade: 3});
+    }else if (param === "starteDrehung") {
+      this.handleClickShowData('aufbau')();
+      console.log("ASHDKASLKDLKJSADKJAHSDKJHSAD");
     } else if (param === "drehungEin") {
       this.setState({rotationBlades: true});
     } else if (param === "SimulationStarten") {
@@ -820,7 +823,9 @@ class App extends React.Component {
         case 17: this.setState({ ledColor18: ledColorOn, ledShadowSize18: ledShadowOn, ledOpacity18: ledOpacityOn, ledColor17: ledColorOn, ledShadowSize17: ledShadowOn, ledOpacity17: ledOpacityOnToOff, ledColor16: ledColorOff, ledShadowSize16: ledShadowOff, ledOpacity16: ledOpacityOff, currentLedOn: this.state.currentLedOn +=1 }); break;
         case 18: this.setState({ ledColor19: ledColorOn, ledShadowSize19: ledShadowOn, ledOpacity19: ledOpacityOn, ledColor18: ledColorOn, ledShadowSize18: ledShadowOn, ledOpacity18: ledOpacityOnToOff, ledColor17: ledColorOff, ledShadowSize17: ledShadowOff, ledOpacity17: ledOpacityOff, currentLedOn: this.state.currentLedOn +=1 }); break;
         case 19: this.setState({ ledColor20: ledColorOn, ledShadowSize20: ledShadowOn, ledOpacity20: ledOpacityOn, ledColor19: ledColorOn, ledShadowSize19: ledShadowOn, ledOpacity19: ledOpacityOnToOff, ledColor18: ledColorOff, ledShadowSize18: ledShadowOff, ledOpacity18: ledOpacityOff, currentLedOn: this.state.currentLedOn +=1 }); break;
-        case 20: this.setState({ ledColor20: ledColorOn, ledShadowSize20: ledShadowOn, ledOpacity20: ledOpacityOnToOff, ledColor19: ledColorOff, ledShadowSize19: ledShadowOff, ledOpacity19: ledOpacityOff, currentLedOn: this.state.currentLedOn +=1 }, () => this.dataTransfer("starteDrehung")()); break;
+        case 20: this.setState({ ledColor20: ledColorOn, ledShadowSize20: ledShadowOn, ledOpacity20: ledOpacityOnToOff, ledColor19: ledColorOff, ledShadowSize19: ledShadowOff, ledOpacity19: ledOpacityOff, currentLedOn: this.state.currentLedOn +=1 }, 
+          () => {
+            this.dataTransfer("starteDrehung")()}); break;
         case 21: this.setState({ ledColor20: ledColorOff, ledShadowSize20: ledShadowOff, ledOpacity20: ledOpacityOff, currentLedOn: this.state.currentLedOn +=1 }); break;
         default: this.setState({ ledsMoving: 0 }); break;
       }
@@ -890,8 +895,8 @@ class App extends React.Component {
             */}
             <Fade in={showMenuPartOne} timeout={{ enter: fadeTimeBasicIn, exit: fadeTimeBasicOut }} mountOnEnter={true} unmountOnExit={true}>
               <div className="firstMenuPoint">
-                <Button className='n1' disabled={menu1AufbauDisabled} style={{ opacity: [fadeMenu1Aufbau ? textClickMeFade : null], position: 'absolute', right: distanceFromSide * 3 + 10, top: distanceFromSide + 5, fontSize: '20px' }} onClick={this.handleClickShowData('aufbau')} >Aufbau</Button>
-                <Fab className={"icon1"} disabled={menu1AufbauDisabled} style={{ opacity: [fadeMenu1Aufbau ? textClickMeFade : null], position: 'absolute', right: distanceFromSide, top: distanceFromSide, fontSize: '20px' }} onClick={this.handleClickShowData('aufbau')}>
+                <Button className='n1' disabled={menu1AufbauDisabled} style={{ opacity: [fadeMenu1Aufbau ? textClickMeFade : null], position: 'absolute', right: distanceFromSide * 3 + 10, top: distanceFromSide + 5, fontSize: '20px' }} onClick={this.dataTransfer("datenDown")} >Aufbau</Button>
+                <Fab className={"icon1"} disabled={menu1AufbauDisabled} style={{ opacity: [fadeMenu1Aufbau ? textClickMeFade : null], position: 'absolute', right: distanceFromSide, top: distanceFromSide, fontSize: '20px' }} onClick={this.dataTransfer("datenDown")}>
                   <AufbauIcon className={"aufbauIcon"} color={fabColor} />
                 </Fab>
               </div>
