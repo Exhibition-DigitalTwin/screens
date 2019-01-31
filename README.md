@@ -1,4 +1,4 @@
-[english](#screens) | [Deutsch](#-Dateisammlung-Digitaler-Zwilling-Ausstellungsgestaltung)
+[english](#screens) | [Deutsch](#Dateisammlung-Digitaler-Zwilling-Ausstellungsgestaltung)
 
 # screens
 All files regarding the prototype of our project "Digital Twin exhibition design" at HfG Schwäbisch Gmünd in wintersemester 18/19 in Schwerpunkte 1.
