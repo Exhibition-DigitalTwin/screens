@@ -14,11 +14,12 @@ All files regarding the prototype of our project "Digital Twin exhibition design
 We recommend at least 8GB RAM and a mediocre graphic card or 16GB RAM when you cannot use a graphic card. We used a touchscreen with 1920x1080px (16:9 21") on Google Chrome.
 
 ### installation
-1. Get the newest version of the code from our [GitHub Repository](https://github.com/Exhibition-DigitalTwin/screens). 
-2. Install [npm](https://www.npmjs.com/get-npm).
-3. Install all dependencies with 'npm install'.
-4. Run 'node listPorts.js' in the terminal in the websocket folder to get the port of your plugged in Arduino.
-5. Write the correct USB port into client.js as 'port' in line 5.
+1. Make sure you have Version 10.12.0 node.js installed
+2. Get the newest version of the code from our [GitHub Repository](https://github.com/Exhibition-DigitalTwin/screens). 
+3. Install [npm](https://www.npmjs.com/get-npm).
+4. Install all dependencies with 'npm install'.
+5. Run 'node listPorts.js' in the terminal in the websocket folder to get the port of your plugged in Arduino.
+6. Write the correct USB port into client.js as 'port' in line 5.
 
 ### shortcut Windows
 Execute the batch file named "start.bat" to start the react app, the arduino client and the websocket server simultaniously.
