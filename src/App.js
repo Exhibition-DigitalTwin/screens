@@ -629,7 +629,6 @@ class App extends React.Component {
       });
       this._three.rotateHeadRootModel(0, 90, -0.01);
       this.sendMessage(1);
-      this.sendMessage(0);
     }
     switch (this.state.actualState) {
       // screensaver
@@ -752,10 +751,13 @@ class App extends React.Component {
   dataTransfer = param => e => {
     if (param === "datenDown") {
       this.setState({ ledsMoving: 2 }); 
+      this.sendMessage(2);
     } else if (param === "datenUp") {
       this.setState({ ledsMoving: 1 }); 
+      this.sendMessage(3);
     } else if (param === "starteDrehung" && this.state.rotationBlades) {
       this._three.rotateHeadRootModel(0, 90, -0.01);
+      this.sendMessage(1);
       this._three.startRotation();
       this.setState({actualStateFade: 3});
     }else if (param === "starteDrehung") {
