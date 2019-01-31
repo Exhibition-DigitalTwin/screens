@@ -1,7 +1,7 @@
 [english](#screens) | [Deutsch](#Dateisammlung-Digitaler-Zwilling-Ausstellungsgestaltung)
 
 # screens
-All files regarding the prototype of our project "Digital Twin exhibition design" at HfG Schwäbisch Gmünd in wintersemester 18/19 in Schwerpunkte 1.
+All files regarding the prototype of our project "Digital Twin exhibition design" at HfG Schwäbisch Gmünd in Wintersemester 18/19 in Schwerpunkte 1.
 
 ### team
 * [Ana Keser](https://anakeser.de/)
@@ -32,8 +32,9 @@ The code just has to be uploaded to the Arduino once, then communication via web
 For the LEDs to work you have to include the FastLED library in the Arduin IDE.
 
 ### installation
-1. Make sure you have Version 10.12.0 node.js installed
-2. Get the newest version of the code from our [GitHub Repository](https://github.com/Exhibition-DigitalTwin/screens). 
+
+1. Get the newest version of the code from our [GitHub Repository](https://github.com/Exhibition-DigitalTwin/screens).
+2. Make sure you have Version 10.12.0 node.js installed 
 3. Install [npm](https://www.npmjs.com/get-npm).
 4. Install all dependencies with 'npm install'.
 5. Run 'node listPorts.js' in the terminal in the websocket folder to get the port of your plugged in Arduino.
