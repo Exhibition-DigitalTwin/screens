@@ -28,7 +28,7 @@ The assembly of all the parts should be clear by looking at the structure tab in
 8. Arduino Uno/Mega
 
 #### micro controller
-The code just has to be uploaded to the Arduino once, then communication via websocket takes care of the input and the handles.
+The code (/arduino/stepper_Motors/stepper_Motors.ino) just has to be uploaded to the Arduino once, then communication via websocket takes care of the input and the handles.
 For the LEDs to work you have to include the FastLED library in the Arduino IDE.
 
 ### installation
