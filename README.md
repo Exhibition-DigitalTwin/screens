@@ -13,6 +13,20 @@ All files regarding the prototype of our project "Digital Twin exhibition design
 ### hardware
 We recommend at least 8GB RAM and a mediocre graphic card or 16GB RAM when you cannot use a graphic card. We used a touchscreen with 1920x1080px (16:9 21") on Google Chrome.
 
+#### 3D models
+All 3d models of our physical and digital model can be found in /src/objects
+
+#### physical model parts
+1. 3D-Printed Models
+2. Ball-Bearing
+3. Small gears
+4. Slip Ring
+5. 2x NEMA17 Stepper
+6. 2x NEMA17 Stepper Driver
+7. LED Stripe
+8. Arduino Uno/Mega
+
+
 ### installation
 1. Make sure you have Version 10.12.0 node.js installed
 2. Get the newest version of the code from our [GitHub Repository](https://github.com/Exhibition-DigitalTwin/screens). 
@@ -28,12 +42,7 @@ Execute the batch file named "start.bat" to start the react app, the arduino cli
 1. Start the react app with 'npm start'.
 2. Start the arduino client and the websocket server with 'node (client or server).js' in the right directory.
 
-## more
-
-### issues & help
-If there is any problem, issue or question you can open an issue at [GitHub](https://github.com/Exhibition-DigitalTwin/screens/issues).
-
-### React information
+## React information
 You can find the most recent version of react information [here](https://github.com/facebook/create-react-app/blob/master/packages/react-scripts/template/README.md).
 
 ---
