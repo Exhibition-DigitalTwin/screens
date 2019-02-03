@@ -224,6 +224,8 @@ class App extends React.Component {
     interval: fadeTimeBasicIn,
     timeForLedDown: 0,
     intervalLed: 1900,
+    timeRunning: 0,
+    intervalToScreensaver: 5000,
     // screensaver
     showScreensaverBasic: true,
     // Aufbau
@@ -257,7 +259,6 @@ class App extends React.Component {
     standardTextClickMeFadeStart: 0.4,
     textClickMeFade: 0.4,
     textClickMeFadeStatus: false,
-    open: false,
     contentOpacity: 0.5,
 
     // Slider
@@ -358,10 +359,11 @@ class App extends React.Component {
     this.clickMeButtonTimer = setInterval(() => this.setContentOpacity(), 30);
     this.clickMeButtonTimer = setInterval(() => this.runLedStrip(), 100);
     this.clickMeButtonTimer = setInterval(() => this.handleFadeActive(), 20);
+    this.clickAnywhereTimer = setInterval(() => this.reload(), this.state.intervalToScreensaver);
   }
 
   componentWillUnmount() {
-    clearInterval(this.clickMeButtonTimer);
+    clearInterval(this.clickMeButtonTimer, this.clickAnywhereTimer);
   }
 
   setOpacity() {
@@ -618,8 +620,6 @@ class App extends React.Component {
     } else if (param === "simulation") {
       this.setState({ actualState: 3, actualStateFade: 4, menu2DatenDisabled: true, time: Date.now() }, () => this.callback());
     } else if (param === "anwendungen") {
-      this._three.deleteModel();
-      this._three.moveCamera(-29, 15, 500);
       this.setState({ actualState: 4, actualStateFade: 7, showSimulationRunning: false, menu3SimulationDisabled: true, time: Date.now() }, () => this.callback());
     } else if (param === "showDatenExpert1") {
       this.setState({ showDatenExpert1: true, showDisableExpertDiv: true, contentFadedOut: false });
@@ -802,7 +802,6 @@ class App extends React.Component {
       this._three.startRotation();
       this.setState({actualStateFade: 3});
     } else if (param === "45Drehung" ) {
-      console.log("hihihihiihii");
       if(this.state.actualStateFade <= 1) {
       this._three.rotateHeadRootModel(0, 45, -0.1);
       }
@@ -815,6 +814,8 @@ class App extends React.Component {
       this._three.showSecondModel();
       this.setState({ actualStateFade: 5, showSimulationRunning: true, }); 
     }else if (param === "SimulationAnwenden") {
+      this._three.deleteModel();
+      this._three.moveCamera(-29, 15, 500);
       this.setState({ actualStateFade: 6, ledsMoving: 1 }); 
     } else {
       console.log(param);
@@ -893,8 +894,11 @@ class App extends React.Component {
     this.setState(() => ({ show: true, color: this.setOpacity() }))
   }
 
-  handleClick = () => {
-    this.setState({ open: !this.state.open })
+  reload() {
+    console.log(this.clickAnywhereTimer);
+    this.clickAnywhereTimer = 0;
+    console.log(this.clickAnywhereTimer);
+    //window.location.reload();
   }
 
   handleShowDisableExpertDiv = () => {
@@ -1084,8 +1088,7 @@ class App extends React.Component {
                   Das große Potential des digitalen Zwillings besteht darin, dass jeder Zustand eines physischen Produkts  mit dem virtuellen Prozess überlagert und verglichen werden
                   kann. Der finale Schritt besteht deshalb darin, die Informationen des Datenspeichers in eine Simulation des Windrades einzubinden.<br /><br />
                   In dieser Simulation können unterschiedliche Faktoren virtuell ausprobiert und deren Einfluss berechnet werden.</p>
-                  <Button className='n1' disabled={fadeStartSimulationDisable} style={{...menuPointButtonStyle, ...{opacity: [fadeStartSimulation ? textClickMeFade*contentOpacity : contentOpacity]}}} onClick={() => { this.dataTransfer("SimulationStarten")(); this.dataTransfer("datenUp")}}>Starte Simulation</Button>        
-                  <Button className='n1' disabled={fadeSendSimulationDisable} style={{...menuPointButtonStyle, ...{opacity: [fadeSendSimulation ? textClickMeFade*contentOpacity : contentOpacity]}}} onClick={() => { this.dataTransfer("SimulationAnwenden")(); this.dataTransfer("datenUp")}}>Simulation anwenden</Button>        
+                  <Button in={!showSimulationRunning} className='n1' disabled={fadeStartSimulationDisable} style={{...menuPointButtonStyle, ...{opacity: [fadeStartSimulation ? textClickMeFade*contentOpacity : contentOpacity]}}} onClick={() => { this.dataTransfer("SimulationStarten")(); this.dataTransfer("datenUp")}}>Starte Simulation</Button>        
               </div>
             </Fade>
             <Fade in={showSimulationRunning} timeout={{ enter: fadeTimeBasicIn, exit: fadeTimeBasicOut }} mountOnEnter={true} unmountOnExit={true}>
@@ -1094,6 +1097,7 @@ class App extends React.Component {
                 Simulation Nr. 1<br/><br/>Windgeschwindigkeit: 'hoch'<br/><br/>Belastung: 'kritisch'</p>
                 <p className='p1' style={{position: 'absolute', left: 910+360, top: 790, fontSize: textFontNormal/1.7 + 'px', color: textColorNormal, width: '10%', textAlign: 'left'}}>
                 Simulation Nr. 265<br/><br/>Windgeschwindigkeit: 'hoch'<br/><br/>Belastung: 'normal'<br/><br/>Bremsvorgang aktiviert</p>
+                <Button className='n1' disabled={fadeSendSimulationDisable} style={{...menuPointButtonStyle, ...{opacity: [fadeSendSimulation ? textClickMeFade*contentOpacity : contentOpacity]}}} onClick={() => { this.dataTransfer("SimulationAnwenden")(); this.dataTransfer("datenUp")}}>Simulation anwenden</Button>        
               </div>
             </Fade>
             {/* 
@@ -1105,7 +1109,7 @@ class App extends React.Component {
                 <p className='p1' style={{...pStyle, ...{opacity:contentOpacity}}} >
                 Digitale Zwillinge von Windrädern ermöglichen unter Anderem <span style={{...expertStyleToEnter, ...{opacity: 1, color: "#FFFFFF"}}} onClick={this.handleClickShowData("showAnwendungenExpert1")}>Predicitve Maintenance</span>  - die Sensordaten von Windfarmen machen eine kontinuierliche Überwachung möglich. Aber Digital Twins finden zukünftig noch sehr vielfältige Anwendungsfelder. Insbesondere die <span style={{...expertStyleToEnter, ...{opacity: 1, color: "#FFFFFF"}}} onClick={this.handleClickShowData("showAnwendungenExpert2")}>Produktion</span> profitiert bereits heute von dem Einsatz der Zwillinge.
                 <br/><br/>Ein digitaler Zwilling in der <span style={{...expertStyleToEnter, ...{opacity: 1, color: "#FFFFFF"}}} onClick={this.handleClickShowData("showAnwendungenExpert3")}>Medizin</span> kann Auskunft darüber geben, ob ein Medikament wirkt oder eine  Therapie anschlägt. Und auch im Bereich <span style={{...expertStyleToEnter, ...{opacity: 1, color: "#FFFFFF"}}} onClick={this.handleClickShowData("showAnwendungenExpert4")}>Smart City</span> ist der Einsatz virtueller Repräsentanzen von großem Interesse.</p>
-                <Button className='n1' style={{...menuPointButtonStyle, ...{opacity: [fadeReload ? textClickMeFade*contentOpacity : contentOpacity]}}} onClick={() => { this.sendMessage(1); window.location.reload()}}>Reload</Button>        
+                <Button className='n1' style={{...menuPointButtonStyle, ...{opacity: [fadeReload ? textClickMeFade*contentOpacity : contentOpacity]}}} onClick={() => { this.sendMessage(1); this.reload()}}>Reload</Button>        
               </div>
             </Fade>
             <Fade in={showAnwendungenExpert1} timeout={{ enter: fadeTimeBasicIn, exit: fadeTimeBasicOut }} mountOnEnter={true} unmountOnExit={true}>
