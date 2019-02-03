@@ -346,9 +346,11 @@ class App extends React.Component {
 
     fadeStartData: false,
     fadeStartSimulation: false,
+    fadeSendSimulation: false,
     fadeReload: false,
     fadeStartDataDisable: false,
     fadeStartSimulationDisable: false,
+    fadeSendSimulationDisable: false,
   };
 
   componentDidMount() {
@@ -424,6 +426,11 @@ class App extends React.Component {
         break;
       case 6:
         this.setState({
+          fadeSendSimulation: false,
+        })
+        break;
+      case 7:
+        this.setState({
           fadeMenu4Anwendung: false,
         })
         break;
@@ -442,6 +449,7 @@ class App extends React.Component {
             fadeStartData: false,
             fadeMenu3Simulation: false,
             fadeStartSimulation: false,
+            fadeSendSimulation: false,
             fadeMenu4Anwendung: false,
             fadeReload: false,
             menu1AufbauDisabled: false,
@@ -450,6 +458,7 @@ class App extends React.Component {
             menu4AnwendungenDisabled: true,
             fadeStartDataDisable: true,
             fadeStartSimulationDisable: true,
+            fadeSendSimulationDisable: true,
           })
           break;
         case 1: // Daten (Menu)
@@ -459,6 +468,7 @@ class App extends React.Component {
             fadeStartData: false,
             fadeMenu3Simulation: false,
             fadeStartSimulation: false,
+            fadeSendSimulation: false,
             fadeMenu4Anwendung: false,
             fadeReload: false,
             menu1AufbauDisabled: false,
@@ -466,7 +476,8 @@ class App extends React.Component {
             menu3SimulationDisabled: true,
             menu4AnwendungenDisabled: true,
             fadeStartDataDisable: true,
-            fadeStartSimulationDisable: true,          
+            fadeStartSimulationDisable: true,   
+            fadeSendSimulationDisable: true,       
           })
           break;
         case 2: // start data transfer
@@ -476,6 +487,7 @@ class App extends React.Component {
             fadeStartData: true,
             fadeMenu3Simulation: false,
             fadeStartSimulation: false,
+            fadeSendSimulation: false,
             fadeMenu4Anwendung: false,
             fadeReload: false,
             menu1AufbauDisabled: true,
@@ -484,6 +496,7 @@ class App extends React.Component {
             menu4AnwendungenDisabled: true,
             fadeStartDataDisable: false,
             fadeStartSimulationDisable: true,
+            fadeSendSimulationDisable: true,
           })
           break;
         case 3: // Simulation (Menu)
@@ -493,6 +506,7 @@ class App extends React.Component {
             fadeStartData: false,
             fadeMenu3Simulation: true,
             fadeStartSimulation: false,
+            fadeSendSimulation: false,
             fadeMenu4Anwendung: false,
             fadeReload: false,
             menu1AufbauDisabled: true,
@@ -501,6 +515,7 @@ class App extends React.Component {
             menu4AnwendungenDisabled: true,
             fadeStartDataDisable: true,
             fadeStartSimulationDisable: false,
+            fadeSendSimulationDisable: true,
           })
           break;
         case 4: // start simulation
@@ -510,6 +525,7 @@ class App extends React.Component {
             fadeStartData: false,
             fadeMenu3Simulation: false,
             fadeStartSimulation: true,
+            fadeSendSimulation: false,
             fadeMenu4Anwendung: false,
             fadeReload: false,
             menu1AufbauDisabled: true,
@@ -519,19 +535,39 @@ class App extends React.Component {
             fadeStartDataDisable: true,
             fadeStartSimulationDisable: false,
             showSimulationRunning: false,
+            fadeSendSimulationDisable: true,
           })
           break;
-        case 5: // Anwendungen (Menu)
+        case 5: // send Simulation
           this.setState({
             fadeMenu1Aufbau: false,
             fadeMenu2Daten: false,
             fadeStartData: false,
             fadeMenu3Simulation: false,
             fadeStartSimulation: false,
-            fadeMenu4Anwendung: true,
+            fadeSendSimulation: true,
+            fadeMenu4Anwendung: false,
             fadeReload: false,
             menu1AufbauDisabled: true,
             menu2DatenDisabled: true,
+            menu3SimulationDisabled: false,
+            menu4AnwendungenDisabled: true,
+            fadeStartDataDisable: true,
+            fadeStartSimulationDisable: true,
+            showSimulationRunning: true,
+            fadeSendSimulationDisable: false,
+          })
+          break;
+        case 6: // Anwendungen (Menu)
+          this.setState({
+            fadeMenu1Aufbau: false,
+            fadeMenu2Daten: false,
+            fadeStartData: false,
+            fadeMenu3Simulation: false,
+            fadeStartSimulation: false,
+            fadeSendSimulation: false,
+            fadeMenu4Anwendung: true,
+            fadeReload: false,
             menu1AufbauDisabled: true,
             menu2DatenDisabled: true,
             menu3SimulationDisabled: false,
@@ -539,20 +575,23 @@ class App extends React.Component {
             fadeStartDataDisable: true,
             fadeStartSimulationDisable: true,
             showSimulationRunning: true,
+            fadeSendSimulationDisable: true,
           })
           break;
-        case 6: // reload
+        case 7: // reload
           this.setState({
             fadeMenu1Aufbau: false,
             fadeMenu2Daten: false,
             fadeStartData: false,
             fadeMenu3Simulation: false,
             fadeStartSimulation: false,
+            fadeSendSimulation: false,
             fadeMenu4Anwendung: false,
             fadeReload: true,
             fadeStartDataDisable: true,
             fadeStartSimulationDisable: true,
             showSimulationRunning: false,
+            fadeSendSimulationDisable: true,
           })
           break;
         default: 
@@ -581,7 +620,7 @@ class App extends React.Component {
     } else if (param === "anwendungen") {
       this._three.deleteModel();
       this._three.moveCamera(-29, 15, 500);
-      this.setState({ actualState: 4, actualStateFade: 6, showSimulationRunning: false, menu3SimulationDisabled: true, time: Date.now() }, () => this.callback());
+      this.setState({ actualState: 4, actualStateFade: 7, showSimulationRunning: false, menu3SimulationDisabled: true, time: Date.now() }, () => this.callback());
     } else if (param === "showDatenExpert1") {
       this.setState({ showDatenExpert1: true, showDisableExpertDiv: true, contentFadedOut: false });
     } else if (param === "showDatenExpert2") {
@@ -775,6 +814,8 @@ class App extends React.Component {
       this._three.moveCamera(-50, 15, 700); 
       this._three.showSecondModel();
       this.setState({ actualStateFade: 5, showSimulationRunning: true, }); 
+    }else if (param === "SimulationAnwenden") {
+      this.setState({ actualStateFade: 6, ledsMoving: 1 }); 
     } else {
       console.log(param);
     }
@@ -882,7 +923,7 @@ class App extends React.Component {
   };
 
   render() {
-    const { showSimulationRunning, fadeStartDataDisable, fadeStartSimulationDisable, fadeStartData, fadeStartSimulation, fadeReload, fadeMenu1Aufbau, fadeMenu2Daten, fadeMenu3Simulation, fadeMenu4Anwendung, menu1AufbauDisabled, menu2DatenDisabled, menu3SimulationDisabled, menu4AnwendungenDisabled, rotationBlades, ledOpacity1, ledOpacity2, ledOpacity3, ledOpacity4, ledOpacity5, ledOpacity6, ledOpacity7, ledOpacity8, ledOpacity9, ledOpacity10, ledOpacity11, ledOpacity12, ledOpacity13, ledOpacity14, ledOpacity15, ledOpacity16, ledOpacity17, ledOpacity18, ledOpacity19, ledOpacity20, ledShadowSize1, ledShadowSize2, ledShadowSize3, ledShadowSize4, ledShadowSize5, ledShadowSize6, ledShadowSize7, ledShadowSize8, ledShadowSize9, ledShadowSize10, ledShadowSize11, ledShadowSize12, ledShadowSize13, ledShadowSize14, ledShadowSize15, ledShadowSize16, ledShadowSize17, ledShadowSize18, ledShadowSize19, ledShadowSize20, ledColor20, ledColor19, ledColor18, ledColor17, ledColor16, ledColor15, ledColor14, ledColor13, ledColor12, ledColor11, ledColor10, ledColor9, ledColor8, ledColor7, ledColor6, ledColor5, ledColor4, ledColor3, ledColor2, ledColor1, showLEDs, contentOpacity, showDisableExpertDiv, lineMenuColor, showLine1, showLine2, showLine3,fabColor, showMenuPartOne, textClickMeFade, leftNormalDistance, showMenu, showScreensaverBasic, showAufbauBasic, showDatenBasic, showDatenExpert1, showDatenExpert2, showDatenExpert3, showSimulationBasic, showAnwendungenExpert3, showAnwendungenExpert4, showAnwendungenExpert1, showAnwendungenExpert2, showAnwendungenBasic, valueSlider } = this.state;
+    const { fadeSendSimulationDisable, fadeSendSimulation, showSimulationRunning, fadeStartDataDisable, fadeStartSimulationDisable, fadeStartData, fadeStartSimulation, fadeReload, fadeMenu1Aufbau, fadeMenu2Daten, fadeMenu3Simulation, fadeMenu4Anwendung, menu1AufbauDisabled, menu2DatenDisabled, menu3SimulationDisabled, menu4AnwendungenDisabled, rotationBlades, ledOpacity1, ledOpacity2, ledOpacity3, ledOpacity4, ledOpacity5, ledOpacity6, ledOpacity7, ledOpacity8, ledOpacity9, ledOpacity10, ledOpacity11, ledOpacity12, ledOpacity13, ledOpacity14, ledOpacity15, ledOpacity16, ledOpacity17, ledOpacity18, ledOpacity19, ledOpacity20, ledShadowSize1, ledShadowSize2, ledShadowSize3, ledShadowSize4, ledShadowSize5, ledShadowSize6, ledShadowSize7, ledShadowSize8, ledShadowSize9, ledShadowSize10, ledShadowSize11, ledShadowSize12, ledShadowSize13, ledShadowSize14, ledShadowSize15, ledShadowSize16, ledShadowSize17, ledShadowSize18, ledShadowSize19, ledShadowSize20, ledColor20, ledColor19, ledColor18, ledColor17, ledColor16, ledColor15, ledColor14, ledColor13, ledColor12, ledColor11, ledColor10, ledColor9, ledColor8, ledColor7, ledColor6, ledColor5, ledColor4, ledColor3, ledColor2, ledColor1, showLEDs, contentOpacity, showDisableExpertDiv, lineMenuColor, showLine1, showLine2, showLine3,fabColor, showMenuPartOne, textClickMeFade, leftNormalDistance, showMenu, showScreensaverBasic, showAufbauBasic, showDatenBasic, showDatenExpert1, showDatenExpert2, showDatenExpert3, showSimulationBasic, showAnwendungenExpert3, showAnwendungenExpert4, showAnwendungenExpert1, showAnwendungenExpert2, showAnwendungenBasic, valueSlider } = this.state;
 
     return (
       <div className="App">
@@ -1044,7 +1085,7 @@ class App extends React.Component {
                   kann. Der finale Schritt besteht deshalb darin, die Informationen des Datenspeichers in eine Simulation des Windrades einzubinden.<br /><br />
                   In dieser Simulation können unterschiedliche Faktoren virtuell ausprobiert und deren Einfluss berechnet werden.</p>
                   <Button className='n1' disabled={fadeStartSimulationDisable} style={{...menuPointButtonStyle, ...{opacity: [fadeStartSimulation ? textClickMeFade*contentOpacity : contentOpacity]}}} onClick={() => { this.dataTransfer("SimulationStarten")(); this.dataTransfer("datenUp")}}>Starte Simulation</Button>        
-
+                  <Button className='n1' disabled={fadeSendSimulationDisable} style={{...menuPointButtonStyle, ...{opacity: [fadeSendSimulation ? textClickMeFade*contentOpacity : contentOpacity]}}} onClick={() => { this.dataTransfer("SimulationAnwenden")(); this.dataTransfer("datenUp")}}>Simulation anwenden</Button>        
               </div>
             </Fade>
             <Fade in={showSimulationRunning} timeout={{ enter: fadeTimeBasicIn, exit: fadeTimeBasicOut }} mountOnEnter={true} unmountOnExit={true}>
