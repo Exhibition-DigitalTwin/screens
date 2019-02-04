@@ -594,21 +594,21 @@ class App extends React.Component {
   handleClickShowData = param => e => {
     if (param === "screensaver") {
       this.setState({ actualState: 0, actualStateFade: 0, time: Date.now() }, () => this.callback());
-    } else if (param === "aufbau") {
+    } else if (param === "aufbau" && this.state.actualState === 0) {
       this.setState({ actualState: 1, actualStateFade: 1, time: Date.now() }, () => this.callback());
       this._three.showWindmill();
-    } else if (param === "daten") {
+    } else if (param === "daten" && this.state.actualState === 1) {
       this._three.resetPosition();
       this.setState({ actualState: 2, actualStateFade: 2, menu1AufbauDisabled: true, time: Date.now() }, () => this.callback());
-    } else if (param === "simulation") {
+    } else if (param === "simulation" && this.state.actualState === 2) {
       this.setState({ actualState: 3, actualStateFade: 4, menu2DatenDisabled: true, time: Date.now() }, () => this.callback());
-    } else if (param === "anwendungen") {
+    } else if (param === "anwendungen" && this.state.actualState === 3) {
       this.setState({ actualState: 4, actualStateFade: 7, showSimulationRunning: false, menu3SimulationDisabled: true, time: Date.now() }, () => this.callback());
-    } else if (param === "showDatenExpert1") {
+    } else if (param === "showDatenExpert1" && this.state.actualState === 2) {
       this.setState({ showDatenExpert1: true, showDisableExpertDiv: true, contentFadedOut: false });
-    } else if (param === "showDatenExpert2") {
+    } else if (param === "showDatenExpert2" && this.state.actualState === 2) {
       this.setState({ showDatenExpert2: true, showDisableExpertDiv: true, contentFadedOut: false });
-    } else if (param === "showDatenExpert3") {
+    } else if (param === "showDatenExpert3" && this.state.actualState === 2) {
       this.setState({ showDatenExpert3: true, showDisableExpertDiv: true, contentFadedOut: false });
     } else if (param === "showAnwendungenExpert1") {
       this.setState({ showAnwendungenExpert1: true, showDisableExpertDiv: true, contentFadedOut: false });
@@ -807,10 +807,8 @@ class App extends React.Component {
       this.sendMessage(1);
       this._three.startRotation();
       this.setState({actualStateFade: 3});
-    } else if (param === "45Drehung" ) {
-      if(this.state.actualStateFade <= 1) {
+    } else if (param === "45Drehung" && this.state.actualStateFade <= 1) {
       this._three.rotateHeadRootModel(0, 45, -0.1);
-      }
     } else if (param === "starteDrehung") {
       this.handleClickShowData('aufbau')();
     } else if (param === "drehungEin") {
@@ -1239,7 +1237,7 @@ class App extends React.Component {
                   In dieser Simulation können unterschiedliche Faktoren virtuell ausprobiert und deren Einfluss berechnet werden.</span> 
                   : <span>ToDo</span>}
                   </p>
-                  <Button in={!showSimulationRunning} className='n1' disabled={fadeStartSimulationDisable} style={{...menuPointButtonStyle, ...{opacity: [fadeStartSimulation&&!showSimulationRunning ? textClickMeFade*contentOpacity : 0]}}} onClick={() => { this.dataTransfer("SimulationStarten")(); this.resetTimer()}}>{showGerman ? <span>Starte Simulation</span> : <span>start simulation</span>}</Button>        
+                  <Button className='n1' disabled={fadeStartSimulationDisable} style={{...menuPointButtonStyle, ...{opacity: [fadeStartSimulation&&!showSimulationRunning ? textClickMeFade*contentOpacity : 0]}}} onClick={() => { this.dataTransfer("SimulationStarten")(); this.resetTimer()}}>{showGerman ? <span>Starte Simulation</span> : <span>start simulation</span>}</Button>        
               </div>
             </Fade>
             <Fade in={showSimulationRunning} timeout={{ enter: fadeTimeBasicIn, exit: fadeTimeBasicOut }} mountOnEnter={true} unmountOnExit={true}>
@@ -1307,7 +1305,7 @@ class App extends React.Component {
             EXPERT CONTENT HIDE 
             */}
             <Fade in={showDisableExpertDiv} timeout={0} mountOnEnter={true} unmountOnExit={true}>
-              <div style={{opacity: "0", position: "absolute", height: "1080px", width: "1500px", top: "0px", left: "0px" }} onClick={() => { this.handleShowDisableExpertDiv()(); this.resetTimer()}}>
+              <div style={{opacity: "0", position: "absolute", height: "1080px", width: "1500px", top: "0px", left: "0px" }} onClick={() => { this.handleShowDisableExpertDiv(); this.resetTimer()}}>
               </div>
             </Fade>
             {/* 
