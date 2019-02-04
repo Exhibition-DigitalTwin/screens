@@ -215,6 +215,7 @@ function AnwendungenIcon(props) {
 class App extends React.Component {
   state = {
     // 0 Screensaver, 1 Aufbau, 2 Daten, 3 Simulation, 4 Anwendungen
+    showGerman: false,
     actualState: 0,
     actualStateFade: 0,
     lastState: 0,
@@ -789,6 +790,14 @@ class App extends React.Component {
     }
   };
 
+  changeLanguage = param => e => {
+    if (param === "english") {
+      this.setState({ showGerman: false }); 
+    } else {
+      this.setState({ showGerman: true });
+    }
+  }
+
   dataTransfer = param => e => {
     if (param === "datenDown") {
       this.setState({ ledsMoving: 2, timeForLedDown: Date.now() }); 
@@ -927,7 +936,7 @@ class App extends React.Component {
   };
 
   render() {
-    const { fadeSendSimulationDisable, fadeSendSimulation, showSimulationRunning, fadeStartDataDisable, fadeStartSimulationDisable, fadeStartData, fadeStartSimulation, fadeReload, fadeMenu1Aufbau, fadeMenu2Daten, fadeMenu3Simulation, fadeMenu4Anwendung, menu1AufbauDisabled, menu2DatenDisabled, menu3SimulationDisabled, menu4AnwendungenDisabled, rotationBlades, ledOpacity1, ledOpacity2, ledOpacity3, ledOpacity4, ledOpacity5, ledOpacity6, ledOpacity7, ledOpacity8, ledOpacity9, ledOpacity10, ledOpacity11, ledOpacity12, ledOpacity13, ledOpacity14, ledOpacity15, ledOpacity16, ledOpacity17, ledOpacity18, ledOpacity19, ledOpacity20, ledShadowSize1, ledShadowSize2, ledShadowSize3, ledShadowSize4, ledShadowSize5, ledShadowSize6, ledShadowSize7, ledShadowSize8, ledShadowSize9, ledShadowSize10, ledShadowSize11, ledShadowSize12, ledShadowSize13, ledShadowSize14, ledShadowSize15, ledShadowSize16, ledShadowSize17, ledShadowSize18, ledShadowSize19, ledShadowSize20, ledColor20, ledColor19, ledColor18, ledColor17, ledColor16, ledColor15, ledColor14, ledColor13, ledColor12, ledColor11, ledColor10, ledColor9, ledColor8, ledColor7, ledColor6, ledColor5, ledColor4, ledColor3, ledColor2, ledColor1, showLEDs, contentOpacity, showDisableExpertDiv, lineMenuColor, showLine1, showLine2, showLine3,fabColor, showMenuPartOne, textClickMeFade, leftNormalDistance, showMenu, showScreensaverBasic, showAufbauBasic, showDatenBasic, showDatenExpert1, showDatenExpert2, showDatenExpert3, showSimulationBasic, showAnwendungenExpert3, showAnwendungenExpert4, showAnwendungenExpert1, showAnwendungenExpert2, showAnwendungenBasic, valueSlider } = this.state;
+    const { showGerman, fadeSendSimulationDisable, fadeSendSimulation, showSimulationRunning, fadeStartDataDisable, fadeStartSimulationDisable, fadeStartData, fadeStartSimulation, fadeReload, fadeMenu1Aufbau, fadeMenu2Daten, fadeMenu3Simulation, fadeMenu4Anwendung, menu1AufbauDisabled, menu2DatenDisabled, menu3SimulationDisabled, menu4AnwendungenDisabled, rotationBlades, ledOpacity1, ledOpacity2, ledOpacity3, ledOpacity4, ledOpacity5, ledOpacity6, ledOpacity7, ledOpacity8, ledOpacity9, ledOpacity10, ledOpacity11, ledOpacity12, ledOpacity13, ledOpacity14, ledOpacity15, ledOpacity16, ledOpacity17, ledOpacity18, ledOpacity19, ledOpacity20, ledShadowSize1, ledShadowSize2, ledShadowSize3, ledShadowSize4, ledShadowSize5, ledShadowSize6, ledShadowSize7, ledShadowSize8, ledShadowSize9, ledShadowSize10, ledShadowSize11, ledShadowSize12, ledShadowSize13, ledShadowSize14, ledShadowSize15, ledShadowSize16, ledShadowSize17, ledShadowSize18, ledShadowSize19, ledShadowSize20, ledColor20, ledColor19, ledColor18, ledColor17, ledColor16, ledColor15, ledColor14, ledColor13, ledColor12, ledColor11, ledColor10, ledColor9, ledColor8, ledColor7, ledColor6, ledColor5, ledColor4, ledColor3, ledColor2, ledColor1, showLEDs, contentOpacity, showDisableExpertDiv, lineMenuColor, showLine1, showLine2, showLine3,fabColor, showMenuPartOne, textClickMeFade, leftNormalDistance, showMenu, showScreensaverBasic, showAufbauBasic, showDatenBasic, showDatenExpert1, showDatenExpert2, showDatenExpert3, showSimulationBasic, showAnwendungenExpert3, showAnwendungenExpert4, showAnwendungenExpert1, showAnwendungenExpert2, showAnwendungenBasic, valueSlider } = this.state;
 
     return (
       <div className="App">
@@ -946,11 +955,16 @@ class App extends React.Component {
             />
             <Three ref={(three) => { this._three = three; }} />
             {/* 
+            LANGUAGE BUTTONS
+            */}
+            <Button className='n1' disabled={showGerman} style={{ opacity: [showGerman ? 0.7 : 0.4], position: 'absolute', left: distanceFromSide, top: distanceFromSide + 5, fontSize: '20px' }} onClick={this.changeLanguage("deutsch")} >DE</Button>
+            <Button className='n1' disabled={!showGerman} style={{ opacity: [!showGerman ? 0.7 : 0.4], position: 'absolute', left: distanceFromSide+40, top: distanceFromSide + 5, fontSize: '20px' }} onClick={this.changeLanguage("english")} >EN</Button>
+            {/* 
             MENU 
             */}
             <Fade in={showMenuPartOne} timeout={{ enter: fadeTimeBasicIn, exit: fadeTimeBasicOut }} mountOnEnter={true} unmountOnExit={true}>
               <div className="firstMenuPoint">
-                <Button className='n1' disabled={menu1AufbauDisabled} style={{ opacity: [fadeMenu1Aufbau ? textClickMeFade : null], position: 'absolute', right: distanceFromSide * 3 + 10, top: distanceFromSide + 5, fontSize: '20px' }} onClick={this.dataTransfer("datenDown")} >Aufbau</Button>
+                <Button className='n1' disabled={menu1AufbauDisabled} style={{ opacity: [fadeMenu1Aufbau ? textClickMeFade : null], position: 'absolute', right: distanceFromSide * 3 + 10, top: distanceFromSide + 5, fontSize: '20px' }} onClick={this.dataTransfer("datenDown")} >{showGerman ? <span>Aufbau</span> : <span>composition</span>}</Button>
                 <Fab className={"icon1"} disabled={menu1AufbauDisabled} style={{ opacity: [fadeMenu1Aufbau ? textClickMeFade : null], position: 'absolute', right: distanceFromSide, top: distanceFromSide, fontSize: '20px' }} onClick={this.dataTransfer("datenDown")}>
                   <AufbauIcon className={"aufbauIcon"} color={fabColor} />
                 </Fab>
@@ -958,7 +972,7 @@ class App extends React.Component {
             </Fade>
             <Fade in={showMenu} timeout={{ enter: fadeTimeBasicIn, exit: fadeTimeBasicOut }} mountOnEnter={true} unmountOnExit={true}>
               <div className="menu">
-                <Button className='n1' disabled={menu2DatenDisabled} style={{ opacity: [fadeMenu2Daten ? textClickMeFade : null], position: 'absolute', right: distanceFromSide * 3 + 10, top: 355, fontSize: '20px' }} onClick={this.handleClickShowData('daten')} >Daten</Button>
+                <Button className='n1' disabled={menu2DatenDisabled} style={{ opacity: [fadeMenu2Daten ? textClickMeFade : null], position: 'absolute', right: distanceFromSide * 3 + 10, top: 355, fontSize: '20px' }} onClick={this.handleClickShowData('daten')} >{showGerman ? <span>Daten</span> : <span>data</span>}</Button>
                 <Fab className={"icon1"} disabled={menu2DatenDisabled} style={{ opacity: [fadeMenu2Daten ? textClickMeFade : null], position: 'absolute', right: distanceFromSide, top: 350, fontSize: '20px' }} onClick={this.handleClickShowData('daten')}>
                   <DatenIcon className={"datenIcon"} color={fabColor} />
                 </Fab>
@@ -966,7 +980,7 @@ class App extends React.Component {
                 <Fab className={"icon1"} disabled={menu3SimulationDisabled} style={{ opacity: [fadeMenu3Simulation ? textClickMeFade : null], position: 'absolute', right: distanceFromSide, top: 670, fontSize: '20px' }} onClick={this.handleClickShowData('simulation')}>
                   <SimulationIcon className={"simulationIcon"} color={fabColor} />
                 </Fab>
-                <Button className='n1' disabled={menu4AnwendungenDisabled} style={{ opacity: [fadeMenu4Anwendung ? textClickMeFade : null], position: 'absolute', right: distanceFromSide * 3 + 10, bottom: distanceFromSide + 10, fontSize: '20px' }} onClick={this.handleClickShowData('anwendungen')} >Anwendungen</Button>
+                <Button className='n1' disabled={menu4AnwendungenDisabled} style={{ opacity: [fadeMenu4Anwendung ? textClickMeFade : null], position: 'absolute', right: distanceFromSide * 3 + 10, bottom: distanceFromSide + 10, fontSize: '20px' }} onClick={this.handleClickShowData('anwendungen')} >{showGerman ? <span>Anwendungen</span> : <span>applications</span>}</Button>
                 <Fab className={"icon1"} disabled={menu4AnwendungenDisabled} style={{ opacity: [fadeMenu4Anwendung ? textClickMeFade : null], position: 'absolute', right: distanceFromSide, bottom: distanceFromSide+5, fontSize: '20px' }} onClick={this.handleClickShowData('anwendungen')}>
                   <AnwendungenIcon className={"anwendungenIcon"} color={fabColor} />
                 </Fab>
@@ -1025,11 +1039,13 @@ class App extends React.Component {
             */}
             <Fade in={showScreensaverBasic} timeout={{ enter: fadeTimeBasicIn, exit: fadeTimeBasicOut }} mountOnEnter={true} unmountOnExit={true}>
               <div className="aufbauNormal">
-                <h1 className='p1' style={h1Style}>Digitaler Zwilling</h1>
+                <h1 className='p1' style={h1Style}>{showGerman ? <span>Digitaler Zwilling</span> : <span>Digital Twin</span>}</h1>
                 <p className='p1' style={{...pStyle, ...{top:690}}}>
-                  Das Konzept des digitalen Zwillings setzt drei Dinge voraus:<br /><br />
-                  Es gibt ein physisches Objekt in
-                  der realen Welt, ein virtuelles Objekt in der virtuellen Welt und die Verbindung der beiden durch Daten und Informationen.</p>
+                  {showGerman ? <span>Das Konzept des digitalen Zwillings setzt drei Dinge voraus:<br /><br />
+                    Es gibt ein physisches Objekt in
+                    der realen Welt, ein virtuelles Objekt in der virtuellen Welt und die Verbindung der beiden durch Daten und Informationen.</span>
+                    : <span>ToDo</span>}
+                  </p>
               </div>
             </Fade>
             {/* 
@@ -1037,14 +1053,16 @@ class App extends React.Component {
             */}
             <Fade in={showAufbauBasic} timeout={{ enter: fadeTimeBasicIn, exit: fadeTimeBasicOut }} mountOnEnter={true} unmountOnExit={true}>
               <div className="aufbauNormal">
-                <h2 className='p1' style={{...h2Style, ...{opacity:contentOpacity}}}>Aufbau</h2>
+                <h2 className='p1' style={{...h2Style, ...{opacity:contentOpacity}}}>{showGerman ? <span>Aufbau</span> : <span>composition</span>}</h2>
                 <p className='p1' style={{...pStyle, ...{opacity:contentOpacity}}}>
-                  Zunächst  werden 3D Modelle aller Elemente angefertigt und zusammengefügt.<br /><br />
-                  Der digitale Zwilling besitzt die selben strukturellen Charakteristika wie das Windrad der physischen Welt und ist im Idealfall nicht von seinem physischen Gegenstück zu unterscheiden.</p>
+                  {showGerman ? <span>Zunächst  werden 3D Modelle aller Elemente angefertigt und zusammengefügt.<br /><br />
+                  Der digitale Zwilling besitzt die selben strukturellen Charakteristika wie das Windrad der physischen Welt und ist im Idealfall nicht von seinem physischen Gegenstück zu unterscheiden.</span>
+                  : <span>ToDo</span>}
+                  </p>
                 <div style={{ position: "absolute", bottom: "170px", left: "225px", width: "320px"}}>
                   <Slider value={valueSlider} onChange={this.handleChangeSlider} style={{padding: '22px 0px'}} max={20} size="medium"/>
-                  <p style={{color: '#FFFFFF', textAlign: 'left', fontSize: textFontNormal + 'px', position: 'absolute', bottom: "-40px", left: "0px", width: "320px", marginRight: -10}}>0</p>
-                  <p style={{color: '#FFFFFF', textAlign: 'right', fontSize: textFontNormal + 'px', position: 'absolute', bottom: "-40px", left: "0px", width: "320px", marginRight: -5}}>1</p>
+                  <p style={{color: '#FFFFFF', textAlign: 'left', fontSize: textFontNormal + 'px', position: 'absolute', bottom: "-40px", left: "0px", width: "320px", marginRight: -10}}>{showGerman ? <span>0</span> : <span>0</span>}</p>
+                  <p style={{color: '#FFFFFF', textAlign: 'right', fontSize: textFontNormal + 'px', position: 'absolute', bottom: "-40px", left: "0px", width: "320px", marginRight: -5}}>{showGerman ? <span>1</span> : <span>1</span>}</p>
                 </div>
               </div>
             </Fade>
@@ -1053,29 +1071,37 @@ class App extends React.Component {
             */}
             <Fade in={showDatenBasic} timeout={{ enter: fadeTimeBasicIn, exit: fadeTimeBasicOut }} mountOnEnter={true} unmountOnExit={true}>
               <div className="aufbauNormal">
-                <h2 className='p1' style={{...h2Style, ...{opacity:contentOpacity}}}>Daten</h2>
-                <p className='p1' style={{...pStyle, ...{opacity:contentOpacity}}} >
-                  Um von einem digitalen Zwilling signifikante Vorteile zu ziehen, müssen der physische und der virtuelle Part miteinander verbunden sein.<br /><br />
-                  Das <span style={{...expertStyleToEnter, ...{opacity: 1, color: "#FFFFFF"}}} onClick={this.handleClickShowData("showDatenExpert1")}>Internet der Dinge</span> ermöglicht es real existierenden Objekten mittels <span style={{...expertStyleToEnter, ...{opacity: 1, color: "#FFFFFF"}}} onClick={this.handleClickShowData("showDatenExpert2")}>Sensoren</span> Daten zum eigenen, aktuellen Zustand in einer <span style={{...expertStyleToEnter, ...{opacity: 1, color: "#FFFFFF"}}} onClick={this.handleClickShowData("showDatenExpert3")}>Cloud</span> zu sammeln und weiterzugeben. Diese Informationen fließen in das digitale Modell ein.</p>
-                   <Button className='n1' disabled={fadeStartDataDisable} style={{...menuPointButtonStyle, ...{opacity: [fadeStartData ? textClickMeFade*contentOpacity : contentOpacity]}}} onClick={ () => { this.dataTransfer("drehungEin")(); this.dataTransfer("datenDown")()}}>Starte Datentransfer</Button>        
+                <h2 className='p1' style={{...h2Style, ...{opacity:contentOpacity}}}>{showGerman ? <span>Daten</span> : <span>data</span>}</h2>
+                <p className='p1' style={{...pStyle, ...{opacity:contentOpacity}}} >{showGerman ? 
+                  <span>Um von einem digitalen Zwilling signifikante Vorteile zu ziehen, müssen der physische und der virtuelle Part miteinander verbunden sein.<br /><br />
+                  Das <span style={{...expertStyleToEnter, ...{opacity: 1, color: "#FFFFFF"}}} onClick={this.handleClickShowData("showDatenExpert1")}>Internet der Dinge</span> ermöglicht es real existierenden Objekten mittels <span style={{...expertStyleToEnter, ...{opacity: 1, color: "#FFFFFF"}}} onClick={this.handleClickShowData("showDatenExpert2")}>Sensoren</span> Daten zum eigenen, aktuellen Zustand in einer <span style={{...expertStyleToEnter, ...{opacity: 1, color: "#FFFFFF"}}} onClick={this.handleClickShowData("showDatenExpert3")}>Cloud</span> zu sammeln und weiterzugeben. Diese Informationen fließen in das digitale Modell ein.</span> 
+                  : <span>ToDo</span>}
+                  </p>
+                   <Button className='n1' disabled={fadeStartDataDisable} style={{...menuPointButtonStyle, ...{opacity: [fadeStartData ? textClickMeFade*contentOpacity : contentOpacity]}}} onClick={ () => { this.dataTransfer("drehungEin")(); this.dataTransfer("datenDown")()}}>{showGerman ? <span>Starte Datentransfer</span> : <span>get live data</span>}</Button>        
               </div>
             </Fade>
             <Fade in={showDatenExpert1} timeout={{ enter: fadeTimeBasicIn, exit: fadeTimeBasicOut }} mountOnEnter={true} unmountOnExit={true}>
               <div className="expertInfo">
                 <p className='p1' style={pExpertStyle}>
-                Die Vernetzung von Gegenständen mit dem Internet, damit diese selbstständig untereinander kommunizieren, wird als Internet der Dinge (IoT) bezeichnet.</p>
+                {showGerman ? <span>Die Vernetzung von Gegenständen mit dem Internet, damit diese selbstständig untereinander kommunizieren, wird als Internet der Dinge (IoT) bezeichnet.</span> 
+                : <span>ToDo</span>}
+                </p>
               </div>
             </Fade>
             <Fade in={showDatenExpert2} timeout={{ enter: fadeTimeBasicIn, exit: fadeTimeBasicOut }} mountOnEnter={true} unmountOnExit={true}>
               <div className="expertInfo">
                 <p className='p1' style={pExpertStyle}>
-                Sensoren sammlen als Schnittstelle zur Außenwelt Daten und sind für die Digitalisierung unabdingbar. <br/><br/>Ein reales, mit Sensoren ausgestattetes Produkt sammelt relevante Daten und Informationen über sich selbst und seine Umgebung.</p>
+                {showGerman ? <span>Sensoren sammeln als Schnittstelle zur Außenwelt Daten und sind für die Digitalisierung unabdingbar. <br/><br/>Ein reales, mit Sensoren ausgestattetes Produkt sammelt relevante Daten und Informationen über sich selbst und seine Umgebung.</span> 
+                : <span>ToDo</span>}
+                </p>
               </div>
             </Fade>
             <Fade in={showDatenExpert3} timeout={{ enter: fadeTimeBasicIn, exit: fadeTimeBasicOut }} mountOnEnter={true} unmountOnExit={true}>
               <div className="expertInfo">
                 <p className='p1' style={pExpertStyle}>
-                Cloud steht für eine Technologie, die es ermöglicht, Anwendungen und Services nicht mehr lokal zu betreiben, sondern als Dienstleistung aus einem Netzwerk wie dem Internet zu beziehen.<br/><br/>Die gesammelten Daten fließen in einen großen Datenspeicher. In diesem werten Analyse-Tools  und selbstlernende Algorithmen die Informationen in Hinsicht auf Zusammenhänge, Muster und Auffälligkeiten aus.</p>
+                {showGerman ? <span>Cloud steht für eine Technologie, die es ermöglicht, Anwendungen und Services nicht mehr lokal zu betreiben, sondern als Dienstleistung aus einem Netzwerk wie dem Internet zu beziehen.<br/><br/>Die gesammelten Daten fließen in einen großen Datenspeicher. In diesem werten Analyse-Tools  und selbstlernende Algorithmen die Informationen in Hinsicht auf Zusammenhänge, Muster und Auffälligkeiten aus.</span> 
+                : <span>ToDo</span>}
+                </p>
               </div>
             </Fade>
             {/* 
@@ -1083,21 +1109,26 @@ class App extends React.Component {
             */}
             <Fade in={showSimulationBasic} timeout={{ enter: fadeTimeBasicIn, exit: fadeTimeBasicOut }} mountOnEnter={true} unmountOnExit={true}>
               <div className="aufbauNormal">
-                <h2 className='p1' style={{...h2Style, ...{opacity:contentOpacity}}}>Simulation</h2>
+                <h2 className='p1' style={{...h2Style, ...{opacity:contentOpacity}}}>{showGerman ? <span>Simulation</span> : <span>simulation</span>}</h2>
                 <p className='p1' style={{...pStyle, ...{opacity:contentOpacity}}}>
-                  Das große Potential des digitalen Zwillings besteht darin, dass jeder Zustand eines physischen Produkts  mit dem virtuellen Prozess überlagert und verglichen werden
+                  {showGerman ? <span>Das große Potential des digitalen Zwillings besteht darin, dass jeder Zustand eines physischen Produkts  mit dem virtuellen Prozess überlagert und verglichen werden
                   kann. Der finale Schritt besteht deshalb darin, die Informationen des Datenspeichers in eine Simulation des Windrades einzubinden.<br /><br />
-                  In dieser Simulation können unterschiedliche Faktoren virtuell ausprobiert und deren Einfluss berechnet werden.</p>
-                  <Button in={!showSimulationRunning} className='n1' disabled={fadeStartSimulationDisable} style={{...menuPointButtonStyle, ...{opacity: [fadeStartSimulation ? textClickMeFade*contentOpacity : contentOpacity]}}} onClick={() => { this.dataTransfer("SimulationStarten")(); this.dataTransfer("datenUp")}}>Starte Simulation</Button>        
+                  In dieser Simulation können unterschiedliche Faktoren virtuell ausprobiert und deren Einfluss berechnet werden.</span> 
+                  : <span>ToDo</span>}
+                  </p>
+                  <Button in={!showSimulationRunning} className='n1' disabled={fadeStartSimulationDisable} style={{...menuPointButtonStyle, ...{opacity: [fadeStartSimulation ? textClickMeFade*contentOpacity : contentOpacity]}}} onClick={() => { this.dataTransfer("SimulationStarten")(); this.dataTransfer("datenUp")}}>{showGerman ? <span>Starte Simulation</span> : <span>start simulation</span>}</Button>        
               </div>
             </Fade>
             <Fade in={showSimulationRunning} timeout={{ enter: fadeTimeBasicIn, exit: fadeTimeBasicOut }} mountOnEnter={true} unmountOnExit={true}>
               <div className="simulationText">
                 <p className='p1' style={{position: 'absolute', left: 910, top: 790, fontSize: textFontNormal/1.7 + 'px', color: textColorNormal, width: '10%', textAlign: 'left'}}>
-                Simulation Nr. 1<br/><br/>Windgeschwindigkeit: 'hoch'<br/><br/>Belastung: 'kritisch'</p>
+                {showGerman ? <span>Simulation Nr. 1<br/><br/>Windgeschwindigkeit: 'hoch'<br/><br/>Belastung: 'kritisch'</span> 
+                : <span>simulation 1 ToDo</span>}</p>
                 <p className='p1' style={{position: 'absolute', left: 910+360, top: 790, fontSize: textFontNormal/1.7 + 'px', color: textColorNormal, width: '10%', textAlign: 'left'}}>
-                Simulation Nr. 265<br/><br/>Windgeschwindigkeit: 'hoch'<br/><br/>Belastung: 'normal'<br/><br/>Bremsvorgang aktiviert</p>
-                <Button className='n1' disabled={fadeSendSimulationDisable} style={{...menuPointButtonStyle, ...{opacity: [fadeSendSimulation ? textClickMeFade*contentOpacity : contentOpacity]}}} onClick={() => { this.dataTransfer("SimulationAnwenden")(); this.dataTransfer("datenUp")}}>Simulation anwenden</Button>        
+                {showGerman ? <span>Simulation Nr. 265<br/><br/>Windgeschwindigkeit: 'hoch'<br/><br/>Belastung: 'normal'<br/><br/>Bremsvorgang aktiviert</span> 
+                : <span>simulation 265 ToDo</span>}
+                </p>
+                <Button className='n1' disabled={fadeSendSimulationDisable} style={{...menuPointButtonStyle, ...{opacity: [fadeSendSimulation ? textClickMeFade*contentOpacity : contentOpacity]}}} onClick={() => { this.dataTransfer("SimulationAnwenden")(); this.dataTransfer("datenUp")}}>{showGerman ? <span>Simulation anwenden</span> : <span>apply simulation</span>}</Button>        
               </div>
             </Fade>
             {/* 
@@ -1105,35 +1136,45 @@ class App extends React.Component {
             */}
             <Fade in={showAnwendungenBasic} timeout={{ enter: fadeTimeBasicIn, exit: fadeTimeBasicOut }} mountOnEnter={true} unmountOnExit={true}>
               <div className="aufbauNormal">
-                <h2 className='p1' style={{...h2Style, ...{opacity:contentOpacity}}}>Anwendungen</h2>
+                <h2 className='p1' style={{...h2Style, ...{opacity:contentOpacity}}}>{showGerman ? <span>Anwendungen</span> : <span>applications</span>}</h2>
                 <p className='p1' style={{...pStyle, ...{opacity:contentOpacity}}} >
-                Digitale Zwillinge von Windrädern ermöglichen unter Anderem <span style={{...expertStyleToEnter, ...{opacity: 1, color: "#FFFFFF"}}} onClick={this.handleClickShowData("showAnwendungenExpert1")}>Predicitve Maintenance</span>  - die Sensordaten von Windfarmen machen eine kontinuierliche Überwachung möglich. Aber Digital Twins finden zukünftig noch sehr vielfältige Anwendungsfelder. Insbesondere die <span style={{...expertStyleToEnter, ...{opacity: 1, color: "#FFFFFF"}}} onClick={this.handleClickShowData("showAnwendungenExpert2")}>Produktion</span> profitiert bereits heute von dem Einsatz der Zwillinge.
-                <br/><br/>Ein digitaler Zwilling in der <span style={{...expertStyleToEnter, ...{opacity: 1, color: "#FFFFFF"}}} onClick={this.handleClickShowData("showAnwendungenExpert3")}>Medizin</span> kann Auskunft darüber geben, ob ein Medikament wirkt oder eine  Therapie anschlägt. Und auch im Bereich <span style={{...expertStyleToEnter, ...{opacity: 1, color: "#FFFFFF"}}} onClick={this.handleClickShowData("showAnwendungenExpert4")}>Smart City</span> ist der Einsatz virtueller Repräsentanzen von großem Interesse.</p>
-                <Button className='n1' style={{...menuPointButtonStyle, ...{opacity: [fadeReload ? textClickMeFade*contentOpacity : contentOpacity]}}} onClick={() => { this.sendMessage(1); this.reload()}}>Reload</Button>        
+                {showGerman ? <span>Digitale Zwillinge von Windrädern ermöglichen unter Anderem <span style={{...expertStyleToEnter, ...{opacity: 1, color: "#FFFFFF"}}} onClick={this.handleClickShowData("showAnwendungenExpert1")}>Predicitve Maintenance</span>  - die Sensordaten von Windfarmen machen eine kontinuierliche Überwachung möglich. Aber Digital Twins finden zukünftig noch sehr vielfältige Anwendungsfelder. Insbesondere die <span style={{...expertStyleToEnter, ...{opacity: 1, color: "#FFFFFF"}}} onClick={this.handleClickShowData("showAnwendungenExpert2")}>Produktion</span> profitiert bereits heute von dem Einsatz der Zwillinge.
+                <br/><br/>Ein digitaler Zwilling in der <span style={{...expertStyleToEnter, ...{opacity: 1, color: "#FFFFFF"}}} onClick={this.handleClickShowData("showAnwendungenExpert3")}>Medizin</span> kann Auskunft darüber geben, ob ein Medikament wirkt oder eine  Therapie anschlägt. Und auch im Bereich <span style={{...expertStyleToEnter, ...{opacity: 1, color: "#FFFFFF"}}} onClick={this.handleClickShowData("showAnwendungenExpert4")}>Smart City</span> ist der Einsatz virtueller Repräsentanzen von großem Interesse.</span> 
+                : <span>ToDo</span>}
+                </p>
+                <Button className='n1' style={{...menuPointButtonStyle, ...{opacity: [fadeReload ? textClickMeFade*contentOpacity : contentOpacity]}}} onClick={() => { this.sendMessage(1); this.reload()}}>{showGerman ? <span>neu starten</span> : <span>reload</span>}</Button>        
               </div>
             </Fade>
             <Fade in={showAnwendungenExpert1} timeout={{ enter: fadeTimeBasicIn, exit: fadeTimeBasicOut }} mountOnEnter={true} unmountOnExit={true}>
               <div className="expertInfo">
                 <p className='p1' style={pExpertStyle}>
-                Die Lebensdauer eines Maschinenteils hängt von verschiedenen Einflüssen ab: die Größe der Last, verschiedene Umgebungsfakoren, die Nutzungsdauer – all das wirkt sich auf die Abnutzung und Leistung aus. Häufig werden Fehler erst angezeigt, wenn ein Teil ausfällt. Mithilfe des digitalen Zwillings können Ausfälle schon vorher prognostiziert werden und um ca. 70 Prozent verringert werden.</p>
+                {showGerman ? <span>Die Lebensdauer eines Maschinenteils hängt von verschiedenen Einflüssen ab: die Größe der Last, verschiedene Umgebungsfakoren, die Nutzungsdauer – all das wirkt sich auf die Abnutzung und Leistung aus. Häufig werden Fehler erst angezeigt, wenn ein Teil ausfällt. Mithilfe des digitalen Zwillings können Ausfälle schon vorher prognostiziert werden und um ca. 70 Prozent verringert werden.</span> 
+                : <span>ToDo</span>}
+                </p>
               </div>
             </Fade>
             <Fade in={showAnwendungenExpert2} timeout={{ enter: fadeTimeBasicIn, exit: fadeTimeBasicOut }} mountOnEnter={true} unmountOnExit={true}>
               <div className="expertInfo">
                 <p className='p1' style={pExpertStyle}>
-                In der industriellen Produktionsphase hilft der Zwilling die Effizienz und Qualität der Produktionsprozesse zu verbessern. Analysetools überwachen Maschinen, Fertigungsprozesse und Produktionsstraßen des Digital  Twin und können bei Fehlern und Störung nicht nur auf das Problem aufmerksam machen, sondern auch Lösungsvorschläge zur Behebung aussprechen.</p>
+                {showGerman ? <span>In der industriellen Produktionsphase hilft der Zwilling die Effizienz und Qualität der Produktionsprozesse zu verbessern. Analysetools überwachen Maschinen, Fertigungsprozesse und Produktionsstraßen des Digital  Twin und können bei Fehlern und Störung nicht nur auf das Problem aufmerksam machen, sondern auch Lösungsvorschläge zur Behebung aussprechen.</span> 
+                : <span>ToDo</span>}
+                </p>
               </div>
             </Fade>
             <Fade in={showAnwendungenExpert3} timeout={{ enter: fadeTimeBasicIn, exit: fadeTimeBasicOut }} mountOnEnter={true} unmountOnExit={true}>
               <div className="expertInfo">
                 <p className='p1' style={pExpertStyle}>
-                Im Bereich Digital Health gewinnt der einzelne Patient durch den virtuellen Zwilling eines deutlich optimierten Behandlungsprozess. Diabetespatienten können ihre Blutzuckerwerte nicht nur über vernetzte Messgeräte speichern, sondern ihre Daten auch in Echtzeit an den behandelnden Arzt schicken. Der Patient profitiert von engmaschigeren Kontrollen und angepassten Behandlungsmethoden.<br/><br/>In Simulationen kann vorab die Verträglichkeit und der Erfolg von Medikamenten und  Therapiemöglichkeiten getestet werden, sodass es zu deutlich weniger Fehlbehandlungen kommt.</p>
+                {showGerman ? <span>Im Bereich Digital Health gewinnt der einzelne Patient durch den virtuellen Zwilling eines deutlich optimierten Behandlungsprozess. Diabetespatienten können ihre Blutzuckerwerte nicht nur über vernetzte Messgeräte speichern, sondern ihre Daten auch in Echtzeit an den behandelnden Arzt schicken. Der Patient profitiert von engmaschigeren Kontrollen und angepassten Behandlungsmethoden.<br/><br/>In Simulationen kann vorab die Verträglichkeit und der Erfolg von Medikamenten und  Therapiemöglichkeiten getestet werden, sodass es zu deutlich weniger Fehlbehandlungen kommt.</span> 
+                : <span>ToDo</span>}
+                </p>
               </div>
             </Fade>
             <Fade in={showAnwendungenExpert4} timeout={{ enter: fadeTimeBasicIn, exit: fadeTimeBasicOut }} mountOnEnter={true} unmountOnExit={true}>
               <div className="expertInfo">
                 <p className='p1' style={pExpertStyle}>
-                Selbst ganze Städte können einen digitalen Zwilling besitzen und mithilfe unterschiedlichster Standortsensoren ein smartes Parkmanagement, intelligente Verkehrssteuerung und Straßenbeleutung ermöglichen.</p>
+                {showGerman ? <span>Selbst ganze Städte können einen digitalen Zwilling besitzen und mithilfe unterschiedlichster Standortsensoren ein smartes Parkmanagement, intelligente Verkehrssteuerung und Straßenbeleutung ermöglichen.</span> 
+                : <span>ToDo</span>}
+                </p>
               </div>
             </Fade>
             {/* 
