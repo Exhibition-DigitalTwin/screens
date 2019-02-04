@@ -819,8 +819,8 @@ class App extends React.Component {
       this.setState({ actualStateFade: 5, showSimulationRunning: true, }); 
     }else if (param === "SimulationAnwenden") {
       this._three.deleteModel();
+      this.setState({ showSimulationRunning: false, actualStateFade: 6, showLEDs: true, ledsMoving: 1 }); 
       this._three.moveCamera(-29, 15, 500);
-      this.setState({ actualStateFade: 6, showLEDs: true, ledsMoving: 1 }); 
     } else {
       console.log(param);
     }
@@ -1050,7 +1050,7 @@ class App extends React.Component {
   };
 
   changeSimulationBoxColor() {
-    if(this.state.actualStateFade === 4) {
+    if(this.state.actualStateFade === 5) {
       this.setState({ simulationBoxColor: this.state.simulationBoxColor -1 });
     }
   }
