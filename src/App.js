@@ -1142,9 +1142,9 @@ class App extends React.Component {
               <div className="aufbauNormal">
                 <h1 className='p1' style={h1Style}>{showGerman ? <span>Digitaler Zwilling</span> : <span>Digital Twin</span>}</h1>
                 <p className='p1' style={{...pStyle, ...{top:690}}}>
-                  {showGerman ? <span>Das Konzept des digitalen Zwillings setzt drei Dinge voraus:<br /><br />
-                    Es gibt ein physisches Objekt in
-                    der realen Welt, ein virtuelles Objekt in der virtuellen Welt und die Verbindung der beiden durch Daten und Informationen.</span>
+                  {showGerman ? <span>Ein digitaler Zwilling, der mit allen Werten und Informationen eine möglichst exakte digitale Abbildung eines Objekts oder eines Prozesses darstellt, 
+                    hilft das Produkt besser zu verstehen, es aus der Ferne zu überwachen und zu steuern, sowie Berechnungen anzustellen und somit die Funktionsweise zu verbessern.
+                  </span>
                     : <span>ToDo</span>}
                   </p>
               </div>
