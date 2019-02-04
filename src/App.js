@@ -55,6 +55,9 @@ const initialState0 = 0;
 const initialState1 = 1;
 const initialStateTrue = true;
 const initialStateFalse = false;
+const initialLineMenuColor = "#1f1f1f";
+const initialContentOpacity = 0.5;
+const initialClickMeFade = 0.4;
 
 const h1Style = {
   position: 'absolute',
@@ -258,12 +261,12 @@ class App extends React.Component {
     showLine1: initialStateFalse,
     showLine2: initialStateFalse,
     showLine3: initialStateFalse,
-    lineMenuColor: "#1f1f1f",
+    lineMenuColor: initialLineMenuColor,
 
-    standardTextClickMeFadeStart: 0.4,
-    textClickMeFade: 0.4,
+    standardTextClickMeFadeStart: initialClickMeFade,
+    textClickMeFade: initialClickMeFade,
     textClickMeFadeStatus: initialStateFalse,
-    contentOpacity: 0.5,
+    contentOpacity: initialContentOpacity,
 
     // Slider
     valueSlider: initialState0,
@@ -363,7 +366,7 @@ class App extends React.Component {
     this.clickMeButtonTimer = setInterval(() => this.setContentOpacity(), 30);
     this.clickMeButtonTimer = setInterval(() => this.runLedStrip(), 100);
     this.clickMeButtonTimer = setInterval(() => this.handleFadeActive(), 20);
-    this.clickAnywhereTimer = setInterval(() => this.reload(), this.state.intervalToScreensaver);
+    this.clickAnywhereTimer = setInterval(() => console.log("this.reload()"), this.state.intervalToScreensaver);
   }
 
   componentWillUnmount() {
@@ -400,50 +403,16 @@ class App extends React.Component {
   handleFadeActive() {
     switch (this.state.actualStateFade) { //actualStateFade
       // screensaver
-      case 0:
-        this.setState({
-          fadeReload: false,
-        })
-        break;
-      case 1:
-        this.setState({
-          fadeMenu1Aufbau: false,
-        })
-        break;
-      case 2:
-        this.setState({
-          fadeMenu2Daten: false,
-        })
-        break;
-      case 3:
-        this.setState({
-          fadeStartData: false,
-        })
-        break;
-      case 4:
-        this.setState({
-          fadeMenu3Simulation: false,
-        })
-        break;
-      case 5:
-        this.setState({
-          fadeStartSimulation: false,
-        })
-        break;
-      case 6:
-        this.setState({
-          fadeSendSimulation: false,
-        })
-        break;
-      case 7:
-        this.setState({
-          fadeMenu4Anwendung: false,
-        })
-        break;
-      default: 
-        console.log("wrong "+this.state.actualState);
-        break;
-      }
+      case 0: this.setState({ fadeReload: false, }); break;
+      case 1: this.setState({ fadeMenu1Aufbau: false, }); break;
+      case 2: this.setState({ fadeMenu2Daten: false, }); break;
+      case 3: this.setState({ fadeStartData: false, }); break;
+      case 4: this.setState({ fadeMenu3Simulation: false, }); break;
+      case 5: this.setState({ fadeStartSimulation: false, }); break;
+      case 6: this.setState({ fadeSendSimulation: false, }); break;
+      case 7: this.setState({ fadeMenu4Anwendung: false, }); break;
+      default: console.log("wrong " + this.state.actualState); break;
+    }
     if(Date.now() - this.state.interval >= this.state.time) {
       this.setState({ time: Date.now() })
 
@@ -917,6 +886,127 @@ class App extends React.Component {
     this.clickAnywhereTimer = 0;
     console.log(this.clickAnywhereTimer);
     //window.location.reload();
+    this.setState({
+      //showGerman: initialStateTrue,
+      actualState: initialState0,
+      actualStateFade: initialState0,
+      lastState: initialState0,
+      started: initialStateFalse,
+      time: initialState0,
+      startTime: -100000,
+      interval: fadeTimeBasicIn,
+      timeForLedDown: initialState0,
+      intervalLed: 1900,
+      timeRunning: initialState0,
+      intervalToScreensaver: 5000,
+      showScreensaverBasic: initialStateTrue,
+      showAufbauBasic: initialStateFalse,
+      showDatenBasic: initialStateFalse,
+      showDatenExpert1: initialStateFalse,
+      showDatenExpert2: initialStateFalse,
+      showDatenExpert3: initialStateFalse,
+      showSimulationBasic: initialStateFalse,
+      showSimulationRunning: initialStateFalse,
+      showAnwendungenBasic: initialStateFalse,
+      showAnwendungenExpert1: initialStateFalse,
+      showAnwendungenExpert2: initialStateFalse,
+      showAnwendungenExpert3: initialStateFalse,
+      showAnwendungenExpert4: initialStateFalse,
+      //fabColor: "default",
+      showDisableExpertDiv: initialStateFalse,
+      contentFadedOut: initialStateFalse,
+      showLine1: initialStateFalse,
+      showLine2: initialStateFalse,
+      showLine3: initialStateFalse,
+      lineMenuColor: initialLineMenuColor,
+      standardTextClickMeFadeStart: initialClickMeFade,
+      textClickMeFade: initialClickMeFade,
+      textClickMeFadeStatus: initialStateFalse,
+      contentOpacity: initialContentOpacity,
+      valueSlider: initialState0,
+      rotationBlades: initialStateFalse,
+      currentLedOn: initialState0,
+      showLEDs: initialStateTrue,
+      ledsMoving: initialState0,
+      ledColor1: ledColorOff,
+      ledColor2: ledColorOff,
+      ledColor3: ledColorOff,
+      ledColor4: ledColorOff,
+      ledColor5: ledColorOff,
+      ledColor6: ledColorOff,
+      ledColor7: ledColorOff,
+      ledColor8: ledColorOff,
+      ledColor9: ledColorOff,
+      ledColor10: ledColorOff,
+      ledColor11: ledColorOff,
+      ledColor12: ledColorOff,
+      ledColor13: ledColorOff,
+      ledColor14: ledColorOff,
+      ledColor15: ledColorOff,
+      ledColor16: ledColorOff,
+      ledColor17: ledColorOff,
+      ledColor18: ledColorOff,
+      ledColor19: ledColorOff,
+      ledColor20: ledColorOff,
+      ledShadowSize1: initialState0,
+      ledShadowSize2: initialState0,
+      ledShadowSize3: initialState0,
+      ledShadowSize4: initialState0,
+      ledShadowSize5: initialState0,
+      ledShadowSize6: initialState0,
+      ledShadowSize7: initialState0,
+      ledShadowSize8: initialState0,
+      ledShadowSize9: initialState0,
+      ledShadowSize10: initialState0,
+      ledShadowSize11: initialState0,
+      ledShadowSize12: initialState0,
+      ledShadowSize13: initialState0,
+      ledShadowSize14: initialState0,
+      ledShadowSize15: initialState0,
+      ledShadowSize16: initialState0,
+      ledShadowSize17: initialState0,
+      ledShadowSize18: initialState0,
+      ledShadowSize19: initialState0,
+      ledShadowSize20: initialState0,
+      ledOpacity1: initialState1,
+      ledOpacity2: initialState1,
+      ledOpacity3: initialState1,
+      ledOpacity4: initialState1,
+      ledOpacity5: initialState1,
+      ledOpacity6: initialState1,
+      ledOpacity7: initialState1,
+      ledOpacity8: initialState1,
+      ledOpacity9: initialState1,
+      ledOpacity10: initialState1,
+      ledOpacity11: initialState1,
+      ledOpacity12: initialState1,
+      ledOpacity13: initialState1,
+      ledOpacity14: initialState1,
+      ledOpacity15: initialState1,
+      ledOpacity16: initialState1,
+      ledOpacity17: initialState1,
+      ledOpacity18: initialState1,
+      ledOpacity19: initialState1,
+      ledOpacity20: initialState1,
+      showMenuPartOne: initialStateTrue,
+      showMenu: initialStateFalse,
+      menu1Aufbau: initialState0,
+      menu1AufbauDisabled: initialStateFalse,
+      menu2DatenDisabled: initialStateTrue,
+      menu3SimulationDisabled: initialStateTrue,
+      menu4AnwendungenDisabled: initialStateTrue,
+      fadeMenu1Aufbau: initialStateTrue,
+      fadeMenu2Daten: initialStateFalse,
+      fadeMenu3Simulation: initialStateFalse,
+      fadeMenu4Anwendung: initialStateFalse,
+      fadeStartData: initialStateFalse,
+      fadeStartSimulation: initialStateFalse,
+      fadeSendSimulation: initialStateFalse,
+      fadeReload: initialStateFalse,
+      fadeStartDataDisable: initialStateFalse,
+      fadeStartSimulationDisable: initialStateFalse,
+      fadeSendSimulationDisable: initialStateFalse,
+    });
   }
 
   handleShowDisableExpertDiv = () => {
