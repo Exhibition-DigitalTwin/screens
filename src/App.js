@@ -635,6 +635,10 @@ class App extends React.Component {
     this.setState({ timeRunning: Date.now() })
   }
 
+  hardReset(){
+    window.location.reload();
+  }
+
   checkForReload(){
     if(this.state.intervalToScreensaver + this.state.timeRunning <= Date.now()){
       this.reload();
@@ -894,7 +898,6 @@ class App extends React.Component {
   }
 
   reload() {
-    //window.location.reload();
     this._three.hideWindmill();
     this.setState({
       //showGerman: initialStateTrue,
@@ -1294,6 +1297,10 @@ class App extends React.Component {
               <div style={{opacity: "0", position: "absolute", height: "1080px", width: "1500px", top: "0px", left: "0px" }} onClick={() => { this.handleShowDisableExpertDiv()(); this.resetTimer()}}>
               </div>
             </Fade>
+            {/* 
+            HARD RESET BUTTON
+            */}
+            <Button className='hardReset' style={{ opacity: 0, position: 'absolute', left: 0, bottom: 0, color: 'rgba(0,0,0,0)', fontSize: '20px' }} onClick={() => {this.hardReset()}} >RESET</Button>
           </MuiThemeProvider>
         </React.Fragment>
       </div>
