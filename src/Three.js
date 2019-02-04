@@ -474,6 +474,10 @@ class ThreeScene extends Component {
         this.tween.start();
     }
 
+    hideWindmill() {
+        console.log("dead");
+    }
+
     showSecondModel() {
         var destination = new THREE.Vector3(-40, -40, 0);
         var destination1 = new THREE.Vector3(-40, -44.3, 0);

@@ -533,7 +533,7 @@ class App extends React.Component {
             fadeStartSimulationDisable: true,
             showSimulationRunning: true,
             fadeSendSimulationDisable: false,
-            showLEDs: true,
+            showLEDs: false,
           })
           break;
         case 6: // Anwendungen (Menu)
@@ -886,6 +886,7 @@ class App extends React.Component {
     this.clickAnywhereTimer = 0;
     console.log(this.clickAnywhereTimer);
     //window.location.reload();
+    this._three.hideWindmill();
     this.setState({
       //showGerman: initialStateTrue,
       actualState: initialState0,
@@ -1176,7 +1177,7 @@ class App extends React.Component {
                   Das <span style={{...expertStyleToEnter, ...{opacity: 1, color: "#FFFFFF"}}} onClick={this.handleClickShowData("showDatenExpert1")}>Internet der Dinge</span> ermöglicht es real existierenden Objekten mittels <span style={{...expertStyleToEnter, ...{opacity: 1, color: "#FFFFFF"}}} onClick={this.handleClickShowData("showDatenExpert2")}>Sensoren</span> Daten zum eigenen, aktuellen Zustand in einer <span style={{...expertStyleToEnter, ...{opacity: 1, color: "#FFFFFF"}}} onClick={this.handleClickShowData("showDatenExpert3")}>Cloud</span> zu sammeln und weiterzugeben. Diese Informationen fließen in das digitale Modell ein.</span> 
                   : <span>ToDo</span>}
                   </p>
-                   <Button className='n1' disabled={fadeStartDataDisable} style={{...menuPointButtonStyle, ...{opacity: [fadeStartData ? textClickMeFade*contentOpacity : contentOpacity]}}} onClick={ () => { this.dataTransfer("drehungEin")(); this.dataTransfer("datenDown")()}}>{showGerman ? <span>Starte Datentransfer</span> : <span>get live data</span>}</Button>        
+                   <Button className='n1' disabled={fadeStartDataDisable} style={{...menuPointButtonStyle, ...{opacity: [fadeStartData ? textClickMeFade*contentOpacity : null]}}} onClick={ () => { this.dataTransfer("drehungEin")(); this.dataTransfer("datenDown")()}}>{showGerman ? <span>Starte Datentransfer</span> : <span>get live data</span>}</Button>        
               </div>
             </Fade>
             <Fade in={showDatenExpert1} timeout={{ enter: fadeTimeBasicIn, exit: fadeTimeBasicOut }} mountOnEnter={true} unmountOnExit={true}>
@@ -1215,7 +1216,7 @@ class App extends React.Component {
                   In dieser Simulation können unterschiedliche Faktoren virtuell ausprobiert und deren Einfluss berechnet werden.</span> 
                   : <span>ToDo</span>}
                   </p>
-                  <Button in={!showSimulationRunning} className='n1' disabled={fadeStartSimulationDisable} style={{...menuPointButtonStyle, ...{opacity: [fadeStartSimulation ? textClickMeFade*contentOpacity : contentOpacity]}}} onClick={() => { this.dataTransfer("SimulationStarten")(); this.dataTransfer("datenUp")}}>{showGerman ? <span>Starte Simulation</span> : <span>start simulation</span>}</Button>        
+                  <Button in={!showSimulationRunning} className='n1' disabled={fadeStartSimulationDisable} style={{...menuPointButtonStyle, ...{opacity: [fadeStartSimulation ? textClickMeFade*contentOpacity : null]}}} onClick={() => { this.dataTransfer("SimulationStarten")(); this.dataTransfer("datenUp")}}>{showGerman ? <span>Starte Simulation</span> : <span>start simulation</span>}</Button>        
               </div>
             </Fade>
             <Fade in={showSimulationRunning} timeout={{ enter: fadeTimeBasicIn, exit: fadeTimeBasicOut }} mountOnEnter={true} unmountOnExit={true}>
@@ -1227,7 +1228,7 @@ class App extends React.Component {
                 {showGerman ? <span>Simulation Nr. 265<br/><br/>Windgeschwindigkeit: 'hoch'<br/><br/>Belastung: 'normal'<br/><br/>Bremsvorgang aktiviert</span> 
                 : <span>simulation 265 ToDo</span>}
                 </p>
-                <Button className='n1' disabled={fadeSendSimulationDisable} style={{...menuPointButtonStyle, ...{opacity: [fadeSendSimulation ? textClickMeFade*contentOpacity : contentOpacity]}}} onClick={() => { this.dataTransfer("SimulationAnwenden")(); this.dataTransfer("datenUp")}}>{showGerman ? <span>Simulation anwenden</span> : <span>apply simulation</span>}</Button>        
+                <Button className='n1' disabled={fadeSendSimulationDisable} style={{...menuPointButtonStyle, ...{opacity: [fadeSendSimulation ? textClickMeFade*contentOpacity : null]}}} onClick={() => { this.dataTransfer("SimulationAnwenden")(); this.dataTransfer("datenUp")}}>{showGerman ? <span>Simulation anwenden</span> : <span>apply simulation</span>}</Button>        
               </div>
             </Fade>
             {/* 
@@ -1241,7 +1242,7 @@ class App extends React.Component {
                 <br/><br/>Ein digitaler Zwilling in der <span style={{...expertStyleToEnter, ...{opacity: 1, color: "#FFFFFF"}}} onClick={this.handleClickShowData("showAnwendungenExpert3")}>Medizin</span> kann Auskunft darüber geben, ob ein Medikament wirkt oder eine  Therapie anschlägt. Und auch im Bereich <span style={{...expertStyleToEnter, ...{opacity: 1, color: "#FFFFFF"}}} onClick={this.handleClickShowData("showAnwendungenExpert4")}>Smart City</span> ist der Einsatz virtueller Repräsentanzen von großem Interesse.</span> 
                 : <span>ToDo</span>}
                 </p>
-                <Button className='n1' style={{...menuPointButtonStyle, ...{opacity: [fadeReload ? textClickMeFade*contentOpacity : contentOpacity]}}} onClick={() => { this.sendMessage(1); this.reload()}}>{showGerman ? <span>neu starten</span> : <span>reload</span>}</Button>        
+                <Button className='n1' style={{...menuPointButtonStyle, ...{opacity: [fadeReload ? textClickMeFade*contentOpacity : null]}}} onClick={() => { this.sendMessage(1); this.reload()}}>{showGerman ? <span>neu starten</span> : <span>reload</span>}</Button>        
               </div>
             </Fade>
             <Fade in={showAnwendungenExpert1} timeout={{ enter: fadeTimeBasicIn, exit: fadeTimeBasicOut }} mountOnEnter={true} unmountOnExit={true}>
