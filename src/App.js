@@ -233,7 +233,7 @@ class App extends React.Component {
     timeForLedDown: initialState0,
     intervalLed: 1900,
     timeRunning: initialState0,
-    intervalToScreensaver: 5000,
+    intervalToScreensaver: 8000,
     // screensaver
     showScreensaverBasic: initialStateTrue,
     // Aufbau
@@ -362,11 +362,11 @@ class App extends React.Component {
   };
 
   componentDidMount() {
-    this.clickMeButtonTimer = setInterval(() => this.updateColor(), 30);
+    this.clickMeButtonTimer = setInterval(() => this.updateColor(), 20);
     this.clickMeButtonTimer = setInterval(() => this.setContentOpacity(), 30);
     this.clickMeButtonTimer = setInterval(() => this.runLedStrip(), 100);
     this.clickMeButtonTimer = setInterval(() => this.handleFadeActive(), 20);
-    this.clickAnywhereTimer = setInterval(() => console.log("this.reload()"), this.state.intervalToScreensaver);
+    this.clickAnywhereTimer = setInterval(() => this.checkForReload(), 30);
   }
 
   componentWillUnmount() {
@@ -631,6 +631,17 @@ class App extends React.Component {
     } 
   };
 
+  resetTimer(){
+    this.setState({ timeRunning: Date.now() })
+  }
+
+  checkForReload(){
+    if(this.state.intervalToScreensaver + this.state.timeRunning <= Date.now()){
+      this.reload();
+      this.resetTimer();
+    }
+  }
+
   callback(){
     if (this.state.lastState !== this.state.actualState && this.state.actualState === 1) {
       this.setState({ lastState: this.state.actualState });
@@ -883,9 +894,6 @@ class App extends React.Component {
   }
 
   reload() {
-    console.log(this.clickAnywhereTimer);
-    this.clickAnywhereTimer = 0;
-    console.log(this.clickAnywhereTimer);
     //window.location.reload();
     this._three.hideWindmill();
     this.setState({
@@ -1058,31 +1066,32 @@ class App extends React.Component {
             {/* 
             LANGUAGE BUTTONS
             */}
-            <Button className='n1' disabled={showGerman} style={{ opacity: [showGerman ? contentOpacity : contentOpacity/1.5], position: 'absolute', left: distanceFromSide, top: distanceFromSide + 5, fontSize: '20px' }} onClick={this.changeLanguage("deutsch")} >DE</Button>
-            <Button className='n1' disabled={!showGerman} style={{ opacity: [!showGerman ? contentOpacity : contentOpacity/1.5], position: 'absolute', left: distanceFromSide+40, top: distanceFromSide + 5, fontSize: '20px' }} onClick={this.changeLanguage("english")} >EN</Button>
+            <Button className='n1' disabled={showGerman} style={{ opacity: [showGerman ? contentOpacity : contentOpacity/1.5], position: 'absolute', left: distanceFromSide, top: distanceFromSide + 5, fontSize: '20px' }} onClick={() => {this.changeLanguage("deutsch"); this.resetTimer()}} >DE</Button>
+            <Button className='n1' disabled={!showGerman} style={{ opacity: [!showGerman ? contentOpacity : contentOpacity/1.5], position: 'absolute', left: distanceFromSide+40, top: distanceFromSide + 5, fontSize: '20px' }} onClick={() => {this.changeLanguage("english"); this.resetTimer()}} >EN</Button>
+            <Button className='n1' disabled={false} style={{ position: 'absolute', left: distanceFromSide+100, top: distanceFromSide + 5, fontSize: '20px' }} onClick={() => {this.resetTimer()}} >Test</Button>
             {/* 
             MENU 
             */}
             <Fade in={showMenuPartOne} timeout={{ enter: fadeTimeBasicIn, exit: fadeTimeBasicOut }} mountOnEnter={true} unmountOnExit={true}>
               <div className="firstMenuPoint">
-                <Button className='n1' disabled={menu1AufbauDisabled} style={{ opacity: [fadeMenu1Aufbau ? textClickMeFade : null], position: 'absolute', right: distanceFromSide * 3 + 10, top: distanceFromSide + 5, fontSize: '20px' }} onClick={this.dataTransfer("datenDown")} >{showGerman ? <span>Aufbau</span> : <span>composition</span>}</Button>
-                <Fab className={"icon1"} disabled={menu1AufbauDisabled} style={{ opacity: [fadeMenu1Aufbau ? textClickMeFade : null], position: 'absolute', right: distanceFromSide, top: distanceFromSide, fontSize: '20px' }} onClick={this.dataTransfer("datenDown")}>
+                <Button className='n1' disabled={menu1AufbauDisabled} style={{ opacity: [fadeMenu1Aufbau ? textClickMeFade : null], position: 'absolute', right: distanceFromSide * 3 + 10, top: distanceFromSide + 5, fontSize: '20px' }} onClick={() => {this.dataTransfer("datenDown"); this.resetTimer()}} >{showGerman ? <span>Aufbau</span> : <span>composition</span>}</Button>
+                <Fab className={"icon1"} disabled={menu1AufbauDisabled} style={{ opacity: [fadeMenu1Aufbau ? textClickMeFade : null], position: 'absolute', right: distanceFromSide, top: distanceFromSide, fontSize: '20px' }} onClick={() => {this.dataTransfer("datenDown"); this.resetTimer()}}>
                   <AufbauIcon className={"aufbauIcon"} color={fabColor} />
                 </Fab>
               </div>
             </Fade>
             <Fade in={showMenu} timeout={{ enter: fadeTimeBasicIn, exit: fadeTimeBasicOut }} mountOnEnter={true} unmountOnExit={true}>
               <div className="menu">
-                <Button className='n1' disabled={menu2DatenDisabled} style={{ opacity: [fadeMenu2Daten ? textClickMeFade : null], position: 'absolute', right: distanceFromSide * 3 + 10, top: 355, fontSize: '20px' }} onClick={this.handleClickShowData('daten')} >{showGerman ? <span>Daten</span> : <span>data</span>}</Button>
-                <Fab className={"icon1"} disabled={menu2DatenDisabled} style={{ opacity: [fadeMenu2Daten ? textClickMeFade : null], position: 'absolute', right: distanceFromSide, top: 350, fontSize: '20px' }} onClick={this.handleClickShowData('daten')}>
+                <Button className='n1' disabled={menu2DatenDisabled} style={{ opacity: [fadeMenu2Daten ? textClickMeFade : null], position: 'absolute', right: distanceFromSide * 3 + 10, top: 355, fontSize: '20px' }} onClick={() => {this.handleClickShowData('daten'); this.resetTimer()}} >{showGerman ? <span>Daten</span> : <span>data</span>}</Button>
+                <Fab className={"icon1"} disabled={menu2DatenDisabled} style={{ opacity: [fadeMenu2Daten ? textClickMeFade : null], position: 'absolute', right: distanceFromSide, top: 350, fontSize: '20px' }} onClick={() => {this.handleClickShowData('daten'); this.resetTimer()}}>
                   <DatenIcon className={"datenIcon"} color={fabColor} />
                 </Fab>
-                <Button className='n1' disabled={menu3SimulationDisabled} style={{ opacity: [fadeMenu3Simulation ? textClickMeFade : null], position: 'absolute', right: distanceFromSide * 3 + 10, top: 675, fontSize: '20px' }} onClick={this.handleClickShowData('simulation')} >Simulation</Button>
-                <Fab className={"icon1"} disabled={menu3SimulationDisabled} style={{ opacity: [fadeMenu3Simulation ? textClickMeFade : null], position: 'absolute', right: distanceFromSide, top: 670, fontSize: '20px' }} onClick={this.handleClickShowData('simulation')}>
+                <Button className='n1' disabled={menu3SimulationDisabled} style={{ opacity: [fadeMenu3Simulation ? textClickMeFade : null], position: 'absolute', right: distanceFromSide * 3 + 10, top: 675, fontSize: '20px' }} onClick={() => {this.handleClickShowData('simulation'); this.resetTimer()}} >Simulation</Button>
+                <Fab className={"icon1"} disabled={menu3SimulationDisabled} style={{ opacity: [fadeMenu3Simulation ? textClickMeFade : null], position: 'absolute', right: distanceFromSide, top: 670, fontSize: '20px' }} onClick={() => {this.handleClickShowData('simulation'); this.resetTimer()}}>
                   <SimulationIcon className={"simulationIcon"} color={fabColor} />
                 </Fab>
-                <Button className='n1' disabled={menu4AnwendungenDisabled} style={{ opacity: [fadeMenu4Anwendung ? textClickMeFade : null], position: 'absolute', right: distanceFromSide * 3 + 10, bottom: distanceFromSide + 10, fontSize: '20px' }} onClick={this.handleClickShowData('anwendungen')} >{showGerman ? <span>Anwendungen</span> : <span>applications</span>}</Button>
-                <Fab className={"icon1"} disabled={menu4AnwendungenDisabled} style={{ opacity: [fadeMenu4Anwendung ? textClickMeFade : null], position: 'absolute', right: distanceFromSide, bottom: distanceFromSide+5, fontSize: '20px' }} onClick={this.handleClickShowData('anwendungen')}>
+                <Button className='n1' disabled={menu4AnwendungenDisabled} style={{ opacity: [fadeMenu4Anwendung ? textClickMeFade : null], position: 'absolute', right: distanceFromSide * 3 + 10, bottom: distanceFromSide + 10, fontSize: '20px' }} onClick={() => {this.handleClickShowData('anwendungen'); this.resetTimer()}} >{showGerman ? <span>Anwendungen</span> : <span>applications</span>}</Button>
+                <Fab className={"icon1"} disabled={menu4AnwendungenDisabled} style={{ opacity: [fadeMenu4Anwendung ? textClickMeFade : null], position: 'absolute', right: distanceFromSide, bottom: distanceFromSide+5, fontSize: '20px' }} onClick={() => {this.handleClickShowData('anwendungen'); this.resetTimer()}}>
                   <AnwendungenIcon className={"anwendungenIcon"} color={fabColor} />
                 </Fab>
               </div>
@@ -1175,10 +1184,10 @@ class App extends React.Component {
                 <h2 className='p1' style={{...h2Style, ...{opacity:contentOpacity}}}>{showGerman ? <span>Daten</span> : <span>data</span>}</h2>
                 <p className='p1' style={{...pStyle, ...{opacity:contentOpacity}}} >{showGerman ? 
                   <span>Um von einem digitalen Zwilling signifikante Vorteile zu ziehen, müssen der physische und der virtuelle Part miteinander verbunden sein.<br /><br />
-                  Das <span style={{...expertStyleToEnter, ...{opacity: 1, color: "#FFFFFF"}}} onClick={this.handleClickShowData("showDatenExpert1")}>Internet der Dinge</span> ermöglicht es real existierenden Objekten mittels <span style={{...expertStyleToEnter, ...{opacity: 1, color: "#FFFFFF"}}} onClick={this.handleClickShowData("showDatenExpert2")}>Sensoren</span> Daten zum eigenen, aktuellen Zustand in einer <span style={{...expertStyleToEnter, ...{opacity: 1, color: "#FFFFFF"}}} onClick={this.handleClickShowData("showDatenExpert3")}>Cloud</span> zu sammeln und weiterzugeben. Diese Informationen fließen in das digitale Modell ein.</span> 
+                  Das <span style={{...expertStyleToEnter, ...{opacity: 1, color: "#FFFFFF"}}} onClick={() => {this.handleClickShowData("showDatenExpert1"); this.resetTimer()}}>Internet der Dinge</span> ermöglicht es real existierenden Objekten mittels <span style={{...expertStyleToEnter, ...{opacity: 1, color: "#FFFFFF"}}} onClick={() => {this.handleClickShowData("showDatenExpert2"); this.resetTimer()}}>Sensoren</span> Daten zum eigenen, aktuellen Zustand in einer <span style={{...expertStyleToEnter, ...{opacity: 1, color: "#FFFFFF"}}} onClick={() => {this.handleClickShowData("showDatenExpert3"); this.resetTimer()}}>Cloud</span> zu sammeln und weiterzugeben. Diese Informationen fließen in das digitale Modell ein.</span> 
                   : <span>ToDo</span>}
                   </p>
-                   <Button className='n1' disabled={fadeStartDataDisable} style={{...menuPointButtonStyle, ...{opacity: [fadeStartData ? textClickMeFade*contentOpacity : 0]}}} onClick={ () => { this.dataTransfer("drehungEin")(); this.dataTransfer("datenDown")()}}>{showGerman ? <span>Starte Datentransfer</span> : <span>get live data</span>}</Button>        
+                   <Button className='n1' disabled={fadeStartDataDisable} style={{...menuPointButtonStyle, ...{opacity: [fadeStartData ? textClickMeFade*contentOpacity : 0]}}} onClick={ () => { this.dataTransfer("drehungEin")(); this.dataTransfer("datenDown")(); this.resetTimer()}}>{showGerman ? <span>Starte Datentransfer</span> : <span>get live data</span>}</Button>        
               </div>
             </Fade>
             <Fade in={showDatenExpert1} timeout={{ enter: fadeTimeBasicIn, exit: fadeTimeBasicOut }} mountOnEnter={true} unmountOnExit={true}>
@@ -1217,7 +1226,7 @@ class App extends React.Component {
                   In dieser Simulation können unterschiedliche Faktoren virtuell ausprobiert und deren Einfluss berechnet werden.</span> 
                   : <span>ToDo</span>}
                   </p>
-                  <Button in={!showSimulationRunning} className='n1' disabled={fadeStartSimulationDisable} style={{...menuPointButtonStyle, ...{opacity: [fadeStartSimulation&&!showSimulationRunning ? textClickMeFade*contentOpacity : 0]}}} onClick={() => { this.dataTransfer("SimulationStarten")();}}>{showGerman ? <span>Starte Simulation</span> : <span>start simulation</span>}</Button>        
+                  <Button in={!showSimulationRunning} className='n1' disabled={fadeStartSimulationDisable} style={{...menuPointButtonStyle, ...{opacity: [fadeStartSimulation&&!showSimulationRunning ? textClickMeFade*contentOpacity : 0]}}} onClick={() => { this.dataTransfer("SimulationStarten")(); this.resetTimer()}}>{showGerman ? <span>Starte Simulation</span> : <span>start simulation</span>}</Button>        
               </div>
             </Fade>
             <Fade in={showSimulationRunning} timeout={{ enter: fadeTimeBasicIn, exit: fadeTimeBasicOut }} mountOnEnter={true} unmountOnExit={true}>
@@ -1229,7 +1238,7 @@ class App extends React.Component {
                 {showGerman ? <span>Simulation Nr. 265<br/><br/>Windgeschwindigkeit: 'hoch'<br/><br/>Belastung: 'normal'<br/><br/>Bremsvorgang aktiviert</span> 
                 : <span>simulation 265 ToDo</span>}
                 </p>
-                <Button className='n1' disabled={fadeSendSimulationDisable} style={{...menuPointButtonStyle, ...{opacity: [fadeSendSimulation ? textClickMeFade*contentOpacity : 0]}}} onClick={() => { this.dataTransfer("SimulationAnwenden")(); this.dataTransfer("datenUp")}}>{showGerman ? <span>Simulation anwenden</span> : <span>apply simulation</span>}</Button>        
+                <Button className='n1' disabled={fadeSendSimulationDisable} style={{...menuPointButtonStyle, ...{opacity: [fadeSendSimulation ? textClickMeFade*contentOpacity : 0]}}} onClick={() => { this.dataTransfer("SimulationAnwenden")(); this.dataTransfer("datenUp"); this.resetTimer()}}>{showGerman ? <span>Simulation anwenden</span> : <span>apply simulation</span>}</Button>        
               </div>
             </Fade>
             {/* 
@@ -1239,11 +1248,11 @@ class App extends React.Component {
               <div className="aufbauNormal">
                 <h2 className='p1' style={{...h2Style, ...{opacity:contentOpacity}}}>{showGerman ? <span>Anwendungen</span> : <span>applications</span>}</h2>
                 <p className='p1' style={{...pStyle, ...{opacity:contentOpacity}}} >
-                {showGerman ? <span>Digitale Zwillinge von Windrädern ermöglichen unter Anderem <span style={{...expertStyleToEnter, ...{opacity: 1, color: "#FFFFFF"}}} onClick={this.handleClickShowData("showAnwendungenExpert1")}>Predicitve Maintenance</span>  - die Sensordaten von Windfarmen machen eine kontinuierliche Überwachung möglich. Aber Digital Twins finden zukünftig noch sehr vielfältige Anwendungsfelder. Insbesondere die <span style={{...expertStyleToEnter, ...{opacity: 1, color: "#FFFFFF"}}} onClick={this.handleClickShowData("showAnwendungenExpert2")}>Produktion</span> profitiert bereits heute von dem Einsatz der Zwillinge.
-                <br/><br/>Ein digitaler Zwilling in der <span style={{...expertStyleToEnter, ...{opacity: 1, color: "#FFFFFF"}}} onClick={this.handleClickShowData("showAnwendungenExpert3")}>Medizin</span> kann Auskunft darüber geben, ob ein Medikament wirkt oder eine  Therapie anschlägt. Und auch im Bereich <span style={{...expertStyleToEnter, ...{opacity: 1, color: "#FFFFFF"}}} onClick={this.handleClickShowData("showAnwendungenExpert4")}>Smart City</span> ist der Einsatz virtueller Repräsentanzen von großem Interesse.</span> 
+                {showGerman ? <span>Digitale Zwillinge von Windrädern ermöglichen unter Anderem <span style={{...expertStyleToEnter, ...{opacity: 1, color: "#FFFFFF"}}} onClick={() => {this.handleClickShowData("showAnwendungenExpert1"); this.resetTimer()}}>Predicitve Maintenance</span>  - die Sensordaten von Windfarmen machen eine kontinuierliche Überwachung möglich. Aber Digital Twins finden zukünftig noch sehr vielfältige Anwendungsfelder. Insbesondere die <span style={{...expertStyleToEnter, ...{opacity: 1, color: "#FFFFFF"}}} onClick={() => {this.handleClickShowData("showAnwendungenExpert2"); this.resetTimer()}}>Produktion</span> profitiert bereits heute von dem Einsatz der Zwillinge.
+                <br/><br/>Ein digitaler Zwilling in der <span style={{...expertStyleToEnter, ...{opacity: 1, color: "#FFFFFF"}}} onClick={() => {this.handleClickShowData("showAnwendungenExpert3"); this.resetTimer()}}>Medizin</span> kann Auskunft darüber geben, ob ein Medikament wirkt oder eine  Therapie anschlägt. Und auch im Bereich <span style={{...expertStyleToEnter, ...{opacity: 1, color: "#FFFFFF"}}} onClick={() => {this.handleClickShowData("showAnwendungenExpert4"); this.resetTimer()}}>Smart City</span> ist der Einsatz virtueller Repräsentanzen von großem Interesse.</span> 
                 : <span>ToDo</span>}
                 </p>
-                <Button className='n1' style={{...menuPointButtonStyle, ...{opacity: [fadeReload ? textClickMeFade*contentOpacity : 0]}}} onClick={() => { this.sendMessage(1); this.reload()}}>{showGerman ? <span>neu starten</span> : <span>reload</span>}</Button>        
+                <Button className='n1' style={{...menuPointButtonStyle, ...{opacity: [fadeReload ? textClickMeFade*contentOpacity : 0]}}} onClick={() => { this.sendMessage(1); this.resetTimer(); this.reload()}}>{showGerman ? <span>neu starten</span> : <span>reload</span>}</Button>        
               </div>
             </Fade>
             <Fade in={showAnwendungenExpert1} timeout={{ enter: fadeTimeBasicIn, exit: fadeTimeBasicOut }} mountOnEnter={true} unmountOnExit={true}>
@@ -1282,7 +1291,7 @@ class App extends React.Component {
             EXPERT CONTENT HIDE 
             */}
             <Fade in={showDisableExpertDiv} timeout={0} mountOnEnter={true} unmountOnExit={true}>
-              <div style={{opacity: "0", position: "absolute", height: "1080px", width: "1500px", top: "0px", left: "0px" }} onClick={() => { this.handleShowDisableExpertDiv()}}>
+              <div style={{opacity: "0", position: "absolute", height: "1080px", width: "1500px", top: "0px", left: "0px" }} onClick={() => { this.handleShowDisableExpertDiv(); this.resetTimer()}}>
               </div>
             </Fade>
           </MuiThemeProvider>
