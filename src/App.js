@@ -34,7 +34,6 @@ const theme = createMuiTheme({
 
 // variables for screen design
 const distanceFromSide = 30;
-const distanceFromSideInfoNormal = 100;
 const textColorNormal = '#FFFFFF';
 const textFontNormal = 20;
 const textLineHeightNormal = 26;
@@ -59,6 +58,7 @@ const initialLineMenuColor = "#1f1f1f";
 const initialContentOpacity = 0.5;
 const initialClickMeFade = 0.4;
 const initialSimulationBoxColor = 255;
+const initialRotationSpeed = -0.01;
 
 const h1Style = {
   position: 'absolute',
@@ -274,6 +274,8 @@ class App extends React.Component {
 
     //windmill
     rotationBlades: initialStateFalse,
+    rotationSpeedLeft: initialRotationSpeed,
+    rotationSpeedRight: initialRotationSpeed,
 
     // LEDs
     currentLedOn: initialState0,
@@ -939,6 +941,8 @@ class App extends React.Component {
       contentOpacity: initialContentOpacity,
       valueSlider: initialState0,
       rotationBlades: initialStateFalse,
+      rotationSpeedLeft: initialRotationSpeed,
+      rotationSpeedRight: initialRotationSpeed,
       currentLedOn: initialState0,
       showLEDs: initialStateTrue,
       ledsMoving: initialState0,
@@ -1055,6 +1059,11 @@ class App extends React.Component {
     }
   }
 
+  setSimulationWindmillRotorSpeed(speedLeft, speedRight) {
+    this._three.setSpeedRotationBladesSimulation(speedLeft);
+    this._three.setSpeedRotationBladesRoot(speedRight);
+  }
+
   render() {
     const { simulationBoxColor, showGerman, fadeSendSimulationDisable, fadeSendSimulation, showSimulationRunning, fadeStartDataDisable, fadeStartSimulationDisable, fadeStartData, fadeStartSimulation, fadeReload, fadeMenu1Aufbau, fadeMenu2Daten, fadeMenu3Simulation, fadeMenu4Anwendung, menu1AufbauDisabled, menu2DatenDisabled, menu3SimulationDisabled, menu4AnwendungenDisabled, rotationBlades, ledOpacity1, ledOpacity2, ledOpacity3, ledOpacity4, ledOpacity5, ledOpacity6, ledOpacity7, ledOpacity8, ledOpacity9, ledOpacity10, ledOpacity11, ledOpacity12, ledOpacity13, ledOpacity14, ledOpacity15, ledOpacity16, ledOpacity17, ledOpacity18, ledOpacity19, ledOpacity20, ledShadowSize1, ledShadowSize2, ledShadowSize3, ledShadowSize4, ledShadowSize5, ledShadowSize6, ledShadowSize7, ledShadowSize8, ledShadowSize9, ledShadowSize10, ledShadowSize11, ledShadowSize12, ledShadowSize13, ledShadowSize14, ledShadowSize15, ledShadowSize16, ledShadowSize17, ledShadowSize18, ledShadowSize19, ledShadowSize20, ledColor20, ledColor19, ledColor18, ledColor17, ledColor16, ledColor15, ledColor14, ledColor13, ledColor12, ledColor11, ledColor10, ledColor9, ledColor8, ledColor7, ledColor6, ledColor5, ledColor4, ledColor3, ledColor2, ledColor1, showLEDs, contentOpacity, showDisableExpertDiv, lineMenuColor, showLine1, showLine2, showLine3,fabColor, showMenuPartOne, textClickMeFade, showMenu, showScreensaverBasic, showAufbauBasic, showDatenBasic, showDatenExpert1, showDatenExpert2, showDatenExpert3, showSimulationBasic, showAnwendungenExpert3, showAnwendungenExpert4, showAnwendungenExpert1, showAnwendungenExpert2, showAnwendungenBasic, valueSlider } = this.state;
 
@@ -1079,6 +1088,7 @@ class App extends React.Component {
             */}
             <Button className='n1' disabled={showGerman} style={{ opacity: [showGerman ? contentOpacity : contentOpacity/1.5], position: 'absolute', left: distanceFromSide, top: distanceFromSide + 5, fontSize: '20px' }} onClick={() => {this.changeLanguage("deutsch")(); this.resetTimer()}} >DE</Button>
             <Button className='n1' disabled={!showGerman} style={{ opacity: [!showGerman ? contentOpacity : contentOpacity/1.5], position: 'absolute', left: distanceFromSide+40, top: distanceFromSide + 5, fontSize: '20px' }} onClick={() => {this.changeLanguage("english")(); this.resetTimer()}} >EN</Button>
+            <Button className='n1' style={{ opacity: [!showGerman ? contentOpacity : contentOpacity/1.5], position: 'absolute', left: distanceFromSide+90, top: distanceFromSide + 5, fontSize: '20px' }} onClick={() => {this.setSimulationWindmillRotorSpeed(-0.07, -0.03); this.resetTimer()}} >Test when simulation runs</Button>
             {/* 
             MENU 
             */}
