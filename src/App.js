@@ -1153,7 +1153,8 @@ class App extends React.Component {
                   {showGerman ? <span>Ein digitaler Zwilling, der mit allen Werten und Informationen eine möglichst exakte digitale Abbildung eines Objekts oder eines Prozesses darstellt, 
                     hilft das Produkt besser zu verstehen, es aus der Ferne zu überwachen und zu steuern, sowie Berechnungen anzustellen und somit die Funktionsweise zu verbessern.
                   </span>
-                    : <span>ToDo</span>}
+                    : <span>A digital Twin, which displays an exact digital portrait with all the data and information from a real object, helps to undestand the product better, 
+                      allows to monitor and control as well as calculating and simulating to later improve the functionality.</span>}
                   </p>
               </div>
             </Fade>
