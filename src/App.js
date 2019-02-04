@@ -215,7 +215,7 @@ function AnwendungenIcon(props) {
 class App extends React.Component {
   state = {
     // 0 Screensaver, 1 Aufbau, 2 Daten, 3 Simulation, 4 Anwendungen
-    showGerman: false,
+    showGerman: true,
     actualState: 0,
     actualStateFade: 0,
     lastState: 0,
@@ -480,7 +480,8 @@ class App extends React.Component {
             menu4AnwendungenDisabled: true,
             fadeStartDataDisable: true,
             fadeStartSimulationDisable: true,   
-            fadeSendSimulationDisable: true,       
+            fadeSendSimulationDisable: true, 
+            showLEDs: true,      
           })
           break;
         case 2: // start data transfer
@@ -539,6 +540,7 @@ class App extends React.Component {
             fadeStartSimulationDisable: false,
             showSimulationRunning: false,
             fadeSendSimulationDisable: true,
+            showLEDs: false,
           })
           break;
         case 5: // send Simulation
@@ -559,6 +561,7 @@ class App extends React.Component {
             fadeStartSimulationDisable: true,
             showSimulationRunning: true,
             fadeSendSimulationDisable: false,
+            showLEDs: true,
           })
           break;
         case 6: // Anwendungen (Menu)
@@ -606,6 +609,9 @@ class App extends React.Component {
 
   handleChangeSlider = (event, valueSlider) => {
     this.setState({ valueSlider });
+    if(this.state.valueSlider >= 9) {
+      this.setState({showLEDs: false});
+    }
     this._three.changePositionHead(valueSlider);
   };
 
