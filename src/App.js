@@ -366,7 +366,7 @@ class App extends React.Component {
     this.clickMeButtonTimer = setInterval(() => this.setContentOpacity(), 30);
     this.clickMeButtonTimer = setInterval(() => this.runLedStrip(), 100);
     this.clickMeButtonTimer = setInterval(() => this.handleFadeActive(), 20);
-    this.clickAnywhereTimer = setInterval(() => this.checkForReload(), 30);
+    //this.clickAnywhereTimer = setInterval(() => this.checkForReload(), 30);
   }
 
   componentWillUnmount() {
@@ -1066,9 +1066,8 @@ class App extends React.Component {
             {/* 
             LANGUAGE BUTTONS
             */}
-            <Button className='n1' disabled={showGerman} style={{ opacity: [showGerman ? contentOpacity : contentOpacity/1.5], position: 'absolute', left: distanceFromSide, top: distanceFromSide + 5, fontSize: '20px' }} onClick={() => {this.changeLanguage("deutsch"); this.resetTimer()}} >DE</Button>
-            <Button className='n1' disabled={!showGerman} style={{ opacity: [!showGerman ? contentOpacity : contentOpacity/1.5], position: 'absolute', left: distanceFromSide+40, top: distanceFromSide + 5, fontSize: '20px' }} onClick={() => {this.changeLanguage("english"); this.resetTimer()}} >EN</Button>
-            <Button className='n1' disabled={false} style={{ position: 'absolute', left: distanceFromSide+100, top: distanceFromSide + 5, fontSize: '20px' }} onClick={() => {this.resetTimer()}} >Test</Button>
+            <Button className='n1' disabled={showGerman} style={{ opacity: [showGerman ? contentOpacity : contentOpacity/1.5], position: 'absolute', left: distanceFromSide, top: distanceFromSide + 5, fontSize: '20px' }} onClick={() => {this.changeLanguage("deutsch")(); this.resetTimer()}} >DE</Button>
+            <Button className='n1' disabled={!showGerman} style={{ opacity: [!showGerman ? contentOpacity : contentOpacity/1.5], position: 'absolute', left: distanceFromSide+40, top: distanceFromSide + 5, fontSize: '20px' }} onClick={() => {this.changeLanguage("english")(); this.resetTimer()}} >EN</Button>
             {/* 
             MENU 
             */}
