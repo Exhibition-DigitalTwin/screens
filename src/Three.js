@@ -34,6 +34,7 @@ class ThreeScene extends Component {
         this.newPositionHead = -40;
 
         this.rotation = false;
+        this.rotationCount = 0;
 
         //ADD SCENE
         this.scene = new THREE.Scene()
@@ -80,6 +81,10 @@ class ThreeScene extends Component {
         //ADD FADING OF ROOT MODEL
         this.tween = new TWEEN.Tween(this.materialWhite)
         this.tween.to({ opacity: 1 }, 300)
+
+        this.tweenHide = new TWEEN.Tween(this.materialWhite)
+        this.tweenHide.to({ opacity: 0, transparent: false }, 300)
+
         this.tweenSimulation = new TWEEN.Tween(this.materialWhiteSimulation)
         this.tweenSimulation.to({ opacity: 1, transparent: false }, 300)
         //tween.start();
@@ -104,6 +109,8 @@ class ThreeScene extends Component {
         var steps = rad / Math.sqrt(speed * speed);
         this.stopRotationLoop = steps;
         console.log("rotate")
+        this.rotationCount += 1;
+        console.log("Count: " + this.rotationCount)
     };
 
     changePositionHead(valueSlider) {
@@ -475,7 +482,28 @@ class ThreeScene extends Component {
     }
 
     hideWindmill() {
-        console.log("dead");
+        this.tweenHide.start();
+        setTimeout(this.resetRotation(), 300);
+    }
+
+    resetRotation() {
+        console.log("Count: " + this.rotationCount)
+        if (this.rotationCount === 1) {
+            this.rotateHeadRootModel(0, 315, -0.1);
+        }
+        else if (this.rotationCount === 2) {
+            this.rotateHeadRootModel(0, 225, -0.1);
+        }
+        else if (this.rotationCount === 3) {
+            this.rotateHeadRootModel(0, 135, -0.1);
+        }
+        else if (this.rotationCount === 4) {
+            this.rotateHeadRootModel(0, 45, -0.1);
+        };
+    }
+
+    getRotationCount() {
+        return this.rotationCount;
     }
 
     showSecondModel() {
@@ -525,6 +553,10 @@ class ThreeScene extends Component {
 
     startRotation() {
         this.rotation = true;
+    }
+
+    stopRotation() {
+        this.rotation = false;
     }
 
     // ------------------------------------------ THREE.JS FUNCTIONS ----------------------------------------------
