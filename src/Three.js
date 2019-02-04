@@ -24,7 +24,8 @@ class ThreeScene extends Component {
         this.loadedSimulation = false;
         this.deletedSimulation = false;
 
-        this.speedRotationBlades = -0.01
+        this.speedRotationBladesRoot = -0.01;
+        this.speedRotationBladesSimulation = -0.01;
         this.speedRotationHead = 0
 
         this.initRotationLoop = 0;
@@ -559,6 +560,14 @@ class ThreeScene extends Component {
         this.rotation = false;
     }
 
+    setSpeedRotationBladesRoot(speed) {
+        this.speedRotationBladesRoot = speed;
+    }
+
+    setSpeedRotationBladesSimulation(speed) {
+        this.speedRotationBladesSimulation = speed;
+    }
+
     // ------------------------------------------ THREE.JS FUNCTIONS ----------------------------------------------
 
     componentWillUnmount() {
@@ -581,11 +590,11 @@ class ThreeScene extends Component {
 
         //TURNING BLADES OF ROOT MODEL
         if (this.loadedSimulation === true && this.deletedSimulation === false && this.rotation === true) {
-            this.bottomParentBladesRootModel.rotateZ(this.speedRotationBlades);
-            this.bottomParentBladesSimulationModel.rotateZ(this.speedRotationBlades);
+            this.bottomParentBladesRootModel.rotateZ(this.speedRotationBladesRoot);
+            this.bottomParentBladesSimulationModel.rotateZ(this.speedRotationBladesSimulation);
         }
         else if (this.loadedSimulation === true && this.rotation === true) {
-            this.bottomParentBladesRootModel.rotateZ(this.speedRotationBlades);
+            this.bottomParentBladesRootModel.rotateZ(this.speedRotationBladesRoot);
         }
 
         //TURNING HEAD OF ROOT MODEL
