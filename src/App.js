@@ -58,6 +58,7 @@ const initialStateFalse = false;
 const initialLineMenuColor = "#1f1f1f";
 const initialContentOpacity = 0.5;
 const initialClickMeFade = 0.4;
+const initialSimulationBoxColor = 255;
 
 const h1Style = {
   position: 'absolute',
@@ -359,6 +360,7 @@ class App extends React.Component {
     fadeStartDataDisable: initialStateFalse,
     fadeStartSimulationDisable: initialStateFalse,
     fadeSendSimulationDisable: initialStateFalse,
+    simulationBoxColor: initialSimulationBoxColor,
   };
 
   componentDidMount() {
@@ -367,6 +369,7 @@ class App extends React.Component {
     this.clickMeButtonTimer = setInterval(() => this.runLedStrip(), 100);
     this.clickMeButtonTimer = setInterval(() => this.handleFadeActive(), 20);
     //this.clickAnywhereTimer = setInterval(() => this.checkForReload(), 30);
+    this.clickMeButtonTimer = setInterval(() => this.changeSimulationBoxColor(), 20);
   }
 
   componentWillUnmount() {
@@ -1019,6 +1022,7 @@ class App extends React.Component {
       fadeStartDataDisable: initialStateFalse,
       fadeStartSimulationDisable: initialStateFalse,
       fadeSendSimulationDisable: initialStateFalse,
+      simulationBoxColor: initialSimulationBoxColor,
     });
   }
 
@@ -1032,7 +1036,7 @@ class App extends React.Component {
       showAnwendungenExpert2: false, 
       showAnwendungenExpert3: false,
       showAnwendungenExpert4: false,
-    })
+    });
   }
 
   handleOpen() {
@@ -1047,8 +1051,14 @@ class App extends React.Component {
     this.refWebSocket.sendMessage(message);
   };
 
+  changeSimulationBoxColor() {
+    if(this.state.actualStateFade === 4) {
+      this.setState({ simulationBoxColor: this.state.simulationBoxColor -1 });
+    }
+  }
+
   render() {
-    const { showGerman, fadeSendSimulationDisable, fadeSendSimulation, showSimulationRunning, fadeStartDataDisable, fadeStartSimulationDisable, fadeStartData, fadeStartSimulation, fadeReload, fadeMenu1Aufbau, fadeMenu2Daten, fadeMenu3Simulation, fadeMenu4Anwendung, menu1AufbauDisabled, menu2DatenDisabled, menu3SimulationDisabled, menu4AnwendungenDisabled, rotationBlades, ledOpacity1, ledOpacity2, ledOpacity3, ledOpacity4, ledOpacity5, ledOpacity6, ledOpacity7, ledOpacity8, ledOpacity9, ledOpacity10, ledOpacity11, ledOpacity12, ledOpacity13, ledOpacity14, ledOpacity15, ledOpacity16, ledOpacity17, ledOpacity18, ledOpacity19, ledOpacity20, ledShadowSize1, ledShadowSize2, ledShadowSize3, ledShadowSize4, ledShadowSize5, ledShadowSize6, ledShadowSize7, ledShadowSize8, ledShadowSize9, ledShadowSize10, ledShadowSize11, ledShadowSize12, ledShadowSize13, ledShadowSize14, ledShadowSize15, ledShadowSize16, ledShadowSize17, ledShadowSize18, ledShadowSize19, ledShadowSize20, ledColor20, ledColor19, ledColor18, ledColor17, ledColor16, ledColor15, ledColor14, ledColor13, ledColor12, ledColor11, ledColor10, ledColor9, ledColor8, ledColor7, ledColor6, ledColor5, ledColor4, ledColor3, ledColor2, ledColor1, showLEDs, contentOpacity, showDisableExpertDiv, lineMenuColor, showLine1, showLine2, showLine3,fabColor, showMenuPartOne, textClickMeFade, showMenu, showScreensaverBasic, showAufbauBasic, showDatenBasic, showDatenExpert1, showDatenExpert2, showDatenExpert3, showSimulationBasic, showAnwendungenExpert3, showAnwendungenExpert4, showAnwendungenExpert1, showAnwendungenExpert2, showAnwendungenBasic, valueSlider } = this.state;
+    const { simulationBoxColor, showGerman, fadeSendSimulationDisable, fadeSendSimulation, showSimulationRunning, fadeStartDataDisable, fadeStartSimulationDisable, fadeStartData, fadeStartSimulation, fadeReload, fadeMenu1Aufbau, fadeMenu2Daten, fadeMenu3Simulation, fadeMenu4Anwendung, menu1AufbauDisabled, menu2DatenDisabled, menu3SimulationDisabled, menu4AnwendungenDisabled, rotationBlades, ledOpacity1, ledOpacity2, ledOpacity3, ledOpacity4, ledOpacity5, ledOpacity6, ledOpacity7, ledOpacity8, ledOpacity9, ledOpacity10, ledOpacity11, ledOpacity12, ledOpacity13, ledOpacity14, ledOpacity15, ledOpacity16, ledOpacity17, ledOpacity18, ledOpacity19, ledOpacity20, ledShadowSize1, ledShadowSize2, ledShadowSize3, ledShadowSize4, ledShadowSize5, ledShadowSize6, ledShadowSize7, ledShadowSize8, ledShadowSize9, ledShadowSize10, ledShadowSize11, ledShadowSize12, ledShadowSize13, ledShadowSize14, ledShadowSize15, ledShadowSize16, ledShadowSize17, ledShadowSize18, ledShadowSize19, ledShadowSize20, ledColor20, ledColor19, ledColor18, ledColor17, ledColor16, ledColor15, ledColor14, ledColor13, ledColor12, ledColor11, ledColor10, ledColor9, ledColor8, ledColor7, ledColor6, ledColor5, ledColor4, ledColor3, ledColor2, ledColor1, showLEDs, contentOpacity, showDisableExpertDiv, lineMenuColor, showLine1, showLine2, showLine3,fabColor, showMenuPartOne, textClickMeFade, showMenu, showScreensaverBasic, showAufbauBasic, showDatenBasic, showDatenExpert1, showDatenExpert2, showDatenExpert3, showSimulationBasic, showAnwendungenExpert3, showAnwendungenExpert4, showAnwendungenExpert1, showAnwendungenExpert2, showAnwendungenBasic, valueSlider } = this.state;
 
     return (
       <div className="App">
@@ -1234,13 +1244,16 @@ class App extends React.Component {
             </Fade>
             <Fade in={showSimulationRunning} timeout={{ enter: fadeTimeBasicIn, exit: fadeTimeBasicOut }} mountOnEnter={true} unmountOnExit={true}>
               <div className="simulationText">
-                <p className='p1' style={{position: 'absolute', left: 910, top: 790, fontSize: textFontNormal/1.7 + 'px', color: textColorNormal, width: '10%', textAlign: 'left'}}>
+                <p className='p1' style={{position: 'absolute', left: 960, top: 790, fontSize: textFontNormal/1.7 + 'px', color: textColorNormal, width: '10%', textAlign: 'left'}}>
                 {showGerman ? <span>Simulation Nr. 1<br/><br/>Windgeschwindigkeit: 'hoch'<br/><br/>Belastung: 'kritisch'</span> 
                 : <span>simulation 1 ToDo</span>}</p>
-                <p className='p1' style={{position: 'absolute', left: 910+360, top: 790, fontSize: textFontNormal/1.7 + 'px', color: textColorNormal, width: '10%', textAlign: 'left'}}>
+                <p className='p1' style={{position: 'absolute', left: 960+350, top: 790, fontSize: textFontNormal/1.7 + 'px', color: textColorNormal, width: '10%', textAlign: 'left'}}>
                 {showGerman ? <span>Simulation Nr. 265<br/><br/>Windgeschwindigkeit: 'hoch'<br/><br/>Belastung: 'normal'<br/><br/>Bremsvorgang aktiviert</span> 
                 : <span>simulation 265 ToDo</span>}
                 </p>
+                
+                <div id="simBox1" style={{position: 'absolute', width: 330, height: 815, clear:'both', top: 130, left: 930, borderStyle: 'solid', borderWidth: 5, borderColor: 'rgb( 255, ' + simulationBoxColor + ', ' + simulationBoxColor + ')'}}></div>
+                <div id="simBox2" style={{position: 'absolute', width: 330, height: 815, clear:'both', top: 130, left: 1275, borderStyle: 'solid', borderWidth: 5, borderColor: 'rgb(' + simulationBoxColor + ', 255, ' + simulationBoxColor + ')'}}></div>
                 <Button className='n1' disabled={fadeSendSimulationDisable} style={{...menuPointButtonStyle, ...{opacity: [fadeSendSimulation ? textClickMeFade*contentOpacity : 0]}}} onClick={() => { this.dataTransfer("SimulationAnwenden")(); this.resetTimer()}}>{showGerman ? <span>Simulation anwenden</span> : <span>apply simulation</span>}</Button>        
               </div>
             </Fade>
