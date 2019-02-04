@@ -51,6 +51,10 @@ const ledShadowOff = 0;
 const ledOpacityOn = 1;
 const ledOpacityOnToOff = 0.5;
 const ledOpacityOff = 0.2;
+const initialState0 = 0;
+const initialState1 = 1;
+const initialStateTrue = true;
+const initialStateFalse = false;
 
 const h1Style = {
   position: 'absolute',
@@ -215,144 +219,143 @@ function AnwendungenIcon(props) {
 class App extends React.Component {
   state = {
     // 0 Screensaver, 1 Aufbau, 2 Daten, 3 Simulation, 4 Anwendungen
-    showGerman: true,
-    actualState: 0,
-    actualStateFade: 0,
-    lastState: 0,
-    started: false,
-    time: 0,
+    showGerman: initialStateTrue,
+    actualState: initialState0,
+    actualStateFade: initialState0,
+    lastState: initialState0,
+    started: initialStateFalse,
+    time: initialState0,
     startTime: -100000,
     interval: fadeTimeBasicIn,
-    timeForLedDown: 0,
+    timeForLedDown: initialState0,
     intervalLed: 1900,
-    timeRunning: 0,
+    timeRunning: initialState0,
     intervalToScreensaver: 5000,
     // screensaver
-    showScreensaverBasic: true,
+    showScreensaverBasic: initialStateTrue,
     // Aufbau
-    showAufbauBasic: false,
+    showAufbauBasic: initialStateFalse,
     // Daten
-    showDatenBasic: false,
-    showDatenExpert1: false,
-    showDatenExpert2: false,
-    showDatenExpert3: false,
+    showDatenBasic: initialStateFalse,
+    showDatenExpert1: initialStateFalse,
+    showDatenExpert2: initialStateFalse,
+    showDatenExpert3: initialStateFalse,
     // Simulation
-    showSimulationBasic: false,
-    showSimulationRunning: false,
+    showSimulationBasic: initialStateFalse,
+    showSimulationRunning: initialStateFalse,
     // Anwendungen
-    showAnwendungenBasic: false,
-    showAnwendungenExpert1: false,
-    showAnwendungenExpert2: false,
-    showAnwendungenExpert3: false,
-    showAnwendungenExpert4: false,
+    showAnwendungenBasic: initialStateFalse,
+    showAnwendungenExpert1: initialStateFalse,
+    showAnwendungenExpert2: initialStateFalse,
+    showAnwendungenExpert3: initialStateFalse,
+    showAnwendungenExpert4: initialStateFalse,
     // variables for content
-    leftNormalDistance: distanceFromSide * 7,
     fabColor: "default",
-    showDisableExpertDiv: false,
-    contentFadedOut: false,
+    showDisableExpertDiv: initialStateFalse,
+    contentFadedOut: initialStateFalse,
 
     // var for lines between menu points
-    showLine1: false,
-    showLine2: false,
-    showLine3: false,
+    showLine1: initialStateFalse,
+    showLine2: initialStateFalse,
+    showLine3: initialStateFalse,
     lineMenuColor: "#1f1f1f",
 
     standardTextClickMeFadeStart: 0.4,
     textClickMeFade: 0.4,
-    textClickMeFadeStatus: false,
+    textClickMeFadeStatus: initialStateFalse,
     contentOpacity: 0.5,
 
     // Slider
-    valueSlider: 0,
+    valueSlider: initialState0,
 
     //windmill
-    rotationBlades: false,
+    rotationBlades: initialStateFalse,
 
     // LEDs
-    currentLedOn: 0,
-    showLEDs: true,
-    ledsMoving: 0, // 0 off, 1 up, 2 down
-    ledColor1: '#191919',
-    ledColor2: '#191919',
-    ledColor3: '#191919',
-    ledColor4: '#191919',
-    ledColor5: '#191919',
-    ledColor6: '#191919',
-    ledColor7: '#191919',
-    ledColor8: '#191919',
-    ledColor9: '#191919',
-    ledColor10: '#191919',
-    ledColor11: '#191919',
-    ledColor12: '#191919',
-    ledColor13: '#191919',
-    ledColor14: '#191919',
-    ledColor15: '#191919',
-    ledColor16: '#191919',
-    ledColor17: '#191919',
-    ledColor18: '#191919',
-    ledColor19: '#191919',
-    ledColor20: '#191919',
-    ledShadowSize1: 0,
-    ledShadowSize2: 0,
-    ledShadowSize3: 0,
-    ledShadowSize4: 0,
-    ledShadowSize5: 0,
-    ledShadowSize6: 0,
-    ledShadowSize7: 0,
-    ledShadowSize8: 0,
-    ledShadowSize9: 0,
-    ledShadowSize10: 0,
-    ledShadowSize11: 0,
-    ledShadowSize12: 0,
-    ledShadowSize13: 0,
-    ledShadowSize14: 0,
-    ledShadowSize15: 0,
-    ledShadowSize16: 0,
-    ledShadowSize17: 0,
-    ledShadowSize18: 0,
-    ledShadowSize19: 0,
-    ledShadowSize20: 0,
-    ledOpacity1: 1,
-    ledOpacity2: 1,
-    ledOpacity3: 1,
-    ledOpacity4: 1,
-    ledOpacity5: 1,
-    ledOpacity6: 1,
-    ledOpacity7: 1,
-    ledOpacity8: 1,
-    ledOpacity9: 1,
-    ledOpacity10: 1,
-    ledOpacity11: 1,
-    ledOpacity12: 1,
-    ledOpacity13: 1,
-    ledOpacity14: 1,
-    ledOpacity15: 1,
-    ledOpacity16: 1,
-    ledOpacity17: 1,
-    ledOpacity18: 1,
-    ledOpacity19: 1,
-    ledOpacity20: 1,
+    currentLedOn: initialState0,
+    showLEDs: initialStateTrue,
+    ledsMoving: initialState0, // 0 off, 1 up, 2 down
+    ledColor1: ledColorOff,
+    ledColor2: ledColorOff,
+    ledColor3: ledColorOff,
+    ledColor4: ledColorOff,
+    ledColor5: ledColorOff,
+    ledColor6: ledColorOff,
+    ledColor7: ledColorOff,
+    ledColor8: ledColorOff,
+    ledColor9: ledColorOff,
+    ledColor10: ledColorOff,
+    ledColor11: ledColorOff,
+    ledColor12: ledColorOff,
+    ledColor13: ledColorOff,
+    ledColor14: ledColorOff,
+    ledColor15: ledColorOff,
+    ledColor16: ledColorOff,
+    ledColor17: ledColorOff,
+    ledColor18: ledColorOff,
+    ledColor19: ledColorOff,
+    ledColor20: ledColorOff,
+    ledShadowSize1: initialState0,
+    ledShadowSize2: initialState0,
+    ledShadowSize3: initialState0,
+    ledShadowSize4: initialState0,
+    ledShadowSize5: initialState0,
+    ledShadowSize6: initialState0,
+    ledShadowSize7: initialState0,
+    ledShadowSize8: initialState0,
+    ledShadowSize9: initialState0,
+    ledShadowSize10: initialState0,
+    ledShadowSize11: initialState0,
+    ledShadowSize12: initialState0,
+    ledShadowSize13: initialState0,
+    ledShadowSize14: initialState0,
+    ledShadowSize15: initialState0,
+    ledShadowSize16: initialState0,
+    ledShadowSize17: initialState0,
+    ledShadowSize18: initialState0,
+    ledShadowSize19: initialState0,
+    ledShadowSize20: initialState0,
+    ledOpacity1: initialState1,
+    ledOpacity2: initialState1,
+    ledOpacity3: initialState1,
+    ledOpacity4: initialState1,
+    ledOpacity5: initialState1,
+    ledOpacity6: initialState1,
+    ledOpacity7: initialState1,
+    ledOpacity8: initialState1,
+    ledOpacity9: initialState1,
+    ledOpacity10: initialState1,
+    ledOpacity11: initialState1,
+    ledOpacity12: initialState1,
+    ledOpacity13: initialState1,
+    ledOpacity14: initialState1,
+    ledOpacity15: initialState1,
+    ledOpacity16: initialState1,
+    ledOpacity17: initialState1,
+    ledOpacity18: initialState1,
+    ledOpacity19: initialState1,
+    ledOpacity20: initialState1,
 
     // menu
-    showMenuPartOne: true,
-    showMenu: false,
-    menu1Aufbau: 0,
-    menu1AufbauDisabled: false,
-    menu2DatenDisabled: true,
-    menu3SimulationDisabled: true,
-    menu4AnwendungenDisabled: true,
-    fadeMenu1Aufbau: true,
-    fadeMenu2Daten: false,
-    fadeMenu3Simulation: false,
-    fadeMenu4Anwendung: false,
+    showMenuPartOne: initialStateTrue,
+    showMenu: initialStateFalse,
+    menu1Aufbau: initialState0,
+    menu1AufbauDisabled: initialStateFalse,
+    menu2DatenDisabled: initialStateTrue,
+    menu3SimulationDisabled: initialStateTrue,
+    menu4AnwendungenDisabled: initialStateTrue,
+    fadeMenu1Aufbau: initialStateTrue,
+    fadeMenu2Daten: initialStateFalse,
+    fadeMenu3Simulation: initialStateFalse,
+    fadeMenu4Anwendung: initialStateFalse,
 
-    fadeStartData: false,
-    fadeStartSimulation: false,
-    fadeSendSimulation: false,
-    fadeReload: false,
-    fadeStartDataDisable: false,
-    fadeStartSimulationDisable: false,
-    fadeSendSimulationDisable: false,
+    fadeStartData: initialStateFalse,
+    fadeStartSimulation: initialStateFalse,
+    fadeSendSimulation: initialStateFalse,
+    fadeReload: initialStateFalse,
+    fadeStartDataDisable: initialStateFalse,
+    fadeStartSimulationDisable: initialStateFalse,
+    fadeSendSimulationDisable: initialStateFalse,
   };
 
   componentDidMount() {
@@ -580,7 +583,7 @@ class App extends React.Component {
             menu4AnwendungenDisabled: false,
             fadeStartDataDisable: true,
             fadeStartSimulationDisable: true,
-            showSimulationRunning: true,
+            showSimulationRunning: false,
             fadeSendSimulationDisable: true,
           })
           break;
@@ -942,7 +945,7 @@ class App extends React.Component {
   };
 
   render() {
-    const { showGerman, fadeSendSimulationDisable, fadeSendSimulation, showSimulationRunning, fadeStartDataDisable, fadeStartSimulationDisable, fadeStartData, fadeStartSimulation, fadeReload, fadeMenu1Aufbau, fadeMenu2Daten, fadeMenu3Simulation, fadeMenu4Anwendung, menu1AufbauDisabled, menu2DatenDisabled, menu3SimulationDisabled, menu4AnwendungenDisabled, rotationBlades, ledOpacity1, ledOpacity2, ledOpacity3, ledOpacity4, ledOpacity5, ledOpacity6, ledOpacity7, ledOpacity8, ledOpacity9, ledOpacity10, ledOpacity11, ledOpacity12, ledOpacity13, ledOpacity14, ledOpacity15, ledOpacity16, ledOpacity17, ledOpacity18, ledOpacity19, ledOpacity20, ledShadowSize1, ledShadowSize2, ledShadowSize3, ledShadowSize4, ledShadowSize5, ledShadowSize6, ledShadowSize7, ledShadowSize8, ledShadowSize9, ledShadowSize10, ledShadowSize11, ledShadowSize12, ledShadowSize13, ledShadowSize14, ledShadowSize15, ledShadowSize16, ledShadowSize17, ledShadowSize18, ledShadowSize19, ledShadowSize20, ledColor20, ledColor19, ledColor18, ledColor17, ledColor16, ledColor15, ledColor14, ledColor13, ledColor12, ledColor11, ledColor10, ledColor9, ledColor8, ledColor7, ledColor6, ledColor5, ledColor4, ledColor3, ledColor2, ledColor1, showLEDs, contentOpacity, showDisableExpertDiv, lineMenuColor, showLine1, showLine2, showLine3,fabColor, showMenuPartOne, textClickMeFade, leftNormalDistance, showMenu, showScreensaverBasic, showAufbauBasic, showDatenBasic, showDatenExpert1, showDatenExpert2, showDatenExpert3, showSimulationBasic, showAnwendungenExpert3, showAnwendungenExpert4, showAnwendungenExpert1, showAnwendungenExpert2, showAnwendungenBasic, valueSlider } = this.state;
+    const { showGerman, fadeSendSimulationDisable, fadeSendSimulation, showSimulationRunning, fadeStartDataDisable, fadeStartSimulationDisable, fadeStartData, fadeStartSimulation, fadeReload, fadeMenu1Aufbau, fadeMenu2Daten, fadeMenu3Simulation, fadeMenu4Anwendung, menu1AufbauDisabled, menu2DatenDisabled, menu3SimulationDisabled, menu4AnwendungenDisabled, rotationBlades, ledOpacity1, ledOpacity2, ledOpacity3, ledOpacity4, ledOpacity5, ledOpacity6, ledOpacity7, ledOpacity8, ledOpacity9, ledOpacity10, ledOpacity11, ledOpacity12, ledOpacity13, ledOpacity14, ledOpacity15, ledOpacity16, ledOpacity17, ledOpacity18, ledOpacity19, ledOpacity20, ledShadowSize1, ledShadowSize2, ledShadowSize3, ledShadowSize4, ledShadowSize5, ledShadowSize6, ledShadowSize7, ledShadowSize8, ledShadowSize9, ledShadowSize10, ledShadowSize11, ledShadowSize12, ledShadowSize13, ledShadowSize14, ledShadowSize15, ledShadowSize16, ledShadowSize17, ledShadowSize18, ledShadowSize19, ledShadowSize20, ledColor20, ledColor19, ledColor18, ledColor17, ledColor16, ledColor15, ledColor14, ledColor13, ledColor12, ledColor11, ledColor10, ledColor9, ledColor8, ledColor7, ledColor6, ledColor5, ledColor4, ledColor3, ledColor2, ledColor1, showLEDs, contentOpacity, showDisableExpertDiv, lineMenuColor, showLine1, showLine2, showLine3,fabColor, showMenuPartOne, textClickMeFade, showMenu, showScreensaverBasic, showAufbauBasic, showDatenBasic, showDatenExpert1, showDatenExpert2, showDatenExpert3, showSimulationBasic, showAnwendungenExpert3, showAnwendungenExpert4, showAnwendungenExpert1, showAnwendungenExpert2, showAnwendungenBasic, valueSlider } = this.state;
 
     return (
       <div className="App">
@@ -963,8 +966,8 @@ class App extends React.Component {
             {/* 
             LANGUAGE BUTTONS
             */}
-            <Button className='n1' disabled={showGerman} style={{ opacity: [showGerman ? 0.7 : 0.4], position: 'absolute', left: distanceFromSide, top: distanceFromSide + 5, fontSize: '20px' }} onClick={this.changeLanguage("deutsch")} >DE</Button>
-            <Button className='n1' disabled={!showGerman} style={{ opacity: [!showGerman ? 0.7 : 0.4], position: 'absolute', left: distanceFromSide+40, top: distanceFromSide + 5, fontSize: '20px' }} onClick={this.changeLanguage("english")} >EN</Button>
+            <Button className='n1' disabled={showGerman} style={{ opacity: [showGerman ? contentOpacity : contentOpacity/1.5], position: 'absolute', left: distanceFromSide, top: distanceFromSide + 5, fontSize: '20px' }} onClick={this.changeLanguage("deutsch")} >DE</Button>
+            <Button className='n1' disabled={!showGerman} style={{ opacity: [!showGerman ? contentOpacity : contentOpacity/1.5], position: 'absolute', left: distanceFromSide+40, top: distanceFromSide + 5, fontSize: '20px' }} onClick={this.changeLanguage("english")} >EN</Button>
             {/* 
             MENU 
             */}
