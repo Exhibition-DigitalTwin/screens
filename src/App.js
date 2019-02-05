@@ -59,7 +59,7 @@ const initialContentOpacity = 0.5;
 const initialClickMeFade = 0.4;
 const initialSimulationBoxColor = 255;
 const initialRotationSpeed = -0.01;
-const rotationSpeedFast = -0.08;
+const rotationSpeedFast = -0.05;
 
 const h1Style = {
   position: 'absolute',
@@ -943,8 +943,8 @@ class App extends React.Component {
       contentOpacity: initialContentOpacity,
       valueSlider: initialState0,
       rotationBlades: initialStateFalse,
-      rotationSpeedLeft: initialRotationSpeed,
-      rotationSpeedRight: initialRotationSpeed,
+      rotationSpeedLeft: 0,
+      rotationSpeedRight: 0,
       brakeOnRight: initialStateFalse,
       currentLedOn: initialState0,
       showLEDs: initialStateTrue,
@@ -1067,7 +1067,7 @@ class App extends React.Component {
         this.setState({ brakeOnRight: true});
         console.log("hihiiihihihi");
       } else if (this.state.brakeOnRight && this.state.rotationSpeedRight <= initialRotationSpeed) {
-        this.setState({ rotationSpeedRight: this.state.rotationSpeedRight +0.0002});
+        this.setState({ rotationSpeedRight: this.state.rotationSpeedRight +0.0005});
       }
       if (this.state.brakeOnRight && this.state.rotationSpeedRight >= initialRotationSpeed) {
         this.setState({ rotationSpeedRight: initialRotationSpeed});
@@ -1079,7 +1079,7 @@ class App extends React.Component {
 
   bladesRotationSpeedUp() {
     if (this.state.rotationSpeedRight >= rotationSpeedFast) {
-      this.setState({ rotationSpeedRight: this.state.rotationSpeedRight -0.0002});
+      this.setState({ rotationSpeedRight: this.state.rotationSpeedRight -0.0005});
       this.setSimulationWindmillRotorSpeed(this.state.rotationSpeedLeft, this.state.rotationSpeedRight);
     }
   }
@@ -1143,7 +1143,7 @@ class App extends React.Component {
             {/* 
             LEDs
             */}
-            <Fade in={showLEDs} timeout={{ enter: fadeTimeBasicIn, exit: fadeTimeBasicOut }} mountOnEnter={true} unmountOnExit={true}>
+            <Fade in={showLEDs} timeout={{ enter: [(this.state.actualStateFade === 6) ? 2000 : fadeTimeBasicIn], exit: fadeTimeBasicOut }} mountOnEnter={true} unmountOnExit={true}>
               <div className={"ledStrip"}>
                 <div id={"led1"} style={{ backgroundColor: ledColor1, opacity: ledOpacity1, boxShadow: '0px 0px '+ledShadowSize1+'px' + ledColor1, position: 'absolute', height: ledSize, width: ledSize, borderRadius: ledSize/2, left: 960-ledSize/2, top: ledDistanceStartTop }}></div>
                 <div id={"led2"} style={{ backgroundColor: ledColor2, opacity: ledOpacity2, boxShadow: '0px 0px '+ledShadowSize2+'px' + ledColor2, position: 'absolute', height: ledSize, width: ledSize, borderRadius: ledSize/2, left: 960-ledSize/2, top: ledDistanceStartTop+ledDistance }}></div>
