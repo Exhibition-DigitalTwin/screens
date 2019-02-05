@@ -59,6 +59,7 @@ const initialContentOpacity = 0.5;
 const initialClickMeFade = 0.4;
 const initialSimulationBoxColor = 255;
 const initialRotationSpeed = -0.01;
+const rotationSpeedFast = -0.08;
 
 const h1Style = {
   position: 'absolute',
@@ -276,6 +277,7 @@ class App extends React.Component {
     rotationBlades: initialStateFalse,
     rotationSpeedLeft: initialRotationSpeed,
     rotationSpeedRight: initialRotationSpeed,
+    brakeOnRight: initialStateFalse,
 
     // LEDs
     currentLedOn: initialState0,
@@ -371,7 +373,7 @@ class App extends React.Component {
     this.clickMeButtonTimer = setInterval(() => this.runLedStrip(), 100);
     this.clickMeButtonTimer = setInterval(() => this.handleFadeActive(), 20);
     //this.clickAnywhereTimer = setInterval(() => this.checkForReload(), 30);
-    this.clickMeButtonTimer = setInterval(() => this.changeSimulationBoxColor(), 20);
+    this.clickMeButtonTimer = setInterval(() => this.changeSimulationBoxColorAndBladesRotationSpeed(), 20);
   }
 
   componentWillUnmount() {
@@ -943,6 +945,7 @@ class App extends React.Component {
       rotationBlades: initialStateFalse,
       rotationSpeedLeft: initialRotationSpeed,
       rotationSpeedRight: initialRotationSpeed,
+      brakeOnRight: initialStateFalse,
       currentLedOn: initialState0,
       showLEDs: initialStateTrue,
       ledsMoving: initialState0,
@@ -1053,9 +1056,31 @@ class App extends React.Component {
     this.refWebSocket.sendMessage(message);
   };
 
-  changeSimulationBoxColor() {
-    if(this.state.actualStateFade === 5) {
+  changeSimulationBoxColorAndBladesRotationSpeed() {
+    if(this.state.actualStateFade === 4){
+      this.bladesRotationSpeedUp();
+    } else if(this.state.actualStateFade === 5) {
       this.setState({ simulationBoxColor: this.state.simulationBoxColor -1 });
+      if(this.state.rotationSpeedLeft >= initialRotationSpeed){
+        this.setState({ rotationSpeedLeft: this.state.rotationSpeedRight });
+      } else if (this.state.rotationSpeedRight <= rotationSpeedFast && !this.state.brakeOnRight) {
+        this.setState({ brakeOnRight: true});
+        console.log("hihiiihihihi");
+      } else if (this.state.brakeOnRight && this.state.rotationSpeedRight <= initialRotationSpeed) {
+        this.setState({ rotationSpeedRight: this.state.rotationSpeedRight +0.0002});
+      }
+      if (this.state.brakeOnRight && this.state.rotationSpeedRight >= initialRotationSpeed) {
+        this.setState({ rotationSpeedRight: initialRotationSpeed});
+      }
+      console.log(this.state.rotationSpeedLeft + " : " +  this.state.rotationSpeedRight);
+      this.setSimulationWindmillRotorSpeed(this.state.rotationSpeedLeft, this.state.rotationSpeedRight);
+    }
+  }
+
+  bladesRotationSpeedUp() {
+    if (this.state.rotationSpeedRight >= rotationSpeedFast) {
+      this.setState({ rotationSpeedRight: this.state.rotationSpeedRight -0.0002});
+      this.setSimulationWindmillRotorSpeed(this.state.rotationSpeedLeft, this.state.rotationSpeedRight);
     }
   }
 
@@ -1065,7 +1090,7 @@ class App extends React.Component {
   }
 
   render() {
-    const { simulationBoxColor, showGerman, fadeSendSimulationDisable, fadeSendSimulation, showSimulationRunning, fadeStartDataDisable, fadeStartSimulationDisable, fadeStartData, fadeStartSimulation, fadeReload, fadeMenu1Aufbau, fadeMenu2Daten, fadeMenu3Simulation, fadeMenu4Anwendung, menu1AufbauDisabled, menu2DatenDisabled, menu3SimulationDisabled, menu4AnwendungenDisabled, rotationBlades, ledOpacity1, ledOpacity2, ledOpacity3, ledOpacity4, ledOpacity5, ledOpacity6, ledOpacity7, ledOpacity8, ledOpacity9, ledOpacity10, ledOpacity11, ledOpacity12, ledOpacity13, ledOpacity14, ledOpacity15, ledOpacity16, ledOpacity17, ledOpacity18, ledOpacity19, ledOpacity20, ledShadowSize1, ledShadowSize2, ledShadowSize3, ledShadowSize4, ledShadowSize5, ledShadowSize6, ledShadowSize7, ledShadowSize8, ledShadowSize9, ledShadowSize10, ledShadowSize11, ledShadowSize12, ledShadowSize13, ledShadowSize14, ledShadowSize15, ledShadowSize16, ledShadowSize17, ledShadowSize18, ledShadowSize19, ledShadowSize20, ledColor20, ledColor19, ledColor18, ledColor17, ledColor16, ledColor15, ledColor14, ledColor13, ledColor12, ledColor11, ledColor10, ledColor9, ledColor8, ledColor7, ledColor6, ledColor5, ledColor4, ledColor3, ledColor2, ledColor1, showLEDs, contentOpacity, showDisableExpertDiv, lineMenuColor, showLine1, showLine2, showLine3,fabColor, showMenuPartOne, textClickMeFade, showMenu, showScreensaverBasic, showAufbauBasic, showDatenBasic, showDatenExpert1, showDatenExpert2, showDatenExpert3, showSimulationBasic, showAnwendungenExpert3, showAnwendungenExpert4, showAnwendungenExpert1, showAnwendungenExpert2, showAnwendungenBasic, valueSlider } = this.state;
+    const { brakeOnRight, simulationBoxColor, showGerman, fadeSendSimulationDisable, fadeSendSimulation, showSimulationRunning, fadeStartDataDisable, fadeStartSimulationDisable, fadeStartData, fadeStartSimulation, fadeReload, fadeMenu1Aufbau, fadeMenu2Daten, fadeMenu3Simulation, fadeMenu4Anwendung, menu1AufbauDisabled, menu2DatenDisabled, menu3SimulationDisabled, menu4AnwendungenDisabled, rotationBlades, ledOpacity1, ledOpacity2, ledOpacity3, ledOpacity4, ledOpacity5, ledOpacity6, ledOpacity7, ledOpacity8, ledOpacity9, ledOpacity10, ledOpacity11, ledOpacity12, ledOpacity13, ledOpacity14, ledOpacity15, ledOpacity16, ledOpacity17, ledOpacity18, ledOpacity19, ledOpacity20, ledShadowSize1, ledShadowSize2, ledShadowSize3, ledShadowSize4, ledShadowSize5, ledShadowSize6, ledShadowSize7, ledShadowSize8, ledShadowSize9, ledShadowSize10, ledShadowSize11, ledShadowSize12, ledShadowSize13, ledShadowSize14, ledShadowSize15, ledShadowSize16, ledShadowSize17, ledShadowSize18, ledShadowSize19, ledShadowSize20, ledColor20, ledColor19, ledColor18, ledColor17, ledColor16, ledColor15, ledColor14, ledColor13, ledColor12, ledColor11, ledColor10, ledColor9, ledColor8, ledColor7, ledColor6, ledColor5, ledColor4, ledColor3, ledColor2, ledColor1, showLEDs, contentOpacity, showDisableExpertDiv, lineMenuColor, showLine1, showLine2, showLine3,fabColor, showMenuPartOne, textClickMeFade, showMenu, showScreensaverBasic, showAufbauBasic, showDatenBasic, showDatenExpert1, showDatenExpert2, showDatenExpert3, showSimulationBasic, showAnwendungenExpert3, showAnwendungenExpert4, showAnwendungenExpert1, showAnwendungenExpert2, showAnwendungenBasic, valueSlider } = this.state;
 
     return (
       <div className="App">
@@ -1088,7 +1113,6 @@ class App extends React.Component {
             */}
             <Button className='n1' disabled={showGerman} style={{ opacity: [showGerman ? contentOpacity : contentOpacity/1.5], position: 'absolute', left: distanceFromSide, top: distanceFromSide + 5, fontSize: '20px' }} onClick={() => {this.changeLanguage("deutsch")(); this.resetTimer()}} >DE</Button>
             <Button className='n1' disabled={!showGerman} style={{ opacity: [!showGerman ? contentOpacity : contentOpacity/1.5], position: 'absolute', left: distanceFromSide+40, top: distanceFromSide + 5, fontSize: '20px' }} onClick={() => {this.changeLanguage("english")(); this.resetTimer()}} >EN</Button>
-            <Button className='n1' style={{ opacity: [!showGerman ? contentOpacity : contentOpacity/1.5], position: 'absolute', left: distanceFromSide+90, top: distanceFromSide + 5, fontSize: '20px' }} onClick={() => {this.setSimulationWindmillRotorSpeed(-0.07, -0.03); this.resetTimer()}} >Test when simulation runs</Button>
             {/* 
             MENU 
             */}
@@ -1192,8 +1216,8 @@ class App extends React.Component {
                   </p>
                 <div style={{ position: "absolute", bottom: "170px", left: "225px", width: "320px"}}>
                   <Slider value={valueSlider} onChange={this.handleChangeSlider} style={{padding: '22px 0px'}} max={20} size="medium"/>
-                  <p style={{color: '#FFFFFF', textAlign: 'left', fontSize: textFontNormal + 'px', position: 'absolute', bottom: "-40px", left: "0px", width: "320px", marginRight: -10}}>{showGerman ? <span>0</span> : <span>0</span>}</p>
-                  <p style={{color: '#FFFFFF', textAlign: 'right', fontSize: textFontNormal + 'px', position: 'absolute', bottom: "-40px", left: "0px", width: "320px", marginRight: -5}}>{showGerman ? <span>1</span> : <span>1</span>}</p>
+                  <p style={{color: '#FFFFFF', textAlign: 'left', fontSize: textFontNormal + 'px', position: 'absolute', bottom: "-40px", left: "0px", width: "320px", marginRight: -10}}>{showGerman ? <span>Geschlossen</span> : <span>Whole</span>}</p>
+                  <p style={{color: '#FFFFFF', textAlign: 'right', fontSize: textFontNormal + 'px', position: 'absolute', bottom: "-40px", left: "0px", width: "320px", marginRight: -5}}>{showGerman ? <span>Teile</span> : <span>Parts</span>}</p>
                 </div>
               </div>
             </Fade>
@@ -1256,7 +1280,7 @@ class App extends React.Component {
                 {showGerman ? <span>Simulation Nr. 1<br/><br/>Windgeschwindigkeit: 'hoch'<br/><br/>Belastung: 'kritisch'</span> 
                 : <span>simulation 1 ToDo</span>}</p>
                 <p className='p1' style={{position: 'absolute', left: 960+350, top: 790, fontSize: textFontNormal/1.7 + 'px', color: textColorNormal, width: '10%', textAlign: 'left'}}>
-                {showGerman ? <span>Simulation Nr. 265<br/><br/>Windgeschwindigkeit: 'hoch'<br/><br/>Belastung: 'normal'<br/><br/>Bremsvorgang aktiviert</span> 
+                {showGerman ? <span>Simulation Nr. 265<br/><br/>Windgeschwindigkeit: 'hoch'<br/><br/>Belastung: 'normal'<br/><br/><span style={{opacity: [brakeOnRight ? 1 : 0]}}>Bremsvorgang aktiviert</span></span> 
                 : <span>simulation 265 ToDo</span>}
                 </p>
                 
