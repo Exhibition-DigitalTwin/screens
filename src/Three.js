@@ -84,7 +84,7 @@ class ThreeScene extends Component {
         this.tween.to({ opacity: 1 }, 300)
 
         this.tweenHide = new TWEEN.Tween(this.materialWhite)
-        this.tweenHide.to({ opacity: 0, transparent: false }, 300)
+        this.tweenHide.to({ opacity: 0, transparent: true }, 300)
 
         this.tweenSimulation = new TWEEN.Tween(this.materialWhiteSimulation)
         this.tweenSimulation.to({ opacity: 1, transparent: false }, 300)
@@ -484,7 +484,7 @@ class ThreeScene extends Component {
 
     hideWindmill() {
         this.tweenHide.start();
-        setTimeout(this.resetRotation(), 300);
+        setTimeout(() => this.resetRotation(), 800);
     }
 
     resetRotation() {

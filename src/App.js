@@ -903,6 +903,7 @@ class App extends React.Component {
   }
 
   reload() {
+    this._three.stopRotation();
     this._three.hideWindmill();
     this.setState({
       //showGerman: initialStateTrue,
@@ -943,8 +944,8 @@ class App extends React.Component {
       contentOpacity: initialContentOpacity,
       valueSlider: initialState0,
       rotationBlades: initialStateFalse,
-      rotationSpeedLeft: 0,
-      rotationSpeedRight: 0,
+      rotationSpeedLeft: initialRotationSpeed,
+      rotationSpeedRight: initialRotationSpeed,
       brakeOnRight: initialStateFalse,
       currentLedOn: initialState0,
       showLEDs: initialStateTrue,
