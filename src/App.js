@@ -1066,14 +1066,12 @@ class App extends React.Component {
         this.setState({ rotationSpeedLeft: this.state.rotationSpeedRight });
       } else if (this.state.rotationSpeedRight <= rotationSpeedFast && !this.state.brakeOnRight) {
         this.setState({ brakeOnRight: true});
-        console.log("hihiiihihihi");
       } else if (this.state.brakeOnRight && this.state.rotationSpeedRight <= initialRotationSpeed) {
         this.setState({ rotationSpeedRight: this.state.rotationSpeedRight +0.0005});
       }
       if (this.state.brakeOnRight && this.state.rotationSpeedRight >= initialRotationSpeed) {
         this.setState({ rotationSpeedRight: initialRotationSpeed});
       }
-      console.log(this.state.rotationSpeedLeft + " : " +  this.state.rotationSpeedRight);
       this.setSimulationWindmillRotorSpeed(this.state.rotationSpeedLeft, this.state.rotationSpeedRight);
     }
   }
@@ -1213,11 +1211,12 @@ class App extends React.Component {
                 <p className='p1' style={{...pStyle, ...{opacity:contentOpacity}}}>
                   {showGerman ? <span>Zunächst  werden 3D Modelle aller Elemente angefertigt und zusammengefügt.<br /><br />
                   Der digitale Zwilling besitzt die selben strukturellen Charakteristika wie das Windrad der physischen Welt und ist im Idealfall nicht von seinem physischen Gegenstück zu unterscheiden.</span>
-                  : <span>ToDo</span>}
+                  : <span>At first you need 3D models of every part to get an exact windmill model<br /><br />
+                  The Digital Twin has the same characteristics as the physical windmill and in the best case they are not distinguishable.</span>}
                   </p>
                 <div style={{ position: "absolute", bottom: "170px", left: "225px", width: "320px"}}>
                   <Slider value={valueSlider} onChange={this.handleChangeSlider} style={{padding: '22px 0px'}} max={20} size="medium"/>
-                  <p style={{color: '#FFFFFF', textAlign: 'left', fontSize: textFontNormal + 'px', position: 'absolute', bottom: "-40px", left: "0px", width: "320px", marginRight: -10}}>{showGerman ? <span>Geschlossen</span> : <span>Whole</span>}</p>
+                  <p style={{color: '#FFFFFF', textAlign: 'left', fontSize: textFontNormal + 'px', position: 'absolute', bottom: "-40px", left: "0px", width: "320px", marginRight: -10}}>{showGerman ? <span>Ganzes</span> : <span>Combined</span>}</p>
                   <p style={{color: '#FFFFFF', textAlign: 'right', fontSize: textFontNormal + 'px', position: 'absolute', bottom: "-40px", left: "0px", width: "320px", marginRight: -5}}>{showGerman ? <span>Teile</span> : <span>Parts</span>}</p>
                 </div>
               </div>
@@ -1231,7 +1230,8 @@ class App extends React.Component {
                 <p className='p1' style={{...pStyle, ...{color: 'rgba(255,255,255,'+contentOpacity+')'}}} >{showGerman ? 
                   <span>Um von einem digitalen Zwilling signifikante Vorteile zu ziehen, müssen der physische und der virtuelle Part miteinander verbunden sein.<br /><br />
                   Das <span style={{...expertStyleToEnter, ...{color: [showDatenExpert1 ? '#FFFFFF' : ('rgba(255,255,255,'+contentOpacity+')')]}}} onClick={() => {this.handleClickShowData("showDatenExpert1")(); this.resetTimer()}}>Internet der Dinge</span> ermöglicht es real existierenden Objekten mittels <span style={{...expertStyleToEnter, ...{color: [showDatenExpert2 ? '#FFFFFF' : ('rgba(255,255,255,'+contentOpacity+')')]}}} onClick={() => {this.handleClickShowData("showDatenExpert2")(); this.resetTimer()}}>Sensoren</span> Daten zum eigenen, aktuellen Zustand in einer <span style={{...expertStyleToEnter, ...{color: [showDatenExpert3 ? '#FFFFFF' : ('rgba(255,255,255,'+contentOpacity+')')]}}} onClick={() => {this.handleClickShowData("showDatenExpert3")(); this.resetTimer()}}>Cloud</span> zu sammeln und weiterzugeben. Diese Informationen fließen in das digitale Modell ein.</span> 
-                  : <span>ToDo</span>}
+                  : <span> To get the best out of a Digital Twin, the physical and the virtual part have to be connected via a data connection.<br /><br />
+                  The <span style={{...expertStyleToEnter, ...{color: [showDatenExpert1 ? '#FFFFFF' : ('rgba(255,255,255,'+contentOpacity+')')]}}} onClick={() => {this.handleClickShowData("showDatenExpert1")(); this.resetTimer()}}>Internet of Things</span> makes it possible to get more data from <span style={{...expertStyleToEnter, ...{color: [showDatenExpert2 ? '#FFFFFF' : ('rgba(255,255,255,'+contentOpacity+')')]}}} onClick={() => {this.handleClickShowData("showDatenExpert2")(); this.resetTimer()}}>sensors</span> from smaller objects than ever before. Much of this data is sent to a <span style={{...expertStyleToEnter, ...{color: [showDatenExpert3 ? '#FFFFFF' : ('rgba(255,255,255,'+contentOpacity+')')]}}} onClick={() => {this.handleClickShowData("showDatenExpert3")(); this.resetTimer()}}>cloud</span> for analysis and evaluation. All this data flows into the Digital Twin.</span>}
                   </p>
                    <Button className='n1' disabled={fadeStartDataDisable} style={{...menuPointButtonStyle, ...{opacity: [fadeStartData ? textClickMeFade*contentOpacity : 0]}}} onClick={ () => { this.dataTransfer("drehungEin")(); this.dataTransfer("datenDown")(); this.resetTimer()}}>{showGerman ? <span>Starte Datentransfer</span> : <span>get live data</span>}</Button>        
               </div>
@@ -1240,7 +1240,7 @@ class App extends React.Component {
               <div className="expertInfo">
                 <p className='p1' style={pExpertStyle}>
                 {showGerman ? <span>Die Vernetzung von Gegenständen mit dem Internet, damit diese selbstständig untereinander kommunizieren, wird als Internet der Dinge (IoT) bezeichnet.</span> 
-                : <span>ToDo</span>}
+                : <span>The connectivity between objects and the internet, to be able to get, store and work with more live data to improve the product, service or lifecycle is called Internet of Things (IoT).</span>}
                 </p>
               </div>
             </Fade>
@@ -1248,7 +1248,7 @@ class App extends React.Component {
               <div className="expertInfo">
                 <p className='p1' style={pExpertStyle}>
                 {showGerman ? <span>Sensoren sammeln als Schnittstelle zur Außenwelt Daten und sind für die Digitalisierung unabdingbar. <br/><br/>Ein reales, mit Sensoren ausgestattetes Produkt sammelt relevante Daten und Informationen über sich selbst und seine Umgebung.</span> 
-                : <span>ToDo</span>}
+                : <span>Sensors are an part between the physical and the digital world and inalienable for the digitization.<br/><br/> An product equiped with sensors gathers relevant data and informationen about itself and its surroundings.</span>}
                 </p>
               </div>
             </Fade>
@@ -1256,7 +1256,7 @@ class App extends React.Component {
               <div className="expertInfo">
                 <p className='p1' style={pExpertStyle}>
                 {showGerman ? <span>Cloud steht für eine Technologie, die es ermöglicht, Anwendungen und Services nicht mehr lokal zu betreiben, sondern als Dienstleistung aus einem Netzwerk wie dem Internet zu beziehen.<br/><br/>Die gesammelten Daten fließen in einen großen Datenspeicher. In diesem werten Analyse-Tools  und selbstlernende Algorithmen die Informationen in Hinsicht auf Zusammenhänge, Muster und Auffälligkeiten aus.</span> 
-                : <span>ToDo</span>}
+                : <span>Cloud stands for a technology, which makes it possible to run applications not local anymore, but as a service in the internet.<br/><br/>The gathered information are stored inside a data storage. You then can analyse, create algorithms and gather more insights with this huge amount of available data.</span>}
                 </p>
               </div>
             </Fade>
@@ -1268,9 +1268,8 @@ class App extends React.Component {
                 <h2 className='p1' style={{...h2Style, ...{opacity:contentOpacity}}}>Simulation</h2>
                 <p className='p1' style={{...pStyle, ...{opacity:contentOpacity}}}>
                   {showGerman ? <span>Das große Potential des digitalen Zwillings besteht darin, dass jeder Zustand eines physischen Produkts  mit dem virtuellen Prozess überlagert und verglichen werden
-                  kann. Der finale Schritt besteht deshalb darin, die Informationen des Datenspeichers in eine Simulation des Windrades einzubinden.<br /><br />
-                  In dieser Simulation können unterschiedliche Faktoren virtuell ausprobiert und deren Einfluss berechnet werden.</span> 
-                  : <span>ToDo</span>}
+                  kann.  In einer Simulation können so unterschiedliche Faktoren virtuell ausprobiert und deren Einfluss berechnet werden.</span> 
+                  : <span> A great potential is to know every state the physical twin can have in an virtual one earlier. With that you can see how your product performs in an specific case which is relevant to test before building the product.</span>}
                   </p>
                   <Button className='n1' disabled={fadeStartSimulationDisable} style={{...menuPointButtonStyle, ...{opacity: [fadeStartSimulation&&!showSimulationRunning ? textClickMeFade*contentOpacity : 0]}}} onClick={() => { this.dataTransfer("SimulationStarten")(); this.resetTimer()}}>{showGerman ? <span>Starte Simulation</span> : <span>start simulation</span>}</Button>        
               </div>
@@ -1279,10 +1278,10 @@ class App extends React.Component {
               <div className="simulationText">
                 <p className='p1' style={{position: 'absolute', left: 960, top: 790, fontSize: textFontNormal/1.7 + 'px', color: textColorNormal, width: '10%', textAlign: 'left'}}>
                 {showGerman ? <span>Simulation Nr. 1<br/><br/>Windgeschwindigkeit: 'hoch'<br/><br/>Belastung: 'kritisch'</span> 
-                : <span>simulation 1 ToDo</span>}</p>
+                : <span>simulation 1<br/><br/>windspeed: 'fast'<br/><br/>load: 'critical'</span>}</p>
                 <p className='p1' style={{position: 'absolute', left: 960+350, top: 790, fontSize: textFontNormal/1.7 + 'px', color: textColorNormal, width: '10%', textAlign: 'left'}}>
                 {showGerman ? <span>Simulation Nr. 265<br/><br/>Windgeschwindigkeit: 'hoch'<br/><br/>Belastung: 'normal'<br/><br/><span style={{opacity: [brakeOnRight ? 1 : 0]}}>Bremsvorgang aktiviert</span></span> 
-                : <span>simulation 265 ToDo</span>}
+                : <span>simulation 265<br/><br/>windspeed: 'fast'<br/><br/>load: 'normal'<br/><br/><span style={{opacity: [brakeOnRight ? 1 : 0]}}>brake activated</span></span>}
                 </p>
                 
                 <div id="simBox1" style={{position: 'absolute', width: 330, height: 815, clear:'both', top: 130, left: 930, borderStyle: 'solid', borderWidth: 5, borderColor: 'rgb( 255, ' + simulationBoxColor + ', ' + simulationBoxColor + ')'}}></div>
@@ -1299,7 +1298,10 @@ class App extends React.Component {
                 <p className='p1' style={{...pStyle, ...{color: 'rgba(255,255,255,'+contentOpacity+')'}}} >
                 {showGerman ? <span>Digitale Zwillinge von Windrädern ermöglichen unter Anderem <span style={{...expertStyleToEnter, ...{color: [showAnwendungenExpert1 ? '#FFFFFF' : ('rgba(255,255,255,'+contentOpacity+')')]}}} onClick={() => {this.handleClickShowData("showAnwendungenExpert1")(); this.resetTimer()}}>Predicitve Maintenance</span>  - die Sensordaten von Windfarmen machen eine kontinuierliche Überwachung möglich. Aber Digital Twins finden zukünftig noch sehr vielfältige Anwendungsfelder. Insbesondere die <span style={{...expertStyleToEnter, ...{color: [showAnwendungenExpert2 ? '#FFFFFF' : ('rgba(255,255,255,'+contentOpacity+')')]}}} onClick={() => {this.handleClickShowData("showAnwendungenExpert2")(); this.resetTimer()}}>Produktion</span> profitiert bereits heute von dem Einsatz der Zwillinge.
                 <br/><br/>Ein digitaler Zwilling in der <span style={{...expertStyleToEnter, ...{color: [showAnwendungenExpert3 ? '#FFFFFF' : ('rgba(255,255,255,'+contentOpacity+')')]}}} onClick={() => {this.handleClickShowData("showAnwendungenExpert3")(); this.resetTimer()}}>Medizin</span> kann Auskunft darüber geben, ob ein Medikament wirkt oder eine  Therapie anschlägt. Und auch im Bereich <span style={{...expertStyleToEnter, ...{color: [showAnwendungenExpert4 ? '#FFFFFF' : ('rgba(255,255,255,'+contentOpacity+')')]}}} onClick={() => {this.handleClickShowData("showAnwendungenExpert4")(); this.resetTimer()}}>Smart City</span> ist der Einsatz virtueller Repräsentanzen von großem Interesse.</span> 
-                : <span>ToDo</span>}
+                : <span>
+                  Digital Twins of windmills allow <span style={{...expertStyleToEnter, ...{color: [showAnwendungenExpert1 ? '#FFFFFF' : ('rgba(255,255,255,'+contentOpacity+')')]}}} onClick={() => {this.handleClickShowData("showAnwendungenExpert1")(); this.resetTimer()}}>Predicitve Maintenance</span>
+                    - because of the sensors which allow the continuous monitoring of entire wind farms. But there are way more possible applications. Especially in the field of <span style={{...expertStyleToEnter, ...{color: [showAnwendungenExpert2 ? '#FFFFFF' : ('rgba(255,255,255,'+contentOpacity+')')]}}} onClick={() => {this.handleClickShowData("showAnwendungenExpert2")(); this.resetTimer()}}>production</span> profits already today of the useage.
+                <br/><br/>A Digital Twin in <span style={{...expertStyleToEnter, ...{color: [showAnwendungenExpert3 ? '#FFFFFF' : ('rgba(255,255,255,'+contentOpacity+')')]}}} onClick={() => {this.handleClickShowData("showAnwendungenExpert3")(); this.resetTimer()}}>medicine</span> can give information about how successful a therapy would be and if some medicine works. In the field of <span style={{...expertStyleToEnter, ...{color: [showAnwendungenExpert4 ? '#FFFFFF' : ('rgba(255,255,255,'+contentOpacity+')')]}}} onClick={() => {this.handleClickShowData("showAnwendungenExpert4")(); this.resetTimer()}}>smart cities</span> the use of virtual representation is also very common.</span>}
                 </p>
                 <Button className='n1' style={{...menuPointButtonStyle, ...{opacity: [fadeReload ? textClickMeFade*contentOpacity : 0]}}} onClick={() => { this.sendMessage(1); this.resetTimer(); this.reload()}}>{showGerman ? <span>neu starten</span> : <span>reload</span>}</Button>        
               </div>
@@ -1308,15 +1310,15 @@ class App extends React.Component {
               <div className="expertInfo">
                 <p className='p1' style={pExpertStyle}>
                 {showGerman ? <span>Die Lebensdauer eines Maschinenteils hängt von verschiedenen Einflüssen ab: die Größe der Last, verschiedene Umgebungsfakoren, die Nutzungsdauer – all das wirkt sich auf die Abnutzung und Leistung aus. Häufig werden Fehler erst angezeigt, wenn ein Teil ausfällt. Mithilfe des digitalen Zwillings können Ausfälle schon vorher prognostiziert werden und um ca. 70 Prozent verringert werden.</span> 
-                : <span>ToDo</span>}
+                : <span>The lifespan of a machine part depends on different influences: the quantity of load, different environment factors and the time running. Today, errors are caught when the machine fails and stops working. With the help of our new technology we can predict errors and losses</span>}
                 </p>
               </div>
             </Fade>
             <Fade in={showAnwendungenExpert2} timeout={{ enter: fadeTimeBasicIn, exit: fadeTimeBasicOut }} mountOnEnter={true} unmountOnExit={true}>
               <div className="expertInfo">
                 <p className='p1' style={pExpertStyle}>
-                {showGerman ? <span>In der industriellen Produktionsphase hilft der Zwilling die Effizienz und Qualität der Produktionsprozesse zu verbessern. Analysetools überwachen Maschinen, Fertigungsprozesse und Produktionsstraßen des Digital  Twin und können bei Fehlern und Störung nicht nur auf das Problem aufmerksam machen, sondern auch Lösungsvorschläge zur Behebung aussprechen.</span> 
-                : <span>ToDo</span>}
+                {showGerman ? <span>In der industriellen Produktionsphase hilft der Zwilling die Effizienz und Qualität der Produktionsprozesse zu verbessern. Analysetools überwachen Maschinen, Fertigungsprozesse und Produktionsstraßen des Digital Twin und können bei Fehlern und Störung nicht nur auf das Problem aufmerksam machen, sondern auch Lösungsvorschläge zur Behebung aussprechen.</span> 
+                : <span>The efficiency and quality in industrial production processes is improved by this technology. Tools for analysis keep track of machines, manufacturing processes and production lines and can help to prevent errors and losses and provide solution proposals before an accidental appears.</span>}
                 </p>
               </div>
             </Fade>
@@ -1324,15 +1326,15 @@ class App extends React.Component {
               <div className="expertInfo">
                 <p className='p1' style={pExpertStyle}>
                 {showGerman ? <span>Im Bereich Digital Health gewinnt der einzelne Patient durch den virtuellen Zwilling eines deutlich optimierten Behandlungsprozess. Diabetespatienten können ihre Blutzuckerwerte nicht nur über vernetzte Messgeräte speichern, sondern ihre Daten auch in Echtzeit an den behandelnden Arzt schicken. Der Patient profitiert von engmaschigeren Kontrollen und angepassten Behandlungsmethoden.<br/><br/>In Simulationen kann vorab die Verträglichkeit und der Erfolg von Medikamenten und  Therapiemöglichkeiten getestet werden, sodass es zu deutlich weniger Fehlbehandlungen kommt.</span> 
-                : <span>ToDo</span>}
+                : <span>In the field of digital health every patient wins through an optimized treatment process. </span>}
                 </p>
               </div>
             </Fade>
             <Fade in={showAnwendungenExpert4} timeout={{ enter: fadeTimeBasicIn, exit: fadeTimeBasicOut }} mountOnEnter={true} unmountOnExit={true}>
               <div className="expertInfo">
                 <p className='p1' style={pExpertStyle}>
-                {showGerman ? <span>Selbst ganze Städte können einen digitalen Zwilling besitzen und mithilfe unterschiedlichster Standortsensoren ein smartes Parkmanagement, intelligente Verkehrssteuerung und Straßenbeleutung ermöglichen.</span> 
-                : <span>ToDo</span>}
+                {showGerman ? <span>Selbst ganze Städte können einen digitalen Zwilling besitzen und mithilfe unterschiedlichster Standortsensoren ein smartes Parkmanagement, intelligente Verkehrssteuerung und Straßenbeleuchtung ermöglichen.</span> 
+                : <span>Even whole cities can have a Digital Twin. Right now some cities may have a smart parking management, intelligent traffic control and street lighting, just parts of their complex system.</span>}
                 </p>
               </div>
             </Fade>
