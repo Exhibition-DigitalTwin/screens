@@ -13,8 +13,8 @@ CRGB leds[NUM_LEDS];
 #define BRIGHTNESS          96
 #define FRAMES_PER_SECOND  120
 int previousLEDrun = false;
-int currentLED = 37;
-int currentLED2 = 59;
+int currentLED = 0;
+int currentLED2 = 20;
 
 // stepper motors
 int incomingByte = 0;
@@ -70,6 +70,7 @@ void loop()
   if (incomingByte == 50) {
     incomingByte = 0;
     showLEDVorne = true;
+    Serial.print("los");
   }
 
   if (incomingByte == 51) {
@@ -77,7 +78,7 @@ void loop()
     showLEDHinten = true;
   }
 
-  if (showLEDVorne == true && currentLED <= NUM_LEDS && currentMicros - previousMicros >= interval) {
+  if (showLEDVorne == true && currentLED <= 20 && currentMicros - previousMicros >= interval) {
     previousMicros = currentMicros;
     leds[currentLED] = CRGB::Red;
     leds[currentLED - 1] = CRGB( 128, 0, 0);
@@ -88,7 +89,7 @@ void loop()
     leds[currentLED - 1] = CRGB::Black;
     //delay(100);
     currentLED++;
-  } else if (currentLED == NUM_LEDS) {
+  } else if (currentLED == 20) {
     showLEDVorne = false;
     leds[currentLED + 2] = CRGB::Black;
     leds[currentLED + 1] = CRGB::Black;
@@ -99,10 +100,10 @@ void loop()
     leds[currentLED - 4] = CRGB::Black;
     leds[currentLED - 5] = CRGB::Black;
     FastLED.show();
-    currentLED = 37;
+    currentLED = 0;
   }
 
-  if (showLEDHinten == true && currentLED2 >= 37 && currentMicros - previousMicros2 >= interval) {
+  if (showLEDHinten == true && currentLED2 >= 0 && currentMicros - previousMicros2 >= interval) {
     previousMicros2 = currentMicros;
     leds[currentLED2] = CRGB::Red;
     leds[currentLED2 - 1] = CRGB::Red;
@@ -111,7 +112,7 @@ void loop()
     leds[currentLED2] = CRGB::Black;
     leds[currentLED2 - 1] = CRGB::Black;
     currentLED2--;
-  } else if (currentLED2 == 3) {
+  } else if (currentLED2 == 0) {
     showLEDHinten = false;
     leds[currentLED + 2] = CRGB::Black;
     leds[currentLED + 1] = CRGB::Black;
@@ -122,7 +123,7 @@ void loop()
     leds[currentLED - 4] = CRGB::Black;
     leds[currentLED - 5] = CRGB::Black;
     FastLED.show();
-    currentLED2 = 59;
+    currentLED2 = 20;
   }
 
   if (rotateCabin == true && cabinSteps <= 3000) {
