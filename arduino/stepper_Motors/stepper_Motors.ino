@@ -14,8 +14,8 @@ CRGB leds[NUM_LEDS];
 #define BRIGHTNESS          96
 #define FRAMES_PER_SECOND  120
 int previousLEDrun = false;
-int currentLED = 37;
-int currentLED2 = 59;
+int currentLED = 0;
+int currentLED2 = 20;
 
 
 // stepper motors
@@ -78,6 +78,7 @@ void loop()
   if (incomingByte == 50) {
     incomingByte = 0;
     showLEDVorne = true;
+    Serial.print("los");
   }
 
   if (incomingByte == 51) {
@@ -86,7 +87,7 @@ void loop()
   }
 
 
-  if (showLEDVorne == true && currentLED <= NUM_LEDS && currentMillis - previousMillis >= interval) {
+  if (showLEDVorne == true && currentLED <= 20 && currentMillis - previousMillis >= interval) {
     previousMillis = currentMillis;
     leds[currentLED] = CRGB::Red;
     leds[currentLED - 1] = CRGB::Red;
@@ -98,7 +99,7 @@ void loop()
     //delay(100);
     currentLED++;
   }
-  else if (currentLED == NUM_LEDS) {
+  else if (currentLED == 20) {
     showLEDVorne = false;
     leds[currentLED + 2] = CRGB::Black;
     leds[currentLED + 1] = CRGB::Black;
@@ -109,10 +110,10 @@ void loop()
     leds[currentLED - 4] = CRGB::Black;
     leds[currentLED - 5] = CRGB::Black;
     FastLED.show();
-    currentLED = 37;
+    currentLED = 0;
   }
 
-  if (showLEDHinten == true && currentLED2 >= 37 && currentMillis - previousMillis2 >= interval) {
+  if (showLEDHinten == true && currentLED2 >= 0 && currentMillis - previousMillis2 >= interval) {
 
     previousMillis2 = currentMillis;
     leds[currentLED2] = CRGB::Red;
@@ -126,7 +127,7 @@ void loop()
     //delay(100);
     currentLED2--;
   }
-  else if (currentLED2 == 3) {
+  else if (currentLED2 == 0) {
     showLEDHinten = false;
      leds[currentLED + 2] = CRGB::Black;
     leds[currentLED + 1] = CRGB::Black;
@@ -137,7 +138,7 @@ void loop()
     leds[currentLED - 4] = CRGB::Black;
     leds[currentLED - 5] = CRGB::Black;
     FastLED.show();
-    currentLED2 = 59;
+    currentLED2 = 20;
   }
 
 
