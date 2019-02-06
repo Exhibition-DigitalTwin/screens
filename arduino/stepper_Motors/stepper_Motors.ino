@@ -81,7 +81,7 @@ void loop()
   if (showLEDVorne == true && currentLED <= 20 && currentMicros - previousMicros >= interval) {
     previousMicros = currentMicros;
     leds[currentLED] = CRGB::Red;
-    leds[currentLED - 1] = CRGB( 128, 0, 0);
+    leds[currentLED - 1] = CRGB( 30, 0, 0);
     FastLED.show();
     //FastLED.delay(100/FRAMES_PER_SECOND);
     // clear this led for the next time around the loop
@@ -105,7 +105,7 @@ void loop()
 
   if (showLEDHinten == true && currentLED2 >= 0 && currentMicros - previousMicros2 >= interval) {
     previousMicros2 = currentMicros;
-    leds[currentLED2] = CRGB::Red;
+    leds[currentLED2] = CRGB(30, 0, 0);
     leds[currentLED2 - 1] = CRGB::Red;
     FastLED.show();
     // clear this led for the next time around the loop
