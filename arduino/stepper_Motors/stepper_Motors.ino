@@ -58,7 +58,6 @@ void loop()
 {
   unsigned long currentMicros = micros();
   if (Serial.available() > 0) {
-    // read the incoming byte:
     incomingByte = Serial.read();
   }
 
@@ -78,7 +77,7 @@ void loop()
     showLEDHinten = true;
   }
 
-  if (showLEDVorne == true && currentLED <= 20 && currentMicros - previousMicros >= interval) {
+  if (showLEDVorne && currentLED <= 20 && currentMicros - previousMicros >= interval) {
     previousMicros = currentMicros;
     leds[currentLED] = CRGB::Red;
     leds[currentLED - 1] = CRGB( 30, 0, 0);
@@ -103,7 +102,7 @@ void loop()
     currentLED = 0;
   }
 
-  if (showLEDHinten == true && currentLED2 >= 0 && currentMicros - previousMicros2 >= interval) {
+  if (showLEDHinten && currentLED2 >= 0 && currentMicros - previousMicros2 >= interval) {
     previousMicros2 = currentMicros;
     leds[currentLED2] = CRGB(30, 0, 0);
     leds[currentLED2 - 1] = CRGB::Red;
@@ -126,7 +125,7 @@ void loop()
     currentLED2 = 20;
   }
 
-  if (rotateCabin == true && cabinSteps <= 3000) {
+  if (rotateCabin && cabinSteps <= 3000) {
     cabinStep(currentMicros);
     rotorStep(currentMicros);
   } else {
@@ -137,12 +136,12 @@ void loop()
 }
 
 void rotorStep(unsigned long currentMicros) {
-  if (stepHighRotor == false && currentMicros - previousMicrosStepRotor >= interval500) {
+  if (!stepHighRotor && currentMicros - previousMicrosStepRotor >= interval500) {
     digitalWrite(stepPinRotor, HIGH);
     previousMicrosStepRotor = currentMicros;
     stepHighRotor = true;
   }
-  else if (stepHighRotor == true && currentMicros - previousMicrosStepRotor >= interval500) {
+  else if (stepHighRotor && currentMicros - previousMicrosStepRotor >= interval500) {
     digitalWrite(stepPinRotor, LOW);
     previousMicrosStepRotor = currentMicros;
     stepHighRotor = false;
@@ -150,13 +149,13 @@ void rotorStep(unsigned long currentMicros) {
 }
 
 void cabinStep(unsigned long currentMicros) {
-  if (stepHighCabin == false && currentMicros - previousMicrosStepCabin >= interval500) {
+  if (!stepHighCabin && currentMicros - previousMicrosStepCabin >= interval500) {
     digitalWrite(stepPinCabin, HIGH);
     previousMicrosStepCabin = currentMicros;
     stepHighCabin = true;
     cabinSteps ++;
   }
-  if (stepHighCabin == true && currentMicros - previousMicrosStepCabin >= interval500) {
+  if (stepHighCabin && currentMicros - previousMicrosStepCabin >= interval500) {
     digitalWrite(stepPinCabin, LOW);
     previousMicrosStepCabin = currentMicros;
     stepHighCabin = false;
