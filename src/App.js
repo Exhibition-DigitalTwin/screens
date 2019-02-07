@@ -372,7 +372,7 @@ class App extends React.Component {
     this.clickMeButtonTimer = setInterval(() => this.setContentOpacity(), 30);
     this.clickMeButtonTimer = setInterval(() => this.runLedStrip(), 100);
     this.clickMeButtonTimer = setInterval(() => this.handleFadeActive(), 20);
-    this.clickAnywhereTimer = setInterval(() => this.checkForReload(), 30);
+    //this.clickAnywhereTimer = setInterval(() => this.checkForReload(), 30);
     this.clickMeButtonTimer = setInterval(() => this.changeSimulationBoxColorAndBladesRotationSpeed(), 20);
   }
 
@@ -802,10 +802,10 @@ class App extends React.Component {
   dataTransfer = param => e => {
     if (param === "datenDown") {
       this.setState({ ledsMoving: 2, timeForLedDown: Date.now() }); 
-      this.sendMessage(3);
+      this.sendMessage(2);
     } else if (param === "datenUp") {
       this.setState({ ledsMoving: 1 }); 
-      this.sendMessage(2);
+      this.sendMessage(3);
     } else if (param === "starteDrehung" && this.state.rotationBlades) {
       this._three.rotateHeadRootModel(0, 90, -0.01);
       this.sendMessage(1);
