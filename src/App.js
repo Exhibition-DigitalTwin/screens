@@ -235,7 +235,7 @@ class App extends React.Component {
     timeForLedDown: initialState0,
     intervalLed: 1900,
     timeRunning: initialState0,
-    intervalToScreensaver: 8000,
+    intervalToScreensaver: 100000,
     // screensaver
     showScreensaverBasic: initialStateTrue,
     // Aufbau
@@ -372,7 +372,7 @@ class App extends React.Component {
     this.clickMeButtonTimer = setInterval(() => this.setContentOpacity(), 30);
     this.clickMeButtonTimer = setInterval(() => this.runLedStrip(), 100);
     this.clickMeButtonTimer = setInterval(() => this.handleFadeActive(), 20);
-    //this.clickAnywhereTimer = setInterval(() => this.checkForReload(), 30);
+    this.clickAnywhereTimer = setInterval(() => this.checkForReload(), 30);
     this.clickMeButtonTimer = setInterval(() => this.changeSimulationBoxColorAndBladesRotationSpeed(), 20);
   }
 
@@ -643,10 +643,6 @@ class App extends React.Component {
   }
 
   hardReset(){
-    window.location.reload();
-  }
-
-  moveSomePart(){
     window.location.reload();
   }
 
@@ -1353,7 +1349,9 @@ class App extends React.Component {
             HARD RESET BUTTON + MOVE PHYSICAL TWIN 10
             */}
             <Button className='hardReset' style={{ opacity: 0, position: 'absolute', left: 0, bottom: 0, color: 'rgba(0,0,0,0)', fontSize: '20px' }} onClick={() => {this.hardReset()}} >RESET</Button>
-            <Button className='moveSomePart' style={{ opacity: 0, position: 'absolute', left: 930, top: 0, color: 'rgba(0,0,0,0)', fontSize: '20px' }} onClick={() => {this.moveSomePart()}} >MOVE SOME PART</Button>
+            <Button className='moveSomePart' style={{ opacity: 0, position: 'absolute', left: 930, top: 0, color: 'rgba(0,0,0,0)', fontSize: '20px' }} onClick={() => {this.sendMessage(4)}} >MOVE SOME PART</Button>
+            <Button className='moveSomePart' style={{ opacity: 0, position: 'absolute', left: 930, bottom: 0, color: 'rgba(0,0,0,0)', fontSize: '20px' }} onClick={() => {this.sendMessage(5)}} >WINDMILL OFF/ON</Button>
+
           </MuiThemeProvider>
         </React.Fragment>
       </div>
