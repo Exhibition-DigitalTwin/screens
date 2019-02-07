@@ -28,6 +28,7 @@ const int dirPinCabin = 5;
 // general
 int rotateCabin = false; // false standing still, true turning
 int rotateCabinShort = false;
+int motors = true;
 int currentStatusLEDs = 0; // 0 off, -1 down, 1 up
 unsigned long previousMicros = 0;
 unsigned long previousMicros2 = 0;
@@ -65,7 +66,10 @@ void loop()
 
   if (incomingByte == 49) {
     incomingByte = 0;
-    rotateCabin = true;
+    if(motors){
+      rotateCabin = true;
+      }
+     else {};
   }
 
   if (incomingByte == 50) {
@@ -81,7 +85,18 @@ void loop()
 
   if (incomingByte == 52) {
     incomingByte = 0;
-    rotateCabinShort = true;
+     if(motors){
+      rotateCabinShort = true;
+      }
+     else {};
+  }
+
+  if (incomingByte == 53) {
+    incomingByte = 0;
+    if(motors){
+      motors = false;
+      }
+     else {motors = true;};
   }
 
   if (showLEDVorne && currentLED <= 20 && currentMicros - previousMicros >= interval) {
@@ -130,23 +145,24 @@ void loop()
     leds[currentLED - 5] = CRGB::Black;
     FastLED.show();
     currentLED2 = 20;
-  }
+  };
 
-  if (rotateCabin && cabinSteps <= 3200) {
+  if (motors && rotateCabin && cabinSteps <= 3200) {
     cabinStep(currentMicros);
     rotorStep(currentMicros);
   }
-  else if (rotateCabinShort && cabinStepsShort <= 1000) {
+  else if (motors && rotateCabinShort && cabinStepsShort <= 1000) {
     cabinStepShort(currentMicros);
     rotorStep(currentMicros);
   }
-  else {
+  else if(motors) {
     rotorStep(currentMicros);
     rotateCabin = false;
     rotateCabinShort = false;
     cabinSteps = 0;
     cabinStepsShort = 0;
   }
+  else {}
 }
 
 void rotorStep(unsigned long currentMicros) {
