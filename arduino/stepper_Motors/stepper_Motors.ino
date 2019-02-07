@@ -19,6 +19,7 @@ int currentLED2 = 20;
 // stepper motors
 int incomingByte = 0;
 int cabinSteps = 0;
+int cabinStepsShort = 0;
 const int stepPinRotor = 2;
 const int dirPinRotor = 3;
 const int stepPinCabin = 4;
@@ -26,6 +27,7 @@ const int dirPinCabin = 5;
 
 // general
 int rotateCabin = false; // false standing still, true turning
+int rotateCabinShort = false;
 int currentStatusLEDs = 0; // 0 off, -1 down, 1 up
 unsigned long previousMicros = 0;
 unsigned long previousMicros2 = 0;
@@ -49,8 +51,8 @@ void setup() {
   Serial.begin(9600);
   Serial.print("los");
 
-  digitalWrite(dirPinRotor, HIGH);
-  digitalWrite(dirPinCabin, HIGH);
+  digitalWrite(dirPinRotor, LOW);
+  digitalWrite(dirPinCabin, LOW);
 }
 
 
@@ -75,6 +77,11 @@ void loop()
   if (incomingByte == 51) {
     incomingByte = 0;
     showLEDHinten = true;
+  }
+
+  if (incomingByte == 52) {
+    incomingByte = 0;
+    rotateCabinShort = true;
   }
 
   if (showLEDVorne && currentLED <= 20 && currentMicros - previousMicros >= interval) {
@@ -125,13 +132,20 @@ void loop()
     currentLED2 = 20;
   }
 
-  if (rotateCabin && cabinSteps <= 3000) {
+  if (rotateCabin && cabinSteps <= 3200) {
     cabinStep(currentMicros);
     rotorStep(currentMicros);
-  } else {
+  }
+  else if (rotateCabinShort && cabinStepsShort <= 1000) {
+    cabinStepShort(currentMicros);
+    rotorStep(currentMicros);
+  }
+  else {
     rotorStep(currentMicros);
     rotateCabin = false;
+    rotateCabinShort = false;
     cabinSteps = 0;
+    cabinStepsShort = 0;
   }
 }
 
@@ -154,6 +168,20 @@ void cabinStep(unsigned long currentMicros) {
     previousMicrosStepCabin = currentMicros;
     stepHighCabin = true;
     cabinSteps ++;
+  }
+  if (stepHighCabin && currentMicros - previousMicrosStepCabin >= interval500) {
+    digitalWrite(stepPinCabin, LOW);
+    previousMicrosStepCabin = currentMicros;
+    stepHighCabin = false;
+  }
+}
+
+void cabinStepShort(unsigned long currentMicros) {
+  if (!stepHighCabin && currentMicros - previousMicrosStepCabin >= interval500) {
+    digitalWrite(stepPinCabin, HIGH);
+    previousMicrosStepCabin = currentMicros;
+    stepHighCabin = true;
+    cabinStepsShort ++;
   }
   if (stepHighCabin && currentMicros - previousMicrosStepCabin >= interval500) {
     digitalWrite(stepPinCabin, LOW);
